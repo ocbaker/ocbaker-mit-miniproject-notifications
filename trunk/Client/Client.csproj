@@ -45,10 +45,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Windows 7 Dialogs, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Windows 7 Dialogs.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dialogs\Messaging\SendSMS.cs">
@@ -110,6 +106,10 @@
     <ProjectReference Include="..\SMS_API\SMS_API.csproj">
       <Project>{9B638F23-5FCE-44B5-8044-F0AF65F3124D}</Project>
       <Name>SMS_API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Windows 7 Dialogs\Windows 7 Dialogs.vbproj">
+      <Project>{E2FAE200-D00B-449A-A03C-C03DC3313F27}</Project>
+      <Name>Windows 7 Dialogs</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
