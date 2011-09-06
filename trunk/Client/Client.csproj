@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dialogs\MainApp\frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\MainApp\frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Messaging\frmSendSMS.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +74,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SrvCon\Connection.cs" />
+    <EmbeddedResource Include="Dialogs\MainApp\frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Messaging\frmSendSMS.resx">
       <DependentUpon>frmSendSMS.cs</DependentUpon>
     </EmbeddedResource>
