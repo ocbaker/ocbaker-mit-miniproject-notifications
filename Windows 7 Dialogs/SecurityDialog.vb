@@ -7,8 +7,8 @@
     Private _Password As String
     Private _SUNPW As Boolean
     Private _UserData As UserData
-    Public _ProxyDetail As String = "The Server https//10.1.1.110 at MIT Wireless Network Login requires a username and password" & vbNewLine & _
-        "Warning: This server is requesting that your username and password be sent in an insecure manner (basic authentication without a secure connection)."
+    Public _ProxyDetail As String = "The Server https//10.1.1.110 at MIT Wireless Network Login requires a username and password"
+    Private _Warning As String = "Warning: This server is requesting that your username and password be sent in an insecure manner (basic authentication without a secure connection)."
 #End Region
 
 #Region "Events"
@@ -36,11 +36,11 @@
     Sub Show(Optional ByVal title As String = "", Optional ByVal context As String = "")
 
         If context = "" And title = "" Then
-            _Dialog.Label3.Text = _ProxyDetail
+            _Dialog.Label3.Text = _ProxyDetail & vbNewLine & _Warning
             _Dialog.Text = "Proxy Authentication"
         Else
             _Dialog.Label3.Text = context
-            _Dialog.Text = title
+            _Dialog.Text = title & vbNewLine & _Warning
         End If
 
         _Dialog.ShowDialog()
