@@ -19,7 +19,7 @@ public class apiValidateLogin
         }
         public string APIusername
         {
-            get { return username;}
+            get { return username; }
             set { username = value ;} 
         }
         public string APIpassword

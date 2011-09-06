@@ -42,26 +42,18 @@ public class apiSendSms
         {
             get { return _sms_from; }
             set { 
-                //Regex catch special characters, specifically + as the + before country code is not needed. if ^+* remove +    
-                //Regex r = Regex("^[a-zA-Z]~!@#$%^&(.*)+");
-                Regex r = new Regex("^[a-zA-Z]~!@#$%^&(.*)");
-                // Regex rx = new Regex("^\+ -- Seperate Regex, if just a + and rest is numbers, replace the + and continue. 
-                if (value.Contains("+"))
+                Regex r = new Regex(@"[\D]+");  Regex rplus = new Regex(@"^[\+]");
+                if (rplus.IsMatch(value))
                 {
-                    value.Replace("+", "");
+                    value = value.Replace("+", String.Empty);
                 }
-
                 if (r.IsMatch(value)) 
                 {
                     throw new NullReferenceException();
-
+                } else {
+                    _sms_from = value; 
                 }
-                //if (r.IsMatch)
-                //{
-
-                //}
-                //value = Regex.Replace(value, new MatchEvaluator(r));
-                _sms_from = value; 
+               
             }
         }
     /// <summary>
@@ -70,7 +62,22 @@ public class apiSendSms
         public string sms_to
         {
             get { return _sms_to; }
-            set { _sms_to = value; }
+            set {
+
+                Regex r = new Regex(@"[\D]+"); Regex rplus = new Regex(@"^[\+]");
+                if (rplus.IsMatch(value))
+                {
+                    value = value.Replace("+", String.Empty);
+                }
+                if (r.IsMatch(value))
+                {
+                    throw new ArgumentException();
+                }
+                else
+                {
+                    _sms_to = value;
+                }           
+            }
         }
     /// <summary>
     /// Who the recipient of the text is (number)
@@ -78,7 +85,15 @@ public class apiSendSms
         public string msg_content
         {
             get { return _msg_content; }
-            set { _msg_content = value; }
+            set {
+
+                if (value.Length > 160)
+                {
+                    throw new ArgumentException();
+                } else {
+                    _msg_content = value;
+                }      
+            }
         }
     /// <summary>
     /// The message to be included in the text
@@ -101,7 +116,10 @@ public class apiSendSms
         {
             //Need to convert to yyyy‐mm‐dd hh:mm:ss
             get { return _schedule; }
-            set { _schedule = value; }
+            set {
+                //Look at some type of converting? if needed?
+                _schedule = value; 
+            }
         }
    ///When the text should be sent (if not included the text sends immediatly).
 
