@@ -41,21 +41,21 @@ namespace SMS_API
 
             request.Method = "POST";
             request.ContentType = "text/xml";
+            request.UseDefaultCredentials = true;
             request.Headers.Add("urn:MobileWorks#apiValidateLogin");
 
-            
 
-            //var document = new XDocument(
-            //               new XDeclaration("1.0", "utf-8", String.Empty),
-            //               new XElement(soapenv + "Envelope", new XAttribute(XNamespace.Xmlns + "SOAP-ENV", soapenv),
-            //                   new XElement(soapenv + "Body"),
-            //                   new XElement("apiValidateLogin",
-            //                   new XElement("user", apiv.APIusername),
-            //                   new XElement("password", apiv.APIpassword)
+            var document = new XDocument(
+                           new XDeclaration("1.0", String.Empty, String.Empty),
+                           new XElement(soapenv + "Envelope", new XAttribute(XNamespace.Xmlns + "SOAP-ENV", soapenv),
+                               new XElement(soapenv + "Body"),
+                               new XElement("apiValidateLogin",
+                               new XElement("user", apiv.APIusername),
+                               new XElement("password", apiv.APIpassword)
 
-            //                   )));
+                               )));
 
-            var document = XDocument.Load("T:\\x.xml");
+            //var document = XDocument.Load("x.xml");
 
             var writer = new StreamWriter(request.GetRequestStream());
             writer.WriteLine(document.ToString());
