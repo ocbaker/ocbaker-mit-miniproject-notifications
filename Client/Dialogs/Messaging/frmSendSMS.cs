@@ -24,12 +24,13 @@ namespace Client.Dialogs.Messaging
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            Windows_7_Dialogs.SecurityDialog dialog = new Windows_7_Dialogs.SecurityDialog();
-            dialog.Show("SMSGlobal Credentials", "SMSGlobal is requesting your username and password");
+            //Windows_7_Dialogs.SecurityDialog dialog = new Windows_7_Dialogs.SecurityDialog();
+           // dialog.Show("SMSGlobal Credentials", "SMSGlobal is requesting your username and password");
 
-            vlogin.APIusername = dialog.UserData.Username;
-            vlogin.APIpassword = dialog.UserData.Password;
-
+            //vlogin.APIusername = dialog.UserData.Username;
+            //vlogin.APIpassword = dialog.UserData.Password;
+            vlogin.APIpassword = "81953801";
+            vlogin.APIusername = "lolhi";
 
             notifications n = new notifications();
 
@@ -37,8 +38,8 @@ namespace Client.Dialogs.Messaging
             vSendSms.sms_to = txtTo.Text;
             vSendSms.msg_content = txtMessage.Text;
 
-            n.HttpSMS(vSendSms, vlogin);
-            //n.requestLogin(vlogin);
+            //n.HttpSMS(vSendSms, vlogin);
+            n.requestLogin(vlogin);
 
         }
     }
