@@ -12,11 +12,11 @@ using SMS_API;
 namespace Client.Dialogs.Messaging
 {
 
-    public partial class SendSMS : Form
+    public partial class frmSendSMS : Form
     {
         apiValidateLogin vlogin = new apiValidateLogin();
         apiSendSms vSendSms = new apiSendSms();
-        public SendSMS()
+        public frmSendSMS()
         {
             InitializeComponent();
 

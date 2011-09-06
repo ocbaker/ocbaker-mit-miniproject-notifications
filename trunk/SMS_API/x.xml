@@ -1,0 +1,14 @@
+<?xml version='1.0' ?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV=
+"http://schemas.xmlsoap.org/soap/envelope/">
+<SOAP-ENV:Body>
+<ns1:apiValidateLogin xmlns:ns1=''>
+<user>
+testuser
+</user>
+<password>
+secret
+</password>
+</ns1:apiValidateLogin>
+</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
