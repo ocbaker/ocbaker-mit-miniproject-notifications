@@ -115,6 +115,10 @@
     <Resource Include="Images\SmallIcon.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Extensions\Extensions.csproj">
+      <Project>{AC374C0A-187A-4007-BE4B-D36B77298986}</Project>
+      <Name>Extensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SMS_API\SMS_API.csproj">
       <Project>{9B638F23-5FCE-44B5-8044-F0AF65F3124D}</Project>
       <Name>SMS_API</Name>
