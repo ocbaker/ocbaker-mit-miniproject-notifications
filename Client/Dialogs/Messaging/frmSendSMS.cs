@@ -39,7 +39,15 @@ namespace Client.Dialogs.Messaging
             vSendSms.msg_content = txtMessage.Text;
 
             //n.HttpSMS(vSendSms, vlogin);
-            n.requestLogin(vlogin);
+            vSendSms.ticket = n.requestLogin(vlogin);
+
+            lblTicket.Text = vSendSms.ticket;
+        }
+
+        private void btnSend_Click(object sender, EventArgs e)
+        {
+            
+
 
         }
     }
