@@ -13,7 +13,7 @@ namespace Plugins.PluginController
 
         #region Variables
 
-        private
+        
 
         #endregion
 
@@ -21,6 +21,6 @@ namespace Plugins.PluginController
 
         #endregion
 
-        #region 
+      
     }
 }

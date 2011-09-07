@@ -42,6 +42,6 @@
                 
             </ribbon:RibbonTab>
         </ribbon:Ribbon>
-        <Frame Grid.Row="1" HorizontalAlignment="Stretch" Name="frame1" VerticalAlignment="Stretch" Width="618" Source="Pages\pgeSMS.xaml" NavigationUIVisibility="Hidden" Margin="0,82,0,0" />
+        <Frame Grid.Row="1" HorizontalAlignment="Stretch" Name="frame1" VerticalAlignment="Stretch" Width="618" Source="Pages\pgeSMS.xaml" NavigationUIVisibility="Hidden" />
     </Grid>
 </ribbon:RibbonWindow>

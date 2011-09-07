@@ -15,6 +15,7 @@ public class apiSendSms
         private string _msg_type = "text";
         private string _unicode = "0";
         private string _schedule;
+        public string _responce;
        
           public apiSendSms()
         {
@@ -71,6 +72,7 @@ public class apiSendSms
                 }
                 if (r.IsMatch(value))
                 {
+                 
                     throw new ArgumentException();
                 }
                 else
