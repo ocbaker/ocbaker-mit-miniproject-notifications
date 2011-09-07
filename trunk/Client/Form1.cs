@@ -20,7 +20,11 @@ namespace Client
         public Form1()
         {
             InitializeComponent();
-           // SrvCon.Connection.connectAsync();
+            try
+            {
+                SrvCon.Connection.connectAsync();
+            }
+            catch (Exception e) { }
         }
 
         private void button1_Click(object sender, EventArgs e)

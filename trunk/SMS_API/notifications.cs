@@ -10,6 +10,7 @@ using System.Runtime.Remoting.Metadata;
 using System.Xml.Schema;
 using System.Xml.Linq;
 using System.Xml;
+using System.Text.RegularExpressions;
 
 namespace SMS_API
 {
@@ -26,8 +27,9 @@ namespace SMS_API
     public class notifications : iAPI
     {
         XNamespace soapenv = "http://schemas.xmlsoap.org/soap/envelope/";
-        public void requestLogin(apiValidateLogin vlogin) {
+        public string requestLogin(apiValidateLogin vlogin)  {
             apiValidateLogin apiv = vlogin;
+            string loginTicket = null;
 
             HttpWebRequest request = WebRequest.Create("http://www.smsglobal.com/mobileworks/soapserver.php") as HttpWebRequest;
 
@@ -48,18 +50,21 @@ namespace SMS_API
             var document = new XDocument(
                            new XDeclaration("1.0", String.Empty, String.Empty),
                            new XElement(soapenv + "Envelope", new XAttribute(XNamespace.Xmlns + "SOAP-ENV", soapenv),
-                               new XElement(soapenv + "Body"),
+                               new XElement(soapenv + "Body",
                                new XElement("apiValidateLogin",
                                new XElement("user", apiv.APIusername),
                                new XElement("password", apiv.APIpassword)
 
-                               )));
+                               ))));
 
-            //var document = XDocument.Load("x.xml");
+           File.WriteAllText("T:\\x2.xml", "<?xml version='1.0' ?>" + Environment.NewLine);
+           File.AppendAllText("T:\\x2.xml", document.ToString());
 
-            var writer = new StreamWriter(request.GetRequestStream());
-            writer.WriteLine(document.ToString());
-            writer.Close();
+           document = XDocument.Load("T:\\x2.xml");
+
+           var writer = new StreamWriter(request.GetRequestStream());
+           writer.WriteLine(document);
+           writer.Close();
 
             using (var rsp = request.GetResponse())
             {
@@ -70,17 +75,18 @@ namespace SMS_API
                                 new StreamReader(rsp.GetResponseStream()))
                     {
                         var readString = answerReader.ReadToEnd();
-                        //do whatever you want with it
-                        Console.WriteLine(readString.ToString());
-                        Console.ReadLine();
+                        Regex r = new Regex(@"(.*)ticket&gt;(.*)&lt;/ticket(.*)");
+                        if (r.IsMatch(readString.ToString()))
+                        {
+                            Regex reg = new Regex(@"[A-Za-z0-9]{32}");
+                            loginTicket = reg.Match(r.Match(readString.ToString()).ToString()).ToString();
+                        }
                     }
+
                 }
+                
             }
-
-
-          
-           
-
+            return loginTicket;
         }
 
         public void soapSMS()
