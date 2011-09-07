@@ -56,3 +56,12 @@
 
 #End Region
 End Class
+
+Public Class Oli
+    Inherits SecurityDialog
+
+    Sub New()
+        Dim a As String = "Hello"
+        MyBase.New(a)
+    End Sub
+End Class

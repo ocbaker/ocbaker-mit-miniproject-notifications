@@ -17,6 +17,12 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Windows 7 Dialogs", "Window
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wpfClient", "wpfClient\wpfClient.csproj", "{66330F4F-4863-45FD-A792-7F0D3FF2AECC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{C11C9BF5-DFA0-477A-8910-BF356A33E421}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins.PluginController", "Plugins.PluginController\Plugins.PluginController.csproj", "{78A25743-10B2-4612-8367-7CED35ACF9B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins.PluginFactory", "Plugins.PluginFactory\Plugins.PluginFactory.csproj", "{ECDE100F-114E-4A24-8128-037D61E5176D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -107,9 +113,33 @@ Global
 		{66330F4F-4863-45FD-A792-7F0D3FF2AECC}.Release|Mixed Platforms.Build.0 = Release|x86
 		{66330F4F-4863-45FD-A792-7F0D3FF2AECC}.Release|x86.ActiveCfg = Release|x86
 		{66330F4F-4863-45FD-A792-7F0D3FF2AECC}.Release|x86.Build.0 = Release|x86
+		{78A25743-10B2-4612-8367-7CED35ACF9B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78A25743-10B2-4612-8367-7CED35ACF9B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78A25743-10B2-4612-8367-7CED35ACF9B6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{78A25743-10B2-4612-8367-7CED35ACF9B6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{78A25743-10B2-4612-8367-7CED35ACF9B6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{78A25743-10B2-4612-8367-7CED35ACF9B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78A25743-10B2-4612-8367-7CED35ACF9B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78A25743-10B2-4612-8367-7CED35ACF9B6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{78A25743-10B2-4612-8367-7CED35ACF9B6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{78A25743-10B2-4612-8367-7CED35ACF9B6}.Release|x86.ActiveCfg = Release|Any CPU
+		{ECDE100F-114E-4A24-8128-037D61E5176D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECDE100F-114E-4A24-8128-037D61E5176D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECDE100F-114E-4A24-8128-037D61E5176D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{ECDE100F-114E-4A24-8128-037D61E5176D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{ECDE100F-114E-4A24-8128-037D61E5176D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{ECDE100F-114E-4A24-8128-037D61E5176D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECDE100F-114E-4A24-8128-037D61E5176D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECDE100F-114E-4A24-8128-037D61E5176D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{ECDE100F-114E-4A24-8128-037D61E5176D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{ECDE100F-114E-4A24-8128-037D61E5176D}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{78A25743-10B2-4612-8367-7CED35ACF9B6} = {C11C9BF5-DFA0-477A-8910-BF356A33E421}
+		{ECDE100F-114E-4A24-8128-037D61E5176D} = {C11C9BF5-DFA0-477A-8910-BF356A33E421}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		VisualSVNWorkingCopyRoot = .
