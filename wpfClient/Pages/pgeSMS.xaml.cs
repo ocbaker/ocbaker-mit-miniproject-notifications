@@ -18,8 +18,13 @@ namespace wpfClient.Pages
     /// <summary>
     /// Interaction logic for pgeSMS.xaml
     /// </summary>
+    /// 
     public partial class pgeSMS : Page
     {
+        apiValidateLogin vlogin = new apiValidateLogin();
+        apiSendSms vSendSms = new apiSendSms();
+        notifications n = new notifications();
+
         public pgeSMS()
         {
             InitializeComponent();
@@ -27,17 +32,47 @@ namespace wpfClient.Pages
 
         private void btnSendSMS_Click(object sender, RoutedEventArgs e)
         {
+            
 
             vSendSms.sms_from = txtFrom.Text;
             vSendSms.sms_to = txtTo.Text;
             vSendSms.msg_content = txtMessage.Text;
             try
             {
-                n.soapSMS(vSendSms);
+              lblmsgid.Content = n.soapSMS(vSendSms);
             }
             catch (Exception ex) { }
 
 
+        }
+
+        private void Login_Click(object sender, RoutedEventArgs e)
+        {
+            //Windows_7_Dialogs.SecurityDialog dialog = new Windows_7_Dialogs.SecurityDialog();
+            // dialog.Show("SMSGlobal Credentials", "SMSGlobal is requesting your username and password");
+
+            //vlogin.APIusername = dialog.UserData.Username;
+            //vlogin.APIpassword = dialog.UserData.Password;
+            vlogin.APIpassword = "81953801";
+            vlogin.APIusername = "lolhi";
+
+
+            try
+            {
+                vSendSms.ticket = n.requestLogin(vlogin);
+            }
+            catch (Exception ex)
+            {
+                //n.HttpSMS(vSendSms, vlogin);            
+            }
+
+            lblmsgid.Content = vSendSms.ticket;
+
+            if (vSendSms.ticket == null)
+            {
+                btnSend.IsEnabled = false;
+            }
+            else { btnSend.IsEnabled = true; }
         }
 
 

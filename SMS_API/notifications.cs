@@ -32,7 +32,6 @@ namespace SMS_API
             string loginTicket = null;
 
             HttpWebRequest request = WebRequest.Create("http://www.smsglobal.com/mobileworks/soapserver.php") as HttpWebRequest;
-
             Windows_7_Dialogs.SecurityDialog a = new Windows_7_Dialogs.SecurityDialog();
 
             if (!request.Proxy.IsBypassed(request.RequestUri))
@@ -45,7 +44,6 @@ namespace SMS_API
             request.ContentType = "text/xml";
             request.Headers.Add("urn:MobileWorks#apiValidateLogin");
 
-
             var document = new XDocument(
                            new XDeclaration("1.0", String.Empty, String.Empty),
                            new XElement(soapenv + "Envelope", new XAttribute(XNamespace.Xmlns + "SOAP-ENV", soapenv),
@@ -55,10 +53,10 @@ namespace SMS_API
                                new XElement("password", apiv.APIpassword)
                                ))));
 
-           File.WriteAllText("T:\\x2.xml", "<?xml version='1.0' ?>" + Environment.NewLine);
-           File.AppendAllText("T:\\x2.xml", document.ToString());
-
-           document = XDocument.Load("T:\\x2.xml");
+           if (File.Exists(Environment.CurrentDirectory + @"\apiLogin.xml")) File.Delete(Environment.CurrentDirectory + @"\apiLogin.xml");
+           File.WriteAllText(Environment.CurrentDirectory + @"\apiLogin.xml", "<?xml version='1.0' ?>" + Environment.NewLine);
+           File.AppendAllText(Environment.CurrentDirectory + @"\apiLogin.xml", document.ToString());
+           document = XDocument.Load(Environment.CurrentDirectory + @"\apiLogin.xml");
 
            var writer = new StreamWriter(request.GetRequestStream());
            writer.WriteLine(document);
@@ -80,17 +78,19 @@ namespace SMS_API
                             loginTicket = reg.Match(r.Match(readString.ToString()).ToString()).ToString();
                         }
                     }
-
                 }
                 
             }
             return loginTicket;
         }
 
-        public void soapSMS(apiSendSms vSendSms)
+        public string soapSMS(apiSendSms vSendSms)
         {
             apiSendSms apis = vSendSms;
+            string msgid = null;
+
             WebRequest request = WebRequest.Create("http://www.smsglobal.com/mobileworks/soapserver.php");
+            
             request.Method = "POST";
             request.ContentType = "text/xml";
             request.Headers.Add("urn:MobileWorks#apiSendSms");
@@ -110,16 +110,16 @@ namespace SMS_API
                                            new XElement("ticket", apis.ticket),
                                            new XElement("sms_from", apis.sms_from),
                                            new XElement("sms_to", apis.sms_to),
-                                           new XElement("msg_content", apis.msg_content),
+                                           new XElement("msg_content", System.Web.HttpUtility.HtmlEncode(apis.msg_content)),
                                            new XElement("msg_type", apis.msg_type),
                                            new XElement("unicode",apis.unicode),
                                            new XElement("schedule", apis.schedule)
                                            ))));
 
-            if (File.Exists("T:\\x3.xml")) File.Delete("T:\\x3.xml");
-            File.WriteAllText("T:\\x3.xml", "<?xml version='1.0' ?>" + Environment.NewLine);
-            File.AppendAllText("T:\\x3.xml", document.ToString());
-            document = XDocument.Load("T:\\x3.xml");
+            if (File.Exists(Environment.CurrentDirectory + @"\sendSMS.xml")) File.Delete(Environment.CurrentDirectory + @"\sendSMS.xml");
+            File.WriteAllText(Environment.CurrentDirectory + @"\sendSMS.xml", "<?xml version='1.0' ?>" + Environment.NewLine);
+            File.AppendAllText(Environment.CurrentDirectory + @"\sendSMS.xml", document.ToString());
+            document = XDocument.Load(Environment.CurrentDirectory + @"\sendSMS.xml");
 
             var writer = new StreamWriter(request.GetRequestStream());
             writer.WriteLine(document);
@@ -137,8 +137,8 @@ namespace SMS_API
                         Regex r = new Regex(@"(.*)msgid&gt;(.*)&lt;/msgid(.*)");
                         if (r.IsMatch(readString.ToString()))
                         {
-                            Regex reg = new Regex(@"[0-9]{17}");
-                            string returnd = reg.Match(r.Match(readString.ToString()).ToString()).ToString();
+                            Regex reg = new Regex(@"[0-9]{16}");
+                             msgid = reg.Match(r.Match(readString.ToString()).ToString()).ToString();
                         }
                     }
 
@@ -146,7 +146,7 @@ namespace SMS_API
 
             }
 
-
+            return msgid;
 
         }
 
@@ -158,7 +158,7 @@ namespace SMS_API
             String encoded = System.Web.HttpUtility.HtmlEncode(vSendSms.msg_content);
 
             WebRequest request = WebRequest.Create("http://www.smsglobal.com/httpapi.php?action=sendsms&user=" + vlogin.APIusername + "&password=" + vlogin.APIpassword + "&from=" + vSendSms.sms_from + "&to=" + vSendSms.sms_to + "&text=" + encoded);
-            //WebRequest request = WebRequest.Create("http://google.co.nz");
+
             request.Method = "POST";
             Windows_7_Dialogs.SecurityDialog a = new Windows_7_Dialogs.SecurityDialog();
             if (!request.Proxy.IsBypassed(request.RequestUri))

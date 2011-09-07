@@ -20,7 +20,9 @@ namespace Client.Dialogs.Messaging
         public frmSendSMS()
         {
             InitializeComponent();
-
+            if (vSendSms.ticket == null) {
+                btnSend.Enabled = false;
+            }
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -33,9 +35,21 @@ namespace Client.Dialogs.Messaging
             vlogin.APIpassword = "81953801";
             vlogin.APIusername = "lolhi";
 
-            //n.HttpSMS(vSendSms, vlogin);
-            vSendSms.ticket = n.requestLogin(vlogin);
+            
+            try
+            {
+                vSendSms.ticket = n.requestLogin(vlogin);
+            } catch(Exception ex) {
+                //n.HttpSMS(vSendSms, vlogin);            
+            }
+
             lblTicket.Text = vSendSms.ticket;
+
+            if (vSendSms.ticket == null)
+            {
+                btnSend.Enabled = false;
+            }
+            else { btnSend.Enabled = true; }
         }
 
         private void btnSend_Click(object sender, EventArgs e)
@@ -43,8 +57,11 @@ namespace Client.Dialogs.Messaging
             vSendSms.sms_from = txtFrom.Text;
             vSendSms.sms_to = txtTo.Text;
             vSendSms.msg_content = txtMessage.Text;
-
-            n.soapSMS(vSendSms);
+            try
+            {
+                n.soapSMS(vSendSms);
+            } catch (Exception ex) { }
+             
 
         }
     }
