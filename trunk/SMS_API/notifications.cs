@@ -43,7 +43,6 @@ namespace SMS_API
 
             request.Method = "POST";
             request.ContentType = "text/xml";
-            request.UseDefaultCredentials = true;
             request.Headers.Add("urn:MobileWorks#apiValidateLogin");
 
 
@@ -54,7 +53,6 @@ namespace SMS_API
                                new XElement("apiValidateLogin",
                                new XElement("user", apiv.APIusername),
                                new XElement("password", apiv.APIpassword)
-
                                ))));
 
            File.WriteAllText("T:\\x2.xml", "<?xml version='1.0' ?>" + Environment.NewLine);
@@ -89,8 +87,9 @@ namespace SMS_API
             return loginTicket;
         }
 
-        public void soapSMS()
+        public void soapSMS(apiSendSms vSendSms)
         {
+            apiSendSms apis = vSendSms;
             WebRequest request = WebRequest.Create("http://www.smsglobal.com/mobileworks/soapserver.php");
             request.Method = "POST";
             request.ContentType = "text/xml";
@@ -106,17 +105,47 @@ namespace SMS_API
             var document = new XDocument(
                                        new XDeclaration("1.0", "utf-8", String.Empty),
                                        new XElement(soapenv + "Envelope", new XAttribute(XNamespace.Xmlns + "SOAP-ENV", soapenv),
-                                           new XElement(soapenv + "Body"),
+                                           new XElement(soapenv + "Body",
                                            new XElement("apiSendSms",
-                                           new XElement("ticket", "t"),
-                                           new XElement("sms_from", "s"),
-                                           new XElement("sms_to", "st"),
-                                           new XElement("msg_content", "Hello World"),
-                                           new XElement("msg_type", "text"),
-                                           new XElement("unicode", "0"),
-                                           new XElement("schedule", "")
+                                           new XElement("ticket", apis.ticket),
+                                           new XElement("sms_from", apis.sms_from),
+                                           new XElement("sms_to", apis.sms_to),
+                                           new XElement("msg_content", apis.msg_content),
+                                           new XElement("msg_type", apis.msg_type),
+                                           new XElement("unicode",apis.unicode),
+                                           new XElement("schedule", apis.schedule)
+                                           ))));
 
-                                           )));
+            if (File.Exists("T:\\x3.xml")) File.Delete("T:\\x3.xml");
+            File.WriteAllText("T:\\x3.xml", "<?xml version='1.0' ?>" + Environment.NewLine);
+            File.AppendAllText("T:\\x3.xml", document.ToString());
+            document = XDocument.Load("T:\\x3.xml");
+
+            var writer = new StreamWriter(request.GetRequestStream());
+            writer.WriteLine(document);
+            writer.Close();
+
+            using (var rsp = request.GetResponse())
+            {
+                request.GetRequestStream().Close();
+                if (rsp != null)
+                {
+                    using (var answerReader =
+                                new StreamReader(rsp.GetResponseStream()))
+                    {
+                        var readString = answerReader.ReadToEnd();
+                        Regex r = new Regex(@"(.*)msgid&gt;(.*)&lt;/msgid(.*)");
+                        if (r.IsMatch(readString.ToString()))
+                        {
+                            Regex reg = new Regex(@"[0-9]{17}");
+                            string returnd = reg.Match(r.Match(readString.ToString()).ToString()).ToString();
+                        }
+                    }
+
+                }
+
+            }
+
 
 
         }
