@@ -16,6 +16,7 @@ namespace Client.Dialogs.Messaging
     {
         apiValidateLogin vlogin = new apiValidateLogin();
         apiSendSms vSendSms = new apiSendSms();
+        notifications n = new notifications();
         public frmSendSMS()
         {
             InitializeComponent();
@@ -32,22 +33,18 @@ namespace Client.Dialogs.Messaging
             vlogin.APIpassword = "81953801";
             vlogin.APIusername = "lolhi";
 
-            notifications n = new notifications();
-
-            vSendSms.sms_from = txtFrom.Text;
-            vSendSms.sms_to = txtTo.Text;
-            vSendSms.msg_content = txtMessage.Text;
-
             //n.HttpSMS(vSendSms, vlogin);
             vSendSms.ticket = n.requestLogin(vlogin);
-
             lblTicket.Text = vSendSms.ticket;
         }
 
         private void btnSend_Click(object sender, EventArgs e)
         {
-            
+            vSendSms.sms_from = txtFrom.Text;
+            vSendSms.sms_to = txtTo.Text;
+            vSendSms.msg_content = txtMessage.Text;
 
+            n.soapSMS(vSendSms);
 
         }
     }
