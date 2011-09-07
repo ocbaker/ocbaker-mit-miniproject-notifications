@@ -6,13 +6,12 @@
       mc:Ignorable="d" 
       d:DesignHeight="462" d:DesignWidth="452"
 	Title="pgeSMS">
-
-    <Grid Height="461">
+ <Grid Height="461" Background="#FF00C1FF">
         <GroupBox Header="Send an SMS" Height="438" HorizontalAlignment="Center" Margin="12,12,0,0" Name="groupBox1" VerticalAlignment="Top" Width="428">
             <Grid>
                 <Label Content="From:" Height="28" HorizontalAlignment="Left" Margin="46,62,0,0" Name="lblFrom" VerticalAlignment="Top" Width="58" />
                 <Label Content="To:" Height="28" HorizontalAlignment="Left" Margin="58,90,0,0" Name="label1" VerticalAlignment="Top" />
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="90,64,0,0" Name="txtFrom" VerticalAlignment="Top" Width="120" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="90,64,0,0" Name="txtFrom" VerticalAlignment="Top" Width="120"  />
                 <TextBox Height="23" HorizontalAlignment="Left" Margin="90,92,0,0" Name="txtTo" VerticalAlignment="Top" Width="120" />
                 <Expander Header="Schedule" Height="100" HorizontalAlignment="Left" Margin="55,236,0,0" Name="expSchedule" VerticalAlignment="Top" Width="291">
                     <Grid>

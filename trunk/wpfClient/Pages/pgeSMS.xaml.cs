@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SMS_API;
+using Extensions;
 
 namespace wpfClient.Pages
 {
@@ -25,6 +26,8 @@ namespace wpfClient.Pages
         apiSendSms vSendSms = new apiSendSms();
         notifications n = new notifications();
 
+
+
         public pgeSMS()
         {
             InitializeComponent();
@@ -32,12 +35,14 @@ namespace wpfClient.Pages
 
         private void btnSendSMS_Click(object sender, RoutedEventArgs e)
         {
+            txtFrom.SetStatus("Errored", TextBoxStatuses.ERRORED);
+            return;
 
             try
             {
                 vSendSms.sms_from = txtFrom.Text;
             } catch (ArgumentException ex) {
-
+                txtFrom.SetStatus("Errored", TextBoxStatuses.ERRORED);
             }
             try
             {
