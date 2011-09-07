@@ -13,7 +13,7 @@
                 <Label Content="From:" Height="28" HorizontalAlignment="Left" Margin="46,62,0,0" Name="lblFrom" VerticalAlignment="Top" Width="58" />
                 <Label Content="To:" Height="28" HorizontalAlignment="Left" Margin="58,90,0,0" Name="label1" VerticalAlignment="Top" />
                 <TextBox Height="23" HorizontalAlignment="Left" Margin="90,64,0,0" Name="txtFrom" VerticalAlignment="Top" Width="120" />
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="90,92,0,0" Name="textBox1" VerticalAlignment="Top" Width="120" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="90,92,0,0" Name="txtTo" VerticalAlignment="Top" Width="120" />
                 <Expander Header="Schedule" Height="100" HorizontalAlignment="Left" Margin="55,236,0,0" Name="expSchedule" VerticalAlignment="Top" Width="291">
                     <Grid>
                         <DatePicker Height="30" HorizontalAlignment="Left" Margin="6,6,0,0" Name="datePicker1" VerticalAlignment="Top" Width="148" DataContext="{Binding}" SelectedDateFormat="Short" />
@@ -21,10 +21,10 @@
                 </Expander>
                 <Label Content="Message" Height="28" HorizontalAlignment="Left" Margin="27,119,0,0" Name="label2" VerticalAlignment="Top" />
                 <TextBox Height="109" HorizontalAlignment="Left" Margin="90,121,0,0" Name="txtMessage" VerticalAlignment="Top" Width="255" TextWrapping="Wrap" />
-                <Button Content="Send SMS" Height="23" HorizontalAlignment="Left" Margin="159,342,0,0" Name="btnSendSMS" VerticalAlignment="Top" Width="75" Click="btnSendSMS_Click" />
-                <Button Content="Login" Height="23" HorizontalAlignment="Left" Margin="271,20,0,0" Name="Login" VerticalAlignment="Top" Width="75" />
+                <Button Content="Send SMS" Height="23" HorizontalAlignment="Left" Margin="159,342,0,0" Name="btnSend" VerticalAlignment="Top" Width="75" Click="btnSendSMS_Click" />
+                <Button Content="Login" Height="23" HorizontalAlignment="Left" Margin="271,20,0,0" Name="btnLogin" VerticalAlignment="Top" Width="75" Click="Login_Click" />
                 <Label Content="Send an SMS" Height="41" HorizontalAlignment="Left" Margin="66,15,0,0" Name="label3" VerticalAlignment="Top" FontSize="22" Width="199" />
-                <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="55,378,0,0" Name="lblmsgid" VerticalAlignment="Top" Width="290" />
+                <Label Height="28" HorizontalAlignment="Left" Margin="55,378,0,0" Name="lblmsgid" VerticalAlignment="Top" Width="290" />
             </Grid>
         </GroupBox>
     </Grid>
