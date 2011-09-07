@@ -32,14 +32,34 @@ namespace wpfClient.Pages
 
         private void btnSendSMS_Click(object sender, RoutedEventArgs e)
         {
-            
 
-            vSendSms.sms_from = txtFrom.Text;
-            vSendSms.sms_to = txtTo.Text;
-            vSendSms.msg_content = txtMessage.Text;
             try
             {
-              lblmsgid.Content = n.soapSMS(vSendSms);
+                vSendSms.sms_from = txtFrom.Text;
+            } catch (ArgumentException ex) {
+
+            }
+            try
+            {
+                vSendSms.sms_to = txtTo.Text;
+            } catch (ArgumentException ex) {
+
+            }
+            try
+            {
+                vSendSms.msg_content = txtMessage.Text;
+            } catch(ArgumentException ex) {
+              
+            }
+            try
+            {
+                if (vSendSms._responce == "") 
+                {
+
+
+                }
+
+              lblmsgid.Content = "Message sent! Message ID number:" + n.soapSMS(vSendSms);
             }
             catch (Exception ex) { }
 
