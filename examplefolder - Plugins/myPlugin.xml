@@ -1,0 +1,19 @@
+<plugin>
+	<header>
+		<pluginCompat>
+			<major/>
+			<minor/>
+			<revision/>
+		</>
+	</header>
+	<body>
+		<pluginName>Shane's SMS Plugin</pluginName>
+		<description></description>
+		<version>
+			<major/>
+			<minor/>
+			<revision/>
+		</version>
+	</body>
+
+</plugin>

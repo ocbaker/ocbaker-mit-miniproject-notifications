@@ -23,7 +23,9 @@ namespace Plugins.PluginController.Client
         /// <summary>
         /// Required Constructor
         /// </summary>
-        public EntryPoint(){
+        public EntryPoint()
+            : base("ServerPlugins")
+        {
             LoadedPlugins = new List<string>();
             pluginsFolder = "ClientPlugins";
         }
