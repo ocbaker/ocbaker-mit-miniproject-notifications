@@ -36,6 +36,7 @@ namespace wpfClient.Pages
         private void btnSendSMS_Click(object sender, RoutedEventArgs e)
         {
             txtFrom.SetStatus("Errored", TextBoxStatuses.ERRORED);
+            txtMessage.SetStatus("Ok", TextBoxStatuses.OK);
             return;
 
             try
