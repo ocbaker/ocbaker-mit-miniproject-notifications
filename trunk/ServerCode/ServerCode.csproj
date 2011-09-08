@@ -123,6 +123,14 @@
       <Project>{AC374C0A-187A-4007-BE4B-D36B77298986}</Project>
       <Name>Extensions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Plugins.PluginController\Plugins.PluginController.csproj">
+      <Project>{78A25743-10B2-4612-8367-7CED35ACF9B6}</Project>
+      <Name>Plugins.PluginController</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plugins.PluginFactory\Plugins.PluginFactory.csproj">
+      <Project>{ECDE100F-114E-4A24-8128-037D61E5176D}</Project>
+      <Name>Plugins.PluginFactory</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

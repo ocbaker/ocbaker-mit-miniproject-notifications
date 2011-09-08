@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Plugins.PluginController
 {
-    internal class EntryPointBase
+    public class EntryPointBase
     {
 
         
@@ -17,7 +17,7 @@ namespace Plugins.PluginController
         #region Constructors
 
         internal EntryPointBase(string PluginsFolder){
-            _loadedPlugins = new List<string>();
+            _loadedPlugins = new List<Plugin>();
             _pluginsFolder = PluginsFolder;
         }
 
