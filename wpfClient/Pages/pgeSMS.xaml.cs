@@ -26,37 +26,47 @@ namespace wpfClient.Pages
         apiSendSms vSendSms = new apiSendSms();
         notifications n = new notifications();
 
-
-
         public pgeSMS()
         {
             InitializeComponent();
+            btnSend.IsEnabled = false;
         }
 
-        private void btnSendSMS_Click(object sender, RoutedEventArgs e)
-        {
-            txtFrom.SetStatus("Errored", TextBoxStatuses.ERRORED);
-            txtMessage.SetStatus("Ok", TextBoxStatuses.OK);
-            return;
 
+        private void txtFrom_LostFocus(object sender, RoutedEventArgs e) 
+        {
             try
             {
                 vSendSms.sms_from = txtFrom.Text;
             } catch (ArgumentException ex) {
-                txtFrom.SetStatus("Errored", TextBoxStatuses.ERRORED);
+                //txtFrom.SetStatus("Errored", TextBoxStatuses.ERRORED);
             }
+        }
+
+        private void txtTo_LostFocus(object sender, RoutedEventArgs e)
+        {
             try
             {
                 vSendSms.sms_to = txtTo.Text;
-            } catch (ArgumentException ex) {
-
             }
+            catch (ArgumentException ex)
+            {
+               
+            }
+        }
+
+        private void btnSendSMS_Click(object sender, RoutedEventArgs e)
+        {
+
             try
             {
                 vSendSms.msg_content = txtMessage.Text;
-            } catch(ArgumentException ex) {
-              
             }
+            catch (ArgumentException ex)
+            {
+
+            }
+           
             try
             {
                 if (vSendSms._responce == "") 
