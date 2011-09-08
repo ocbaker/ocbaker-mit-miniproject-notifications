@@ -10,18 +10,47 @@ namespace Extensions
 {
     public static class ExtensionServices
     {
+        #region System.Windows.Controls
+        #region Textbox
+
         public static void SetStatus(this TextBox me, String statusText, TextBoxStatuses status)  {
 
+            switch(status)
+            {
+                case TextBoxStatuses.ERRORED: 
+                    {
+                        me.BorderBrush = Brushes.Red;
+                        me.Background = Brushes.PaleVioletRed;
+                        me.BorderThickness = new System.Windows.Thickness(1);
 
+                        return;
+                    }
+                case TextBoxStatuses.OK:
+                    {
+                        me.BorderBrush = Brushes.DarkGreen;
+                        me.Background = Brushes.LightGreen;
+                        me.BorderThickness = new System.Windows.Thickness(2);
+                        return;
+                    }
+                case TextBoxStatuses.DEFAULT:
+                    {
+                        me.BorderBrush = Brushes.Gray;
+                        me.Background = Brushes.White;
+                        me.BorderThickness = new System.Windows.Thickness(0);
+                        return;
+                    }
 
-            me.BorderBrush = Brushes.SlateBlue;
+            }
+        #endregion
+        #endregion
+            
             
         }
     }
 
     public enum TextBoxStatuses
 	{
-	    BLANK,
+	    DEFAULT,
         OK,
         ERRORED
 	}
