@@ -18,6 +18,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wpfClient", "wpfClient\wpfClient.csproj", "{66330F4F-4863-45FD-A792-7F0D3FF2AECC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{C11C9BF5-DFA0-477A-8910-BF356A33E421}"
+	ProjectSection(SolutionItems) = preProject
+		PluginDescriptor.xml = PluginDescriptor.xml
+		PluginDescriptorSchema.xsd = PluginDescriptorSchema.xsd
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins.PluginController", "Plugins.PluginController\Plugins.PluginController.csproj", "{78A25743-10B2-4612-8367-7CED35ACF9B6}"
 EndProject
