@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://tempuri.org/XMLSchema.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/XMLSchema.xsd"
+    xmlns:mstns="http://tempuri.org/XMLSchema.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="Plugin">
+    <xs:annotation>
+      <xs:documentation>
+        This is the base root for the Plugin Descriptor
+      </xs:documentation>
+    </xs:annotation>
+    
+    <xs:complexType>
+      <xs:sequence minOccurs="1" maxOccurs="1">
+        
+        <!-- Controller Info -->
+        <xs:element name="ControllerInfo">
+          <xs:annotation>
+            <xs:documentation>
+              This Describes the Plugin Controller that this Plugin was createed for.
+              
+              This allows more cross compatibility between plugins and application versions
+            </xs:documentation>
+          </xs:annotation>
+
+          <xs:complexType>
+            <xs:sequence minOccurs="1" maxOccurs="1">
+              <xs:element name="controllerVersion">
+                <xs:annotation>
+                  <xs:documentation>
+                    Describles the controller version that this plugin was designed for
+                  </xs:documentation>
+                </xs:annotation>
+
+                <xs:complexType>
+                  <xs:all>
+                    <xs:element ref="Version"/>
+                  </xs:all>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        
+        <!-- Plugin Info -->
+        <xs:element name="PluginInfo">
+          <xs:annotation>
+            <xs:documentation>
+              
+            </xs:documentation>
+          </xs:annotation>
+
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="name" type="xs:string">
+                <xs:annotation>
+                  <xs:documentation>
+                    The Official Name of the plugin that will be displayed in the servers loaded plugins list
+                  </xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="author" type="xs:string">
+                <xs:annotation>
+                  <xs:documentation>
+                    The Author of the plugin
+                  </xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="description" type="xs:string">
+                <xs:annotation>
+                  <xs:documentation>
+                    The description of the plugin
+                  </xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="website" type="xs:anyURI">
+                <xs:annotation>
+                  <xs:documentation>
+                    The Webstie of the plugin
+                  </xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element ref="Version"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        
+        <!-- Dependant Plugins -->
+        <xs:element name="DependantPlugins" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>
+              Plugins that this plugin is dependant on to run, without those plugins this plugin should NOT run
+            </xs:documentation>
+          </xs:annotation>
+          
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="GUID" type="GUID" use="required">
+        <xs:annotation>
+          <xs:documentation>
+            
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="Version" abstract="false">
+    <xs:annotation>
+      <xs:documentation>
+        This describes a version object for repetition
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="major" type="versionNumber" use="required">
+        <xs:annotation>
+          <xs:documentation>
+            Major version number
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="minor" type="versionNumber" use="required">
+        <xs:annotation>
+          <xs:documentation>
+            Minor version number
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="build" type="versionNumber" use="required">
+        <xs:annotation>
+          <xs:documentation>
+            Version Build Number
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+
+    </xs:complexType>
+  </xs:element>
+
+  <xs:simpleType name="versionNumber">
+    <xs:annotation>
+      <xs:documentation>
+        Defines a version number: (An Integer that can't go below 0)
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="GUID">
+    <xs:annotation>
+      <xs:documentation>
+        This defines a GUID type to make the plugin unique
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})|(\{[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\})"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

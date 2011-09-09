@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Plugin xmlns="http://tempuri.org/XMLSchema.xsd">
+  <ControllerInfo>
+    <controllerVersion>
+      <Version major="1" minor="0" build="154">
+      </Version>
+    </controllerVersion>
+  </ControllerInfo>
+  <PluginInfo>
+    <name>TestPlugin</name>
+    <author>Oliver C. Baker</author>
+    <description>This Plugin XML and relating Libary are there to provide an example of how to set up a plugin</description>
+    <website>http://tempuri.org</website>
+    <Version major="1" minor="0" build="">
+    </Version>
+  </PluginInfo>
+  <DependantPlugins>
+    
+  </DependantPlugins>
+</Plugin>
