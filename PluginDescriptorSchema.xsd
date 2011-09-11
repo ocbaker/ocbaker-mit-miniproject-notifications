@@ -151,23 +151,31 @@
                       </xs:annotation>
 
                       <xs:complexType>
-                        <xs:sequence minOccurs="1" maxOccurs="unbounded">
-                          <xs:element name="version" type="mstns:versionNumber" maxOccurs="1">
+                        <xs:sequence>
+                          <xs:element ref="mstns:Version" minOccurs="1" maxOccurs="1">
                             <xs:annotation>
                               <xs:documentation>
-                                
+
                               </xs:documentation>
                             </xs:annotation>
                           </xs:element>
                           <xs:element name="changeItem" minOccurs="1" maxOccurs="unbounded">
                             <xs:annotation>
                               <xs:documentation>
-                                
+
                               </xs:documentation>
                             </xs:annotation>
                             <xs:complexType>
-                              
-                              <!--<xs:attribute name="changeType" type=""-->
+                              <xs:all>
+                                <xs:element name="changeInfo" type="xs:string"/>
+                              </xs:all>
+                              <xs:attribute name="changeType" type="changeType">
+                                <xs:annotation>
+                                  <xs:documentation>
+                                    The Type of the changeItem
+                                  </xs:documentation>
+                                </xs:annotation>
+                              </xs:attribute>
                             </xs:complexType>
                           </xs:element>
                         </xs:sequence>
@@ -319,7 +327,8 @@
     <xs:restriction base="xs:string">
       <xs:enumeration value="FIX"/>
       <xs:enumeration value="FEATURE"/>
-      
+      <xs:enumeration value="NOTE"/>
+      <xs:enumeration value="UNFIXEDBUG"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>

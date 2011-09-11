@@ -17,9 +17,8 @@ namespace TestingServer
             Console.WriteLine("FOR DEVELOPMENT PURPOSES ONLY!");
             Console.WriteLine("------------------------------");
             Console.WriteLine("");
-
+            Console.WriteLine(Extensions.GuidGenerator.GenerateTimeBasedGuid(DateTime.Now));
             srvCon = new srvConnection();
-
             Console.ReadLine();
         }
     }
