@@ -26,5 +26,15 @@ namespace wpfClient
 
             // Insert code required on object creation below this point.
         }
+
+        private void Ribbon_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void SendSMS_Click(object sender, RoutedEventArgs e)
+        {
+            frame1.NavigationService.Source = new Uri("/Pages/pgeSMS.xaml", UriKind.Relative);
+        }
     }
 }

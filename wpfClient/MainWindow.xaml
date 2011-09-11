@@ -8,11 +8,12 @@
 
 	<Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="69"/>
+            <RowDefinition Height="68" />
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <ribbon:Ribbon x:Name="Ribbon">
+        <ribbon:Ribbon x:Name="Ribbon" Grid.RowSpan="2" SelectionChanged="Ribbon_SelectionChanged">
             <ribbon:Ribbon.ApplicationMenu>
                 <ribbon:RibbonApplicationMenu SmallImageSource="Images\SmallIcon.png">
                     <ribbon:RibbonApplicationMenuItem Header="Hello _Ribbon"
@@ -41,7 +42,23 @@
                 </ribbon:RibbonGroup>
                 
             </ribbon:RibbonTab>
+            <ribbon:RibbonTab x:Name="SMSTab" 
+                              Header="SMS's" Selector.IsSelected="True">
+                <ribbon:RibbonGroup x:Name="Group2" 
+                                    Header="SMS">
+                    <ribbon:RibbonButton x:Name="SendSMS"
+                                         LargeImageSource="Images\blue-sms-button-32.png"
+                                         Label="Send" Click="SendSMS_Click" />
+                    
+                </ribbon:RibbonGroup>
+                <ribbon:RibbonGroup x:Name="Group3"
+                                    Header="Login">
+                    <ribbon:RibbonButton x:Name="Login"
+                                         SmallImageSource="Images\SmallIcon.png"
+                                         Label="Login Details" />
+                </ribbon:RibbonGroup>
+            </ribbon:RibbonTab>
         </ribbon:Ribbon>
-        <Frame Grid.Row="1" HorizontalAlignment="Stretch" Name="frame1" VerticalAlignment="Stretch" Width="618" Source="Pages\pgeSMS.xaml" NavigationUIVisibility="Hidden" />
+        <Frame Grid.Row="2" HorizontalAlignment="Stretch" Name="frame1" VerticalAlignment="Stretch" Width="618" Source="Pages\pgeSMShistory.xaml" NavigationUIVisibility="Hidden" />
     </Grid>
 </ribbon:RibbonWindow>
