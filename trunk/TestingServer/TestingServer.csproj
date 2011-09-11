@@ -47,6 +47,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Extensions\Extensions.csproj">
+      <Project>{AC374C0A-187A-4007-BE4B-D36B77298986}</Project>
+      <Name>Extensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServerCode\ServerCode.csproj">
       <Project>{06761DA3-36A3-45DE-BEC0-32114DFCF3C1}</Project>
       <Name>ServerCode</Name>
