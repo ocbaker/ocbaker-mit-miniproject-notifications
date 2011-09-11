@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins.PluginFactory", "Pl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.SMS", "Plugin.SMS\Plugin.SMS.csproj", "{8E4DEF8B-953C-4E53-B428-3586F004840C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.Updater", "Plugin.Updater\Plugin.Updater.csproj", "{FED14967-D008-462E-9785-F76A07278060}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -149,6 +151,16 @@ Global
 		{8E4DEF8B-953C-4E53-B428-3586F004840C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{8E4DEF8B-953C-4E53-B428-3586F004840C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{8E4DEF8B-953C-4E53-B428-3586F004840C}.Release|x86.ActiveCfg = Release|Any CPU
+		{FED14967-D008-462E-9785-F76A07278060}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FED14967-D008-462E-9785-F76A07278060}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FED14967-D008-462E-9785-F76A07278060}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FED14967-D008-462E-9785-F76A07278060}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FED14967-D008-462E-9785-F76A07278060}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FED14967-D008-462E-9785-F76A07278060}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FED14967-D008-462E-9785-F76A07278060}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FED14967-D008-462E-9785-F76A07278060}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FED14967-D008-462E-9785-F76A07278060}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{FED14967-D008-462E-9785-F76A07278060}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -157,6 +169,7 @@ Global
 		{78A25743-10B2-4612-8367-7CED35ACF9B6} = {C11C9BF5-DFA0-477A-8910-BF356A33E421}
 		{ECDE100F-114E-4A24-8128-037D61E5176D} = {C11C9BF5-DFA0-477A-8910-BF356A33E421}
 		{8E4DEF8B-953C-4E53-B428-3586F004840C} = {C11C9BF5-DFA0-477A-8910-BF356A33E421}
+		{FED14967-D008-462E-9785-F76A07278060} = {C11C9BF5-DFA0-477A-8910-BF356A33E421}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		VisualSVNWorkingCopyRoot = .
