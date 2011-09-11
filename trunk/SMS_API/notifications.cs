@@ -26,6 +26,7 @@ namespace SMS_API
     /// </summary>
     public class notifications : iAPI
     {
+        private NetworkCredential _cred;
         XNamespace soapenv = "http://schemas.xmlsoap.org/soap/envelope/";
         public string requestLogin(apiValidateLogin vlogin)  {
             apiValidateLogin apiv = vlogin;
@@ -37,7 +38,8 @@ namespace SMS_API
             if (!request.Proxy.IsBypassed(request.RequestUri))
             {
                 a.Show();
-                request.Proxy.Credentials = new NetworkCredential(a.UserData.Username, a.UserData.Password);
+                _cred = new NetworkCredential(a.UserData.Username, a.UserData.Password);
+                request.Proxy.Credentials = _cred;
             }
 
             request.Method = "POST";
@@ -90,13 +92,16 @@ namespace SMS_API
             string msgid = null;
 
             WebRequest request = WebRequest.Create("http://www.smsglobal.com/mobileworks/soapserver.php");
-            
+
+            if (_cred != null) request.Proxy.Credentials = _cred;
+
             request.Method = "POST";
             request.ContentType = "text/xml";
             request.Headers.Add("urn:MobileWorks#apiSendSms");
 
             Windows_7_Dialogs.SecurityDialog a = new Windows_7_Dialogs.SecurityDialog();
-            if (!request.Proxy.IsBypassed(request.RequestUri))
+            
+             if (_cred == null)
             {
                 a.Show();
                 request.Proxy.Credentials = new NetworkCredential(a.UserData.Username, a.UserData.Password);
