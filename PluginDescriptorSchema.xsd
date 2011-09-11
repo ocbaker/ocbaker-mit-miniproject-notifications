@@ -82,6 +82,103 @@
                   </xs:documentation>
                 </xs:annotation>
               </xs:element>
+              <xs:element name="UpdateInfo">
+                <xs:annotation>
+                  <xs:documentation>
+                    
+                  </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:choice>
+                    <xs:element name="AmazonS3">
+                      <xs:annotation>
+                        <xs:documentation>
+                          
+                        </xs:documentation>
+                      </xs:annotation>
+
+                      <xs:complexType>
+                        <xs:sequence minOccurs="1" maxOccurs="1">
+                          <xs:element name="Bucket" type="AmazonBucket">
+                            <xs:annotation>
+                              <xs:documentation>
+                                
+                              </xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                          <xs:element name="pluginName" type="pluginName">
+                            
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="CustomLocation">
+                      <xs:annotation>
+                        <xs:documentation>
+                          
+                        </xs:documentation>
+                      </xs:annotation>
+                      <xs:complexType>
+                        <xs:sequence minOccurs="1" maxOccurs="1">
+                          <xs:element name="folderURI" type="xs:anyURI">
+                            <xs:annotation>
+                              <xs:documentation>
+                                
+                              </xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:choice>
+                </xs:complexType>
+              </xs:element>
+
+              <xs:element name="changelog">
+                <xs:annotation>
+                  <xs:documentation>
+                    
+                  </xs:documentation>
+                </xs:annotation>
+
+                <xs:complexType>
+                  <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                    <xs:element name="change">
+                      <xs:annotation>
+                        <xs:documentation>
+                          
+                        </xs:documentation>
+                      </xs:annotation>
+
+                      <xs:complexType>
+                        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                          <xs:element name="version" type="mstns:versionNumber" maxOccurs="1">
+                            <xs:annotation>
+                              <xs:documentation>
+                                
+                              </xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                          <xs:element name="changeItem" minOccurs="1" maxOccurs="unbounded">
+                            <xs:annotation>
+                              <xs:documentation>
+                                
+                              </xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                              
+                              <!--<xs:attribute name="changeType" type=""-->
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="version" type="GUID">
+                          
+                        </xs:attribute>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
               <xs:element ref="Version"/>
             </xs:sequence>
           </xs:complexType>
@@ -94,13 +191,48 @@
               Plugins that this plugin is dependant on to run, without those plugins this plugin should NOT run
             </xs:documentation>
           </xs:annotation>
-          
+          <xs:complexType>
+            <xs:sequence minOccurs="0" maxOccurs="unbounded">
+              <xs:element name="dependantPlugin">
+                <xs:annotation>
+                  <xs:documentation>
+                    A Plugin which this plugin requires to run
+                  </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                    <xs:element name="compatibleVersion">
+                      <xs:annotation>
+                        <xs:documentation>
+                          A Version of the plugin that this Plugin is compatible with
+                        </xs:documentation>
+                      </xs:annotation>
+
+                      <xs:complexType>
+                        <xs:attribute name="ID" type="GUID" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="name" type="xs:string" use="required"/>
+                  <xs:attribute name="fileName" type="xs:string" use="required"/>
+                  <xs:attribute name="GUID" type="GUID" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
         </xs:element>
       </xs:sequence>
-      <xs:attribute name="GUID" type="GUID" use="required">
+      <xs:attribute name="pluginGUID" type="GUID" use="required">
         <xs:annotation>
           <xs:documentation>
             
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="versionGUID" type="GUID" use="required">
+        <xs:annotation>
+          <xs:documentation>
+
           </xs:documentation>
         </xs:annotation>
       </xs:attribute>
@@ -158,6 +290,36 @@
     </xs:annotation>
     <xs:restriction base="xs:string">
       <xs:pattern value="([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})|(\{[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\})"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="AmazonBucket">
+    <xs:annotation>
+      <xs:documentation>
+        
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="([A-Za-z0-9]*[/]([A-Za-z0-9]*[/])*)"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="pluginName">
+    <xs:annotation>
+      <xs:documentation>
+        
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="([A-Za-z0-9]*)"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="changeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="FIX"/>
+      <xs:enumeration value="FEATURE"/>
+      
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>
