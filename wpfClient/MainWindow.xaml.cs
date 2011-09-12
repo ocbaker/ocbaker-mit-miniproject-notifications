@@ -38,8 +38,9 @@ namespace wpfClient
                     case "admTab":
                         changePage("pgeAdmin");
                         break;
-                    case: "SMSTab";
-                        changePage("");
+                    case "SMSTab":
+                        changePage("pgeSMS");
+                        break;
                     default:
 
                         break;
