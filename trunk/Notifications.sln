@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.SMS", "Plugin.SMS\Pl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.Updater", "Plugin.Updater\Plugin.Updater.csproj", "{FED14967-D008-462E-9785-F76A07278060}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestOnDemandLoader", "TestOnDemandLoader\TestOnDemandLoader.csproj", "{DF979647-29B7-4B06-8639-03A8A9F2663B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -161,6 +163,16 @@ Global
 		{FED14967-D008-462E-9785-F76A07278060}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{FED14967-D008-462E-9785-F76A07278060}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{FED14967-D008-462E-9785-F76A07278060}.Release|x86.ActiveCfg = Release|Any CPU
+		{DF979647-29B7-4B06-8639-03A8A9F2663B}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{DF979647-29B7-4B06-8639-03A8A9F2663B}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{DF979647-29B7-4B06-8639-03A8A9F2663B}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{DF979647-29B7-4B06-8639-03A8A9F2663B}.Debug|x86.ActiveCfg = Debug|x86
+		{DF979647-29B7-4B06-8639-03A8A9F2663B}.Debug|x86.Build.0 = Debug|x86
+		{DF979647-29B7-4B06-8639-03A8A9F2663B}.Release|Any CPU.ActiveCfg = Release|x86
+		{DF979647-29B7-4B06-8639-03A8A9F2663B}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{DF979647-29B7-4B06-8639-03A8A9F2663B}.Release|Mixed Platforms.Build.0 = Release|x86
+		{DF979647-29B7-4B06-8639-03A8A9F2663B}.Release|x86.ActiveCfg = Release|x86
+		{DF979647-29B7-4B06-8639-03A8A9F2663B}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

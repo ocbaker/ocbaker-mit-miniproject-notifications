@@ -140,6 +140,11 @@
       <Project>{AC374C0A-187A-4007-BE4B-D36B77298986}</Project>
       <Name>Extensions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Plugin.SMS\Plugin.SMS.csproj">
+      <Project>{8E4DEF8B-953C-4E53-B428-3586F004840C}</Project>
+      <Name>Plugin.SMS</Name>
+      <Private>False</Private>
+    </ProjectReference>
     <ProjectReference Include="..\SMS_API\SMS_API.csproj">
       <Project>{9B638F23-5FCE-44B5-8044-F0AF65F3124D}</Project>
       <Name>SMS_API</Name>
@@ -147,6 +152,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\blue-sms-button-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
