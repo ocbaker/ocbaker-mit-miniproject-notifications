@@ -54,8 +54,13 @@ namespace Extensions
             {
                 BrushConverter bc = new BrushConverter();
                 return (Brush)bc.ConvertFrom(hex);
-
             }
+        public static Brush fromRGB(byte r, byte g, byte b)
+        {
+            System.Drawing.Color col = System.Drawing.Color.FromArgb(r,g,b);   
+            BrushConverter bc = new BrushConverter();
+            return (Brush)bc.ConvertFrom(string.Concat("#", (col.ToArgb() & 0x00FFFFFF).ToString("X6")));
+        }
 
 #endregion
 #endregion

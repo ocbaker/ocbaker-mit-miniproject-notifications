@@ -51,7 +51,9 @@
                                          Label="Send" Click="SendSMS_Click" />
                     <ribbon:RibbonButton x:Name="smsHistory"
                                          Label="History">
-                        
+                    </ribbon:RibbonButton>
+                    <ribbon:RibbonButton x:Name="smsTemplate"
+                                         Label="SMS Template" Click="smsTemplate_Click">
                     </ribbon:RibbonButton>
                 </ribbon:RibbonGroup>
                 <ribbon:RibbonGroup x:Name="Group3"
