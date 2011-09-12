@@ -34,7 +34,15 @@ public class apiSendSms
         public string ticket
         {
             get { return _ticket; }
-            set { _ticket = value; }
+            set {
+                Regex reg = new Regex(@"[A-Za-z0-9]{32}");
+                if (reg.IsMatch(value))
+                {
+                    _ticket = value;
+                } else {
+                    throw new ArgumentException();
+                }
+            }
         }
     /// <summary>
     /// The login ticket so we can connect to the SMSGlobal API
@@ -43,14 +51,14 @@ public class apiSendSms
         {
             get { return _sms_from; }
             set { 
-                Regex r = new Regex(@"[\D]+");  Regex rplus = new Regex(@"^[\+]");
+                Regex r = new Regex(@"^[\D]+");  Regex rplus = new Regex(@"^[\+]");
                 if (rplus.IsMatch(value))
                 {
                     value = value.Replace("+", String.Empty);
                 }
-                if (r.IsMatch(value)) 
+                if (r.IsMatch(value) || value == "") 
                 {
-                    throw new NullReferenceException();
+                    throw new ArgumentException();
                 } else {
                     _sms_from = value; 
                 }
@@ -65,12 +73,12 @@ public class apiSendSms
             get { return _sms_to; }
             set {
 
-                Regex r = new Regex(@"[\D]+"); Regex rplus = new Regex(@"^[\+]");
+                Regex r = new Regex(@"^[\D]+"); Regex rplus = new Regex(@"^[\+]");
                 if (rplus.IsMatch(value))
                 {
                     value = value.Replace("+", String.Empty);
                 }
-                if (r.IsMatch(value))
+                if (r.IsMatch(value) || value == "")
                 {
                  
                     throw new ArgumentException();
@@ -89,7 +97,7 @@ public class apiSendSms
             get { return _msg_content; }
             set {
 
-                if (value.Length > 160)
+                if (value.Length > 160 || value.Length <= 0)
                 {
                     throw new ArgumentException();
                 } else {

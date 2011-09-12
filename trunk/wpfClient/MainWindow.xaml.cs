@@ -29,12 +29,32 @@ namespace wpfClient
 
         private void Ribbon_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (e.RemovedItems.Count == 0) 
+            {
+                return;
+            } else {
+                switch (((RibbonTab)e.AddedItems[0]).Name)
+                {
+                    case "admTab":
+                        changePage("pgeAdmin");
+                        break;
+                    case: "SMSTab";
+                        changePage("");
+                    default:
 
+                        break;
+                }
+            }
         }
 
         private void SendSMS_Click(object sender, RoutedEventArgs e)
         {
-            frame1.NavigationService.Source = new Uri("/Pages/pgeSMS.xaml", UriKind.Relative);
+            changePage("pgeSMS");
+        }
+        private void changePage(string arg0) 
+        {
+            frame1.NavigationService.Source = new Uri("/Pages/"+ arg0 + ".xaml", UriKind.Relative);
+        
         }
     }
 }
