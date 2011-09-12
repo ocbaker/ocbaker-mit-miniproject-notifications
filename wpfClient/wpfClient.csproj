@@ -70,6 +70,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\Administration\admSMS.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\pgeAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\pgeLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -84,6 +92,12 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pages\Administration\admSMS.xaml.cs">
+      <DependentUpon>admSMS.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\pgeAdmin.xaml.cs">
+      <DependentUpon>pgeAdmin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\pgeLogin.xaml.cs">
       <DependentUpon>pgeLogin.xaml</DependentUpon>
     </Compile>

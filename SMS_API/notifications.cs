@@ -15,6 +15,7 @@ using System.Text.RegularExpressions;
 namespace SMS_API
 {
     /// <summary>
+    /// COPY LOCAL = FALSE
     /// User: lolhi
     /// Password: 81953801
     ///  SEND TO http://www.smsglobal.com/mobileworks/soapserver.php

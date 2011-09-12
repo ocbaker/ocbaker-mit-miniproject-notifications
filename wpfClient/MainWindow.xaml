@@ -16,13 +16,13 @@
         <ribbon:Ribbon x:Name="Ribbon" Grid.RowSpan="2" SelectionChanged="Ribbon_SelectionChanged">
             <ribbon:Ribbon.ApplicationMenu>
                 <ribbon:RibbonApplicationMenu SmallImageSource="Images\SmallIcon.png">
-                    <ribbon:RibbonApplicationMenuItem Header="Hello _Ribbon"
-                                                      x:Name="MenuItem1"
+                    <ribbon:RibbonApplicationMenuItem Header="Exit"
+                                                      x:Name="Exit"
                                                       ImageSource="Images\LargeIcon.png"/>
                 </ribbon:RibbonApplicationMenu>
             </ribbon:Ribbon.ApplicationMenu>
             <ribbon:RibbonTab x:Name="HomeTab" 
-                              Header="Home">
+                              Header="Home" Selector.IsSelected="True">
                 <ribbon:RibbonGroup x:Name="Group1" 
                                     Header="Group1">
                     <ribbon:RibbonButton x:Name="Button1"
@@ -43,13 +43,16 @@
                 
             </ribbon:RibbonTab>
             <ribbon:RibbonTab x:Name="SMSTab" 
-                              Header="SMS's" Selector.IsSelected="True">
+                              Header="SMS's">
                 <ribbon:RibbonGroup x:Name="Group2" 
                                     Header="SMS">
                     <ribbon:RibbonButton x:Name="SendSMS"
                                          LargeImageSource="Images\blue-sms-button-32.png"
                                          Label="Send" Click="SendSMS_Click" />
-                    
+                    <ribbon:RibbonButton x:Name="smsHistory"
+                                         Label="History">
+                        
+                    </ribbon:RibbonButton>
                 </ribbon:RibbonGroup>
                 <ribbon:RibbonGroup x:Name="Group3"
                                     Header="Login">
@@ -58,7 +61,31 @@
                                          Label="Login Details" />
                 </ribbon:RibbonGroup>
             </ribbon:RibbonTab>
+            <ribbon:RibbonTab x:Name="admTab"
+                              Header="Admin">
+                <ribbon:RibbonGroup x:Name="SMSgroup"
+                                    Header="SMS">
+                    <ribbon:RibbonButton x:Name="SMSadmbutton"
+                                         Label="SMS"
+                                        LargeImageSource="Images\LargeIcon.png">
+                    </ribbon:RibbonButton>
+                </ribbon:RibbonGroup>
+                <ribbon:RibbonGroup x:Name="EmailGroup"
+                                    Header="Email">
+                <ribbon:RibbonButton x:Name="Emailbutton"
+                                         Label="Email"
+                                        LargeImageSource="Images\LargeIcon.png">
+                    </ribbon:RibbonButton>
+                </ribbon:RibbonGroup>
+                <ribbon:RibbonGroup x:Name="ServerGroup"
+                                    Header="Server">
+                    <ribbon:RibbonButton x:Name="Serverbutton"
+                                         Label="Server"
+                                        LargeImageSource="Images\LargeIcon.png">
+                    </ribbon:RibbonButton>
+                </ribbon:RibbonGroup>
+            </ribbon:RibbonTab>
         </ribbon:Ribbon>
-        <Frame Grid.Row="2" HorizontalAlignment="Stretch" Name="frame1" VerticalAlignment="Stretch" Width="618" Source="Pages\pgeSMShistory.xaml" NavigationUIVisibility="Hidden" />
+        <Frame Grid.Row="2" HorizontalAlignment="Stretch" Name="frame1" VerticalAlignment="Stretch" Width="618" Source="Pages\pgeLogin.xaml" NavigationUIVisibility="Hidden" />
     </Grid>
 </ribbon:RibbonWindow>

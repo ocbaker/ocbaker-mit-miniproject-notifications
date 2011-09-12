@@ -38,8 +38,9 @@ namespace wpfClient.Pages
             try
             {
                 vSendSms.sms_from = txtFrom.Text;
+                txtFrom.SetStatus("OK", TextBoxStatuses.OK);
             } catch (ArgumentException ex) {
-                //txtFrom.SetStatus("Errored", TextBoxStatuses.ERRORED);
+               txtFrom.SetStatus("Errored", TextBoxStatuses.ERRORED);
             }
         }
 
@@ -48,25 +49,29 @@ namespace wpfClient.Pages
             try
             {
                 vSendSms.sms_to = txtTo.Text;
+                txtTo.SetStatus("OK", TextBoxStatuses.OK);
             }
             catch (ArgumentException ex)
             {
-               
+                txtTo.SetStatus("Errored", TextBoxStatuses.ERRORED);
+            }
+        }
+
+        private void txtMessage_LostFocus(object sender,RoutedEventArgs e)
+        {
+            try
+            {
+                vSendSms.msg_content = txtMessage.Text;
+                txtMessage.SetStatus("OK", TextBoxStatuses.OK);
+            }
+            catch (ArgumentException ex)
+            {
+                txtMessage.SetStatus("Errored", TextBoxStatuses.ERRORED);
             }
         }
 
         private void btnSendSMS_Click(object sender, RoutedEventArgs e)
         {
-
-            try
-            {
-                vSendSms.msg_content = txtMessage.Text;
-            }
-            catch (ArgumentException ex)
-            {
-
-            }
-           
             try
             {
                 if (vSendSms._responce == "") 
@@ -91,7 +96,6 @@ namespace wpfClient.Pages
             //vlogin.APIpassword = dialog.UserData.Password;
             vlogin.APIpassword = "81953801";
             vlogin.APIusername = "lolhi";
-
 
             try
             {
