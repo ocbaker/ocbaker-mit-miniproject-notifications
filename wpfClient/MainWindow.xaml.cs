@@ -41,8 +41,10 @@ namespace wpfClient
                     case "SMSTab":
                         changePage("pgeSMS");
                         break;
+                    case "HomeTab":
+                        changePage("pgeLogin");
+                        break;
                     default:
-
                         break;
                 }
             }
@@ -52,10 +54,13 @@ namespace wpfClient
         {
             changePage("pgeSMS");
         }
+        private void smsTemplate_Click(object sender, RoutedEventArgs e)
+        {
+            changePage("pgeSMStemplate");
+        }
         private void changePage(string arg0) 
         {
             frame1.NavigationService.Source = new Uri("/Pages/"+ arg0 + ".xaml", UriKind.Relative);
-        
         }
     }
 }
