@@ -5,14 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{66330F4F-4863-45FD-A792-7F0D3FF2AECC}</ProjectGuid>
+    <ProjectGuid>{AFDCAFD0-A8CA-46BE-A1AB-1B57909524C8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>wpfClient</RootNamespace>
-    <AssemblyName>wpfClient</AssemblyName>
+    <RootNamespace>wpfClientPluginTest</RootNamespace>
+    <AssemblyName>wpfClientPluginTest</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -70,51 +69,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\Administration\admSMS.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\pgeAdmin.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\pgeLogin.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\pgeSMS.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\pgeSMShistory.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\pgeSMStemplate.xaml">
+    <Page Include="plgTabAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pages\Administration\admSMS.xaml.cs">
-      <DependentUpon>admSMS.xaml</DependentUpon>
+    <Compile Include="plgTabAdmin.xaml.cs">
+      <DependentUpon>plgTabAdmin.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\pgeAdmin.xaml.cs">
-      <DependentUpon>pgeAdmin.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\pgeLogin.xaml.cs">
-      <DependentUpon>pgeLogin.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\pgeSMS.xaml.cs">
-      <DependentUpon>pgeSMS.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\pgeSMShistory.xaml.cs">
-      <DependentUpon>pgeSMShistory.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\pgeSMStemplate.xaml.cs">
-      <DependentUpon>pgeSMStemplate.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="PluginHandler\AddWindowTab.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -132,7 +95,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -142,27 +104,6 @@
   <ItemGroup>
     <Resource Include="Images\LargeIcon.png" />
     <Resource Include="Images\SmallIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Extensions\Extensions.csproj">
-      <Project>{AC374C0A-187A-4007-BE4B-D36B77298986}</Project>
-      <Name>Extensions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Plugin.SMS\Plugin.SMS.csproj">
-      <Project>{8E4DEF8B-953C-4E53-B428-3586F004840C}</Project>
-      <Name>Plugin.SMS</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\SMS_API\SMS_API.csproj">
-      <Project>{9B638F23-5FCE-44B5-8044-F0AF65F3124D}</Project>
-      <Name>SMS_API</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\blue-sms-button-32.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
