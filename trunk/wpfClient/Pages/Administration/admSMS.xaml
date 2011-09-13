@@ -8,6 +8,14 @@
 	Title="admSMS">
 
     <Grid>
-        
+        <Label Content="SMS Admin" Height="50" HorizontalAlignment="Left" Margin="122,23,0,0" Name="label1" VerticalAlignment="Top" FontSize="22" Width="142" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+        <GroupBox Header="Login Information" HorizontalAlignment="Left" Margin="25,90,0,291" Name="gbUserLogin" Width="336">
+            <Grid>
+                <Label Content="Username:" Height="28" HorizontalAlignment="Left" Margin="16,6,0,0" Name="label2" VerticalAlignment="Top" />
+                <Label Content="Password:" Height="28" HorizontalAlignment="Left" Margin="16,40,0,0" Name="label3" VerticalAlignment="Top" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="91,11,0,0" Name="txtUsername" VerticalAlignment="Top" Width="131" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="91,42,0,0" Name="txtPassword" VerticalAlignment="Top" Width="131" />
+            </Grid>
+        </GroupBox>
     </Grid>
 </Page>

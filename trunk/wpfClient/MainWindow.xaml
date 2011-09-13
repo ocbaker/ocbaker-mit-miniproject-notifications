@@ -56,12 +56,6 @@
                                          Label="SMS Template" Click="smsTemplate_Click">
                     </ribbon:RibbonButton>
                 </ribbon:RibbonGroup>
-                <ribbon:RibbonGroup x:Name="Group3"
-                                    Header="Login">
-                    <ribbon:RibbonButton x:Name="Login"
-                                         SmallImageSource="Images\SmallIcon.png"
-                                         Label="Login Details" />
-                </ribbon:RibbonGroup>
             </ribbon:RibbonTab>
             <ribbon:RibbonTab x:Name="admTab"
                               Header="Admin">
@@ -69,8 +63,9 @@
                                     Header="SMS">
                     <ribbon:RibbonButton x:Name="SMSadmbutton"
                                          Label="SMS"
-                                        LargeImageSource="Images\LargeIcon.png">
-                    </ribbon:RibbonButton>
+                                        LargeImageSource="Images\LargeIcon.png"/>
+                    <ribbon:RibbonButton x:Name="Login"
+                                         Label="Login Details" />
                 </ribbon:RibbonGroup>
                 <ribbon:RibbonGroup x:Name="EmailGroup"
                                     Header="Email">

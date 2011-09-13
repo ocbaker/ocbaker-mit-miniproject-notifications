@@ -28,6 +28,8 @@ namespace wpfClient.Pages
 
         private void textBox1_TextChanged(object sender, TextChangedEventArgs e)
         {
+
+            //If chr = backspace, -1
             _count += 1;
             byte red = (byte)_count;
             byte green = 150, blue = 150;
