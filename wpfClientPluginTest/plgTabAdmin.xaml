@@ -7,20 +7,20 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Header="Admin" x:Name="HomeTab">
             <ribbon:RibbonGroup x:Name="Group1" 
-                                    Header="Group1">
+                                    Header="SMS">
                 <ribbon:RibbonButton x:Name="Button1"
                                          LargeImageSource="Images\LargeIcon.png"
-                                         Label="Button1" />
+                                         Label="All SMS Settings" />
 
                 <ribbon:RibbonButton x:Name="Button2"
                                          SmallImageSource="Images\SmallIcon.png"
-                                         Label="Button2" />
+                                         Label="SMSIssues2" />
                 <ribbon:RibbonButton x:Name="Button3"
                                          SmallImageSource="Images\SmallIcon.png"
-                                         Label="Button3" />
+                                         Label="Set Password" />
                 <ribbon:RibbonButton x:Name="Button4"
                                          SmallImageSource="Images\SmallIcon.png"
-                                         Label="Button4" />
+                                         Label="Templates" />
 
             </ribbon:RibbonGroup>
 </ribbon:RibbonTab>
