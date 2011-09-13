@@ -42,7 +42,7 @@
                                          SmallImageSource="Images\SmallIcon.png" />
 
                 </ribbon:RibbonGroup>
-
+                
             </ribbon:RibbonTab>
             <!--
                 <my:plgTabAdmin x:Name="plgTabAdmin1" >

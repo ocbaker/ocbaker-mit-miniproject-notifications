@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestOnDemandLoader", "TestO
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wpfClientPluginTest", "wpfClientPluginTest\wpfClientPluginTest.csproj", "{AFDCAFD0-A8CA-46BE-A1AB-1B57909524C8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins.ClientPluginBase", "Plugins.ClientPluginBase\Plugins.ClientPluginBase.csproj", "{7D6726BA-1209-43BC-B4C4-15581A79FE8F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -185,6 +187,16 @@ Global
 		{AFDCAFD0-A8CA-46BE-A1AB-1B57909524C8}.Release|Mixed Platforms.Build.0 = Release|x86
 		{AFDCAFD0-A8CA-46BE-A1AB-1B57909524C8}.Release|x86.ActiveCfg = Release|x86
 		{AFDCAFD0-A8CA-46BE-A1AB-1B57909524C8}.Release|x86.Build.0 = Release|x86
+		{7D6726BA-1209-43BC-B4C4-15581A79FE8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D6726BA-1209-43BC-B4C4-15581A79FE8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D6726BA-1209-43BC-B4C4-15581A79FE8F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{7D6726BA-1209-43BC-B4C4-15581A79FE8F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{7D6726BA-1209-43BC-B4C4-15581A79FE8F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7D6726BA-1209-43BC-B4C4-15581A79FE8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D6726BA-1209-43BC-B4C4-15581A79FE8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D6726BA-1209-43BC-B4C4-15581A79FE8F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{7D6726BA-1209-43BC-B4C4-15581A79FE8F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{7D6726BA-1209-43BC-B4C4-15581A79FE8F}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -194,6 +206,7 @@ Global
 		{ECDE100F-114E-4A24-8128-037D61E5176D} = {C11C9BF5-DFA0-477A-8910-BF356A33E421}
 		{8E4DEF8B-953C-4E53-B428-3586F004840C} = {C11C9BF5-DFA0-477A-8910-BF356A33E421}
 		{FED14967-D008-462E-9785-F76A07278060} = {C11C9BF5-DFA0-477A-8910-BF356A33E421}
+		{7D6726BA-1209-43BC-B4C4-15581A79FE8F} = {C11C9BF5-DFA0-477A-8910-BF356A33E421}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		VisualSVNWorkingCopyRoot = .

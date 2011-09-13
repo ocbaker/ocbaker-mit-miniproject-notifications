@@ -30,8 +30,8 @@ namespace wpfClientPluginTest
         private void Button1_Click(object sender, RoutedEventArgs e)
         {
             plgTabAdmin plg = new plgTabAdmin();
-            ribbon.
-            Ribbon.Children.Add(plg);
+            ribbon.Items.Add(plg);
+            
         }
     }
 }
