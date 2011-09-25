@@ -30,7 +30,11 @@ namespace SMS_API
         private NetworkCredential _cred;
         XNamespace soapenv = "http://schemas.xmlsoap.org/soap/envelope/";
         public apiValidateLogin apiv;
-
+        /// <summary>
+        /// Request a login from the SMSGlobal Soap API, get a ticket in return and put it into apiSendSMS class.
+        /// </summary>
+        /// <param name="_vlogin">ApiValidateLogin object</param>
+        /// <param name="_sendSMS">apiSendSMS object</param>
         public void requestLogin(apiValidateLogin _vlogin, apiSendSms _sendSMS)  {
             this.apiv = _vlogin;
             apiSendSms apis = _sendSMS;
@@ -40,6 +44,7 @@ namespace SMS_API
             HttpWebRequest request = WebRequest.Create("http://www.smsglobal.com/mobileworks/soapserver.php") as HttpWebRequest;
             Windows_7_Dialogs.SecurityDialog a = new Windows_7_Dialogs.SecurityDialog();
 
+            /// Get proxy information if needed. Using Olivers previously made Dialog box
             if (!request.Proxy.IsBypassed(request.RequestUri))
             {
                 a.Show();
@@ -47,10 +52,12 @@ namespace SMS_API
                 request.Proxy.Credentials = _cred;
             }
 
+            /// Add the needed headers for the SOAP API.
             request.Method = "POST";
             request.ContentType = "text/xml";
             request.Headers.Add("urn:MobileWorks#apiValidateLogin");
 
+            ///Create an XML Document, with the needed data inside.
             var document = new XDocument(
                            new XDeclaration("1.0", String.Empty, String.Empty),
                            new XElement(soapenv + "Envelope", new XAttribute(XNamespace.Xmlns + "SOAP-ENV", soapenv),
@@ -60,15 +67,19 @@ namespace SMS_API
                                new XElement("password", apiv.APIpassword)
                                ))));
 
+            ///As it doesn't seem to want to make the declaration, a work around is used. Creating a file, then appending the xml document made above, then loaded into the 
+            ///document object.
            if (File.Exists(Environment.CurrentDirectory + @"\apiLogin.xml")) File.Delete(Environment.CurrentDirectory + @"\apiLogin.xml");
            File.WriteAllText(Environment.CurrentDirectory + @"\apiLogin.xml", "<?xml version='1.0' ?>" + Environment.NewLine);
            File.AppendAllText(Environment.CurrentDirectory + @"\apiLogin.xml", document.ToString());
            document = XDocument.Load(Environment.CurrentDirectory + @"\apiLogin.xml");
 
+            ///Write the document to the requested place, in this case is the Soap API at SMSGLobal.com
            var writer = new StreamWriter(request.GetRequestStream());
            writer.WriteLine(document);
            writer.Close();
 
+            ///Get the responce from the webserver after writing to the API.
             using (var rsp = request.GetResponse())
             {
                request.GetRequestStream().Close();
@@ -77,6 +88,8 @@ namespace SMS_API
                     using (var answerReader =
                                 new StreamReader(rsp.GetResponseStream()))
                     {
+
+                        ///Get the ticket which the server sent back using Regex to get the letter/digit mix of 32 characters.
                         var readString = answerReader.ReadToEnd();
                         Regex r = new Regex(@"(.*)ticket&gt;(.*)&lt;/ticket(.*)");
                         if (r.IsMatch(readString.ToString()))
