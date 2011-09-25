@@ -50,7 +50,7 @@
                                          LargeImageSource="Images\blue-sms-button-32.png"
                                          Label="Send" Click="SendSMS_Click" />
                     <ribbon:RibbonButton x:Name="smsHistory"
-                                         Label="History">
+                                         Label="History" Click="smsHistory_Click">
                     </ribbon:RibbonButton>
                     <ribbon:RibbonButton x:Name="smsTemplate"
                                          Label="SMS Template" Click="smsTemplate_Click">
@@ -65,7 +65,7 @@
                                          Label="SMS"
                                         LargeImageSource="Images\LargeIcon.png"/>
                     <ribbon:RibbonButton x:Name="Login"
-                                         Label="Login Details" />
+                                         Label="Login Details" Click="Login_Click" />
                 </ribbon:RibbonGroup>
                 <ribbon:RibbonGroup x:Name="EmailGroup"
                                     Header="Email">

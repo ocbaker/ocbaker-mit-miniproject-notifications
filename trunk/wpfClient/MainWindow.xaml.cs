@@ -58,9 +58,18 @@ namespace wpfClient
         {
             changePage("pgeSMStemplate");
         }
+        private void smsHistory_Click(object sender, RoutedEventArgs e)
+        {
+            changePage("pgeSMShistory");
+        }
         private void changePage(string arg0) 
         {
             frame1.NavigationService.Source = new Uri("/Pages/"+ arg0 + ".xaml", UriKind.Relative);
+        }
+
+        private void Login_Click(object sender, RoutedEventArgs e)
+        {
+            changePage("Administration/admSMS");
         }
     }
 }

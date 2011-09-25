@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Extensions;
 
 namespace wpfClient.Pages.Administration
 {
@@ -19,9 +20,30 @@ namespace wpfClient.Pages.Administration
     /// </summary>
     public partial class admSMS : Page
     {
+        apiValidateLogin Login= pgeSMS.vlogin;
         public admSMS()
         {
             InitializeComponent();
+        }
+
+        public void txtUsername_LostFocus(object sender, RoutedEventArgs e)
+        {
+            try {
+                Login.APIusername = txtUsername.Text;
+                txtUsername.SetStatus("OK", TextBoxStatuses.OK);
+            } catch (ArgumentException ex) {
+                txtUsername.SetStatus("Error", TextBoxStatuses.ERRORED);
+            }
+        }
+        public void txtPassword_LostFocus(object sender, RoutedEventArgs e)
+        {
+            try {
+                Login.APIpassword = txtPassword.Text;
+                txtPassword.SetStatus("OK", TextBoxStatuses.OK);
+            } catch (ArgumentException ex) {
+                txtPassword.SetStatus("Error", TextBoxStatuses.ERRORED);
+            }
+
         }
     }
 }
