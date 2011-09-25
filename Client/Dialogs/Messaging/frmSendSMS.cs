@@ -38,7 +38,8 @@ namespace Client.Dialogs.Messaging
             
             try
             {
-                vSendSms.ticket = n.requestLogin(vlogin);
+                n.requestLogin(vlogin, vSendSms);
+             
             } catch(Exception ex) {
                 //n.HttpSMS(vSendSms, vlogin);            
             }

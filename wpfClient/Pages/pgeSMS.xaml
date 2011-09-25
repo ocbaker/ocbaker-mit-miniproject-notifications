@@ -23,7 +23,7 @@
                 <Button Content="Send SMS" Height="23" HorizontalAlignment="Left" Margin="159,342,0,0" Name="btnSend" VerticalAlignment="Top" Width="75" Click="btnSendSMS_Click" />
                 <Button Content="Login" Height="23" HorizontalAlignment="Left" Margin="271,20,0,0" Name="btnLogin" VerticalAlignment="Top" Width="75" Click="Login_Click" />
                 <Label Content="Send an SMS" Height="41" HorizontalAlignment="Left" Margin="66,15,0,0" Name="label3" VerticalAlignment="Top" FontSize="22" Width="199" />
-                <Label Height="28" HorizontalAlignment="Left" Margin="55,378,0,0" Name="lblmsgid" VerticalAlignment="Top" Width="290" />
+                <Label Height="28" HorizontalAlignment="Left" Margin="27,378,0,0" Name="lblmsgid" VerticalAlignment="Top" Width="364" />
             </Grid>
         </GroupBox>
     </Grid>

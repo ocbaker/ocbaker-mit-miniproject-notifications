@@ -29,8 +29,12 @@ namespace SMS_API
     {
         private NetworkCredential _cred;
         XNamespace soapenv = "http://schemas.xmlsoap.org/soap/envelope/";
-        public string requestLogin(apiValidateLogin vlogin)  {
-            apiValidateLogin apiv = vlogin;
+        public apiValidateLogin apiv;
+
+        public void requestLogin(apiValidateLogin _vlogin, apiSendSms _sendSMS)  {
+            this.apiv = _vlogin;
+            apiSendSms apis = _sendSMS;
+
             string loginTicket = null;
 
             HttpWebRequest request = WebRequest.Create("http://www.smsglobal.com/mobileworks/soapserver.php") as HttpWebRequest;
@@ -84,10 +88,10 @@ namespace SMS_API
                 }
                 
             }
-            return loginTicket;
+            apis.ticket = loginTicket;
         }
 
-        public string soapSMS(apiSendSms vSendSms)
+        public void soapSMS(apiSendSms vSendSms)
         {
             apiSendSms apis = vSendSms;
             string msgid = null;
@@ -151,9 +155,7 @@ namespace SMS_API
                 }
 
             }
-
-            return msgid;
-
+            apis._responce = msgid;
         }
 
         public void HttpSMS(apiSendSms vSendSms, apiValidateLogin vlogin)
@@ -176,7 +178,14 @@ namespace SMS_API
            
 
         }
+        public void setUsername()
+        {
+            
+        }
+        public void setPassword()
+        {
 
+        }
 
     }
 }

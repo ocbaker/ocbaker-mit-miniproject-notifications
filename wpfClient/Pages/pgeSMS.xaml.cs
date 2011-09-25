@@ -22,7 +22,7 @@ namespace wpfClient.Pages
     /// 
     public partial class pgeSMS : Page
     {
-        apiValidateLogin vlogin = new apiValidateLogin();
+        public static apiValidateLogin vlogin = new apiValidateLogin();
         apiSendSms vSendSms = new apiSendSms();
         notifications n = new notifications();
 
@@ -74,13 +74,14 @@ namespace wpfClient.Pages
         {
             try
             {
+                n.soapSMS(vSendSms);
+
                 if (vSendSms._responce == "") 
                 {
-
-
+                    lblmsgid.Content = "Message send failed.";
+                }else{ 
+                    lblmsgid.Content = "Message sent! Message ID number: " + vSendSms._responce;                
                 }
-
-              lblmsgid.Content = "Message sent! Message ID number:" + n.soapSMS(vSendSms);
             }
             catch (Exception ex) { }
 
@@ -99,7 +100,7 @@ namespace wpfClient.Pages
 
             try
             {
-                vSendSms.ticket = n.requestLogin(vlogin);
+                n.requestLogin(vlogin, vSendSms);
             }
             catch (Exception ex)
             {
