@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Web;
 
 [Serializable()]
 public class apiSendSms 
@@ -51,7 +52,7 @@ public class apiSendSms
         {
             get { return _sms_from; }
             set { 
-                Regex r = new Regex(@"^[\D]+");  Regex rplus = new Regex(@"^[\+]");
+                Regex r = new Regex(@"^[\D]+$");  Regex rplus = new Regex(@"^[\+]");
                 if (rplus.IsMatch(value))
                 {
                     value = value.Replace("+", String.Empty);
@@ -73,7 +74,7 @@ public class apiSendSms
             get { return _sms_to; }
             set {
 
-                Regex r = new Regex(@"^[\D]+"); Regex rplus = new Regex(@"^[\+]");
+                Regex r = new Regex(@"^[\D]+$"); Regex rplus = new Regex(@"^[\+]");
                 if (rplus.IsMatch(value))
                 {
                     value = value.Replace("+", String.Empty);
@@ -85,6 +86,7 @@ public class apiSendSms
                 }
                 else
                 {
+                   value = HttpUtility.HtmlEncode(value);
                     _sms_to = value;
                 }           
             }
