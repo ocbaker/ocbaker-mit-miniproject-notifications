@@ -191,14 +191,5 @@ namespace SMS_API
            
 
         }
-        public void setUsername()
-        {
-            
-        }
-        public void setPassword()
-        {
-
-        }
-
     }
 }
