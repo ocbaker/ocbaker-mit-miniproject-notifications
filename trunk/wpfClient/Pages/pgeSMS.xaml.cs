@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SMS_API;
 using Extensions;
+using Microsoft.Windows.Controls;
 
 namespace wpfClient.Pages
 {
@@ -25,6 +26,7 @@ namespace wpfClient.Pages
         public static apiValidateLogin vlogin = new apiValidateLogin();
         apiSendSms vSendSms = new apiSendSms();
         notifications n = new notifications();
+        
 
         public pgeSMS()
         {
@@ -91,8 +93,8 @@ namespace wpfClient.Pages
         private void Login_Click(object sender, RoutedEventArgs e)
         {
             //Windows_7_Dialogs.SecurityDialog dialog = new Windows_7_Dialogs.SecurityDialog();
-            // dialog.Show("SMSGlobal Credentials", "SMSGlobal is requesting your username and password");
-
+            //dialog.Show("SMSGlobal Credentials", "SMSGlobal is requesting your username and password");
+            
             //vlogin.APIusername = dialog.UserData.Username;
             //vlogin.APIpassword = dialog.UserData.Password;
             vlogin.APIpassword = "81953801";

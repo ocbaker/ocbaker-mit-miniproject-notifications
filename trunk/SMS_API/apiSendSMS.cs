@@ -18,7 +18,7 @@ public class apiSendSms
         private string _schedule;
         public string _responce;
        
-          public apiSendSms()
+        public apiSendSms()
         {
         }
         public apiSendSms(string t, string from, string to, string content, string sch)
@@ -130,7 +130,10 @@ public class apiSendSms
             get { return _schedule; }
             set {
                 //Look at some type of converting? if needed?
-                _schedule = value; 
+
+                DateTime z = TimeZoneInfo.ConvertTime(Convert.ToDateTime(value), TimeZoneInfo.FindSystemTimeZoneById("AUS Eastern Standard Time"));
+                
+                _schedule = z.ToString(); 
             }
         }
    ///When the text should be sent (if not included the text sends immediatly).
