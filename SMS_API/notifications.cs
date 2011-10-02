@@ -166,7 +166,6 @@ namespace SMS_API
                     }
 
                 }
-
             }
             apis._responce = msgid;
         }
