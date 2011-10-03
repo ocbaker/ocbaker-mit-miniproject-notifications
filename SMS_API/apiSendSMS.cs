@@ -123,7 +123,8 @@ public class apiSendSms
         }
     /// <summary>
     /// Unicode
-    /// </summary>
+    /// </summary> 
+  
         public string schedule
         {
             //Need to convert to yyyy‐mm‐dd hh:mm:ss
@@ -131,9 +132,10 @@ public class apiSendSms
             set {
                 //Look at some type of converting? if needed?
 
-                DateTime z = TimeZoneInfo.ConvertTime(Convert.ToDateTime(value), TimeZoneInfo.FindSystemTimeZoneById("AUS Eastern Standard Time"));
-                
-                _schedule = z.ToString(); 
+                //DateTime z = TimeZoneInfo.ConvertTime(Convert.ToDateTime(value), TimeZoneInfo.FindSystemTimeZoneById("AUS Eastern Standard Time"));
+                //value = z.ToString("yyyy‐MM‐dd H:mm:ss");
+
+                _schedule = value;
             }
         }
    ///When the text should be sent (if not included the text sends immediatly).
