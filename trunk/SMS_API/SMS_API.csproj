@@ -53,6 +53,8 @@
     <Compile Include="iAPI.cs" />
     <Compile Include="notifications.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="rqSMSdata.cs" />
+    <Compile Include="rtSMSdata.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Windows 7 Dialogs\Windows 7 Dialogs.vbproj">

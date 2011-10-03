@@ -39,8 +39,8 @@
             _Dialog.Label3.Text = _ProxyDetail & vbNewLine & _Warning
             _Dialog.Text = "Proxy Authentication"
         Else
-            _Dialog.Label3.Text = context
-            _Dialog.Text = title & vbNewLine & _Warning
+            _Dialog.Label3.Text = context & vbNewLine & _Warning
+            _Dialog.Text = title
         End If
 
         _Dialog.ShowDialog()

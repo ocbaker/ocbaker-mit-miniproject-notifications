@@ -24,13 +24,11 @@ namespace wpfClient.Pages
         public pgeSMStemplate()
         {
             InitializeComponent();
+            lblSMScount.Content = _count + "/160";
         }
 
         private void textBox1_TextChanged(object sender, TextChangedEventArgs e)
         {
-
-            //If chr = backspace, -1
-            _count += 1;
             byte red = (byte)_count;
             byte green = 150, blue = 150;
 
@@ -46,22 +44,20 @@ namespace wpfClient.Pages
             }
             lblSMScount.Foreground = ExtensionServices.fromRGB(red,green,blue);
 
+            if (Keyboard.IsKeyDown(Key.Back))
+            {
+                _count -= 1;
+            }
+            else
+            {
+                _count += 1;
+            }
             lblSMScount.Content = _count + "/160";
+        }
 
-
-        //    if (_count > 150 && _count <161) 
-        //    {
-        //        lblSMScount.Foreground = ExtensionServices.fromHex("#FF0000");
-        //    }
-        //    else  if (_count > 160) 
-        //    {
-        //         lblSMScount.Foreground = ExtensionServices.fromHex("#FF0000");
-        //    }
-        //    else {
-        //        lblSMScount.Foreground = ExtensionServices.fromHex("#FF0000");
-        //    }
-            
-        //    
+        private void btnTemplateSave_Click(object sender, RoutedEventArgs e)
+        {
+            //Save to a User profile.
         }
     }
 }

@@ -32,6 +32,7 @@ namespace wpfClient.Pages
         {
             InitializeComponent();
             btnSend.IsEnabled = false;
+            //TimePicker t = new TimePicker();
         }
 
 
@@ -74,6 +75,8 @@ namespace wpfClient.Pages
 
         private void btnSendSMS_Click(object sender, RoutedEventArgs e)
         {
+            //vSendSms.schedule = Convert.ToString(dtp.DateTimeSelected);
+            //If (dtp.DateTimeSelected) / Write to some DB and set timer.
             try
             {
                 n.soapSMS(vSendSms);

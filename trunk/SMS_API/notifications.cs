@@ -35,6 +35,7 @@ namespace SMS_API
         /// </summary>
         /// <param name="_vlogin">ApiValidateLogin object</param>
         /// <param name="_sendSMS">apiSendSMS object</param>
+        /// 
         public void requestLogin(apiValidateLogin _vlogin, apiSendSms _sendSMS)  {
             this.apiv = _vlogin;
             apiSendSms apis = _sendSMS;
@@ -47,7 +48,8 @@ namespace SMS_API
             /// Get proxy information if needed. Using Olivers previously made Dialog box
             if (!request.Proxy.IsBypassed(request.RequestUri))
             {
-                a.Show();
+
+                a.Show("Proxy Authentication", "The server you are trying to access requires a username and password." + Environment.NewLine);
                 _cred = new NetworkCredential(a.UserData.Username, a.UserData.Password);
                 request.Proxy.Credentials = _cred;
             }
@@ -186,9 +188,6 @@ namespace SMS_API
                 a.Show();
                 request.Proxy.Credentials = new NetworkCredential(a.UserData.Username, a.UserData.Password);
             }
-
-           
-
         }
     }
 }

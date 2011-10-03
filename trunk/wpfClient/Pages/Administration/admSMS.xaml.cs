@@ -45,5 +45,10 @@ namespace wpfClient.Pages.Administration
             }
 
         }
+
+        private void btnLoginSave_Click(object sender, RoutedEventArgs e)
+        {
+            //Send the username/password to the Settings Project.
+        }
     }
 }

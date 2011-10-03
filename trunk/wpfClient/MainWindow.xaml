@@ -43,7 +43,7 @@
                 
             </ribbon:RibbonTab>
             <ribbon:RibbonTab x:Name="SMSTab" 
-                              Header="SMS's">
+                              Header="SMS">
                 <ribbon:RibbonGroup x:Name="Group2" 
                                     Header="SMS">
                     <ribbon:RibbonButton x:Name="SendSMS"
