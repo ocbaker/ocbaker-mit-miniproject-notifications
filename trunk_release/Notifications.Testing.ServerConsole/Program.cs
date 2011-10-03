@@ -7,10 +7,13 @@ namespace Notifications.Testing.ServerConsole
 {
     class Program
     {
+        [STAThread]
         static void Main(string[] args)
         {
-            Console.WriteLine(Notifications.Server.Server.Class1.test());
+            Notifications.Server.Server.ConnectionV2 con = new Server.Server.ConnectionV2();
+            con.startListening();
             Console.ReadLine();
+            
         }
     }
 }

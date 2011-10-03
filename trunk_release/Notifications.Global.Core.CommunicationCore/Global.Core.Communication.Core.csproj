@@ -44,7 +44,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requests\comdata_Blank.cs" />
     <Compile Include="Requests\comdata_Login.cs" />
+    <Compile Include="Requests\comdata_File.cs" />
     <Compile Include="Responses\comdata_Login.cs" />
+    <Compile Include="Responses\comdata_File.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
