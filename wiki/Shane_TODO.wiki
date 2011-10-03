@@ -1,0 +1,8 @@
+#summary List of things I need to do, finish, so I don't forget.
+
+= TO DO =
+
+ * Template saving - pgeSMStemplate 
+ * SMSGlobal Username/Password saving - admSMS
+ * SMS Scheduling - Schedule on the machine to send.
+ * Save SMS to the database 
