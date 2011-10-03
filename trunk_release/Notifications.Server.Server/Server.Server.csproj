@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{59A2FC1F-C976-4CD3-89FF-C6A70C0B6584}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Notifications.Server.Server</RootNamespace>
+    <AssemblyName>Notifications.Server.Server</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="srvConnection.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Notifications.Global.Core.CommunicationBase\Global.Core.Communication.Base.csproj">
+      <Project>{C55B156A-CC8B-4EB9-BE65-BF0D63C1E5E2}</Project>
+      <Name>Global.Core.Communication.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Notifications.Global.Core.CommunicationCore\Global.Core.Communication.Core.csproj">
+      <Project>{EB1D1A60-B6A8-447B-B36C-7EE7891A9E08}</Project>
+      <Name>Global.Core.Communication.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Notifications.Server.Core.Manager\Server.Core.Manager.csproj">
+      <Project>{6E63A56D-14EE-4E99-9984-E9664F480D15}</Project>
+      <Name>Server.Core.Manager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Notifications.Server.Modules.Core\Server.Core.Core.csproj">
+      <Project>{863B1A63-002F-47AF-BA19-2C53BBBCE4ED}</Project>
+      <Name>Server.Core.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
