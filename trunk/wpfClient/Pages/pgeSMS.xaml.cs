@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using SMS_API;
 using Extensions;
 using Microsoft.Windows.Controls;
+using System.Threading;
 
 namespace wpfClient.Pages
 {
@@ -23,28 +24,37 @@ namespace wpfClient.Pages
     /// 
     public partial class pgeSMS : Page
     {
-        public static apiValidateLogin vlogin = new apiValidateLogin();
-        apiSendSms vSendSms = new apiSendSms();
-        notifications n = new notifications();
         
+        public static apiValidateLogin vlogin = new apiValidateLogin();
+        public static apiSendSms vSendSms = new apiSendSms();
+        notifications n = new notifications();
+        //DispatcherTimer timer = new DispatcherTimer();
+        //Maybe use thread.sleep(3000); lbl.enabled = false
+
 
         public pgeSMS()
         {
             InitializeComponent();
             btnSend.IsEnabled = false;
-            //TimePicker t = new TimePicker();
+
+            //Take the current loged in user, get their employee ID number, use it as their FROM: In the SMS FROM
+            txtFrom.Text = Convert.ToString(000001);
+
+            //Get the SMSGLobal username & password from the database (only admin can set), and Login using SMSvalidateapi
+            //connectToDatabase();
+            //loginToSMSGlobal();
         }
 
 
         private void txtFrom_LostFocus(object sender, RoutedEventArgs e) 
         {
-            try
-            {
-                vSendSms.sms_from = txtFrom.Text;
-                txtFrom.SetStatus("OK", TextBoxStatuses.OK);
-            } catch (ArgumentException ex) {
-               txtFrom.SetStatus("Errored", TextBoxStatuses.ERRORED);
-            }
+            //try
+            //{
+            //    vSendSms.sms_from = txtFrom.Text;
+            //    txtFrom.SetStatus("OK", TextBoxStatuses.OK);
+            //} catch (ArgumentException ex) {
+            //   txtFrom.SetStatus("Errored", TextBoxStatuses.ERRORED);
+            //}
         }
 
         private void txtTo_LostFocus(object sender, RoutedEventArgs e)
@@ -90,7 +100,6 @@ namespace wpfClient.Pages
             }
             catch (Exception ex) { }
 
-
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)
@@ -100,28 +109,41 @@ namespace wpfClient.Pages
             
             //vlogin.APIusername = dialog.UserData.Username;
             //vlogin.APIpassword = dialog.UserData.Password;
+            
+
+            loginToSMSGlobal();
+
+            
+
+            //lblmsgid.Content = vSendSms.ticket;
+
+        }
+
+        private void loginToSMSGlobal() 
+        {
+            //Remove when i can connect to the database.
             vlogin.APIpassword = "81953801";
             vlogin.APIusername = "lolhi";
 
-            try
+            try 
             {
                 n.requestLogin(vlogin, vSendSms);
+            } catch (Exception ex) {
+               // n.HttpSMS(vSendSms, vlogin);
             }
-            catch (Exception ex)
-            {
-                //n.HttpSMS(vSendSms, vlogin);            
-            }
-
-            lblmsgid.Content = vSendSms.ticket;
 
             if (vSendSms.ticket == null)
             {
                 btnSend.IsEnabled = false;
             }
             else { btnSend.IsEnabled = true; }
+
         }
 
+        private void connectToDatabase()
+        {
 
+        }
 
     }
 }
