@@ -31,12 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Nito.Async">
-      <HintPath>..\Nito.Async.dll</HintPath>
-    </Reference>
-    <Reference Include="Nito.Async.Sockets">
-      <HintPath>..\Nito.Async.Sockets.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -52,6 +46,14 @@
     <Compile Include="srvConnection.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\External_Libraries\Nitro\Nito.Async.Sockets\Nito.Async.Sockets.csproj">
+      <Project>{B412B766-BEC2-407C-A7A1-0E5257511515}</Project>
+      <Name>Nito.Async.Sockets</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\External_Libraries\Nitro\Nito.Async\Nito.Async.csproj">
+      <Project>{708763ED-7801-4F2C-B103-4FEBD771769A}</Project>
+      <Name>Nito.Async</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Global.Core.Utils\Global.Core.Utils.csproj">
       <Project>{4F796810-F43D-41C3-9D83-AB83D93F1150}</Project>
       <Name>Global.Core.Utils</Name>

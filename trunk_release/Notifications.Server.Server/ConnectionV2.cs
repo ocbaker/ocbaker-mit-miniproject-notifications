@@ -77,6 +77,7 @@ namespace Notifications.Server.Server
         }
         private void ListeningSocket_ConnectionArrived(AsyncResultEventArgs<SimpleServerChildTcpSocket> e)
         {
+            Console.WriteLine("Connection Recived");
             // Check for errors
             if (e.Error != null)
             {
@@ -93,7 +94,7 @@ namespace Notifications.Server.Server
                 socket.PacketArrived += (args) => ChildSocket_PacketArrived(socket, args);
                 socket.WriteCompleted += (args) => ChildSocket_WriteCompleted(socket, args);
                 socket.ShutdownCompleted += (args) => ChildSocket_ShutdownCompleted(socket, args);
-
+                Console.WriteLine("Client Connected");
             }
             catch (Exception ex)
             {
