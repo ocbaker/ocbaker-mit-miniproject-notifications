@@ -18,6 +18,51 @@ namespace Notifications.Client.Executable
     public class NetworkComms
     {
 
+        private static Dictionary<Type, Func<object, object>> DataHandlers;
+
+        public NetworkComms(){
+            DataHandlers = new Dictionary<Type, Func<object, object>>();
+            addDataHandler((new comdata_rqFile()).GetType(),(Func<object,object>)testFunction);
+        }
+
+        public void addDataHandler(object key, Func<object, object> value){
+            if (DataHandlers.ContainsKey(key.GetType()))
+            {
+                throw new Exception("Duplicate Keys Not Allowed");
+            }else{
+                DataHandlers.Add(key.GetType(), value);
+            }
+        }
+
+        public void removeDataHandler(object key){
+            if (DataHandlers.ContainsKey(key.GetType()))
+            {
+                throw new KeyNotFoundException();
+            }
+            else
+            {
+                DataHandlers.Remove(key.GetType());
+            }
+        }
+
+        /// <summary>
+        /// Called by PacketArrived Asynchroniously to handle the message.
+        /// Decreases Client Hang Times
+        /// </summary>
+        /// <param name="data"></param>
+        private void HandleInboundData(object message){
+            
+            //string typen = message.GetType().FullName;
+
+            //object compareValue = new comdata_rqFile();
+            Type ty;
+            if (DataHandlers.ContainsKey(message.GetType()))
+            {
+                object result = DataHandlers[message.GetType()](message);
+            }
+            string lol = "a";
+        }
+
         public void connect(){
             try
             {
@@ -156,7 +201,7 @@ namespace Notifications.Client.Executable
             }
 
         }
-
+        
         private void ClientSocket_PacketArrived(AsyncResultEventArgs<byte[]> e)
         {
             try
@@ -176,34 +221,7 @@ namespace Notifications.Client.Executable
                 {
                     // At this point, we know we actually got a message.
 
-                    // Deserialize the message
-                    object message = Util.Deserialize(e.Result);
-                    string typen = message.GetType().FullName;
-
-                    object compareValue = new comdata_rqLogin();
-
-                    if (message.GetType() == compareValue.GetType())
-                    {
-                        testFunction((comdata_rqLogin)message);
-                    }
-                    string lol = "a";
-                    //// Handle the message
-                    //Messages.StringMessage stringMessage = message as Messages.StringMessage;
-                    //if (stringMessage != null)
-                    //{
-                    //    textBoxLog.AppendText("Socket read got a string message: " + stringMessage.Message + Environment.NewLine);
-                    //    return;
-                    //}
-
-                    //Messages.ComplexMessage complexMessage = message as Messages.ComplexMessage;
-                    //if (complexMessage != null)
-                    //{
-                    //    textBoxLog.AppendText("Socket read got a complex message: (UniqueID = " + complexMessage.UniqueID.ToString() +
-                    //        ", Time = " + complexMessage.Time.ToString() + ", Message = " + complexMessage.Message + ")" + Environment.NewLine);
-                    //    return;
-                    //}
-
-                    //textBoxLog.AppendText("Socket read got an unknown message of type " + message.GetType().Name + Environment.NewLine);
+                    Sync.SynchronizeAction(() => HandleInboundData(Util.Deserialize(e.Result)));
                 }
             }
             catch (Exception ex)
@@ -217,8 +235,11 @@ namespace Notifications.Client.Executable
             }
         }
 
-        private void testFunction(comdata_rqLogin data){
-            string a = "lol";
+        private object testFunction(object arg0)
+        {
+            comdata_rqFile data = (comdata_rqFile)arg0;
+            System.IO.File.WriteAllBytes(data.FileName, data.File);
+            return true;
         }
     }
 }

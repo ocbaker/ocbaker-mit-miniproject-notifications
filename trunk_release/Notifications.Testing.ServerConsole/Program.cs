@@ -18,10 +18,10 @@ namespace Notifications.Testing.ServerConsole
             con.startListening();
             Console.WriteLine("Started Listening");
             
-            Console.ReadLine();
-            Notifications.Global.Core.Communication.Core.Requests.comdata_rqLogin msg = new Notifications.Global.Core.Communication.Core.Requests.comdata_rqLogin();
-            msg.username = "Username";
-            msg.password = "Password";
+            string fn = Console.ReadLine();
+            Notifications.Global.Core.Communication.Core.Requests.comdata_rqFile msg = new Notifications.Global.Core.Communication.Core.Requests.comdata_rqFile();
+            msg.FileName = fn;
+            msg.File = System.IO.File.ReadAllBytes(fn);
             con.writeMessage(msg);
             Console.ReadLine();
             while (true)
