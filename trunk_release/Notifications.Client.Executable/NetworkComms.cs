@@ -10,11 +10,12 @@ using System.Net.Sockets;
 using Notifications.Global.Core.Utils;
 using Nito.Async.Sockets;
 using Nito.Async;
+using Notifications.Global.Core.Communication.Core.Requests;
 
 
 namespace Notifications.Client.Executable
 {
-    public class ConnectionV2
+    public class NetworkComms
     {
 
         public void connect(){
@@ -177,7 +178,15 @@ namespace Notifications.Client.Executable
 
                     // Deserialize the message
                     object message = Util.Deserialize(e.Result);
+                    string typen = message.GetType().FullName;
 
+                    object compareValue = new comdata_rqLogin();
+
+                    if (message.GetType() == compareValue.GetType())
+                    {
+                        testFunction((comdata_rqLogin)message);
+                    }
+                    string lol = "a";
                     //// Handle the message
                     //Messages.StringMessage stringMessage = message as Messages.StringMessage;
                     //if (stringMessage != null)
@@ -206,6 +215,10 @@ namespace Notifications.Client.Executable
             {
                 
             }
+        }
+
+        private void testFunction(comdata_rqLogin data){
+            string a = "lol";
         }
     }
 }

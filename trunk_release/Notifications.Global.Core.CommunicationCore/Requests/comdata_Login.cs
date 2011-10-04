@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Notifications.Global.Core.Communication.Core.Requests
 {
-    [DataContract]
+    [DataContract,Serializable]
     /// <summary>
     /// A class defining the data of a Login Request sent to the server
     /// </summary>

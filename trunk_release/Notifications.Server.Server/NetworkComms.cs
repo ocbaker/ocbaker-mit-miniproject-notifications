@@ -204,8 +204,13 @@ namespace Notifications.Server.Server
             //    string description = (string)e.UserState;
             //    textBoxLog.AppendText("Socket write completed to " + socket.RemoteEndPoint.ToString() + " for message " + description + Environment.NewLine);
             //}
-
+            Console.WriteLine("Message Sent");
             //RefreshDisplay();
+        }
+
+        public void writeMessage(object msg){
+
+            ChildSockets.First().Key.WriteAsync(Util.Serialize(msg));
         }
     }
 }

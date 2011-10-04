@@ -65,8 +65,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ConnectionV2.cs" />
-    <Compile Include="ConnectionV3.cs" />
+    <Compile Include="NetworkComms.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -120,6 +119,14 @@
     <ProjectReference Include="..\Notifications.Client.Modules.Core\Client.Core.Core.csproj">
       <Project>{74422501-DEC2-478A-A0C4-3CBF82785EC8}</Project>
       <Name>Client.Core.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Notifications.Global.Core.CommunicationBase\Global.Core.Communication.Base.csproj">
+      <Project>{C55B156A-CC8B-4EB9-BE65-BF0D63C1E5E2}</Project>
+      <Name>Global.Core.Communication.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Notifications.Global.Core.CommunicationCore\Global.Core.Communication.Core.csproj">
+      <Project>{EB1D1A60-B6A8-447B-B36C-7EE7891A9E08}</Project>
+      <Name>Global.Core.Communication.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

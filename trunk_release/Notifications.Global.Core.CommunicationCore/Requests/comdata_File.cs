@@ -7,16 +7,16 @@ using System.Text;
 
 namespace Notifications.Global.Core.Communication.Core.Requests
 {
-    [DataContract]
+    [Serializable]
     /// <summary>
     /// A class defining the data of a Login Request sent to the server
     /// </summary>
     public class comdata_rqFile
     {
-        [DataMember]
-        public string username;
+        
+        public string FileName;
 
-        [DataMember]
-        public string password;
+        
+        public byte[] File;
     }
 }

@@ -17,13 +17,18 @@ namespace Notifications.Testing.ServerConsole
             con = new Server.Server.NetworkComms();
             con.startListening();
             Console.WriteLine("Started Listening");
+            
+            Console.ReadLine();
+            Notifications.Global.Core.Communication.Core.Requests.comdata_rqLogin msg = new Notifications.Global.Core.Communication.Core.Requests.comdata_rqLogin();
+            msg.username = "Username";
+            msg.password = "Password";
+            con.writeMessage(msg);
+            Console.ReadLine();
             while (true)
             {
                 Thread.Sleep(5);
                 //actDisp.Run();
             }
-            Console.ReadLine();
-            
         }
     }
 }

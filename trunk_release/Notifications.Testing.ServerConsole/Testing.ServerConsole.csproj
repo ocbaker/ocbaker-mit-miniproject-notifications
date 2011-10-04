@@ -47,6 +47,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Notifications.Global.Core.CommunicationBase\Global.Core.Communication.Base.csproj">
+      <Project>{C55B156A-CC8B-4EB9-BE65-BF0D63C1E5E2}</Project>
+      <Name>Global.Core.Communication.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Notifications.Global.Core.CommunicationCore\Global.Core.Communication.Core.csproj">
+      <Project>{EB1D1A60-B6A8-447B-B36C-7EE7891A9E08}</Project>
+      <Name>Global.Core.Communication.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Notifications.Server.Server\Server.Server.csproj">
       <Project>{59A2FC1F-C976-4CD3-89FF-C6A70C0B6584}</Project>
       <Name>Server.Server</Name>
