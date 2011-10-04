@@ -348,7 +348,7 @@ namespace Nito.Async.Sockets
         {
             Socket.BeginSend(buffer, offset, size, SocketFlags.None, Sync.SynchronizeAsyncCallback((asyncResult) =>
                 {
-                    Sync.InvokeAndCallback(() => Socket.EndSend(asyncResult),
+                    Sync.InvokeAndCallback((Func<int>)(() => Socket.EndSend(asyncResult)),
                         OnWriteCompleted, asyncResult.AsyncState);
                 }), state);
         }

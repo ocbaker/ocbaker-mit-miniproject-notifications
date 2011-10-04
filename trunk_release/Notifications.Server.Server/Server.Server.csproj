@@ -41,9 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="ConnectionV2.cs" />
+    <Compile Include="NetworkComms.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="srvConnection.cs" />
+    <Compile Include="SynchronizationManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\External_Libraries\Nitro\Nito.Async.Sockets\Nito.Async.Sockets.csproj">

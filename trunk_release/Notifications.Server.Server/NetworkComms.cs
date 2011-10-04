@@ -18,7 +18,7 @@ using Notifications.Global.Core.Utils;
 
 namespace Notifications.Server.Server
 {
-    public class ConnectionV2
+    public class NetworkComms
     {
 
         
@@ -27,6 +27,10 @@ namespace Notifications.Server.Server
         /// A mapping of sockets (with established connections) to their state.
         /// </summary>
         private Dictionary<SimpleServerChildTcpSocket, ChildSocketState> ChildSockets = new Dictionary<SimpleServerChildTcpSocket, ChildSocketState>();
+
+        public NetworkComms(){
+            SynchronizationManager.letMeHandleIt();
+        }
 
         /// <summary>
         /// The state of a child socket connection.
@@ -81,7 +85,7 @@ namespace Notifications.Server.Server
             // Check for errors
             if (e.Error != null)
             {
-                throw new Exception("Unknown Exception");
+                //throw new Exception("Unknown Exception");
             }
 
             SimpleServerChildTcpSocket socket = e.Result;
@@ -99,7 +103,7 @@ namespace Notifications.Server.Server
             catch (Exception ex)
             {
                 ResetChildSocket(socket);
-                throw ex;
+                //throw ex;
             }
             finally
             {
@@ -114,14 +118,14 @@ namespace Notifications.Server.Server
                 if (e.Error != null)
                 {
                     ResetChildSocket(socket);
-                    throw new Exception("Unknown Exception");
+                    //throw new Exception("Unknown Exception");
                 }
                 else if (e.Result == null)
                 {
 
                     // Close the socket and remove it from the list
                     ResetChildSocket(socket);
-                    throw new Exception("Unknown Exception");
+                    //throw new Exception("Unknown Exception");
                 }
                 else
                 {
@@ -152,7 +156,7 @@ namespace Notifications.Server.Server
             catch (Exception ex)
             {
                 ResetChildSocket(socket);
-                throw ex;
+                //throw ex;
             }
             finally
             {
@@ -167,13 +171,14 @@ namespace Notifications.Server.Server
             if (e.Error != null)
             {
                 ResetChildSocket(socket);
-                throw new Exception("Unknown Exception");
+                //throw new Exception("Unknown Exception");
             }
             else
             {
                 // Close the socket and remove it from the list
                 ResetChildSocket(socket);
             }
+            Console.WriteLine("Client Disconnected");
         }
         private void ChildSocket_WriteCompleted(SimpleServerChildTcpSocket socket, AsyncCompletedEventArgs e)
         {
