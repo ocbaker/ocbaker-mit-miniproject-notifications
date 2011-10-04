@@ -14,7 +14,8 @@ using System.Windows.Shapes;
 using SMS_API;
 using Extensions;
 using Microsoft.Windows.Controls;
-using System.Threading;
+//using System.Threading;
+using Nito.Async;
 
 namespace wpfClient.Pages
 {
@@ -30,7 +31,7 @@ namespace wpfClient.Pages
         notifications n = new notifications();
         //DispatcherTimer timer = new DispatcherTimer();
         //Maybe use thread.sleep(3000); lbl.enabled = false
-
+       
 
         public pgeSMS()
         {
@@ -42,7 +43,7 @@ namespace wpfClient.Pages
 
             //Get the SMSGLobal username & password from the database (only admin can set), and Login using SMSvalidateapi
             //connectToDatabase();
-            //loginToSMSGlobal();
+            loginToSMSGlobal();
         }
 
 
@@ -66,7 +67,7 @@ namespace wpfClient.Pages
             }
             catch (ArgumentException ex)
             {
-                txtTo.SetStatus("Errored", TextBoxStatuses.ERRORED);
+                txtTo.SetStatus("Errored" + ex.Message, TextBoxStatuses.ERRORED);
             }
         }
 
@@ -79,7 +80,7 @@ namespace wpfClient.Pages
             }
             catch (ArgumentException ex)
             {
-                txtMessage.SetStatus("Errored", TextBoxStatuses.ERRORED);
+                txtMessage.SetStatus("Errored" + ex.Message, TextBoxStatuses.ERRORED);
             }
         }
 
@@ -87,23 +88,34 @@ namespace wpfClient.Pages
         {
             //vSendSms.schedule = Convert.ToString(dtp.DateTimeSelected);
             //If (dtp.DateTimeSelected) / Write to some DB and set timer.
+            vSendSms.sms_from = txtFrom.Text;
             try
             {
                 n.soapSMS(vSendSms);
 
                 if (vSendSms._responce == "") 
                 {
+                    //Timer t = new Timer();
+                    
+
+                    lblmsgid.Visibility = System.Windows.Visibility.Visible;
                     lblmsgid.Content = "Message send failed.";
+                    //t.SetSingleShot(new TimeSpan(3000));
+                   // t.Enabled = true;
+                   // lblmsgid.Visibility = System.Windows.Visibility.Collapsed;
                 }else{ 
-                    lblmsgid.Content = "Message sent! Message ID number: " + vSendSms._responce;                
+
+                    lblmsgid.Content = "Message sent! Message ID number: " + vSendSms._responce;
+                    //Thread.Sleep(3000);
+
                 }
             }
             catch (Exception ex) { }
 
         }
 
-        private void Login_Click(object sender, RoutedEventArgs e)
-        {
+        //private void Login_Click(object sender, RoutedEventArgs e)
+        //{
             //Windows_7_Dialogs.SecurityDialog dialog = new Windows_7_Dialogs.SecurityDialog();
             //dialog.Show("SMSGlobal Credentials", "SMSGlobal is requesting your username and password");
             
@@ -111,13 +123,13 @@ namespace wpfClient.Pages
             //vlogin.APIpassword = dialog.UserData.Password;
             
 
-            loginToSMSGlobal();
+            
 
             
 
             //lblmsgid.Content = vSendSms.ticket;
 
-        }
+       // }
 
         private void loginToSMSGlobal() 
         {
@@ -143,6 +155,11 @@ namespace wpfClient.Pages
         private void connectToDatabase()
         {
 
+        }
+
+        private void pgeSMS_LostFocus(object sender, RoutedEventArgs e)
+        {
+            
         }
 
     }

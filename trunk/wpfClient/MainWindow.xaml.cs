@@ -20,6 +20,10 @@ namespace wpfClient
     /// </summary>
     public partial class MainWindow : RibbonWindow
     {
+        public static List<Page> pageList;
+        //Need to make a list of pages, with objects to save state. Save the states in here, 
+        //Load them from here when needed.
+
         public MainWindow()
         {
             InitializeComponent();
@@ -48,6 +52,7 @@ namespace wpfClient
                         break;
                 }
             }
+            
         }
 
         private void SendSMS_Click(object sender, RoutedEventArgs e)

@@ -162,7 +162,7 @@ namespace SMS_API
                         Regex r = new Regex(@"(.*)msgid&gt;(.*)&lt;/msgid(.*)");
                         if (r.IsMatch(readString.ToString()))
                         {
-                            Regex reg = new Regex(@"[0-9]{16}");
+                            Regex reg = new Regex(@"\d{16}");
                              msgid = reg.Match(r.Match(readString.ToString()).ToString()).ToString();
                         }
                     }
