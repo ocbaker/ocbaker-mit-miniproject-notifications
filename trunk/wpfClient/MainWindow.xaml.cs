@@ -20,14 +20,15 @@ namespace wpfClient
     /// </summary>
     public partial class MainWindow : RibbonWindow
     {
-        public static List<Page> pageList;
+        public static Dictionary<Page, String> StateDictionary;
+        
         //Need to make a list of pages, with objects to save state. Save the states in here, 
         //Load them from here when needed.
 
         public MainWindow()
         {
             InitializeComponent();
-
+            
             // Insert code required on object creation below this point.
         }
 
