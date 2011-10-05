@@ -8,7 +8,7 @@
       Title="pgeSMS"
       d:DesignHeight="462"
       d:DesignWidth="452"
-      mc:Ignorable="d" Name="pgeSMS" LostFocus="pgeSMS_LostFocus">
+      mc:Ignorable="d" LostFocus="pgeSMS_LostFocus">
     <Grid Height="461">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="58*" />

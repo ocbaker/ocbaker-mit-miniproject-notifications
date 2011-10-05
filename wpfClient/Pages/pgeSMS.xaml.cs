@@ -29,9 +29,6 @@ namespace wpfClient.Pages
         public static apiValidateLogin vlogin = new apiValidateLogin();
         public static apiSendSms vSendSms = new apiSendSms();
         notifications n = new notifications();
-        //DispatcherTimer timer = new DispatcherTimer();
-        //Maybe use thread.sleep(3000); lbl.enabled = false
-       
 
         public pgeSMS()
         {
@@ -106,7 +103,7 @@ namespace wpfClient.Pages
                 }else{ 
 
                     lblmsgid.Content = "Message sent! Message ID number: " + vSendSms._responce;
-                    //Thread.Sleep(3000);
+                   
 
                 }
             }
@@ -157,6 +154,14 @@ namespace wpfClient.Pages
 
         }
 
+        //private string SaveState()
+        //{
+        //   string[] states;
+
+            
+
+        //    return states;
+        //}
         private void pgeSMS_LostFocus(object sender, RoutedEventArgs e)
         {
             
