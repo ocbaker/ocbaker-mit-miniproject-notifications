@@ -43,6 +43,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Notifications.Global.Base.Plugin.Client\Global.Base.Plugin.Client.csproj">
+      <Project>{A63DC85B-1333-47AA-91B9-8D348BD2CB05}</Project>
+      <Name>Global.Base.Plugin.Client</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>False</Private>
+    </ProjectReference>
     <ProjectReference Include="..\..\Global\Notifications.Plugins.SMS.Global.ComObjects\Plugins.SMS.Global.ComObjects.csproj">
       <Project>{96861E9B-D128-438A-85DA-9F51E7220AD8}</Project>
       <Name>Plugins.SMS.Global.ComObjects</Name>

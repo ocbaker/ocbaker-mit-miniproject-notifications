@@ -59,6 +59,14 @@
       <Project>{4F796810-F43D-41C3-9D83-AB83D93F1150}</Project>
       <Name>Global.Core.Utils</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Notifications.Global.Base.Plugin.ComObjects\Notifications.Global.Base.Plugin.ComObjects.csproj">
+      <Project>{F72809D9-E2F1-4BAE-A321-250A6F5B8062}</Project>
+      <Name>Notifications.Global.Base.Plugin.ComObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Notifications.Global.Base.Plugin.Server\Global.Base.Plugin.Server.csproj">
+      <Project>{9ACA2A3E-2C76-471C-BDD2-1D48847329DB}</Project>
+      <Name>Global.Base.Plugin.Server</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Notifications.Global.Core.CommunicationBase\Global.Core.Communication.Base.csproj">
       <Project>{C55B156A-CC8B-4EB9-BE65-BF0D63C1E5E2}</Project>
       <Name>Global.Core.Communication.Base</Name>

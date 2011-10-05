@@ -42,6 +42,13 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Notifications.Global.Base.Plugin.ComObjects\Notifications.Global.Base.Plugin.ComObjects.csproj">
+      <Project>{F72809D9-E2F1-4BAE-A321-250A6F5B8062}</Project>
+      <Name>Notifications.Global.Base.Plugin.ComObjects</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

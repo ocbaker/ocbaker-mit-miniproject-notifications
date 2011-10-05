@@ -22,10 +22,11 @@ namespace Notifications.Client.Executable
 
         public NetworkComms(){
             DataHandlers = new Dictionary<Type, Func<object, object>>();
-            addDataHandler((new comdata_rqFile()).GetType(),(Func<object,object>)testFunction);
+            addDataHandler((new comdata_rqFile()),(Func<object,object>)testFunction);
         }
 
         public void addDataHandler(object key, Func<object, object> value){
+            string typ = key.GetType().FullName;
             if (DataHandlers.ContainsKey(key.GetType()))
             {
                 throw new Exception("Duplicate Keys Not Allowed");
@@ -55,10 +56,18 @@ namespace Notifications.Client.Executable
             //string typen = message.GetType().FullName;
 
             //object compareValue = new comdata_rqFile();
+            string typ = message.GetType().FullName;
             Type ty;
+            while (true)
+            {
+                System.Threading.Thread.Sleep(10);
+            }
             if (DataHandlers.ContainsKey(message.GetType()))
             {
                 object result = DataHandlers[message.GetType()](message);
+                string z = "a";
+            }else{
+                throw new KeyNotFoundException("This Data Object is not handled by the executable");
             }
             string lol = "a";
         }
@@ -220,8 +229,8 @@ namespace Notifications.Client.Executable
                 else
                 {
                     // At this point, we know we actually got a message.
-
-                    Sync.SynchronizeAction(() => HandleInboundData(Util.Deserialize(e.Result)));
+                    HandleInboundData(Util.Deserialize(e.Result));
+                    //Sync.SynchronizeAction(() => HandleInboundData(Util.Deserialize(e.Result)));
                 }
             }
             catch (Exception ex)

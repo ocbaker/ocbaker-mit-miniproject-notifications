@@ -7,14 +7,13 @@ using System.Text;
 
 namespace Notifications.Global.Core.Communication.Core.Responses
 {
-    [DataContract]
+    [Serializable]
     /// <summary>
     /// A class defining the data of a Login Response sent from the server
     /// </summary>
     public class comdata_rtLogin
     {
 
-        [DataMember]
         public bool loginSuccessful;
     }
 }

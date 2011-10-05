@@ -23,6 +23,7 @@ namespace Notifications.Server.Server
 
         
         internal static SimpleServerTcpSocket ListeningSocket;
+        private static Dictionary<Type, Func<object, object>> DataHandlers;
         /// <summary>
         /// A mapping of sockets (with established connections) to their state.
         /// </summary>
@@ -30,6 +31,8 @@ namespace Notifications.Server.Server
 
         public NetworkComms(){
             SynchronizationManager.letMeHandleIt();
+            DataHandlers = new Dictionary<Type, Func<object, object>>();
+            //addDataHandler((new comdata_rqFile()), (Func<object, object>)testFunction);
         }
 
         /// <summary>
@@ -212,5 +215,58 @@ namespace Notifications.Server.Server
 
             ChildSockets.First().Key.WriteAsync(Util.Serialize(msg));
         }
+
+        
+
+        public void addDataHandler(object key, Func<object, object> value)
+        {
+            string typ = key.GetType().FullName;
+            if (DataHandlers.ContainsKey(key.GetType()))
+            {
+                throw new Exception("Duplicate Keys Not Allowed");
+            }
+            else
+            {
+                DataHandlers.Add(key.GetType(), value);
+            }
+        }
+
+        public void removeDataHandler(object key)
+        {
+            if (DataHandlers.ContainsKey(key.GetType()))
+            {
+                throw new KeyNotFoundException();
+            }
+            else
+            {
+                DataHandlers.Remove(key.GetType());
+            }
+        }
+
+        /// <summary>
+        /// Called by PacketArrived Asynchroniously to handle the message.
+        /// Decreases Client Hang Times
+        /// </summary>
+        /// <param name="data"></param>
+        private void HandleInboundData(object message)
+        {
+
+            
+            if (DataHandlers.ContainsKey(message.GetType()))
+            {
+                object result = DataHandlers[message.GetType()](message);
+                if((bool)result == false){
+                    //We will not be returning data
+                }else{
+                    writeMessage(result);
+                }
+            }
+            else
+            {
+                throw new KeyNotFoundException("This Data Object is not handled by the executable");
+            }
+            string lol = "a";
+        }
+
     }
 }

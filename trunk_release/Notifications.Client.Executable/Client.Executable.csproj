@@ -120,6 +120,14 @@
       <Project>{74422501-DEC2-478A-A0C4-3CBF82785EC8}</Project>
       <Name>Client.Core.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Notifications.Global.Base.Plugin.Client\Global.Base.Plugin.Client.csproj">
+      <Project>{A63DC85B-1333-47AA-91B9-8D348BD2CB05}</Project>
+      <Name>Global.Base.Plugin.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Notifications.Global.Base.Plugin.ComObjects\Notifications.Global.Base.Plugin.ComObjects.csproj">
+      <Project>{F72809D9-E2F1-4BAE-A321-250A6F5B8062}</Project>
+      <Name>Notifications.Global.Base.Plugin.ComObjects</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Notifications.Global.Core.CommunicationBase\Global.Core.Communication.Base.csproj">
       <Project>{C55B156A-CC8B-4EB9-BE65-BF0D63C1E5E2}</Project>
       <Name>Global.Core.Communication.Base</Name>

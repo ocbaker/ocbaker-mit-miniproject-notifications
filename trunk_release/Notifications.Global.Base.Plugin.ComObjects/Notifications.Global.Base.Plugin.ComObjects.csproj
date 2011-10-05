@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{15A3421B-14B9-46BA-B1F4-FC43557EDF8E}</ProjectGuid>
+    <ProjectGuid>{F72809D9-E2F1-4BAE-A321-250A6F5B8062}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Notifications.Plugins.SMS.Server</RootNamespace>
-    <AssemblyName>Notifications.Plugins.SMS.Server</AssemblyName>
+    <RootNamespace>Notifications.Global.Base.Plugin.ComObjects</RootNamespace>
+    <AssemblyName>Notifications.Global.Base.Plugin.ComObjects</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,14 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Notifications.Global.Base.Plugin.Server\Global.Base.Plugin.Server.csproj">
-      <Project>{9ACA2A3E-2C76-471C-BDD2-1D48847329DB}</Project>
-      <Name>Global.Base.Plugin.Server</Name>
-      <Private>False</Private>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
