@@ -11,8 +11,10 @@ namespace Notifications.Global.Core.Communication.Core.Responses
     /// <summary>
     /// A class defining the data of a Login Response sent from the server
     /// </summary>
-    public class comdata_rtFile
+    public class comdata_rtFile : Global.Core.Communication.Base.BaseObjects.aBaseResponse
     {
+
+        public comdata_rtFile(Global.Core.Communication.Base.BaseObjects.aBaseRequest request) : base(request) { }
 
         [DataMember]
         public byte[] File;

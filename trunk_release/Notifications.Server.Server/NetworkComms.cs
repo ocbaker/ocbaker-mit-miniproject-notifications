@@ -27,12 +27,12 @@ namespace Notifications.Server.Server
         /// <summary>
         /// A mapping of sockets (with established connections) to their state.
         /// </summary>
-        private Dictionary<SimpleServerChildTcpSocket, ChildSocketState> ChildSockets = new Dictionary<SimpleServerChildTcpSocket, ChildSocketState>();
+        private static Dictionary<SimpleServerChildTcpSocket, ChildSocketState> ChildSockets = new Dictionary<SimpleServerChildTcpSocket, ChildSocketState>();
 
         public NetworkComms(){
             SynchronizationManager.letMeHandleIt();
             DataHandlers = new Dictionary<Type, Func<object, object>>();
-            //addDataHandler((new comdata_rqFile()), (Func<object, object>)testFunction);
+            //DataHandler((new comdata_rqFile.bject>)testFunction);
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace Notifications.Server.Server
 
                     // Deserialize the message
                     object message = Util.Deserialize(e.Result);
-
+                    HandleInboundData(message);
                     // Handle the message
                     //Messages.StringMessage stringMessage = message as Messages.StringMessage;
                     //if (stringMessage != null)
@@ -211,16 +211,17 @@ namespace Notifications.Server.Server
             //RefreshDisplay();
         }
 
-        public void writeMessage(object msg){
+        public static void writeMessage(object msg){
 
             ChildSockets.First().Key.WriteAsync(Util.Serialize(msg));
         }
 
         
 
-        public void addDataHandler(object key, Func<object, object> value)
+        public static void addDataHandler(object key, Func<object, object> value)
         {
-            string typ = key.GetType().FullName;
+            
+            
             if (DataHandlers.ContainsKey(key.GetType()))
             {
                 throw new Exception("Duplicate Keys Not Allowed");
@@ -231,7 +232,7 @@ namespace Notifications.Server.Server
             }
         }
 
-        public void removeDataHandler(object key)
+        public static void removeDataHandler(object key)
         {
             if (DataHandlers.ContainsKey(key.GetType()))
             {
@@ -268,5 +269,10 @@ namespace Notifications.Server.Server
             string lol = "a";
         }
 
+
+        public void addDefaultHandlers()
+        {
+            (new Core.Core.RequestHandlers.Login()).setupHandlers();
+        }
     }
 }

@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseObjects\aBaseRequest.cs" />
+    <Compile Include="BaseObjects\aBaseResponse.cs" />
     <Compile Include="BaseObjects\RequestObject.cs" />
     <Compile Include="BaseObjects\ResponseObject.cs" />
     <Compile Include="ObjectConverter.cs" />

@@ -5,7 +5,8 @@ using System.Text;
 
 namespace Notifications.Global.Base.Plugin.Server
 {
-    public class Class1
+    public interface IRequestHandler
     {
+        void setupHandlers();
     }
 }

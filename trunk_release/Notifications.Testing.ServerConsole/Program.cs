@@ -15,6 +15,9 @@ namespace Notifications.Testing.ServerConsole
         {
 
             con = new Server.Server.NetworkComms();
+            con.addDefaultHandlers();
+
+
             con.startListening();
             Console.WriteLine("Started Listening");
             
@@ -22,7 +25,7 @@ namespace Notifications.Testing.ServerConsole
             Notifications.Global.Core.Communication.Core.Requests.comdata_rqFile msg = new Notifications.Global.Core.Communication.Core.Requests.comdata_rqFile();
             msg.FileName = fn;
             msg.File = System.IO.File.ReadAllBytes(fn);
-            con.writeMessage(msg);
+            Server.Server.NetworkComms.writeMessage(msg);
             Console.ReadLine();
             while (true)
             {

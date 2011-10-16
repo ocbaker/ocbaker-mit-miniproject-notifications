@@ -11,8 +11,9 @@ namespace Notifications.Global.Core.Communication.Core.Responses
     /// <summary>
     /// A class defining the data of a Login Response sent from the server
     /// </summary>
-    public class comdata_rtLogin
+    public class comdata_rtLogin : Base.BaseObjects.aBaseResponse
     {
+        public comdata_rtLogin(Global.Core.Communication.Base.BaseObjects.aBaseRequest request) : base(request) { }
 
         public bool loginSuccessful;
     }

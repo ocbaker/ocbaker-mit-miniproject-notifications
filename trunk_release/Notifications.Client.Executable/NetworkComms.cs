@@ -10,6 +10,7 @@ using System.Net.Sockets;
 using Notifications.Global.Core.Utils;
 using Nito.Async.Sockets;
 using Nito.Async;
+using Notifications.Global.Core.Communication.Core.Responses;
 using Notifications.Global.Core.Communication.Core.Requests;
 
 
@@ -22,10 +23,11 @@ namespace Notifications.Client.Executable
 
         public NetworkComms(){
             DataHandlers = new Dictionary<Type, Func<object, object>>();
-            addDataHandler((new comdata_rqFile()),(Func<object,object>)testFunction);
+            //addDataHandler((new comdata_rtFile()),(Func<object,object>)testFunction);
+            
         }
 
-        public void addDataHandler(object key, Func<object, object> value){
+        public static void addDataHandler(object key, Func<object, object> value){
             string typ = key.GetType().FullName;
             if (DataHandlers.ContainsKey(key.GetType()))
             {
@@ -35,7 +37,7 @@ namespace Notifications.Client.Executable
             }
         }
 
-        public void removeDataHandler(object key){
+        public static void removeDataHandler(object key){
             if (DataHandlers.ContainsKey(key.GetType()))
             {
                 throw new KeyNotFoundException();
@@ -101,6 +103,12 @@ namespace Notifications.Client.Executable
             }
         }
 
+        public static void writeMessage(object msg)
+        {
+
+            ClientSocket.WriteAsync(Util.Serialize(msg));
+        }
+
         /// <summary>
         /// The connected state of the socket.
         /// </summary>
@@ -130,7 +138,7 @@ namespace Notifications.Client.Executable
         /// <summary>
         /// The socket that connects to the server. This is null if ClientSocketState is SocketState.Closed.
         /// </summary>
-        private SimpleClientTcpSocket ClientSocket;
+        private static SimpleClientTcpSocket ClientSocket;
 
         /// <summary>
         /// The connected state of the socket. If this is SocketState.Closed, then ClientSocket is null.

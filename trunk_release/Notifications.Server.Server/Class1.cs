@@ -7,8 +7,8 @@ namespace Notifications.Server.Server
 {
     public class Class1
     {
-        public static string test(){
-            return Notifications.Server.Core.Core.Class1.test();
-        }
+        //public static string test(){
+        //    //return Notifications.Server.Core.Core.Class1.test();
+        //}
     }
 }

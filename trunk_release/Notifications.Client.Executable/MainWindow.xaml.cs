@@ -33,5 +33,11 @@ namespace Notifications.Client.Executable
             con2 = new NetworkComms();
             con2.connect();
         }
+
+        private void ButtonTest_Click(object sender, RoutedEventArgs e)
+        {
+            Client.Core.Core.UI.Dialogs.frmLoginDialog frm = new Core.Core.UI.Dialogs.frmLoginDialog();
+            frm.ShowDialog();
+        }
     }
 }

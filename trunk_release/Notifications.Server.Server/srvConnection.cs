@@ -71,7 +71,7 @@ namespace ServerCode
                             Console.WriteLine("Username: "+request_login.data.username);
                             Console.WriteLine("Password: "+request_login.data.password);
                             ResponseObject<comdata_rtLogin> response_login = new ResponseObject<comdata_rtLogin>();
-                            response_login.data = new comdata_rtLogin();
+                            response_login.data = new comdata_rtLogin(new comdata_rqLogin());
                             response_login.repsoneid = request_login.responseid;
                             response_login.error_code = 0;
                         switch (request_login.data.username){

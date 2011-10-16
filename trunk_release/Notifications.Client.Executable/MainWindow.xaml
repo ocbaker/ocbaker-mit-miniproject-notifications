@@ -28,9 +28,10 @@
                                          LargeImageSource="Images\LargeIcon.png"
                                          Label="Button1" Click="Button2_Click" />
 
-                    <ribbon:RibbonButton x:Name="Button2"
+                    <ribbon:RibbonButton x:Name="ButtonTest"
                                          SmallImageSource="Images\SmallIcon.png"
-                                         Label="Button2" />
+                                         Label="Button2"
+                                         Click="ButtonTest_Click"/>
                     <ribbon:RibbonButton x:Name="Button3"
                                          SmallImageSource="Images\SmallIcon.png"
                                          Label="Button3" />

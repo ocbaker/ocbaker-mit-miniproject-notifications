@@ -11,11 +11,14 @@ namespace Notifications.Global.Core.Communication.Core.Requests
     /// <summary>
     /// A class defining the data of a Login Request sent to the server
     /// </summary>
-    public class comdata_rqFile
+    public class comdata_rqFile :Global.Core.Communication.Base.BaseObjects.aBaseRequest
     {
-        
-        public string FileName;
+        public comdata_rqFile()
+        {
+            
+        }
 
+        public string FileName;
         
         public byte[] File;
     }

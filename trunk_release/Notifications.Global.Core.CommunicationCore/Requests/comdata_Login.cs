@@ -11,8 +11,13 @@ namespace Notifications.Global.Core.Communication.Core.Requests
     /// <summary>
     /// A class defining the data of a Login Request sent to the server
     /// </summary>
-    public class comdata_rqLogin
+    public class comdata_rqLogin : Global.Core.Communication.Base.BaseObjects.aBaseRequest
     {
+
+        public comdata_rqLogin()
+        {
+
+        }
         public string username;
 
         public string password;
