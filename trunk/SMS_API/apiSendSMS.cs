@@ -57,7 +57,9 @@ public class apiSendSms
                 {
                     value = value.Replace("+", String.Empty);
                 }
-                if (r.IsMatch(value) || value == "") 
+                /// As found out from experience, Text messages do not send if only 1 number, but responce is given by SMSGlobal
+                /// although it is empty.
+                if (r.IsMatch(value) || value == "" || value.Length <= 1) 
                 {
                     throw new ArgumentException();
                 } else {

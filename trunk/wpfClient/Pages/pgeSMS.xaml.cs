@@ -25,7 +25,7 @@ namespace wpfClient.Pages
     /// 
     public partial class pgeSMS : Page
     {
-        
+        int _count = 0;
         public static apiValidateLogin vlogin = new apiValidateLogin();
         public static apiSendSms vSendSms = new apiSendSms();
         notifications n = new notifications();
@@ -36,7 +36,7 @@ namespace wpfClient.Pages
             btnSend.IsEnabled = false;
 
             //Take the current loged in user, get their employee ID number, use it as their FROM: In the SMS FROM
-            txtFrom.Text = Convert.ToString(000001);
+            txtFrom.Text = Convert.ToString("000001234");
 
             //Get the SMSGLobal username & password from the database (only admin can set), and Login using SMSvalidateapi
             //connectToDatabase();
@@ -46,6 +46,7 @@ namespace wpfClient.Pages
 
         private void txtFrom_LostFocus(object sender, RoutedEventArgs e) 
         {
+            /// Will hopefully relate to the logged in user. Dr Smurf. EmployeeID = 00001
             //try
             //{
             //    vSendSms.sms_from = txtFrom.Text;
@@ -89,22 +90,19 @@ namespace wpfClient.Pages
             try
             {
                 n.soapSMS(vSendSms);
-
+                n.sendEmail(vSendSms);
                 if (vSendSms._responce == "") 
                 {
                     //Timer t = new Timer();
-                    
 
                     lblmsgid.Visibility = System.Windows.Visibility.Visible;
                     lblmsgid.Content = "Message send failed.";
                     //t.SetSingleShot(new TimeSpan(3000));
                    // t.Enabled = true;
                    // lblmsgid.Visibility = System.Windows.Visibility.Collapsed;
-                }else{ 
-
+                }else{
+                    lblmsgid.Visibility = System.Windows.Visibility.Visible;
                     lblmsgid.Content = "Message sent! Message ID number: " + vSendSms._responce;
-                   
-
                 }
             }
             catch (Exception ex) { }
@@ -165,6 +163,43 @@ namespace wpfClient.Pages
         private void pgeSMS_LostFocus(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void txtMessage_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            byte red = (byte)_count;
+            byte green = 150, blue = 150;
+
+            if (_count + 150 > 255)
+            {
+                red = 255;
+                blue = 0;
+                green = 0;
+            }
+            else
+            {
+                red = (byte)((int)150 + (int)_count);
+
+                blue = (byte)((int)150 - (int)_count);
+                green = blue;
+            }
+            lblSMScount.Foreground = ExtensionServices.fromRGB(red, green, blue);
+
+            if (Keyboard.IsKeyDown(Key.Back))
+            {
+                _count -= 1;
+            }  else {
+                _count += 1;
+            }
+            if (_count > 160)
+            {
+                btnSend.IsEnabled = false;
+            } else 
+                if (_count <= 160) 
+            {
+                btnSend.IsEnabled = true;
+            }
+            lblSMScount.Content = _count + "/160";
         }
 
     }

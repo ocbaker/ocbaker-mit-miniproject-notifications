@@ -11,6 +11,7 @@ using System.Xml.Schema;
 using System.Xml.Linq;
 using System.Xml;
 using System.Text.RegularExpressions;
+using System.Web.Mail;
 
 namespace SMS_API
 {
@@ -25,6 +26,8 @@ namespace SMS_API
     /// http://stackoverflow.com/questions/1799005/soap-object-over-http-post-in-c-net
     /// http post data soap c#
     /// </summary>
+    /// 
+
     public class notifications : iAPI
     {
         private NetworkCredential _cred;
@@ -45,14 +48,15 @@ namespace SMS_API
             HttpWebRequest request = WebRequest.Create("http://www.smsglobal.com/mobileworks/soapserver.php") as HttpWebRequest;
             Windows_7_Dialogs.SecurityDialog a = new Windows_7_Dialogs.SecurityDialog();
 
-            /// Get proxy information if needed. Using Olivers previously made Dialog box
-            if (!request.Proxy.IsBypassed(request.RequestUri))
-            {
+            /// Get proxy information if needed.             
 
+            //if (!request.Proxy.IsBypassed(request.RequestUri))
+            if (isProxyActive(request.RequestUri, request) == true)
+            {
                 a.Show("Proxy Authentication", "The server you are trying to access requires a username and password." + Environment.NewLine);
                 _cred = new NetworkCredential(a.UserData.Username, a.UserData.Password);
                 request.Proxy.Credentials = _cred;
-            }
+            } 
 
             /// Add the needed headers for the SOAP API.
             request.Method = "POST";
@@ -101,11 +105,20 @@ namespace SMS_API
                         }
                     }
                 }
-                
             }
             apis.ticket = loginTicket;
         }
+        private bool isProxyActive(Uri u, HttpWebRequest wr)
+        {
+            bool p = true;
 
+            if (wr.Proxy.IsBypassed(u) == true)
+            {
+                p = false;
+            }
+
+            return p;
+        }
         public void soapSMS(apiSendSms vSendSms)
         {
             apiSendSms apis = vSendSms;
@@ -113,29 +126,30 @@ namespace SMS_API
 
             WebRequest request = WebRequest.Create("http://www.smsglobal.com/mobileworks/soapserver.php");
 
-            if (_cred != null) request.Proxy.Credentials = _cred;
-
+            //if (_cred != null ) request.Proxy.Credentials = _cred;
+            /// Needs a rework ^
             request.Method = "POST";
             request.ContentType = "text/xml";
             request.Headers.Add("urn:MobileWorks#apiSendSms");
 
             Windows_7_Dialogs.SecurityDialog a = new Windows_7_Dialogs.SecurityDialog();
             
-             if (_cred == null)
-            {
-                a.Show();
-                request.Proxy.Credentials = new NetworkCredential(a.UserData.Username, a.UserData.Password);
-            }
+            // if (_cred == null)
+            //{
+            //    a.Show();
+            //    request.Proxy.Credentials = new NetworkCredential(a.UserData.Username, a.UserData.Password);
+            //}
 
             var document = new XDocument(
-                                       new XDeclaration("1.0", "utf-8", String.Empty),
-                                       new XElement(soapenv + "Envelope", new XAttribute(XNamespace.Xmlns + "SOAP-ENV", soapenv),
+                                           new XDeclaration("1.0", "utf-8", String.Empty),
+                                           new XElement(soapenv + "Envelope", new XAttribute(XNamespace.Xmlns + "SOAP-ENV", soapenv),
                                            new XElement(soapenv + "Body",
                                            new XElement("apiSendSms",
                                            new XElement("ticket", apis.ticket),
                                            new XElement("sms_from", apis.sms_from),
                                            new XElement("sms_to", apis.sms_to),
                                            new XElement("msg_content", System.Web.HttpUtility.HtmlEncode(apis.msg_content)),
+                                           //new XElement("msg_content", apis.msg_content),
                                            new XElement("msg_type", apis.msg_type),
                                            new XElement("unicode",apis.unicode),
                                            new XElement("schedule", apis.schedule)
@@ -166,12 +180,37 @@ namespace SMS_API
                              msgid = reg.Match(r.Match(readString.ToString()).ToString()).ToString();
                         }
                     }
-
                 }
             }
             apis._responce = msgid;
         }
+        public void sendEmail(apiSendSms vSendSms)
+        {
+            System.Net.Mail.MailMessage m = new System.Net.Mail.MailMessage("noreply-notifications-miniproject@itsasmurflife.com",
+                "shane@itsasmurflife.com"); 
+           
+            m.Subject = "Reminder: " + vSendSms.msg_content;
+            m.Body = "What the subject said.";
+            m.BodyEncoding = UTF8Encoding.UTF8;
+            m.DeliveryNotificationOptions = System.Net.Mail.DeliveryNotificationOptions.OnFailure;
 
+           using (System.Net.Mail.SmtpClient s = new System.Net.Mail.SmtpClient("smtp.gmail.com", 587))
+            {
+                s.EnableSsl = true;
+                s.Timeout = 10000;
+                s.UseDefaultCredentials = false;
+                s.Credentials = new NetworkCredential("noreply-notifications-miniproject@itsasmurflife.com", "miniproject"); /// Get the username and password from server.core. / Utils
+                s.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
+
+                try
+                {
+                    s.Send(m);
+             }
+                catch (Exception e) {
+
+                }
+            }
+        }
         public void HttpSMS(apiSendSms vSendSms, apiValidateLogin vlogin)
         {
             apiSendSms apis = vSendSms;

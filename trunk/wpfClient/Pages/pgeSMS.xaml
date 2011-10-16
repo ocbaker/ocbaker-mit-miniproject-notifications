@@ -11,8 +11,8 @@
       mc:Ignorable="d" LostFocus="pgeSMS_LostFocus">
     <Grid Height="461">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="58*" />
-            <ColumnDefinition Width="394*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <GroupBox Name="groupBox1"
                   Width="434"
@@ -22,6 +22,11 @@
                   VerticalAlignment="Top"
                   Header="Send an SMS" Grid.ColumnSpan="2">
             <Grid>
+                <Expander Name="expSchedule" Width="291" Height="77" Margin="55,254,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Header="Schedule">
+                    <Grid Height="73">
+                        <local:DateTimePicker Name="dtp" Height="30" Margin="10,11,14,32" />
+                    </Grid>
+                </Expander>
                 <Label Name="lblFrom"
                        Width="58"
                        Height="28"
@@ -49,22 +54,7 @@
                          Margin="90,92,0,0"
                          HorizontalAlignment="Left"
                          VerticalAlignment="Top"
-                         LostFocus="txtTo_LostFocus" />
-                <Expander Name="expSchedule"
-                          Width="291"
-                          Height="77"
-                          Margin="55,236,0,0"
-                          HorizontalAlignment="Left"
-                          VerticalAlignment="Top"
-                          Header="Schedule">
-                    <Grid Height="73">
-                        <local:DateTimePicker Name="dtp"
-                                              Height="30"
-                                              Margin="10,11,14,32" />
-                    </Grid>
-
-                </Expander>
-
+                         LostFocus="txtTo_LostFocus" TabIndex="0" />
                 <Label Name="label2"
                        Height="28"
                        Margin="27,119,0,0"
@@ -78,7 +68,7 @@
                          HorizontalAlignment="Left"
                          VerticalAlignment="Top"
                          LostFocus="txtMessage_LostFocus"
-                         TextWrapping="Wrap" />
+                         TextWrapping="Wrap" TabIndex="1" TextChanged="txtMessage_TextChanged" />
                 <Button Name="btnSend"
                         Width="75"
                         Height="23"
@@ -86,7 +76,7 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         Click="btnSendSMS_Click"
-                        Content="Send SMS" />
+                        Content="Send SMS" TabIndex="2" />
                 <Label Name="label3"
                        Width="142"
                        Height="41"
@@ -104,6 +94,7 @@
                        IsEnabled="False" Visibility="Collapsed">
                     
                 </Label>
+                <Label Height="26" HorizontalAlignment="Left" Name="lblSMScount" VerticalAlignment="Top" Width="54" Margin="291,230,0,0" />
             </Grid>
         </GroupBox>
     </Grid>
