@@ -3,8 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ribbon="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
         Title="MainWindow"
-		x:Name="RibbonWindow"
-		Width="640" Height="645">
+		x:Name="RibbonWindow">
 
 	<Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
@@ -83,6 +82,6 @@
                 </ribbon:RibbonGroup>
             </ribbon:RibbonTab>
         </ribbon:Ribbon>
-        <Frame Grid.Row="2" HorizontalAlignment="Stretch" Name="frame1" VerticalAlignment="Stretch" Width="618" Source="Pages\pgeLogin.xaml" NavigationUIVisibility="Hidden" />
+        <Frame Grid.Row="2" HorizontalAlignment="Stretch" Name="frame1" VerticalAlignment="Stretch" Source="Pages\pgeLogin.xaml" NavigationUIVisibility="Hidden" />
     </Grid>
 </ribbon:RibbonWindow>
