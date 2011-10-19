@@ -8,10 +8,10 @@
 	Title="pgeSMStemplate">
 
     <Grid>
-        <Label Content="SMS Default Template" Height="61" HorizontalAlignment="Left" Margin="108,12,0,0" Name="label1" VerticalAlignment="Top" Width="208" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
         <TextBox Height="132" HorizontalAlignment="Left" Margin="78,101,0,0" Name="textBox1" VerticalAlignment="Top" Width="297" TextWrapping="Wrap" TextChanged="textBox1_TextChanged" />
         <Label Content="Default template for text messages. Change if needed:" Height="28" HorizontalAlignment="Left" Margin="78,67,0,0" Name="label2" VerticalAlignment="Top" />
         <Label Height="28" HorizontalAlignment="Left" Margin="337,239,0,0" Name="lblSMScount" VerticalAlignment="Top" />
         <Button Content="Save Template" Height="23" HorizontalAlignment="Left" Margin="284,281,0,0" Name="btnTemplateSave" VerticalAlignment="Top" Width="91" Click="btnTemplateSave_Click" />
+        <Label Background="#3F0097FF" Content="SMS Template" FontSize="22" Height="61" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Name="label1" VerticalAlignment="Top" VerticalContentAlignment="Center" />
     </Grid>
 </Page>

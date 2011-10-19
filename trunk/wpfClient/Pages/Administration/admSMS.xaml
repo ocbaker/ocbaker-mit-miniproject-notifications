@@ -8,7 +8,6 @@
 	Title="admSMS">
 
     <Grid>
-        <Label Content="SMS Admin" Height="50" HorizontalAlignment="Left" Margin="122,23,0,0" Name="label1" VerticalAlignment="Top" FontSize="22" Width="142" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
         <GroupBox Header="SMSGlobal Login Information" HorizontalAlignment="Left" Margin="25,79,0,302" Name="gbSMSGlobalUserLogin" Width="336">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -40,5 +39,6 @@
                 <PasswordBox Height="23" HorizontalAlignment="Left" Margin="85,49,0,0" Name="psbGmailPassword" VerticalAlignment="Top" Width="131" LostFocus="psbGmailPassword_LostFocus" />
             </Grid>
         </GroupBox>
+        <Label Background="#3F0097FF" Content="Messaging Admin" FontSize="22" Height="61" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Name="label1" VerticalAlignment="Top" VerticalContentAlignment="Center" />
     </Grid>
 </Page>

@@ -33,6 +33,8 @@ namespace SMS_API
         private NetworkCredential _cred;
         XNamespace soapenv = "http://schemas.xmlsoap.org/soap/envelope/";
         public apiValidateLogin apiv;
+
+        public string mail_response;
         /// <summary>
         /// Request a login from the SMSGlobal Soap API, get a ticket in return and put it into apiSendSMS class.
         /// </summary>
@@ -72,13 +74,13 @@ namespace SMS_API
                                new XElement("user", apiv.APIusername),
                                new XElement("password", apiv.APIpassword)
                                ))));
-
+            document.Declaration.Version = "1.0";
             ///As it doesn't seem to want to make the declaration, a work around is used. Creating a file, then appending the xml document made above, then loaded into the 
             ///document object.
-           if (File.Exists(Environment.CurrentDirectory + @"\apiLogin.xml")) File.Delete(Environment.CurrentDirectory + @"\apiLogin.xml");
-           File.WriteAllText(Environment.CurrentDirectory + @"\apiLogin.xml", "<?xml version='1.0' ?>" + Environment.NewLine);
-           File.AppendAllText(Environment.CurrentDirectory + @"\apiLogin.xml", document.ToString());
-           document = XDocument.Load(Environment.CurrentDirectory + @"\apiLogin.xml");
+           //if (File.Exists(Environment.CurrentDirectory + @"\apiLogin.xml")) File.Delete(Environment.CurrentDirectory + @"\apiLogin.xml");
+           //File.WriteAllText(Environment.CurrentDirectory + @"\apiLogin.xml", "<?xml version='1.0' ?>" + Environment.NewLine);
+           //File.AppendAllText(Environment.CurrentDirectory + @"\apiLogin.xml", document.ToString());
+           //document = XDocument.Load(Environment.CurrentDirectory + @"\apiLogin.xml");
 
             ///Write the document to the requested place, in this case is the Soap API at SMSGLobal.com
            var writer = new StreamWriter(request.GetRequestStream());
@@ -149,20 +151,42 @@ namespace SMS_API
                                            new XElement("sms_from", apis.sms_from),
                                            new XElement("sms_to", apis.sms_to),
                                            new XElement("msg_content", System.Web.HttpUtility.HtmlEncode(apis.msg_content)),
-                                           //new XElement("msg_content", apis.msg_content),
                                            new XElement("msg_type", apis.msg_type),
                                            new XElement("unicode",apis.unicode),
                                            new XElement("schedule", apis.schedule)
                                            ))));
 
-            if (File.Exists(Environment.CurrentDirectory + @"\sendSMS.xml")) File.Delete(Environment.CurrentDirectory + @"\sendSMS.xml");
-            File.WriteAllText(Environment.CurrentDirectory + @"\sendSMS.xml", "<?xml version='1.0' ?>" + Environment.NewLine);
-            File.AppendAllText(Environment.CurrentDirectory + @"\sendSMS.xml", document.ToString());
-            document = XDocument.Load(Environment.CurrentDirectory + @"\sendSMS.xml");
+                document.Declaration.Version = "1.0";
 
             var writer = new StreamWriter(request.GetRequestStream());
             writer.WriteLine(document);
             writer.Close();
+
+            //using (var rsp = request.GetResponse())
+            //{
+            //    request.GetRequestStream().Close();
+            //    if (rsp != null)
+            //    {
+            //        using (var answerReader =
+            //                    new StreamReader(rsp.GetResponseStream()))
+            //        {
+            //            var readString = answerReader.ReadToEnd();
+            //            Regex r = new Regex(@"(.*)msgid&gt;(.*)&lt;/msgid(.*)");
+            //            if (r.IsMatch(readString.ToString()))
+            //            {
+            //                Regex reg = new Regex(@"\d{16}");
+            //                 msgid = reg.Match(r.Match(readString.ToString()).ToString()).ToString();
+            //            }
+            //        }
+            //    }
+            //}
+
+            apis._responce = getResponse(request);
+            
+        }
+        public string getResponse(WebRequest request)
+        {
+            String responce = null;
 
             using (var rsp = request.GetResponse())
             {
@@ -173,16 +197,32 @@ namespace SMS_API
                                 new StreamReader(rsp.GetResponseStream()))
                     {
                         var readString = answerReader.ReadToEnd();
-                        Regex r = new Regex(@"(.*)msgid&gt;(.*)&lt;/msgid(.*)");
+                        Regex r = new Regex(@"((.*)msgid&gt;(.*)&lt;/msgid(.*))");
                         if (r.IsMatch(readString.ToString()))
                         {
                             Regex reg = new Regex(@"\d{16}");
-                             msgid = reg.Match(r.Match(readString.ToString()).ToString()).ToString();
+                            responce = reg.Match(r.Match(readString.ToString()).ToString()).ToString();
                         }
                     }
                 }
             }
-            apis._responce = msgid;
+            return responce;
+        }
+        public string getResponse(StreamReader sr)
+        {
+            String responce = null;
+            using (sr)
+            {
+                var readstring = sr.ReadLine();
+
+                Regex r = new Regex(@"((.*)queued message ID: (.*) SMSGlobalMsgID:(.*))");
+                if (r.IsMatch(readstring.ToString()))
+                {
+                    Regex reg = new Regex(@"\d{16}");
+                    responce = reg.Match(r.Match(readstring.ToString()).ToString()).ToString();
+                }
+            }
+            return responce;
         }
         public void sendEmail(apiSendSms vSendSms)
         {
@@ -190,7 +230,7 @@ namespace SMS_API
                 "shane@itsasmurflife.com"); 
            
             m.Subject = "Reminder: " + vSendSms.msg_content;
-            m.Body = "What the subject said.";
+            m.Body = vSendSms.msg_content.Substring(0, 20) + "...";
             m.BodyEncoding = UTF8Encoding.UTF8;
             m.DeliveryNotificationOptions = System.Net.Mail.DeliveryNotificationOptions.OnFailure;
 
@@ -205,9 +245,10 @@ namespace SMS_API
                 try
                 {
                     s.Send(m);
+                    mail_response = "The email was sent sucessfully";
              }
                 catch (Exception e) {
-
+                    mail_response = "The email was sent but failed";
                 }
             }
         }
@@ -217,16 +258,23 @@ namespace SMS_API
             apiValidateLogin apiv = vlogin;
 
             String encoded = System.Web.HttpUtility.HtmlEncode(vSendSms.msg_content);
-
-            WebRequest request = WebRequest.Create("http://www.smsglobal.com/httpapi.php?action=sendsms&user=" + vlogin.APIusername + "&password=" + vlogin.APIpassword + "&from=" + vSendSms.sms_from + "&to=" + vSendSms.sms_to + "&text=" + encoded);
-
-            request.Method = "POST";
-            Windows_7_Dialogs.SecurityDialog a = new Windows_7_Dialogs.SecurityDialog();
-            if (!request.Proxy.IsBypassed(request.RequestUri))
+            Uri smsUri  = new Uri("http://www.smsglobal.com/http-api.php?action=sendsms&user=" + vlogin.APIusername + "&password=" + vlogin.APIpassword + "&from=" + vSendSms.sms_from + "&to=" + vSendSms.sms_to + "&text=" + encoded);
+           
+            
+            /// Need to add proxy support when I have it working.
+            try
             {
-                a.Show();
-                request.Proxy.Credentials = new NetworkCredential(a.UserData.Username, a.UserData.Password);
-            }
+                WebClient wc = new WebClient();
+                using (Stream s = wc.OpenRead(smsUri))
+                {
+                    using (StreamReader r = new StreamReader(s)) 
+                    {
+                        apis._responce = getResponse(r);
+                    }   
+                }          
+            } catch (Exception e) { }
+
+          
         }
     }
 }

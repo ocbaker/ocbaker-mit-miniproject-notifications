@@ -36,10 +36,11 @@ namespace wpfClient.Pages
             btnSend.IsEnabled = false;
 
             //Take the current loged in user, get their employee ID number, use it as their FROM: In the SMS FROM
-            txtFrom.Text = Convert.ToString("000001234");
+            txtFrom.Text = Convert.ToString("00001234");
 
             //Get the SMSGLobal username & password from the database (only admin can set), and Login using SMSvalidateapi
             //connectToDatabase();
+            /// Won't need to 'login to sms global', the server will be, only here until there is support.
             loginToSMSGlobal();
         }
 
@@ -89,8 +90,20 @@ namespace wpfClient.Pages
             vSendSms.sms_from = txtFrom.Text;
             try
             {
-                n.soapSMS(vSendSms);
-                n.sendEmail(vSendSms);
+                if (cbSMS.IsEnabled)
+                {
+                    try
+                    {
+                        n.soapSMS(vSendSms);
+                    }
+                    catch (Exception exxx)
+                    {
+                        /// Could have error logging.?
+                        n.HttpSMS(vSendSms, vlogin);
+                    }
+
+                
+
                 if (vSendSms._responce == "") 
                 {
                     //Timer t = new Timer();
@@ -104,27 +117,15 @@ namespace wpfClient.Pages
                     lblmsgid.Visibility = System.Windows.Visibility.Visible;
                     lblmsgid.Content = "Message sent! Message ID number: " + vSendSms._responce;
                 }
+        }
+                if (cbEmail.IsEnabled)
+                {
+                    n.sendEmail(vSendSms);
+                }
             }
             catch (Exception ex) { }
 
         }
-
-        //private void Login_Click(object sender, RoutedEventArgs e)
-        //{
-            //Windows_7_Dialogs.SecurityDialog dialog = new Windows_7_Dialogs.SecurityDialog();
-            //dialog.Show("SMSGlobal Credentials", "SMSGlobal is requesting your username and password");
-            
-            //vlogin.APIusername = dialog.UserData.Username;
-            //vlogin.APIpassword = dialog.UserData.Password;
-            
-
-            
-
-            
-
-            //lblmsgid.Content = vSendSms.ticket;
-
-       // }
 
         private void loginToSMSGlobal() 
         {
@@ -200,6 +201,38 @@ namespace wpfClient.Pages
                 btnSend.IsEnabled = true;
             }
             lblSMScount.Content = _count + "/160";
+        }
+
+        private void cbEmail_Checked(object sender, RoutedEventArgs e)
+        {
+            if (cbEmail.IsChecked == true)
+            {
+                txtEmail.IsEnabled = true;
+            } 
+        }
+
+        private void cbSMS_Checked(object sender, RoutedEventArgs e)
+        {
+            if (cbSMS.IsChecked == true)
+            {
+                txtTo.IsEnabled = true;
+            } 
+        }
+
+        private void cbSMS_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (cbSMS.IsChecked == false)
+            {
+                txtTo.IsEnabled = false;
+            }
+        }
+
+        private void cbEmail_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (cbEmail.IsChecked == false)
+            {
+                txtEmail.IsEnabled = false;
+            }
         }
 
     }

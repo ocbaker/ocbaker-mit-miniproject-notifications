@@ -6,23 +6,30 @@
       xmlns:local="http://schemas.AvalonControls/AvalonControlsLibrary/Controls"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       Title="pgeSMS"
-      d:DesignHeight="462"
+      d:DesignHeight="591"
       d:DesignWidth="452"
       mc:Ignorable="d" LostFocus="pgeSMS_LostFocus">
-    <Grid Height="461">
+    <Grid Height="567" Width="451">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="104*" />
+            <RowDefinition Height="392*" />
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="132" />
+            <ColumnDefinition Width="120" />
+            <ColumnDefinition Width="87" />
             <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="112*" />
         </Grid.ColumnDefinitions>
         <GroupBox Name="groupBox1"
                   Width="434"
-                  Height="438"
-                  Margin="12,12,6,0"
+                  Height="418"
+                  Margin="12,76,5,0"
                   HorizontalAlignment="Center"
                   VerticalAlignment="Top"
-                  Header="Send an SMS" Grid.ColumnSpan="2">
-            <Grid>
-                <Expander Name="expSchedule" Width="291" Height="77" Margin="55,254,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Header="Schedule">
+                  Header="Send an SMS" Grid.ColumnSpan="5" Grid.RowSpan="2">
+            <Grid Height="395">
+                <Expander Name="expSchedule" Width="291" Height="77" Margin="58,309,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Header="Schedule">
                     <Grid Height="73">
                         <local:DateTimePicker Name="dtp" Height="30" Margin="10,11,14,32" />
                     </Grid>
@@ -57,45 +64,50 @@
                          LostFocus="txtTo_LostFocus" TabIndex="0" />
                 <Label Name="label2"
                        Height="28"
-                       Margin="27,119,0,0"
+                       Margin="27,192,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        Content="Message" />
                 <TextBox Name="txtMessage"
                          Width="255"
                          Height="109"
-                         Margin="90,121,0,0"
+                         Margin="90,194,0,0"
                          HorizontalAlignment="Left"
                          VerticalAlignment="Top"
                          LostFocus="txtMessage_LostFocus"
                          TextWrapping="Wrap" TabIndex="1" TextChanged="txtMessage_TextChanged" />
                 <Button Name="btnSend"
-                        Width="75"
+                        Width="103"
                         Height="23"
-                        Margin="270,90,0,0"
+                        Margin="242,90,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         Click="btnSendSMS_Click"
-                        Content="Send SMS" TabIndex="2" />
+                        Content="Send Message" TabIndex="2" />
                 <Label Name="label3"
-                       Width="142"
+                       Width="173"
                        Height="41"
-                       Margin="133,17,0,0"
+                       Margin="127,17,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
-                       Content="Send an SMS"
+                       Content="Send a Message"
                        FontSize="22" />
                 <Label Name="lblmsgid"
                        Width="364"
                        Height="28"
-                       Margin="27,348,0,0"
+                       Margin="27,416,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        IsEnabled="False" Visibility="Collapsed">
                     
                 </Label>
-                <Label Height="26" HorizontalAlignment="Left" Name="lblSMScount" VerticalAlignment="Top" Width="54" Margin="291,230,0,0" />
+                <Label Height="26" HorizontalAlignment="Left" Name="lblSMScount" VerticalAlignment="Top" Width="54" Margin="291,303,0,0" />
+                <CheckBox Content="SMS" Height="22" HorizontalAlignment="Left" Margin="242,62,0,0" Name="cbSMS" VerticalAlignment="Top" Width="58" IsChecked="True" Checked="cbSMS_Checked" Unchecked="cbSMS_Unchecked" />
+                <CheckBox Content="Email" Height="22" HorizontalAlignment="Left" Margin="301,62,0,0" Name="cbEmail" VerticalAlignment="Top" Width="56" Checked="cbEmail_Checked" Unchecked="cbEmail_Unchecked" />
+                <Label Content="Email:" Height="28" HorizontalAlignment="Left" Margin="46,119,0,0" Name="label4" VerticalAlignment="Top" Width="58" />
+                <TextBox Height="23" HorizontalAlignment="Left" IsEnabled="False" Margin="90,121,0,0" Name="txtEmail" VerticalAlignment="Top" Width="120" />
             </Grid>
         </GroupBox>
+        <Label Background="#3F0097FF" Content="Send a Message" FontSize="22" Height="61" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Name="label5" VerticalAlignment="Top" VerticalContentAlignment="Center" Grid.ColumnSpan="5" />
     </Grid>
 </Page>
