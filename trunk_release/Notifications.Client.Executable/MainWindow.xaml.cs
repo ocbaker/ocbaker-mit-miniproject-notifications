@@ -39,5 +39,7 @@ namespace Notifications.Client.Executable
             Client.Core.Core.UI.Dialogs.frmLoginDialog frm = new Core.Core.UI.Dialogs.frmLoginDialog();
             frm.ShowDialog();
         }
+
+        //public void
     }
 }

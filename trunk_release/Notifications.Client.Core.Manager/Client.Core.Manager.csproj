@@ -41,9 +41,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="PluginManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Notifications.Global.Base.Plugin.Client\Global.Base.Plugin.Client.csproj">
+      <Project>{A63DC85B-1333-47AA-91B9-8D348BD2CB05}</Project>
+      <Name>Global.Base.Plugin.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Notifications.Global.Modules.ManagerBase\Global.Core.ManagerBase.csproj">
       <Project>{05546654-B256-4B52-A29C-1983DD1D2845}</Project>
       <Name>Global.Core.ManagerBase</Name>

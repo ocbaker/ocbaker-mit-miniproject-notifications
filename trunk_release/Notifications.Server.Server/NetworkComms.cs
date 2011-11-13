@@ -138,6 +138,9 @@ namespace Notifications.Server.Server
                     // Deserialize the message
                     object message = Util.Deserialize(e.Result);
                     HandleInboundData(message);
+                    //Action<object> act = HandleInboundData;
+                    //ThreadPool.QueueUserWorkItem
+                    //Nito.Async.ActionDispatcher.Current.QueueAction(act(message));
                     // Handle the message
                     //Messages.StringMessage stringMessage = message as Messages.StringMessage;
                     //if (stringMessage != null)
@@ -257,7 +260,9 @@ namespace Notifications.Server.Server
             if (DataHandlers.ContainsKey(message.GetType()))
             {
                 object result = DataHandlers[message.GetType()](message);
-                if((bool)result == false){
+
+                if (result.GetType().BaseType != typeof(Global.Core.Communication.Base.BaseObjects.aBaseResponse))
+                {
                     //We will not be returning data
                 }else{
                     writeMessage(result);

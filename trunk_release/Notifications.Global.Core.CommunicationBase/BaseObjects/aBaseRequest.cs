@@ -6,7 +6,7 @@ using System.Text;
 namespace Notifications.Global.Core.Communication.Base.BaseObjects
 {
     [Serializable]
-    public abstract class aBaseRequest
+    public abstract class aBaseRequest : IRequest
     {
 
         private Guid _messageID;

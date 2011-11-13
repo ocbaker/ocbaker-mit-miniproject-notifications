@@ -117,6 +117,10 @@
       <Project>{8BE3E22D-E56A-44C6-9319-68D570BB11C6}</Project>
       <Name>Client.Core.Manager</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Notifications.Client.Interop\Notifications.Client.Interop.csproj">
+      <Project>{66EA8CBF-718F-4CFB-8015-760CDC64C956}</Project>
+      <Name>Notifications.Client.Interop</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Notifications.Client.Modules.Core\Client.Core.Core.csproj">
       <Project>{74422501-DEC2-478A-A0C4-3CBF82785EC8}</Project>
       <Name>Client.Core.Core</Name>

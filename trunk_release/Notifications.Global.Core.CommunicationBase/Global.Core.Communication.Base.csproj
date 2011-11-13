@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="BaseObjects\aBaseRequest.cs" />
     <Compile Include="BaseObjects\aBaseResponse.cs" />
+    <Compile Include="BaseObjects\IRequest.cs" />
+    <Compile Include="BaseObjects\IResponse.cs" />
     <Compile Include="BaseObjects\RequestObject.cs" />
     <Compile Include="BaseObjects\ResponseObject.cs" />
     <Compile Include="ObjectConverter.cs" />

@@ -24,7 +24,7 @@ namespace Notifications.Client.Executable
         public NetworkComms(){
             DataHandlers = new Dictionary<Type, Func<object, object>>();
             //addDataHandler((new comdata_rtFile()),(Func<object,object>)testFunction);
-            
+            Interop.NetworkComms.addDataHandler = addDataHandler;
         }
 
         public static void addDataHandler(object key, Func<object, object> value){
@@ -54,16 +54,17 @@ namespace Notifications.Client.Executable
         /// </summary>
         /// <param name="data"></param>
         private void HandleInboundData(object message){
-            
-            
             if (DataHandlers.ContainsKey(message.GetType()))
             {
                 object result = DataHandlers[message.GetType()](message);
-                string z = "a";
+                if (result.GetType().BaseType == typeof(Global.Core.Communication.Base.BaseObjects.aBaseRequest))
+                {
+                    writeMessage(result);
+                }
             }else{
                 throw new KeyNotFoundException("This Data Object is not handled by the executable");
             }
-            string lol = "a";
+            
         }
 
         public void connect(){
@@ -142,6 +143,7 @@ namespace Notifications.Client.Executable
         /// </summary>
         private void ResetSocket()
         {
+            System.Windows.MessageBox.Show("Connection has been forcibly closed");
             // Close the socket
             ClientSocket.Close();
             ClientSocket = null;
@@ -213,8 +215,8 @@ namespace Notifications.Client.Executable
         
         private void ClientSocket_PacketArrived(AsyncResultEventArgs<byte[]> e)
         {
-            try
-            {
+            //try
+            //{
                 // Check for errors
                 if (e.Error != null)
                 {
@@ -232,16 +234,16 @@ namespace Notifications.Client.Executable
                     HandleInboundData(Util.Deserialize(e.Result));
                     //Sync.SynchronizeAction(() => HandleInboundData(Util.Deserialize(e.Result)));
                 }
-            }
-            catch (Exception ex)
-            {
-                ResetSocket();
-                throw new Exception("Unknown Exception");
-            }
-            finally
-            {
-                
-            }
+            //}
+            //catch (Exception ex)
+            //{
+                //ResetSocket();
+                //throw new Exception("Unknown Exception");
+            //}
+            //finally
+            //{
+            //    
+            //}
         }
 
         private object testFunction(object arg0)

@@ -156,6 +156,33 @@ namespace Nito.Async
             }
         }
 
+        ///// <summary>
+        ///// Queues an action to an action dispatcher.
+        ///// </summary>
+        ///// <param name="action">The action to execute.</param>
+        ///// <remarks>
+        ///// <para>Actions are executed in the order they are queued.</para>
+        ///// <para>Actions may queue other actions and/or an exit action by using the <see cref="Current"/> action dispatcher.</para>
+        ///// </remarks>
+        ///// <threadsafety>This method may be called by any thread at any time.</threadsafety>
+        ///// <example>The following code sample demonstrates how to queue an action to an ActionDispatcher and access the Current property:
+        ///// <code source="..\..\Source\Examples\DocumentationExamples\ActionDispatcher\QueueActionCurrent.cs"/>
+        ///// </example>
+        //public void QueueAction(Action action)
+        //{
+        //    lock (this.actionQueue)
+        //    {
+        //        // Add the action to the action queue
+        //        this.actionQueue.Enqueue(action);
+
+        //        // Set the signal if necessary
+        //        if (this.actionQueue.Count == 1)
+        //        {
+        //            this.actionQueueNotEmptyEvent.Set();
+        //        }
+        //    }
+        //}
+
         /// <summary>
         /// Queues an exit action, causing <see cref="Run"/> to return.
         /// </summary>
