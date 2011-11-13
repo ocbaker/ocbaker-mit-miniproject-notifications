@@ -8,17 +8,13 @@ namespace Notifications.Testing.ServerConsole
 {
     class Program
     {
-        public static Notifications.Server.Server.NetworkComms con;
+        
         
 
         static void Main(string[] args)
         {
 
-            con = new Server.Server.NetworkComms();
-            con.addDefaultHandlers();
-
-
-            con.startListening();
+            Server.Server.Setup.setup();
             Console.WriteLine("Started Listening");
             
             string fn = Console.ReadLine();

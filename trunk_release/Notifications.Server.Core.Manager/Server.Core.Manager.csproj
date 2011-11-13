@@ -41,9 +41,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="PluginManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\External_Libraries\Nitro\Nito.Async.Sockets\Nito.Async.Sockets.csproj">
+      <Project>{B412B766-BEC2-407C-A7A1-0E5257511515}</Project>
+      <Name>Nito.Async.Sockets</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\External_Libraries\Nitro\Nito.Async\Nito.Async.csproj">
+      <Project>{708763ED-7801-4F2C-B103-4FEBD771769A}</Project>
+      <Name>Nito.Async</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Notifications.Global.Base.Plugin.Server\Global.Base.Plugin.Server.csproj">
+      <Project>{9ACA2A3E-2C76-471C-BDD2-1D48847329DB}</Project>
+      <Name>Global.Base.Plugin.Server</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Notifications.Global.Modules.ManagerBase\Global.Core.ManagerBase.csproj">
       <Project>{05546654-B256-4B52-A29C-1983DD1D2845}</Project>
       <Name>Global.Core.ManagerBase</Name>

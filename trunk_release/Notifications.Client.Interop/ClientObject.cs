@@ -12,7 +12,16 @@ namespace Notifications.Client.Interop
         
         private static void setupClass()
         {
+            
+        }
 
+
+        public static void addTab(Object key, Object value)
+        {
+            Assembly cAssembly = Assembly.GetEntryAssembly();
+            Type tNetworkComms = cAssembly.GetType("Notifications.Client.Executable.MainWindow");
+            MethodInfo mAddDataHandler = tNetworkComms.GetMethod("addTab");
+            mAddDataHandler.Invoke(null, new object[] { key, value });
         }
 
         //internal static object FInvoke()

@@ -33,6 +33,7 @@ namespace Notifications.Server.Server
             SynchronizationManager.letMeHandleIt();
             DataHandlers = new Dictionary<Type, Func<object, object>>();
             //DataHandler((new comdata_rqFile.bject>)testFunction);
+            
         }
 
         /// <summary>
@@ -133,7 +134,7 @@ namespace Notifications.Server.Server
                 else
                 {
                     // At this point, we know we actually got a message.
-
+                    Console.WriteLine("Message Recieved");
                     // Deserialize the message
                     object message = Util.Deserialize(e.Result);
                     HandleInboundData(message);

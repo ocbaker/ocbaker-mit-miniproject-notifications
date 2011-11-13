@@ -55,15 +55,7 @@ namespace Notifications.Client.Executable
         /// <param name="data"></param>
         private void HandleInboundData(object message){
             
-            //string typen = message.GetType().FullName;
-
-            //object compareValue = new comdata_rqFile();
-            string typ = message.GetType().FullName;
-            Type ty;
-            while (true)
-            {
-                System.Threading.Thread.Sleep(10);
-            }
+            
             if (DataHandlers.ContainsKey(message.GetType()))
             {
                 object result = DataHandlers[message.GetType()](message);
