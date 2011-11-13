@@ -40,6 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComObjects\Requests\comdata_sendEmail.cs" />
+    <Compile Include="ComObjects\Requests\comdata_sendSMS.cs" />
+    <Compile Include="ComObjects\Response\comdata_emailSent.cs" />
+    <Compile Include="ComObjects\Response\comdata_textSent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -48,10 +52,12 @@
       <Name>Notifications.Global.Base.Plugin.ComObjects</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Notifications.Global.Core.CommunicationBase\Global.Core.Communication.Base.csproj">
+      <Project>{C55B156A-CC8B-4EB9-BE65-BF0D63C1E5E2}</Project>
+      <Name>Global.Core.Communication.Base</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ComObjects\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

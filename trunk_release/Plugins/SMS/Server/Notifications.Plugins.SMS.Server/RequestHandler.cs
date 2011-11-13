@@ -6,22 +6,36 @@ using Notifications.Global.Core.Communication.Base;
 
 namespace Notifications.Plugins.SMS.Server
 {
-    class RequestHandler : Global.Base.Plugin.Server.IRequestHandler
+    class RequestHandler : Notifications.Global.Base.Plugin.Server.IRequestHandler
     {
-
+        
         public void setupHandlers()
         {
-          //  Notifications.Server.Interop.NetworkComms.addDataHandler((new Notifications.Global.Core.Communication.Requests.comdata_rqLogin()), handleLogin);
             Console.WriteLine("Setting up SMS Server Plugin....");
             //Nito.Async.ActionDispatcher.Current.QueueAction(new Action(
+            Notifications.Server.Interop.NetworkComms.addDataHandler((new Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_sendSMS()), textSent);
+            
         }
 
 
-        private static object handleLogin(object request)
+        private static object textSent(object request)
         {
-            return 0;
+            Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_sendSMS requ = (Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_sendSMS)request;
+            Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_textSent respo = new Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_textSent(requ);
+
+            respo.successfullText = false;
+            serverNotification sn = new serverNotification();
+            try
+            {
+                sn.soapSMS(requ);
+            }           
+            catch (Exception ex) { 
+                // sn.HttpSMS(request,(smsglobal information));
+            }
+
+
+            return respo;
         }
 
-        //private static 
     }
 }

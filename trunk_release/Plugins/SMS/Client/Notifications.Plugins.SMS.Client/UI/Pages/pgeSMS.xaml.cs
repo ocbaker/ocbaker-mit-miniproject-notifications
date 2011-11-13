@@ -27,27 +27,50 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
         /// </summary>
 
             int _count = 0;
-        
-            //public static apiValidateLogin vlogin = new apiValidateLogin();
+
             public static apiSendSMS vSendSms = new apiSendSMS();
-            
+            //public static   // RequestObject
             //public static serverNotification n = new serverNotification();
 
             public pgeSMS()
             {
-                
                 InitializeComponent();
                 btnSend.IsEnabled = false;
-                
+
+                Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_textSent(new Global.ComObjects.Requests.comdata_sendSMS())), txt_serverResponse);
+                Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_emailSent(new Global.ComObjects.Requests.comdata_sendEmail())), email_serverResponse);
+
                 //Take the current loged in user, get their employee ID number, use it as their FROM: In the SMS FROM
                 txtFrom.Text = Convert.ToString("00001234");
+
 
                 //Get the SMSGLobal username & password from the database (only admin can set), and Login using SMSvalidateapi
                 //connectToDatabase();
                 /// Won't need to 'login to sms global', the server will be, only here until there is support.
                // loginToSMSGlobal();
             }
+            private object txt_serverResponse(Object response)
+            {
+                return false;
+                //switch ((bool)response)
+                //{
 
+                //    case true:
+                //        lblmsgid.Content = "The message was sent sucessfully!";
+                //        break;
+
+                //    case false:
+                //        lblmsgid.Content = "The message failed to send.";
+                //        break;
+
+
+                //}
+            }
+            private object email_serverResponse(Object response)
+            {
+
+                return 0;
+            }
 
             private void txtFrom_LostFocus(object sender, RoutedEventArgs e)
             {
@@ -91,6 +114,7 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
             {
                 //vSendSms.schedule = Convert.ToString(dtp.DateTimeSelected);
                 //If (dtp.DateTimeSelected) / Write to some DB and set timer.
+
                 vSendSms.sms_from = txtFrom.Text;
                 try
                 {
@@ -99,10 +123,18 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
                         try
                         {
                             //n.soapSMS(vSendSms); // <-INSTEAD OF Creating a request object, inherits aBaseRequest, using the vSendSMS, then using NetworkComs 'sendMessage' to send to the server.
+                            Global.ComObjects.Requests.comdata_sendSMS rSMS = new Global.ComObjects.Requests.comdata_sendSMS();
+                            rSMS.sms_from = vSendSms.sms_from;
+                            rSMS.sms_to = vSendSms.sms_to;
+                            rSMS.msg_content = vSendSms.msg_content;
+                            rSMS.msg_type = vSendSms.msg_type;
+                            rSMS.schedule = vSendSms.schedule;
+                            rSMS.unicode = vSendSms.unicode;
+                            Notifications.Client.Interop.NetworkComms.sendMessage(rSMS);
                         }
                         catch (Exception exxx)
                         {
-                            /// Could have error logging.?
+                            /// Could have error logging.? /// Won't be handled here now? Will have to try { } (Exception e) { http.send } on the server.
                            // n.HttpSMS(vSendSms, vlogin);
                         }
 
@@ -126,7 +158,15 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
                     }
                     if (cbEmail.IsEnabled)
                     {
-                       // n.sendEmail(vSendSms);
+                        Global.ComObjects.Requests.comdata_sendEmail rEmail = new Global.ComObjects.Requests.comdata_sendEmail();
+
+                        rEmail.email_to = "";
+                        rEmail.msg_content = vSendSms.msg_content;
+
+                        Notifications.Client.Interop.NetworkComms.sendMessage(rEmail);
+                       
+                        // n.sendEmail(vSendSms);
+
                     }
                 }
                 catch (Exception ex) { }

@@ -40,6 +40,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -67,11 +68,19 @@
       <Project>{4F796810-F43D-41C3-9D83-AB83D93F1150}</Project>
       <Name>Global.Core.Utils</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Notifications.Client.Interop\Notifications.Client.Interop.csproj">
+      <Project>{66EA8CBF-718F-4CFB-8015-760CDC64C956}</Project>
+      <Name>Notifications.Client.Interop</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\Notifications.Global.Base.Plugin.Client\Global.Base.Plugin.Client.csproj">
       <Project>{A63DC85B-1333-47AA-91B9-8D348BD2CB05}</Project>
       <Name>Global.Base.Plugin.Client</Name>
       <EmbedInteropTypes>False</EmbedInteropTypes>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Notifications.Global.Core.CommunicationBase\Global.Core.Communication.Base.csproj">
+      <Project>{C55B156A-CC8B-4EB9-BE65-BF0D63C1E5E2}</Project>
+      <Name>Global.Core.Communication.Base</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\Notifications.Global.Core.CommunicationCore\Global.Core.Communication.Core.csproj">
       <Project>{EB1D1A60-B6A8-447B-B36C-7EE7891A9E08}</Project>

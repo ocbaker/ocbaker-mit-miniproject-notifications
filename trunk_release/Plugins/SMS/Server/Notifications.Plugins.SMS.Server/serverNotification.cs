@@ -17,18 +17,18 @@ namespace Notifications.Plugins.SMS.Server
 {
     public class serverNotification
     {
-        //XNamespace soapenv = "http://schemas.xmlsoap.org/soap/envelope/";
+        XNamespace soapenv = "http://schemas.xmlsoap.org/soap/envelope/";
 
-        //private NetworkCredential _cred;
-        //private string ticket;
-        //public apiValidateLogin apiv;
-        //public string mail_response;
-        ///// <summary>
-        ///// Request a login from the SMSGlobal Soap API, get a ticket in return and put it into apiSendSMS class.
-        ///// </summary>
-        ///// <param name="_vlogin">ApiValidateLogin object</param>
-        ///// <param name="_sendSMS">apiSendSMS object</param>
-        ///// 
+        private NetworkCredential _cred;
+        private string ticket;
+        public apiValidateLogin apiv;
+        public string mail_response;
+        /// <summary>
+        /// Request a login from the SMSGlobal Soap API, get a ticket in return and put it into apiSendSMS class.
+        /// </summary>
+        /// <param name="_vlogin">ApiValidateLogin object</param>
+        /// <param name="_sendSMS">apiSendSMS object</param>
+        /// 
 
         //public void requestLogin(apiValidateLogin _vlogin)
         //{
@@ -111,116 +111,97 @@ namespace Notifications.Plugins.SMS.Server
 
         //    return p;
         //}
-        //public void soapSMS(apiSendSMS vSendSms) 
-        //    // Must accept Object from the request handler, (object requestedData), then apiSendSMS data = (apiSendSMS)requestedData
-        //{
+        public void soapSMS(Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_sendSMS apis)
+        // Must accept Object from the request handler, (object requestedData), then apiSendSMS data = (apiSendSMS)requestedData
+        {
+            
+            
+            //apiSendSMS apis = vSendSms;
+            string msgid = null;
 
+            WebRequest request = WebRequest.Create("http://www.smsglobal.com/mobileworks/soapserver.php");
 
-        //    apiSendSMS apis = vSendSms;
-        //    string msgid = null;
+            //if (_cred != null ) request.Proxy.Credentials = _cred;
+            /// Needs a rework ^
+            request.Method = "POST";
+            request.ContentType = "text/xml";
+            request.Headers.Add("urn:MobileWorks#apiSendSms");
 
-        //    WebRequest request = WebRequest.Create("http://www.smsglobal.com/mobileworks/soapserver.php");
+            //Windows_7_Dialogs.SecurityDialog a = new Windows_7_Dialogs.SecurityDialog();
 
-        //    //if (_cred != null ) request.Proxy.Credentials = _cred;
-        //    /// Needs a rework ^
-        //    request.Method = "POST";
-        //    request.ContentType = "text/xml";
-        //    request.Headers.Add("urn:MobileWorks#apiSendSms");
+            // if (_cred == null)
+            //{
+            //    a.Show();
+            //    request.Proxy.Credentials = new NetworkCredential(a.UserData.Username, a.UserData.Password);
+            //}
 
-        //    //Windows_7_Dialogs.SecurityDialog a = new Windows_7_Dialogs.SecurityDialog();
+            var document = new XDocument(
+                                           new XDeclaration("1.0", "utf-8", String.Empty),
+                                           new XElement(soapenv + "Envelope", new XAttribute(XNamespace.Xmlns + "SOAP-ENV", soapenv),
+                                           new XElement(soapenv + "Body",
+                                           new XElement("apiSendSms",
+                                           new XElement("ticket", ticket),
+                                           new XElement("sms_from", apis.sms_from),
+                                           new XElement("sms_to", apis.sms_to),
+                                           new XElement("msg_content", System.Web.HttpUtility.HtmlEncode(apis.msg_content)),
+                                           new XElement("msg_type", apis.msg_type),
+                                           new XElement("unicode", apis.unicode),
+                                           new XElement("schedule", apis.schedule)
+                                           ))));
 
-        //    // if (_cred == null)
-        //    //{
-        //    //    a.Show();
-        //    //    request.Proxy.Credentials = new NetworkCredential(a.UserData.Username, a.UserData.Password);
-        //    //}
+            document.Declaration.Version = "1.0";
 
-        //    var document = new XDocument(
-        //                                   new XDeclaration("1.0", "utf-8", String.Empty),
-        //                                   new XElement(soapenv + "Envelope", new XAttribute(XNamespace.Xmlns + "SOAP-ENV", soapenv),
-        //                                   new XElement(soapenv + "Body",
-        //                                   new XElement("apiSendSms",
-        //                                   new XElement("ticket", ticket),
-        //                                   new XElement("sms_from", apis.sms_from),
-        //                                   new XElement("sms_to", apis.sms_to),
-        //                                   new XElement("msg_content", System.Web.HttpUtility.HtmlEncode(apis.msg_content)),
-        //                                   new XElement("msg_type", apis.msg_type),
-        //                                   new XElement("unicode", apis.unicode),
-        //                                   new XElement("schedule", apis.schedule)
-        //                                   ))));
+            var writer = new StreamWriter(request.GetRequestStream());
+            writer.WriteLine(document);
+            writer.Close();
 
-        //    document.Declaration.Version = "1.0";
+           apis.response = getResponse(request);
 
-        //    var writer = new StreamWriter(request.GetRequestStream());
-        //    writer.WriteLine(document);
-        //    writer.Close();
+        }
+        public string getResponse(WebRequest request)
+        {
+            String responce = null;
 
-        //    //using (var rsp = request.GetResponse())
-        //    //{
-        //    //    request.GetRequestStream().Close();
-        //    //    if (rsp != null)
-        //    //    {
-        //    //        using (var answerReader =
-        //    //                    new StreamReader(rsp.GetResponseStream()))
-        //    //        {
-        //    //            var readString = answerReader.ReadToEnd();
-        //    //            Regex r = new Regex(@"(.*)msgid&gt;(.*)&lt;/msgid(.*)");
-        //    //            if (r.IsMatch(readString.ToString()))
-        //    //            {
-        //    //                Regex reg = new Regex(@"\d{16}");
-        //    //                 msgid = reg.Match(r.Match(readString.ToString()).ToString()).ToString();
-        //    //            }
-        //    //        }
-        //    //    }
-        //    //}
+            using (var rsp = request.GetResponse())
+            {
+                request.GetRequestStream().Close();
+                if (rsp != null)
+                {
+                    using (var answerReader =
+                                new StreamReader(rsp.GetResponseStream()))
+                    {
+                        var readString = answerReader.ReadToEnd();
+                        Regex r = new Regex(@"((.*)msgid&gt;(.*)&lt;/msgid(.*))");
+                        if (r.IsMatch(readString.ToString()))
+                        {
+                            Regex reg = new Regex(@"\d{16}");
+                            responce = reg.Match(r.Match(readString.ToString()).ToString()).ToString();
+                        }
+                    }
+                }
+            }
+            return responce;
+        }
+        public string getResponse(StreamReader sr)
+        {
+            String responce = null;
+            using (sr)
+            {
+                var readstring = sr.ReadLine();
 
-        //    apis._responce = getResponse(request);
-
-        //}
-        //public string getResponse(WebRequest request)
-        //{
-        //    String responce = null;
-
-        //    using (var rsp = request.GetResponse())
-        //    {
-        //        request.GetRequestStream().Close();
-        //        if (rsp != null)
-        //        {
-        //            using (var answerReader =
-        //                        new StreamReader(rsp.GetResponseStream()))
-        //            {
-        //                var readString = answerReader.ReadToEnd();
-        //                Regex r = new Regex(@"((.*)msgid&gt;(.*)&lt;/msgid(.*))");
-        //                if (r.IsMatch(readString.ToString()))
-        //                {
-        //                    Regex reg = new Regex(@"\d{16}");
-        //                    responce = reg.Match(r.Match(readString.ToString()).ToString()).ToString();
-        //                }
-        //            }
-        //        }
-        //    }
-        //    return responce;
-        //}
-        //public string getResponse(StreamReader sr)
-        //{
-        //    String responce = null;
-        //    using (sr)
-        //    {
-        //        var readstring = sr.ReadLine();
-
-        //        Regex r = new Regex(@"((.*)queued message ID: (.*) SMSGlobalMsgID:(.*))");
-        //        if (r.IsMatch(readstring.ToString()))
-        //        {
-        //            Regex reg = new Regex(@"\d{16}");
-        //            responce = reg.Match(r.Match(readstring.ToString()).ToString()).ToString();
-        //        }
-        //    }
-        //    return responce;
-        //}
+                Regex r = new Regex(@"((.*)queued message ID: (.*) SMSGlobalMsgID:(.*))");
+                if (r.IsMatch(readstring.ToString()))
+                {
+                    Regex reg = new Regex(@"\d{16}");
+                    responce = reg.Match(r.Match(readstring.ToString()).ToString()).ToString();
+                }
+            }
+            return responce;
+        }
         //public void sendEmail(apiSendSMS vSendSms)
         //{
         //    System.Net.Mail.MailMessage m = new System.Net.Mail.MailMessage("noreply-notifications-miniproject@itsasmurflife.com",
-        //        "shane@itsasmurflife.com");
+        //        "shane@itsasmurflife.com"); // Here have the actual email address
 
         //    m.Subject = "Reminder: " + vSendSms.msg_content;
         //    m.Body = vSendSms.msg_content.Substring(0, 20) + "...";
@@ -246,7 +227,7 @@ namespace Notifications.Plugins.SMS.Server
         //        }
         //    }
         //}
-        //public void HttpSMS(apiSendSMS vSendSms, apiValidateLogin vlogin)
+        //public void HttpSMS(Object info) // apiSendSMS vSendSms, apiValidateLogin vlogin
         //{
         //    apiSendSMS apis = vSendSms;
         //    apiValidateLogin apiv = vlogin;
