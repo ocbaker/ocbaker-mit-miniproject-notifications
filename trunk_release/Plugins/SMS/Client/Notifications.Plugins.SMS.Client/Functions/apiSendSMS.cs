@@ -27,6 +27,7 @@ namespace Notifications.Plugins.SMS.Server
             schedule = sch;
         }
         public apiSendSMS() { }
+
     /// <summary>
     /// The apiSendSms object accepts a ticket, sms_from, sms_to, message content, message type, unicode and the schedule.
     /// </summary>

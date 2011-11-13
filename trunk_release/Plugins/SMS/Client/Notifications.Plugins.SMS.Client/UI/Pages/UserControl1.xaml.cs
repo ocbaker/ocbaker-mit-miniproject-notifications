@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Notifications.Global.Base.Plugin.Client.UI.Pages
+namespace Notifications.Plugins.SMS.Client.UI.Pages
 {
     /// <summary>
     /// Interaction logic for UserControl1.xaml

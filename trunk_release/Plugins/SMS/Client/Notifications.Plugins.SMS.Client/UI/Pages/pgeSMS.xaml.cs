@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Notifications.Plugins.SMS.Server;
+using Notifications.Global.Core.Utils;
 
 
 namespace Notifications.Global.Base.Plugin.Client.UI.Pages
@@ -19,17 +20,18 @@ namespace Notifications.Global.Base.Plugin.Client.UI.Pages
     /// <summary>
     /// Interaction logic for pgeSMS.xaml
     /// </summary>
-    partial class pgeSMS : Page
+    public partial class pgeSMS : Page
     {
         /// <summary>
         /// Interaction logic for pgeSMS.xaml
         /// </summary>
 
             int _count = 0;
-            public static apiValidateLogin vlogin = new apiValidateLogin();
-            public static apiSendSMS vSendSms = new apiSendSMS();
-            public static serverNotification n = new serverNotification();
         
+            //public static apiValidateLogin vlogin = new apiValidateLogin();
+            public static apiSendSMS vSendSms = new apiSendSMS();
+            
+            public static serverNotification n = new serverNotification();
 
             public pgeSMS()
             {
@@ -43,7 +45,7 @@ namespace Notifications.Global.Base.Plugin.Client.UI.Pages
                 //Get the SMSGLobal username & password from the database (only admin can set), and Login using SMSvalidateapi
                 //connectToDatabase();
                 /// Won't need to 'login to sms global', the server will be, only here until there is support.
-                loginToSMSGlobal();
+               // loginToSMSGlobal();
             }
 
 
@@ -96,12 +98,12 @@ namespace Notifications.Global.Base.Plugin.Client.UI.Pages
                     {
                         try
                         {
-                            n.soapSMS(vSendSms);
+                            //n.soapSMS(vSendSms); // <-INSTEAD OF Creating a request object, inherits aBaseRequest, using the vSendSMS, then using NetworkComs 'sendMessage' to send to the server.
                         }
                         catch (Exception exxx)
                         {
                             /// Could have error logging.?
-                            n.HttpSMS(vSendSms, vlogin);
+                           // n.HttpSMS(vSendSms, vlogin);
                         }
 
 
@@ -131,28 +133,27 @@ namespace Notifications.Global.Base.Plugin.Client.UI.Pages
 
             }
 
-            private void loginToSMSGlobal()
-            {
-                //Remove when i can connect to the database.
-                vlogin.APIpassword = "81953801";
-                vlogin.APIusername = "lolhi";
+            //private void loginToSMSGlobal()
+            //{
+            //    //Remove when i can connect to the database.
+            //    //vlogin.APIpassword = "81953801";
+            //   // vlogin.APIusername = "lolhi";
 
-                try
-                {
-                    n.requestLogin(vlogin, vSendSms);
-                }
-                catch (Exception ex)
-                {
-                    // n.HttpSMS(vSendSms, vlogin);
-                }
+            //    try
+            //    {
+            //        n.requestLogin(vlogin, vSendSms);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        // n.HttpSMS(vSendSms, vlogin);
+            //    }
 
-                if (vSendSms.ticket == null)
-                {
-                    btnSend.IsEnabled = false;
-                }
-                else { btnSend.IsEnabled = true; }
-
-            }
+            //    if (vSendSms.ticket == null)
+            //    {
+            //        btnSend.IsEnabled = false;
+            //    }
+            //    else { btnSend.IsEnabled = true; }
+            //}
 
             private void connectToDatabase()
             {
