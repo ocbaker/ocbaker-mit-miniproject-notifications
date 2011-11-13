@@ -11,23 +11,47 @@ namespace Notifications.Server.Core.Manager
     {
         public static void start()
         {
-            var instances = from t in Assembly.LoadFile(Environment.CurrentDirectory + @"\PluginTest.dll").GetTypes()
-                            where t.GetInterfaces().Contains(typeof(IRequestHandler))
-                                     && t.GetConstructor(Type.EmptyTypes) != null
-                            select Activator.CreateInstance(t) as IRequestHandler;
 
-            foreach (var instance in instances)
+            var plugins = System.IO.Directory.EnumerateFiles(Environment.CurrentDirectory + @"\Plugins\", "*.dll", System.IO.SearchOption.TopDirectoryOnly);
+            foreach (string item in plugins)
             {
+                Console.WriteLine("Plugin Setup: {0}",item.Substring(item.LastIndexOf("\\") + 1));
                 try
                 {
-                    instance.setupHandlers(); // where Foo is a method of ISomething
-                    string nm = instance.GetType().FullName;
-                    Console.WriteLine("Setup Plugin: " + nm);
+                    var instances = from t in Assembly.LoadFile(item).GetTypes()
+                                    where t.GetInterfaces().Contains(typeof(IRequestHandler))
+                                             && t.GetConstructor(Type.EmptyTypes) != null
+                                    select Activator.CreateInstance(t) as IRequestHandler;
+                    foreach (var instance in instances)
+                    {
+                        try
+                        {
+                            if (!instance.GetType().FullName.StartsWith("Notifications"))
+                            {
+                                Console.WriteLine("   - Plugin Namespace: " + instance.GetType().FullName);
+                                instance.setupHandlers();
+                                Console.WriteLine("        - SUCCEEDED");
+                            }
+                            else
+                            {
+                                
+                                Console.WriteLine("        - FAILED");
+                                Console.WriteLine("        - Reason: Not allowed to use the base namespace Notifications.");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("        - FAILED");
+                            Console.WriteLine("        - Reason: Plugin Threw an unhandled exception.");
+                        }
+                    }   
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Setup Plugin FALIED: Test Plugin");
+                    Console.WriteLine("   - Failed Loading Assembly");
                 }
+
+                
             }
             Nito.Async.ActionDispatcher.Current.QueueAction(new Action(action));
         }

@@ -8,8 +8,8 @@
     <ProjectGuid>{96861E9B-D128-438A-85DA-9F51E7220AD8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Notifications.Plugins.SMS.Global.ComObjects</RootNamespace>
-    <AssemblyName>Notifications.Plugins.SMS.Global.ComObjects</AssemblyName>
+    <RootNamespace>Notifications.Plugins.SMS.Global</RootNamespace>
+    <AssemblyName>Notifications.Plugins.SMS.Global</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -48,6 +48,9 @@
       <Name>Notifications.Global.Base.Plugin.ComObjects</Name>
       <Private>False</Private>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ComObjects\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

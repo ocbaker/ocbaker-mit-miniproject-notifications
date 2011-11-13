@@ -49,7 +49,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{B21A79
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Global", "Global", "{4F3F4685-49AC-4165-915C-88A6DCE3272C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins.SMS.Global.ComObjects", "Plugins\SMS\Global\Notifications.Plugins.SMS.Global.ComObjects\Plugins.SMS.Global.ComObjects.csproj", "{96861E9B-D128-438A-85DA-9F51E7220AD8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins.SMS.Global", "Plugins\SMS\Global\Notifications.Plugins.SMS.Global.ComObjects\Plugins.SMS.Global.csproj", "{96861E9B-D128-438A-85DA-9F51E7220AD8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins.SMS.Server", "Plugins\SMS\Server\Notifications.Plugins.SMS.Server\Plugins.SMS.Server.csproj", "{15A3421B-14B9-46BA-B1F4-FC43557EDF8E}"
 EndProject

@@ -48,6 +48,11 @@
     <Compile Include="serverNotification.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\External_Libraries\Nitro\Nito.Async\Nito.Async.csproj">
+      <Project>{708763ED-7801-4F2C-B103-4FEBD771769A}</Project>
+      <Name>Nito.Async</Name>
+      <Private>False</Private>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\Notifications.Global.Base.Plugin.Server\Global.Base.Plugin.Server.csproj">
       <Project>{9ACA2A3E-2C76-471C-BDD2-1D48847329DB}</Project>
       <Name>Global.Base.Plugin.Server</Name>
@@ -61,9 +66,9 @@
       <Project>{BAF14E0B-6361-4A51-B553-ABBA031E210F}</Project>
       <Name>Server.Interop</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Global\Notifications.Plugins.SMS.Global.ComObjects\Plugins.SMS.Global.ComObjects.csproj">
+    <ProjectReference Include="..\..\Global\Notifications.Plugins.SMS.Global.ComObjects\Plugins.SMS.Global.csproj">
       <Project>{96861E9B-D128-438A-85DA-9F51E7220AD8}</Project>
-      <Name>Plugins.SMS.Global.ComObjects</Name>
+      <Name>Plugins.SMS.Global</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

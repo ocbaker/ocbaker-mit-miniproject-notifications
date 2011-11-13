@@ -77,9 +77,9 @@
       <Project>{EB1D1A60-B6A8-447B-B36C-7EE7891A9E08}</Project>
       <Name>Global.Core.Communication.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Global\Notifications.Plugins.SMS.Global.ComObjects\Plugins.SMS.Global.ComObjects.csproj">
+    <ProjectReference Include="..\..\Global\Notifications.Plugins.SMS.Global.ComObjects\Plugins.SMS.Global.csproj">
       <Project>{96861E9B-D128-438A-85DA-9F51E7220AD8}</Project>
-      <Name>Plugins.SMS.Global.ComObjects</Name>
+      <Name>Plugins.SMS.Global</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Server\Notifications.Plugins.SMS.Server\Plugins.SMS.Server.csproj">
       <Project>{15A3421B-14B9-46BA-B1F4-FC43557EDF8E}</Project>
