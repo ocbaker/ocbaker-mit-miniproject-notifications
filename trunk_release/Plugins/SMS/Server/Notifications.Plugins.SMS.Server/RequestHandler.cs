@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Notifications.Global.Core.Communication.Base;
 
 namespace Notifications.Plugins.SMS.Server
 {
@@ -10,7 +11,7 @@ namespace Notifications.Plugins.SMS.Server
 
         public void setupHandlers()
         {
-            Notifications.Server.Interop.NetworkComms.addDataHandler((new Global.Core.Communication.Core.Requests.comdata_rqLogin()), handleLogin);
+          //  Notifications.Server.Interop.NetworkComms.addDataHandler((new Notifications.Global.Core.Communication.Requests.comdata_rqLogin()), handleLogin);
         }
 
 

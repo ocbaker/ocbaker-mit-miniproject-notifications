@@ -87,7 +87,7 @@ namespace Notifications.Plugins.SMS.Server
                 }
                 else
                 {
-                   value = HttpUtility.HtmlEncode(value);
+                   //value = HttpUtility.HtmlEncode(value);
                     _sms_to = value;
                 }           
             }

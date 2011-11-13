@@ -31,12 +31,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AvalonControlsLibrary, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>UI\Pages\AvalonControlsLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,9 +61,6 @@
     <Compile Include="UI\Pages\pgeSMSTemplate.xaml.cs">
       <DependentUpon>pgeSMSTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Pages\UserControl1.xaml.cs">
-      <DependentUpon>UserControl1.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Global.Core.Utils\Global.Core.Utils.csproj">
@@ -70,6 +72,10 @@
       <Name>Global.Base.Plugin.Client</Name>
       <EmbedInteropTypes>False</EmbedInteropTypes>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Notifications.Global.Core.CommunicationCore\Global.Core.Communication.Core.csproj">
+      <Project>{EB1D1A60-B6A8-447B-B36C-7EE7891A9E08}</Project>
+      <Name>Global.Core.Communication.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Global\Notifications.Plugins.SMS.Global.ComObjects\Plugins.SMS.Global.ComObjects.csproj">
       <Project>{96861E9B-D128-438A-85DA-9F51E7220AD8}</Project>
@@ -92,10 +98,6 @@
     <Page Include="UI\Pages\pgeSMSTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UI\Pages\UserControl1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

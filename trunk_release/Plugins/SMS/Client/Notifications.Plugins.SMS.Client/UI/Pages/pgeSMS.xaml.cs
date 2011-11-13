@@ -15,7 +15,7 @@ using Notifications.Plugins.SMS.Server;
 using Notifications.Global.Core.Utils;
 
 
-namespace Notifications.Global.Base.Plugin.Client.UI.Pages
+namespace Notifications.Plugins.SMS.Client.UI.Pages
 {
     /// <summary>
     /// Interaction logic for pgeSMS.xaml
@@ -31,7 +31,7 @@ namespace Notifications.Global.Base.Plugin.Client.UI.Pages
             //public static apiValidateLogin vlogin = new apiValidateLogin();
             public static apiSendSMS vSendSms = new apiSendSMS();
             
-            public static serverNotification n = new serverNotification();
+            //public static serverNotification n = new serverNotification();
 
             public pgeSMS()
             {
@@ -126,7 +126,7 @@ namespace Notifications.Global.Base.Plugin.Client.UI.Pages
                     }
                     if (cbEmail.IsEnabled)
                     {
-                        n.sendEmail(vSendSms);
+                       // n.sendEmail(vSendSms);
                     }
                 }
                 catch (Exception ex) { }
@@ -245,5 +245,4 @@ namespace Notifications.Global.Base.Plugin.Client.UI.Pages
                 }
             }
         }
-   
 }

@@ -21,7 +21,8 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
 
     public partial class admSMS : Page
     {
-        apiValidateLogin Login = pgeSMS.vlogin;
+       // apiValidateLogin Login = pgeSMS.vlogin;
+        
         
         public admSMS()
         {
@@ -136,7 +137,7 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
         {
             try
             {
-                Login.APIusername = txtSMSUsername.Text;
+                //Login.APIusername = txtSMSUsername.Text;
 
                // string a = Encrypt(txtSMSUsername.Text, true);
                // MessageBox.Show("Encrypted text: " + a);
@@ -152,7 +153,7 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
         {
             try
             {
-                Login.APIpassword = psbSMSpassword.Password;
+                //Login.APIpassword = psbSMSpassword.Password;
                 //txtPassword.SetStatus("OK", TextBoxStatuses.OK);
             }
             catch (ArgumentException ex)
@@ -166,7 +167,7 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
         {
             try
             {
-                Login.APIpassword = psbGmailPassword.Password;
+               // Login.APIpassword = psbGmailPassword.Password;
 
             }
             catch (ArgumentException ex)
@@ -179,7 +180,7 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
         {
             try
             {
-                Login.APIpassword = txtGmailUserlogin.Text;
+                //Login.APIpassword = txtGmailUserlogin.Text;
                 //txtPassword.SetStatus("OK", TextBoxStatuses.OK);
             }
             catch (ArgumentException ex)
@@ -192,7 +193,7 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
         {
             try
             {
-                Login.APIpassword = pswProxyPassword.Password;
+               // Login.APIpassword = pswProxyPassword.Password;
 
             }
             catch (ArgumentException ex)
@@ -205,7 +206,7 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
         {
             try
             {
-                Login.APIpassword = txtProxyUsername.Text;
+               // Login.APIpassword = txtProxyUsername.Text;
                 //txtPassword.SetStatus("OK", TextBoxStatuses.OK);
             }
             catch (ArgumentException ex)
