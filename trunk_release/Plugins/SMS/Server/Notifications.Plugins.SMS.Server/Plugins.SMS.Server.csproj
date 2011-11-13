@@ -33,6 +33,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,13 +42,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="apiSendSMS.cs" />
+    <Compile Include="apiValidateLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestHandler.cs" />
+    <Compile Include="serverNotification.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Notifications.Global.Base.Plugin.Server\Global.Base.Plugin.Server.csproj">
       <Project>{9ACA2A3E-2C76-471C-BDD2-1D48847329DB}</Project>
       <Name>Global.Base.Plugin.Server</Name>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Notifications.Global.Core.CommunicationCore\Global.Core.Communication.Core.csproj">
+      <Project>{EB1D1A60-B6A8-447B-B36C-7EE7891A9E08}</Project>
+      <Name>Global.Core.Communication.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Notifications.Server.Interop\Server.Interop.csproj">
+      <Project>{BAF14E0B-6361-4A51-B553-ABBA031E210F}</Project>
+      <Name>Server.Interop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Global\Notifications.Plugins.SMS.Global.ComObjects\Plugins.SMS.Global.ComObjects.csproj">
+      <Project>{96861E9B-D128-438A-85DA-9F51E7220AD8}</Project>
+      <Name>Plugins.SMS.Global.ComObjects</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
