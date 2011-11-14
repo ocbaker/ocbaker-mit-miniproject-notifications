@@ -79,6 +79,10 @@
       <Project>{6E63A56D-14EE-4E99-9984-E9664F480D15}</Project>
       <Name>Server.Core.Manager</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Notifications.Server.Interop\Server.Interop.csproj">
+      <Project>{BAF14E0B-6361-4A51-B553-ABBA031E210F}</Project>
+      <Name>Server.Interop</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Notifications.Server.Modules.Core\Server.Core.Core.csproj">
       <Project>{863B1A63-002F-47AF-BA19-2C53BBBCE4ED}</Project>
       <Name>Server.Core.Core</Name>

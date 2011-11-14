@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{BAF14E0B-6361-4A51-B553-ABBA031E210F}</ProjectGuid>
+    <ProjectGuid>{5628573F-0733-4DD6-B02B-29D2CFD82CB1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Notifications.Server.Interop</RootNamespace>
-    <AssemblyName>Notifications.Server.Interop</AssemblyName>
+    <RootNamespace>Notifications.Plugins.Administration.Client</RootNamespace>
+    <AssemblyName>Notifications.Plugins.Administration.Client</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,8 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EventManager.cs" />
-    <Compile Include="NetworkComms.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

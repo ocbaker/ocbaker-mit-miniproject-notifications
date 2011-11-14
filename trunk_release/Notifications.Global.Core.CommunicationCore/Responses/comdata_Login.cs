@@ -16,5 +16,6 @@ namespace Notifications.Global.Core.Communication.Core.Responses
         public comdata_rtLogin(Global.Core.Communication.Base.BaseObjects.aBaseRequest request) : base(request) { }
 
         public bool loginSuccessful;
+        public string username;
     }
 }

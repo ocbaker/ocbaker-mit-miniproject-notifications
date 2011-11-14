@@ -25,6 +25,8 @@ namespace Notifications.Client.Executable
             DataHandlers = new Dictionary<Type, Func<object, object>>();
             //addDataHandler((new comdata_rtFile()),(Func<object,object>)testFunction);
             Interop.NetworkComms.addDataHandler = addDataHandler;
+            Interop.NetworkComms.sendMessage = writeMessage;
+            Interop.NetworkComms.removeDataHandler = removeDataHandler;
         }
 
         public static void addDataHandler(object key, Func<object, object> value){

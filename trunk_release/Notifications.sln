@@ -87,6 +87,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Global", "Global", "{7B6092
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{E90BE4D7-6BD6-4146-878F-8F4FE8E6E081}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notifications.Plugins.Administration.Client", "Notifications.Plugins.Administration.Client\Notifications.Plugins.Administration.Client.csproj", "{5628573F-0733-4DD6-B02B-29D2CFD82CB1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -317,6 +319,16 @@ Global
 		{BAF14E0B-6361-4A51-B553-ABBA031E210F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{BAF14E0B-6361-4A51-B553-ABBA031E210F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{BAF14E0B-6361-4A51-B553-ABBA031E210F}.Release|x86.ActiveCfg = Release|Any CPU
+		{5628573F-0733-4DD6-B02B-29D2CFD82CB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5628573F-0733-4DD6-B02B-29D2CFD82CB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5628573F-0733-4DD6-B02B-29D2CFD82CB1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5628573F-0733-4DD6-B02B-29D2CFD82CB1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5628573F-0733-4DD6-B02B-29D2CFD82CB1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5628573F-0733-4DD6-B02B-29D2CFD82CB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5628573F-0733-4DD6-B02B-29D2CFD82CB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5628573F-0733-4DD6-B02B-29D2CFD82CB1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5628573F-0733-4DD6-B02B-29D2CFD82CB1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5628573F-0733-4DD6-B02B-29D2CFD82CB1}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -359,6 +371,7 @@ Global
 		{E49DED2D-F644-4B7C-8809-79102ABDB3EC} = {1371E40C-FEAC-48CC-89EA-32EDA2B959CC}
 		{7B6092BC-BE4B-424F-B7F5-47EA5B247DC4} = {1371E40C-FEAC-48CC-89EA-32EDA2B959CC}
 		{E90BE4D7-6BD6-4146-878F-8F4FE8E6E081} = {1371E40C-FEAC-48CC-89EA-32EDA2B959CC}
+		{5628573F-0733-4DD6-B02B-29D2CFD82CB1} = {E49DED2D-F644-4B7C-8809-79102ABDB3EC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		VisualSVNWorkingCopyRoot = .

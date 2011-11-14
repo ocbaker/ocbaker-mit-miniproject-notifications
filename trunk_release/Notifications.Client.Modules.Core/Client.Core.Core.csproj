@@ -58,6 +58,9 @@
     <Compile Include="UI\Pages\pgeLogin.xaml.cs">
       <DependentUpon>pgeLogin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Pages\pgeMain.xaml.cs">
+      <DependentUpon>pgeMain.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="UI\Dialogs\frmLoginDialog.resx">
@@ -89,6 +92,10 @@
     <Page Include="UI\Pages\pgeLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\pgeMain.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

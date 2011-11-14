@@ -30,6 +30,7 @@ namespace Notifications.Server.Core.Core.RequestHandlers
                     canLogin = false;
                     break;
             }
+            respo.username = reqo.username;
             if (canLogin && reqo.password == password)
             {
                 respo.loginSuccessful = true;

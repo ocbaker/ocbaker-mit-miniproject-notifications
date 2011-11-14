@@ -18,7 +18,7 @@ namespace Notifications.Client.Core.Core.UI.Pages
     /// <summary>
     /// Interaction logic for pgeMain.xaml
     /// </summary>
-    public partial class pgeMain : aPage
+    public partial class pgeMain : Page
     {
         public pgeMain()
         {

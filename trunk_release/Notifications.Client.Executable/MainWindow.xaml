@@ -12,7 +12,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <ribbon:Ribbon x:Name="Ribbon">
+        <ribbon:Ribbon x:Name="Ribbon" IsCollapsed="False" IsMinimized="False">
             <ribbon:Ribbon.ApplicationMenu>
                 <ribbon:RibbonApplicationMenu SmallImageSource="Images\SmallIcon.png">
                     <ribbon:RibbonApplicationMenuItem Header="Hello _Ribbon"
@@ -42,7 +42,7 @@
                 </ribbon:RibbonGroup>
                 
             </ribbon:RibbonTab>
-        </ribbon:Ribbon> 
-        
+        </ribbon:Ribbon>
+        <Frame Grid.Row="1" Height="Auto" HorizontalAlignment="Stretch" Name="frame1" VerticalAlignment="Stretch" Width="Auto" />
     </Grid>
 </ribbon:RibbonWindow>

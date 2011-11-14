@@ -16,7 +16,7 @@ namespace Notifications.Client.Core.Core.UI.Dialogs
         public frmLoginDialog()
         {
             InitializeComponent();
-            Interop.NetworkComms.addDataHandler((new Responses.comdata_rtLogin(new Requests.comdata_rqLogin())), handleResponse);
+            //Interop.NetworkComms.addDataHandler((new Responses.comdata_rtLogin(new Requests.comdata_rqLogin())), handleResponse);
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -32,6 +32,7 @@ namespace Notifications.Client.Core.Core.UI.Dialogs
             Responses.comdata_rtLogin resp = (Responses.comdata_rtLogin)response;
             if (resp.loginSuccessful)
             {
+                Interop.EventManager.raiseEvents("Client.LoggedIn",resp.username);
                 Close();
             }
             return false;

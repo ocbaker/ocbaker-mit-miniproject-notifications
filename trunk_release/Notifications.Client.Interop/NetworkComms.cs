@@ -11,6 +11,11 @@ namespace Notifications.Client.Interop
         public delegate void del_addDataHandler(object key,Func<object,object> value);
         public static del_addDataHandler addDataHandler;
 
+        public delegate void del_sendMessage(object message);
+        public static del_sendMessage sendMessage;
+
+        public delegate void del_removeDataHandler(object key);
+        public static del_removeDataHandler removeDataHandler;
         //public static void addDataHandler(object key, Func<object, object> value)
         //{
         //    Assembly cAssembly = Assembly.GetEntryAssembly();
@@ -19,20 +24,20 @@ namespace Notifications.Client.Interop
         //    mAddDataHandler.Invoke(null, new object[] { key, value });
         //}
 
-        public static void sendMessage(object message)
-        {
-            Assembly cAssembly = Assembly.GetEntryAssembly();
-            Type tNetworkComms = cAssembly.GetType("Notifications.Client.Executable.NetworkComms");
-            MethodInfo mAddDataHandler = tNetworkComms.GetMethod("writeMessage");
-            mAddDataHandler.Invoke(null, new object[] { message });
-        }
+        //public static void sendMessage(object message)
+        //{
+        //    Assembly cAssembly = Assembly.GetEntryAssembly();
+        //    Type tNetworkComms = cAssembly.GetType("Notifications.Client.Executable.NetworkComms");
+        //    MethodInfo mAddDataHandler = tNetworkComms.GetMethod("writeMessage");
+        //    mAddDataHandler.Invoke(null, new object[] { message });
+        //}
 
-        public static void removeDataHandler(object key)
-        {
-            Assembly cAssembly = Assembly.GetEntryAssembly();
-            Type tNetworkComms = cAssembly.GetType("Notifications.Client.Executable.NetworkComms");
-            MethodInfo mAddDataHandler = tNetworkComms.GetMethod("removeDataHandler");
-            mAddDataHandler.Invoke(null, new object[] { key });
-        }
+        //public static void removeDataHandler(object key)
+        //{
+        //    Assembly cAssembly = Assembly.GetEntryAssembly();
+        //    Type tNetworkComms = cAssembly.GetType("Notifications.Client.Executable.NetworkComms");
+        //    MethodInfo mAddDataHandler = tNetworkComms.GetMethod("removeDataHandler");
+        //    mAddDataHandler.Invoke(null, new object[] { key });
+        //}
     }
 }
