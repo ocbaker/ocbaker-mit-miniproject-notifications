@@ -43,6 +43,6 @@
                 
             </ribbon:RibbonTab>
         </ribbon:Ribbon>
-        <Frame Grid.Row="1" Height="Auto" HorizontalAlignment="Stretch" Name="frame1" VerticalAlignment="Stretch" Width="Auto" />
+        <Frame Grid.Row="1" Height="Auto" HorizontalAlignment="Stretch" Name="frame1" VerticalAlignment="Stretch" Width="Auto" NavigationUIVisibility="Hidden" />
     </Grid>
 </ribbon:RibbonWindow>
