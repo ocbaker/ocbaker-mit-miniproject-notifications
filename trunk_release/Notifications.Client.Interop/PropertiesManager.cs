@@ -16,7 +16,8 @@ namespace Notifications.Client.Interop
             if (_properties.ContainsKey(key))
                 return null;
             else
-                return _properties[key];
+                try { return _properties[key]; }
+                catch (Exception ex) { return null; }
         }
 
         public static void SetProperty(string key, object value)

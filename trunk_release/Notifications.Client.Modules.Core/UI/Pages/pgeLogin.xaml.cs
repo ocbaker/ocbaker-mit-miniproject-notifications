@@ -45,7 +45,7 @@ namespace Notifications.Client.Core.Core.UI.Pages
             if (resp.loginSuccessful)
             {
                 Interop.PropertiesManager.SetProperty("User.username", resp.username);
-                Interop.EventManager.raiseEvents("Client.LoggedIn", resp.username);
+                Interop.EventManager.raiseEvents("Client.LoggedIn");
             }
             else
             {

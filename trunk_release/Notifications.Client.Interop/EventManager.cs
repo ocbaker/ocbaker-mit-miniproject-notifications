@@ -8,7 +8,7 @@ namespace Notifications.Client.Interop
     public static class EventManager
     {
 
-        private static Dictionary<string, Delegate> EventList = new Dictionary<string, Delegate>();
+        private static Dictionary<string, List<Delegate>> EventList = new Dictionary<string, List<Delegate>>();
 
         public static void addEvent(string key)
         {
@@ -29,12 +29,13 @@ namespace Notifications.Client.Interop
                     addEvent(key);
                 if (EventList[key] == null)
                 {
-                    EventList[key] = value;
+                    EventList[key] = new List<Delegate>();
+                    
                 }
-                else
-                {
-                    EventList[key] = Delegate.Combine(EventList[key], value);
-                }
+                if(!EventList[key].Contains(value))
+                    EventList[key].Add(value);
+                    
+                //EventList[key] = Delegate.Combine(EventList[key], value);
                 //MulticastDelegate.
                 //EventList[key].
             }
@@ -67,7 +68,7 @@ namespace Notifications.Client.Interop
             try
             {
                 //EventList[key] -= value;
-                EventList[key] = Delegate.Remove(EventList[key], value);
+                EventList[key].Remove(value);
             }
             catch (Exception ex)
             {
@@ -94,9 +95,20 @@ namespace Notifications.Client.Interop
 
         public static void raiseEvents(string key, params object[] fields)
         {
+            Console.WriteLine("Raised Event: " + key);
             key = key.ToLower();
             if (EventList[key] != null)
-                EventList[key].DynamicInvoke(fields);
+            {
+                try
+                {
+                    foreach (Delegate outDelegate in EventList[key])
+                        outDelegate.DynamicInvoke(fields);
+                }
+                catch (Exception ex)
+                {
+                    string a = "lol";
+                }
+            }
         }
     }
 }

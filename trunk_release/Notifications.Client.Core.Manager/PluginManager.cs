@@ -52,6 +52,25 @@ namespace Notifications.Client.Core.Manager
 
 
             }
+
+            //Attach ALL EventHandlers
+            //foreach (Assembly assem in AppDomain.CurrentDomain.GetAssemblies())
+            //{
+            //    foreach (var t in assem.GetTypes())
+            //    {
+            //        foreach (MethodInfo method in t.GetMethods())
+            //        {
+                        
+            //            if (Attribute.IsDefined(method, typeof(Interop.EventMethod)))
+            //            {
+            //                Interop.EventMethod EventMethodAttrib = (Interop.EventMethod)Attribute.GetCustomAttribute(method, typeof(Interop.EventMethod));
+            //                Interop.EventManager.handleEvent(EventMethodAttrib.EventName, Delegate.CreateDelegate(method.GetType(),method));
+            //            }
+
+            //        }
+            //    }  
+            //}
+            
         }
     }
 }

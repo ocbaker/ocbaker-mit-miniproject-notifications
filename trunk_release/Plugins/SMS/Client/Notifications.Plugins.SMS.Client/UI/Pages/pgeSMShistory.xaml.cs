@@ -17,7 +17,7 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
     /// <summary>
     /// Interaction logic for pgeSMShistory.xaml
     /// </summary>
-    public partial class pgeSMShistory : UserControl
+    public partial class pgeSMShistory : Page
     {
         public pgeSMShistory()
         {

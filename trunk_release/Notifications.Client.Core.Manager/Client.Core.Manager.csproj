@@ -45,6 +45,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Notifications.Client.Interop\Notifications.Client.Interop.csproj">
+      <Project>{66EA8CBF-718F-4CFB-8015-760CDC64C956}</Project>
+      <Name>Notifications.Client.Interop</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Notifications.Global.Base.Plugin.Client\Global.Base.Plugin.Client.csproj">
       <Project>{A63DC85B-1333-47AA-91B9-8D348BD2CB05}</Project>
       <Name>Global.Base.Plugin.Client</Name>
