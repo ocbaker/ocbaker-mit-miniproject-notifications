@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
+using System.Data.SqlClient;
 using Notifications.Global.Core.Communication.Base;
 
 namespace Notifications.Plugins.SMS.Server
@@ -15,7 +17,6 @@ namespace Notifications.Plugins.SMS.Server
         public void setupHandlers()
         {
             Console.WriteLine("Setting up SMS Server Plugin....");
-            //Nito.Async.ActionDispatcher.Current.QueueAction(new Action(
             Notifications.Server.Interop.NetworkComms.addDataHandler((new Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_sendSMS()), textSent);
             
         }
@@ -32,13 +33,31 @@ namespace Notifications.Plugins.SMS.Server
             {
                 v.LastCheck = DateTime.Now.AddMinutes(10);
                 // Connect to database and get get username/password, add to CachedUsername, cachedPassword
+
+                SqlConnection mycon = new SqlConnection("server=(local);" +
+                                    "Trusted_Connection=yes;" +
+                                    "database=PatientNotifications; " +
+                                    "connection timeout=30");
+
+                mycon.Open();
+
+                DataSet ds = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter("SELECT [Key], Value FROM dbo.Settings WHERE ([Key] = 'SMSGlobalusername') OR ([Key] = 'SMSGlobalpassword')", mycon);
+
+                da.Fill(ds);
+                cachedUsername = ds.Tables[0].Rows[0]["Value"].ToString();
+                cachedPassword = ds.Tables[0].Rows[1]["Value"].ToString();
+
+                mycon.Close();
+
+
             }
             v = new apiValidateLogin(cachedUsername, cachedPassword);
 
             serverNotification sn = new serverNotification();
             try
             {
-               // sn.requestLogin( some object which has info's )
+                sn.requestLogin(v);
                 try
                 {
                     sn.soapSMS(requ);
@@ -66,7 +85,16 @@ namespace Notifications.Plugins.SMS.Server
         {
          //   Save whatver data is needed using respo and resu.
 
-        }
+            SqlConnection mycon = new SqlConnection("server=(local);" +
+                                       "Trusted_Connection=yes;" +
+                                       "database=PatientNotifications; " +
+                                       "connection timeout=30");
 
+            mycon.Open();
+
+            SqlCommand com = new SqlCommand("INSERT INTO PatientData (FamilyName,GivenName, Email, Mobile, Phone, ReminderText, ReminderDate) VALUES (" + ",," + rq.email + "," + rq.sms_to + ",," + rq.msg_content + ",);", mycon);
+            com.ExecuteNonQuery();
+            mycon.Close();
+        }
     }
 }

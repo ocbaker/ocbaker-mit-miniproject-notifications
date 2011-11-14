@@ -22,8 +22,8 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
         public pgeSMShistory()
         {
             InitializeComponent();
-
-
+            // Interop.PropertiesManager.GetProperty("Client.Username");
+            // "SELECT * FROM PATIENTDATA WHERE DR='.THIS' ??
 
             //Request for Client data
         }

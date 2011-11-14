@@ -11,5 +11,6 @@ namespace Notifications.Plugins.SMS.Global.ComObjects.Requests
         public comdata_rqTemplate() { }
         public string TempContent;
         public bool retrieveSavedTemp;
+        public string username;
     }
 }

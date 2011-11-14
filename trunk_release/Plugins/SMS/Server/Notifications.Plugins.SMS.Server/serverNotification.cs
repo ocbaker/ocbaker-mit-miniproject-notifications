@@ -61,8 +61,8 @@ namespace Notifications.Plugins.SMS.Server
                            new XElement(soapenv + "Envelope", new XAttribute(XNamespace.Xmlns + "SOAP-ENV", soapenv),
                                new XElement(soapenv + "Body",
                                new XElement("apiValidateLogin",
-                               new XElement("user", ""),
-                               new XElement("password", "")
+                               new XElement("user", apiv.APIusername),
+                               new XElement("password", apiv.APIpassword)
                                ))));
             document.Declaration.Version = "1.0";
 

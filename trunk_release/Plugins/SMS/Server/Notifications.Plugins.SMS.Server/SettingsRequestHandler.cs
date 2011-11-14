@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace Notifications.Plugins.SMS.Server
 {
@@ -23,6 +25,22 @@ namespace Notifications.Plugins.SMS.Server
             if (requ.getData == true)
             {
                 // GET the data respo.username = 'Username' | respo.password = 'Password'
+
+                SqlConnection mycon = new SqlConnection("server=(local);" +
+                                       "Trusted_Connection=yes;" +
+                                       "database=PatientNotifications; " +
+                                       "connection timeout=30");
+
+                mycon.Open();
+
+                DataSet ds = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter("SELECT [Key], Value FROM dbo.Settings WHERE ([Key] = 'SMSGlobalusername') OR ([Key] = 'SMSGlobalpassword'", mycon);
+                
+                da.Fill(ds);
+                respo.username = ds.Tables[0].Rows[0]["Value"].ToString();
+                respo.password = ds.Tables[0].Rows[1]["Value"].ToString();
+                
+                mycon.Close();
                 respo.dataRetrieved = true;
             }
             else
@@ -30,6 +48,16 @@ namespace Notifications.Plugins.SMS.Server
                 // POST data to the server using Use requ.username and requ.password 
                 try
                 {
+                    SqlConnection mycon = new SqlConnection("server=(local);" +
+                                       "Trusted_Connection=yes;" +
+                                       "database=PatientNotifications; " +
+                                       "connection timeout=30");
+
+                    mycon.Open();
+
+                    SqlCommand com = new SqlCommand("UPDATE dbo.Settings SET Value=N'" + requ.username + "', Value=N'" + requ.password + "' WHERE [Key] = 'SMSGlobalusername', [Key] = 'SMSGlobalpassword';", mycon);
+                    com.ExecuteNonQuery();
+                    mycon.Close();
 
                     respo.SaveSucessful = true;
                 }
@@ -52,6 +80,23 @@ namespace Notifications.Plugins.SMS.Server
             if (requ.getData == true)
             {
                 // GET the data respo.username = 'Username' | respo.password = 'Password'
+
+                SqlConnection mycon = new SqlConnection("server=(local);" +
+                                       "Trusted_Connection=yes;" +
+                                       "database=PatientNotifications; " +
+                                       "connection timeout=30");
+
+                mycon.Open();
+
+                DataSet ds = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter("SELECT [Key], Value FROM dbo.Settings WHERE ([Key] = 'Mailusername') OR ([Key] = 'Mailpassword'", mycon);
+
+                da.Fill(ds);
+                respo.username = ds.Tables[0].Rows[0]["Value"].ToString();
+                respo.password = ds.Tables[0].Rows[1]["Value"].ToString();
+
+                mycon.Close();
+
                 respo.dataRetrieved = true;
             }
             else
@@ -59,6 +104,17 @@ namespace Notifications.Plugins.SMS.Server
                 // POST data to the server using Use requ.username and requ.password 
                 try
                 {
+
+                    SqlConnection mycon = new SqlConnection("server=(local);" +
+                                       "Trusted_Connection=yes;" +
+                                       "database=PatientNotifications; " +
+                                       "connection timeout=30");
+
+                    mycon.Open();
+
+                    SqlCommand com = new SqlCommand("UPDATE dbo.Settings SET Value=N'" + requ.username + "', Value=N'" + requ.password + "' WHERE [Key] = 'Mailusername', [Key] = 'Mailpassword';", mycon);
+                    com.ExecuteNonQuery();
+                    mycon.Close();
 
                     respo.SaveSucessful = true;
                 }
@@ -84,6 +140,23 @@ namespace Notifications.Plugins.SMS.Server
             if (requ.getData == true)
             {
                 // GET the data respo.username = 'Username' | respo.password = 'Password'
+
+                SqlConnection mycon = new SqlConnection("server=(local);" +
+                                      "Trusted_Connection=yes;" +
+                                      "database=PatientNotifications; " +
+                                      "connection timeout=30");
+
+                mycon.Open();
+
+                DataSet ds = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter("SELECT [Key], Value FROM dbo.Settings WHERE ([Key] = 'Proxyusername') OR ([Key] = 'Proxypassword'", mycon);
+
+                da.Fill(ds);
+                respo.username = ds.Tables[0].Rows[0]["Value"].ToString();
+                respo.password = ds.Tables[0].Rows[1]["Value"].ToString();
+
+                mycon.Close();
+
                 respo.dataRetrieved = true;
             }
             else
@@ -91,7 +164,16 @@ namespace Notifications.Plugins.SMS.Server
                 // POST data to the server using Use requ.username and requ.password 
                 try
                 {
+                    SqlConnection mycon = new SqlConnection("server=(local);" +
+                                       "Trusted_Connection=yes;" +
+                                       "database=PatientNotifications; " +
+                                       "connection timeout=30");
 
+                mycon.Open();
+
+                SqlCommand com = new SqlCommand("UPDATE dbo.Settings SET Value=N'" + requ.username + "', Value=N'" + requ.password + "' WHERE [Key] = 'Proxyusername', [Key] = 'Proxypassword';", mycon);
+                com.ExecuteNonQuery();
+                mycon.Close();
                     respo.SaveSucessful = true;
                 }
                 catch (Exception ex)

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace Notifications.Plugins.SMS.Server
 {
@@ -20,10 +22,38 @@ namespace Notifications.Plugins.SMS.Server
             if (requ.retrieveSavedTemp == true)
             {
                 // Connect to database and GET the template and put into respo.retrieved_data
+                SqlConnection mycon = new SqlConnection("server=(local);" +
+                                       "Trusted_Connection=yes;" +
+                                       "database=PatientNotifications; " +
+                                       "connection timeout=30");
+
+                mycon.Open();
+
+                DataSet ds = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter("SELECT Username, SMStemplate FROM  dbo.Staff WHERE (Username = N'" + requ.username + "')", mycon);
+
+               
+
+                da.Fill(ds);
+                respo.retrieved_data = ds.Tables[0].Rows[0]["SMStemplate"].ToString();
+                mycon.Close();
+                
+
             }
             else
             { 
                 // Connect to database and replace the template with the requ.TempContent
+
+                SqlConnection mycon = new SqlConnection("server=(local);" +
+                                       "Trusted_Connection=yes;" +
+                                       "database=PatientNotifications; " +
+                                       "connection timeout=30");
+
+                mycon.Open();
+
+                SqlCommand com = new SqlCommand("UPDATE dbo.Staff SET SMStemplate=N'" + requ.TempContent+ "WHERE Username='" + requ.username + "';", mycon);
+                com.ExecuteNonQuery();
+                mycon.Close();
             }
 
             

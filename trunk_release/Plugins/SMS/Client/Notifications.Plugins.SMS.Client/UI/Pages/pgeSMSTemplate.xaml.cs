@@ -30,6 +30,7 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
 
             Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_rpTemplate(new Global.ComObjects.Requests.comdata_rqTemplate())), template);
 
+
             getPreviousTemplate();
 
         }

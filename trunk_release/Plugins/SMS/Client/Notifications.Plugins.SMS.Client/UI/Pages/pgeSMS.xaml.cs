@@ -42,7 +42,7 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
                 Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_emailSent(new Global.ComObjects.Requests.comdata_sendEmail())), email_serverResponse);
 
                 //Take the current loged in user, get their employee ID number, use it as their FROM: In the SMS FROM
-                txtFrom.Text = Convert.ToString("00001234");
+                txtFrom.Text = Convert.ToString("00001234"); //Interop.PropertiesManager.GetProperty("Client.Username");
 
                 // GET the user logged in. Get their 'ID'
 

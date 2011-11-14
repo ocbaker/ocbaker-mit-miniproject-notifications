@@ -6,7 +6,7 @@
       xmlns:local="http://schemas.AvalonControls/AvalonControlsLibrary/Controls"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       Title="pgeSMS"
-      d:DesignHeight="591"
+      d:DesignHeight="569"
       d:DesignWidth="452"
       mc:Ignorable="d">
     

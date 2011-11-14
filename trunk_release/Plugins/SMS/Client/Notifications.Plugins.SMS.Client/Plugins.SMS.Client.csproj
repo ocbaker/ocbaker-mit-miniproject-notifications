@@ -37,6 +37,7 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="RibbonControlsLibrary, Version=4.0.0.11019, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -53,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Functions\apiSendSMS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SetupHandlers.cs" />
     <Compile Include="UI\Pages\Administrator\admSMS.xaml.cs">
       <DependentUpon>admSMS.xaml</DependentUpon>
     </Compile>
@@ -65,15 +67,20 @@
     <Compile Include="UI\Pages\pgeSMSTemplate.xaml.cs">
       <DependentUpon>pgeSMSTemplate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\tabSMSTab.xaml.cs">
+      <DependentUpon>tabSMSTab.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Global.Core.Utils\Global.Core.Utils.csproj">
       <Project>{4F796810-F43D-41C3-9D83-AB83D93F1150}</Project>
       <Name>Global.Core.Utils</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\Notifications.Client.Interop\Notifications.Client.Interop.csproj">
       <Project>{66EA8CBF-718F-4CFB-8015-760CDC64C956}</Project>
       <Name>Notifications.Client.Interop</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\Notifications.Global.Base.Plugin.Client\Global.Base.Plugin.Client.csproj">
       <Project>{A63DC85B-1333-47AA-91B9-8D348BD2CB05}</Project>
@@ -93,10 +100,6 @@
       <Project>{96861E9B-D128-438A-85DA-9F51E7220AD8}</Project>
       <Name>Plugins.SMS.Global</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Server\Notifications.Plugins.SMS.Server\Plugins.SMS.Server.csproj">
-      <Project>{15A3421B-14B9-46BA-B1F4-FC43557EDF8E}</Project>
-      <Name>Plugins.SMS.Server</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="UI\Pages\Administrator\admSMS.xaml">
@@ -114,6 +117,10 @@
     <Page Include="UI\Pages\pgeSMSTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\tabSMSTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
