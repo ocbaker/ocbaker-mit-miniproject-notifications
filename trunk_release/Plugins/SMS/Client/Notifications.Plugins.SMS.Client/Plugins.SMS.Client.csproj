@@ -59,6 +59,9 @@
     <Compile Include="UI\Pages\pgeSMS.xaml.cs">
       <DependentUpon>pgeSMS.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Pages\pgeSMShistory.xaml.cs">
+      <DependentUpon>pgeSMShistory.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Pages\pgeSMSTemplate.xaml.cs">
       <DependentUpon>pgeSMSTemplate.xaml</DependentUpon>
     </Compile>
@@ -103,6 +106,10 @@
     <Page Include="UI\Pages\pgeSMS.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Pages\pgeSMShistory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Pages\pgeSMSTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -29,6 +29,7 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
             int _count = 0;
 
             public static apiSendSMS vSendSms = new apiSendSMS();
+
             //public static   // RequestObject
             //public static serverNotification n = new serverNotification();
 
@@ -43,45 +44,54 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
                 //Take the current loged in user, get their employee ID number, use it as their FROM: In the SMS FROM
                 txtFrom.Text = Convert.ToString("00001234");
 
+                // GET the user logged in. Get their 'ID'
 
-                //Get the SMSGLobal username & password from the database (only admin can set), and Login using SMSvalidateapi
-                //connectToDatabase();
-                /// Won't need to 'login to sms global', the server will be, only here until there is support.
-               // loginToSMSGlobal();
             }
             private object txt_serverResponse(Object response)
             {
+                Global.ComObjects.Response.comdata_textSent r = (Global.ComObjects.Response.comdata_textSent)response;
+
+                switch (r.successfullText)
+                {
+
+                    case true:
+                        lblmsgid.Content = "The text was sent sucessfully!";
+                        break;
+
+                    case false:
+                        lblmsgid.Content = "The text failed to send.";
+                        break;
+                }
+
                 return false;
-                //switch ((bool)response)
-                //{
-
-                //    case true:
-                //        lblmsgid.Content = "The message was sent sucessfully!";
-                //        break;
-
-                //    case false:
-                //        lblmsgid.Content = "The message failed to send.";
-                //        break;
-
-
-                //}
             }
+
             private object email_serverResponse(Object response)
             {
 
-                return 0;
+                Global.ComObjects.Response.comdata_emailSent r = (Global.ComObjects.Response.comdata_emailSent)response;
+
+                switch (r.successfullEmail)
+                {
+
+                    case true:
+                        lblmsgid.Content += Environment.NewLine + "The Email was sent sucessfully!";
+                        break;
+
+                    case false:
+                        lblmsgid.Content += Environment.NewLine + "The Email failed to send.";
+                        break;
+                }
+                
+                return false;
             }
 
             private void txtFrom_LostFocus(object sender, RoutedEventArgs e)
             {
                 /// Will hopefully relate to the logged in user. Dr Smurf. EmployeeID = 00001
-                //try
-                //{
-                //    vSendSms.sms_from = txtFrom.Text;
-                //    txtFrom.SetStatus("OK", TextBoxStatuses.OK);
-                //} catch (ArgumentException ex) {
-                //   txtFrom.SetStatus("Errored", TextBoxStatuses.ERRORED);
-                //}
+                
+
+
             }
 
             private void txtTo_LostFocus(object sender, RoutedEventArgs e)
@@ -116,6 +126,7 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
                 //If (dtp.DateTimeSelected) / Write to some DB and set timer.
 
                 vSendSms.sms_from = txtFrom.Text;
+                lblmsgid.Content = "";
                 try
                 {
                     if (cbSMS.IsEnabled)
@@ -123,6 +134,7 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
                         try
                         {
                             //n.soapSMS(vSendSms); // <-INSTEAD OF Creating a request object, inherits aBaseRequest, using the vSendSMS, then using NetworkComs 'sendMessage' to send to the server.
+                            
                             Global.ComObjects.Requests.comdata_sendSMS rSMS = new Global.ComObjects.Requests.comdata_sendSMS();
                             rSMS.sms_from = vSendSms.sms_from;
                             rSMS.sms_to = vSendSms.sms_to;
@@ -130,86 +142,26 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
                             rSMS.msg_type = vSendSms.msg_type;
                             rSMS.schedule = vSendSms.schedule;
                             rSMS.unicode = vSendSms.unicode;
+                            rSMS.email = vSendSms.email;
                             Notifications.Client.Interop.NetworkComms.sendMessage(rSMS);
                         }
                         catch (Exception exxx)
                         {
-                            /// Could have error logging.? /// Won't be handled here now? Will have to try { } (Exception e) { http.send } on the server.
-                           // n.HttpSMS(vSendSms, vlogin);
-                        }
-
-
-
-                        if (vSendSms._responce == "")
-                        {
-                            //Timer t = new Timer();
-
-                            lblmsgid.Visibility = System.Windows.Visibility.Visible;
-                            lblmsgid.Content = "Message send failed.";
-                            //t.SetSingleShot(new TimeSpan(3000));
-                            // t.Enabled = true;
-                            // lblmsgid.Visibility = System.Windows.Visibility.Collapsed;
-                        }
-                        else
-                        {
-                            lblmsgid.Visibility = System.Windows.Visibility.Visible;
-                            lblmsgid.Content = "Message sent! Message ID number: " + vSendSms._responce;
+                            lblmsgid.Content = "Cannot connect to the server. Please try again after reconnection to the server";
                         }
                     }
+
                     if (cbEmail.IsEnabled)
                     {
                         Global.ComObjects.Requests.comdata_sendEmail rEmail = new Global.ComObjects.Requests.comdata_sendEmail();
 
-                        rEmail.email_to = "";
+                        rEmail.email_to = vSendSms.email;
                         rEmail.msg_content = vSendSms.msg_content;
 
-                        Notifications.Client.Interop.NetworkComms.sendMessage(rEmail);
-                       
-                        // n.sendEmail(vSendSms);
-
+                        Notifications.Client.Interop.NetworkComms.sendMessage(rEmail); //Send the email data to the server so that it can send the email                  
                     }
                 }
                 catch (Exception ex) { }
-
-            }
-
-            //private void loginToSMSGlobal()
-            //{
-            //    //Remove when i can connect to the database.
-            //    //vlogin.APIpassword = "81953801";
-            //   // vlogin.APIusername = "lolhi";
-
-            //    try
-            //    {
-            //        n.requestLogin(vlogin, vSendSms);
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        // n.HttpSMS(vSendSms, vlogin);
-            //    }
-
-            //    if (vSendSms.ticket == null)
-            //    {
-            //        btnSend.IsEnabled = false;
-            //    }
-            //    else { btnSend.IsEnabled = true; }
-            //}
-
-            private void connectToDatabase()
-            {
-
-            }
-
-            //private string SaveState()
-            //{
-            //   string[] states;
-
-
-
-            //    return states;
-            //}
-            private void pgeSMS_LostFocus(object sender, RoutedEventArgs e)
-            {
 
             }
 

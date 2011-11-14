@@ -27,6 +27,26 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
         {
             InitializeComponent();
             lblSMScount.Content = _count + "/160";
+
+            Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_rpTemplate(new Global.ComObjects.Requests.comdata_rqTemplate())), template);
+
+            getPreviousTemplate();
+
+        }
+        private object template(Object request)
+        {
+
+            Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_rpTemplate t = (Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_rpTemplate)request;
+            textBox1.Text = t.retrieved_data;
+
+            return false;  
+        }
+        private void getPreviousTemplate()
+        {
+            Global.ComObjects.Requests.comdata_rqTemplate rTemp = new Global.ComObjects.Requests.comdata_rqTemplate();
+            rTemp.TempContent = null;
+            rTemp.retrieveSavedTemp = true;
+            Notifications.Client.Interop.NetworkComms.sendMessage(rTemp);
         }
 
         private void textBox1_TextChanged(object sender, TextChangedEventArgs e)
@@ -63,6 +83,13 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
         private void btnTemplateSave_Click(object sender, RoutedEventArgs e)
         {
             //Save to a User profile.
+            Global.ComObjects.Requests.comdata_rqTemplate rTemp = new Global.ComObjects.Requests.comdata_rqTemplate();
+            rTemp.TempContent = textBox1.Text;
+            rTemp.retrieveSavedTemp = false;
+             Notifications.Client.Interop.NetworkComms.sendMessage(rTemp);
+            
+
+                        
         }
     }
 }

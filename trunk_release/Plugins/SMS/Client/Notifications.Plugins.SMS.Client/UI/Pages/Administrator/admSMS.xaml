@@ -17,8 +17,9 @@
                 <Label Content="Username:" Height="28" HorizontalAlignment="Left" Margin="3,6,0,0" Name="label2" VerticalAlignment="Top" Grid.Column="1" />
                 <Label Content="Password:" Height="28" HorizontalAlignment="Left" Margin="3,40,0,0" Name="label3" VerticalAlignment="Top" Grid.Column="1" />
                 <TextBox Height="23" HorizontalAlignment="Left" Margin="78,11,0,0" Name="txtSMSUsername" VerticalAlignment="Top" Width="131" LostFocus="txtUsername_LostFocus" Grid.Column="1" />
-                <Button Content="Save" Height="23" HorizontalAlignment="Left" Margin="233,41,0,0" Name="btnLoginSave" VerticalAlignment="Top" Width="60" Click="btnLoginSave_Click" Grid.Column="1" />
+                <Button Content="Save" Height="23" HorizontalAlignment="Left" Margin="233,41,0,0" Name="btnSMSGlobalSave" VerticalAlignment="Top" Width="60" Click="btnLoginSave_Click" Grid.Column="1" />
                 <PasswordBox Height="23" HorizontalAlignment="Left" Margin="78,41,0,0" Name="psbSMSpassword" VerticalAlignment="Top" Width="131" Grid.Column="1" />
+                <Label Grid.Column="1" Height="28" HorizontalAlignment="Left" Margin="233,11,0,0" Name="lblSMSSave" VerticalAlignment="Top" Width="60" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FF00CD00" />
             </Grid>
         </GroupBox>
         <GroupBox Header="Proxy Login Information" Height="110" HorizontalAlignment="Left" Margin="31,189,0,0" Name="gbProxyLogin" VerticalAlignment="Top" Width="330">
@@ -28,6 +29,7 @@
                 <TextBox Height="23" HorizontalAlignment="Left" Margin="85,15,0,0" Name="txtProxyUsername" VerticalAlignment="Top" Width="131" LostFocus="txtProxyUsername_LostFocus" />
                 <Button Content="Save" Height="23" HorizontalAlignment="Left" Margin="240,45,0,0" Name="btnProxySave" VerticalAlignment="Top" Width="60" Click="btnProxySave_Click" />
                 <PasswordBox Height="23" HorizontalAlignment="Left" Margin="85,49,0,0" Name="pswProxyPassword" VerticalAlignment="Top" Width="131" LostFocus="pswProxyPassword_LostFocus" />
+                <Label Height="28" HorizontalAlignment="Left" Margin="240,15,0,0" Name="lblProxySave" VerticalAlignment="Top" Width="60" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FF00CD00" />
             </Grid>
         </GroupBox>
         <GroupBox Header="Gmail User Login" Height="100" HorizontalAlignment="Left" Margin="31,305,0,0" Name="gbGmailInfo" VerticalAlignment="Top" Width="330">
@@ -37,6 +39,7 @@
                 <TextBox Height="23" HorizontalAlignment="Left" Margin="85,15,0,0" Name="txtGmailUserlogin" VerticalAlignment="Top" Width="131" LostFocus="tbGmailUserlogin_LostFocus" />
                 <Button Content="Save" Height="23" HorizontalAlignment="Left" Margin="240,45,0,0" Name="btnGmailSave" VerticalAlignment="Top" Width="60" Click="button1_Click" />
                 <PasswordBox Height="23" HorizontalAlignment="Left" Margin="85,49,0,0" Name="psbGmailPassword" VerticalAlignment="Top" Width="131" LostFocus="psbGmailPassword_LostFocus" />
+                <Label Height="28" HorizontalAlignment="Left" Margin="240,15,0,0" Name="lblMailSave" VerticalAlignment="Top" Width="60" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FF00CD00" />
             </Grid>
         </GroupBox>
         <Label Background="#3F0097FF" Content="Messaging Admin" FontSize="22" Height="61" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Name="label1" VerticalAlignment="Top" VerticalContentAlignment="Center" />

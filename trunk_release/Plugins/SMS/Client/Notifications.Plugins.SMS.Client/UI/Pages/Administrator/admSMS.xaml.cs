@@ -27,7 +27,97 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
         public admSMS()
         {
             InitializeComponent();
+
+            Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_rpProxy(new Global.ComObjects.Requests.comdata_rqProxy())), Proxy);
+            Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_rpEmail(new Global.ComObjects.Requests.comdata_rqEmail())), yougotMail);
+            Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_rpSMSGlobal(new Global.ComObjects.Requests.comdata_rqSMSGlobal())), SMS);
+
+            loadPreviousData();
         }
+        private void loadPreviousData() {
+
+            Global.ComObjects.Requests.comdata_rqSMSGlobal rSMS = new Global.ComObjects.Requests.comdata_rqSMSGlobal();
+            rSMS.getData = true;
+            Notifications.Client.Interop.NetworkComms.sendMessage(rSMS);
+
+            Global.ComObjects.Requests.comdata_rqProxy rProxy = new Global.ComObjects.Requests.comdata_rqProxy();
+            rProxy.getData = true;
+            Notifications.Client.Interop.NetworkComms.sendMessage(rProxy);
+
+            Global.ComObjects.Requests.comdata_rqEmail rMail = new Global.ComObjects.Requests.comdata_rqEmail();
+            rMail.getData = true;
+            Notifications.Client.Interop.NetworkComms.sendMessage(rMail);
+        }
+        private object Proxy(Object response) {
+
+            Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_rpProxy t = (Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_rpProxy)response;
+
+            if (t.dataRetrieved == true)
+            {
+               
+                txtProxyUsername.Text = t.username;
+                pswProxyPassword.Password = t.password;
+            }
+            else
+            {
+                if (t.SaveSucessful == true)
+                {
+                    lblProxySave.Content = "Saved!";
+                }
+                else
+                {
+                    lblProxySave.Content = "Save failed";
+                }
+            }
+            return false;
+        }
+        private object SMS(Object response)
+        {
+
+            Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_rpSMSGlobal t = (Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_rpSMSGlobal)response;
+
+            if (t.dataRetrieved == true)
+            {
+
+                txtSMSUsername.Text = t.username;
+                psbSMSpassword.Password = t.password;
+            }
+            else
+            {
+                if (t.SaveSucessful == true)
+                {
+                    lblSMSSave.Content = "Saved!";
+                }
+                else
+                {
+                    lblSMSSave.Content = "Save failed";
+                }
+            }
+            return false;
+        }
+        private object yougotMail(Object response)
+        {
+            Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_rpEmail t = (Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_rpEmail)response;
+
+            if (t.dataRetrieved == true)
+            {
+                txtGmailUserlogin.Text = t.username;
+                psbGmailPassword.Password = t.password;
+            }
+            else
+            {
+                if (t.SaveSucessful == true)
+                {
+                    lblMailSave.Content = "Saved!";
+                }
+                else
+                {
+                    lblMailSave.Content = "Save failed";
+                }
+            }
+            return false;
+        }
+
         //public static string Encrypt(string toEncrypt, bool useHashing)
         //{
         //    byte[] keyArray;
@@ -123,96 +213,60 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
         private void btnLoginSave_Click(object sender, RoutedEventArgs e)
         {
             //Send the username/password to the Settings Project.
+
+            Global.ComObjects.Requests.comdata_rqSMSGlobal rSMS = new Global.ComObjects.Requests.comdata_rqSMSGlobal();
+            rSMS.username = txtSMSUsername.Text;
+            rSMS.password = psbSMSpassword.Password;
+            rSMS.getData = false;
+            Notifications.Client.Interop.NetworkComms.sendMessage(rSMS);
+
         }
         private void btnProxySave_Click(object sender, RoutedEventArgs e)
         {
             //Send the username/password to the Settings Project.
+            Global.ComObjects.Requests.comdata_rqProxy rProxy = new Global.ComObjects.Requests.comdata_rqProxy();
+            rProxy.username = txtProxyUsername.Text;
+            rProxy.password = pswProxyPassword.Password;
+            rProxy.getData = false;
+            Notifications.Client.Interop.NetworkComms.sendMessage(rProxy);
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             //Send the username/password to the Settings Project.
+            Global.ComObjects.Requests.comdata_rqEmail rMail = new Global.ComObjects.Requests.comdata_rqEmail();
+            rMail.username = txtGmailUserlogin.Text;
+            rMail.password = psbGmailPassword.Password;
+            rMail.getData = false;
+            Notifications.Client.Interop.NetworkComms.sendMessage(rMail);
         }
         public void txtUsername_LostFocus(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                //Login.APIusername = txtSMSUsername.Text;
-
-               // string a = Encrypt(txtSMSUsername.Text, true);
-               // MessageBox.Show("Encrypted text: " + a);
-               // MessageBox.Show("Decrpted text: " + Decrypt(a, true));
-                //psbSMSpassword.SetStatus("OK", TextBoxStatuses.OK);
-            }
-            catch (ArgumentException ex)
-            {
-                // txtUsername.SetStatus("Error", TextBoxStatuses.ERRORED);
-            }
+           
         }
         public void txtPassword_LostFocus(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                //Login.APIpassword = psbSMSpassword.Password;
-                //txtPassword.SetStatus("OK", TextBoxStatuses.OK);
-            }
-            catch (ArgumentException ex)
-            {
-                // txtPassword.SetStatus("Error", TextBoxStatuses.ERRORED);
-            }
 
         }
 
         private void psbGmailPassword_LostFocus(object sender, RoutedEventArgs e)
         {
-            try
-            {
-               // Login.APIpassword = psbGmailPassword.Password;
-
-            }
-            catch (ArgumentException ex)
-            {
-
-            }
+          
         }
 
         private void tbGmailUserlogin_LostFocus(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                //Login.APIpassword = txtGmailUserlogin.Text;
-                //txtPassword.SetStatus("OK", TextBoxStatuses.OK);
-            }
-            catch (ArgumentException ex)
-            {
-                // txtPassword.SetStatus("Error", TextBoxStatuses.ERRORED);
-            }
+        
         }
 
         private void pswProxyPassword_LostFocus(object sender, RoutedEventArgs e)
         {
-            try
-            {
-               // Login.APIpassword = pswProxyPassword.Password;
-
-            }
-            catch (ArgumentException ex)
-            {
-
-            }
+           
         }
 
         private void txtProxyUsername_LostFocus(object sender, RoutedEventArgs e)
         {
-            try
-            {
-               // Login.APIpassword = txtProxyUsername.Text;
-                //txtPassword.SetStatus("OK", TextBoxStatuses.OK);
-            }
-            catch (ArgumentException ex)
-            {
-                // txtPassword.SetStatus("Error", TextBoxStatuses.ERRORED);
-            }
+          
         }
 
 

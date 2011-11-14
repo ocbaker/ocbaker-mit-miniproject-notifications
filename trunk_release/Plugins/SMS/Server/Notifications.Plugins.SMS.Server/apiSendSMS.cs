@@ -17,6 +17,7 @@ namespace Notifications.Plugins.SMS.Server
         private string _unicode = "0";
         private string _schedule;
         public string _responce;
+        private string _email;
        
         public apiSendSMS(string t, string from, string to, string content, string sch)
         {
@@ -140,6 +141,25 @@ namespace Notifications.Plugins.SMS.Server
             }
         }
    ///When the text should be sent (if not included the text sends immediatly).
-
+        public string email
+        {
+            get { return _email; }
+            set { 
+                
+              Regex r = new Regex(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" +
+         @"\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\" + 
+         @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
+                if (r.IsMatch(value)) 
+                {
+                    _email = value;
+                } else { 
+                    throw new ArgumentException("You need to input a valid email address"); 
+                }
+  
+                
+                 
+            
+            }
+        }
     }
 }

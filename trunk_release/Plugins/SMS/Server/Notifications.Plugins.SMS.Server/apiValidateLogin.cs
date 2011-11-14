@@ -9,6 +9,7 @@ namespace Notifications.Plugins.SMS.Server
     {
         private string username;
         private string password;
+        private DateTime _lastcheck;
 
         public apiValidateLogin(string _username, string _password)
         {
@@ -27,6 +28,11 @@ namespace Notifications.Plugins.SMS.Server
         {
             get { return password; }
             set { password = value; }
+        }
+        public DateTime LastCheck
+        {
+            get { return _lastcheck; }
+            set { _lastcheck = value; }
         }
     }
 }

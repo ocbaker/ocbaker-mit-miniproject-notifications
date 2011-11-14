@@ -17,5 +17,6 @@ namespace Notifications.Plugins.SMS.Global.ComObjects.Requests
         public string schedule;
         public string msg_type;
         public string response;
+        public string email;
     }
 }
