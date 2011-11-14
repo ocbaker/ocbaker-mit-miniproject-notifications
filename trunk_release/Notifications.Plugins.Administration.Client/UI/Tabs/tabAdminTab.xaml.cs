@@ -25,8 +25,8 @@ namespace Notifications.Plugins.Administration.Client.UI.Tabs
         {
             Console.WriteLine("lol");
             InitializeComponent();
-            Interop.EventManager.handleEvent("Client.LoggedIn",LoggedIn);
-            Interop.EventManager.handleEvent("Client.LoggedOut", LoggedOut);
+            //Interop.EventManager.handleEvent("Client.LoggedIn",LoggedIn);
+            //Interop.EventManager.handleEvent("Client.LoggedOut", LoggedOut);
             Interop.EventManager.handleEvent("Plugin.Administration.Tab.AddGroup", addGroup);
             Console.WriteLine("Administration Tab Initialized");
         }
@@ -39,11 +39,11 @@ namespace Notifications.Plugins.Administration.Client.UI.Tabs
         private void LoggedIn()
         {
             Console.WriteLine("Administration LoggedIn Function Running");
-            Interop.EventManager.raiseEvents("Client.Window.AddTab", (Object)this);
+            //Interop.EventManager.raiseEvents("Client.Window.AddTab", (Object)this);
         }
         private void LoggedOut()
         {
-            Interop.EventManager.raiseEvents("Client.Window.RemoveTab", (Object)this);
+            //Interop.EventManager.raiseEvents("Client.Window.RemoveTab", (Object)this);
         }
     }
 }

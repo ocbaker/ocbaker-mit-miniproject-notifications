@@ -49,9 +49,14 @@ namespace Notifications.Client.Executable
             // Insert code required on object creation below this point.
             Ribbon.IsEnabled = false;
             Ribbon.IsMinimized = true;
+            Ribbon.IsHitTestVisible = false;
             Notifications.Client.Core.Manager.PluginManager.start();
             Interop.EventManager.raiseEvents("Client.Window.ChangePage", new Core.Core.UI.Pages.pgeLogin());
             //frame1.Content = new Core.Core.UI.Pages.pgeLogin();
+            foreach (System.Reflection.AssemblyName assem in System.Reflection.Assembly.GetExecutingAssembly().GetReferencedAssemblies())
+            {
+                Console.WriteLine(assem.FullName);
+            }
         }
 
         private void Button2_Click(object sender, RoutedEventArgs e)
@@ -93,12 +98,13 @@ namespace Notifications.Client.Executable
             Ribbon.Items.Remove(tab);
         }
 
-        [Interop.EventMethod("Client.LoggedIn")]
+        //[Interop.EventMethod("Client.LoggedIn",glbh_UserLoggedIn)]
         public void glbh_UserLoggedIn()
         {
             Group1.Header = "Logged In: " + Interop.PropertiesManager.GetProperty("Client.Username");
             Ribbon.IsEnabled = true;
             Ribbon.IsMinimized = false;
+            Ribbon.IsHitTestVisible = true;
             Ribbon.SelectedIndex = 0;
         }
     }

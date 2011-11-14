@@ -76,6 +76,7 @@
     <ProjectReference Include="..\Notifications.Plugins.Administration.Global\Plugins.Administration.Global.csproj">
       <Project>{D0ABE4E8-98E7-4A9E-BD00-A32A6E4926DB}</Project>
       <Name>Plugins.Administration.Global</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -12,7 +12,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <ribbon:Ribbon x:Name="Ribbon" IsCollapsed="False" IsMinimized="False">
+        <ribbon:Ribbon x:Name="Ribbon" IsCollapsed="False" IsMinimized="False" IsManipulationEnabled="False">
             <ribbon:Ribbon.ApplicationMenu>
                 <ribbon:RibbonApplicationMenu SmallImageSource="Images\SmallIcon.png">
                     <ribbon:RibbonApplicationMenuItem Header="Hello _Ribbon"
