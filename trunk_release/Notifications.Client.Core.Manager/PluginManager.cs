@@ -11,6 +11,8 @@ namespace Notifications.Client.Core.Manager
     {
         public static void start()
         {
+            if (!System.IO.Directory.Exists(Environment.CurrentDirectory + @"\Plugins\"))
+                System.IO.Directory.CreateDirectory(Environment.CurrentDirectory + @"\Plugins\");
             var plugins = System.IO.Directory.EnumerateFiles(Environment.CurrentDirectory + @"\Plugins\", "*.dll", System.IO.SearchOption.TopDirectoryOnly);
             foreach (string item in plugins)
             {
@@ -54,21 +56,23 @@ namespace Notifications.Client.Core.Manager
             }
 
             //Attach ALL EventHandlers
+            //Console.WriteLine("Attaching Static Events");
             //foreach (Assembly assem in AppDomain.CurrentDomain.GetAssemblies())
             //{
+            //    Console.WriteLine("");
             //    foreach (var t in assem.GetTypes())
             //    {
             //        foreach (MethodInfo method in t.GetMethods())
             //        {
-                        
+
             //            if (Attribute.IsDefined(method, typeof(Interop.EventMethod)))
             //            {
             //                Interop.EventMethod EventMethodAttrib = (Interop.EventMethod)Attribute.GetCustomAttribute(method, typeof(Interop.EventMethod));
-            //                Interop.EventManager.handleEvent(EventMethodAttrib.EventName, Delegate.CreateDelegate(method.GetType(),method));
+            //                Interop.EventManager.handleEvent(EventMethodAttrib.EventName, Delegate.CreateDelegate(method.GetType(), method));
             //            }
 
             //        }
-            //    }  
+            //    }
             //}
             
         }
