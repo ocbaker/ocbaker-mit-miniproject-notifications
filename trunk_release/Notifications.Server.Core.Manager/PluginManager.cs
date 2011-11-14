@@ -30,19 +30,19 @@ namespace Notifications.Server.Core.Manager
                             {
                                 Console.WriteLine("   - Plugin Namespace: " + instance.GetType().FullName);
                                 instance.setupHandlers();
-                                Console.WriteLine("        - SUCCEEDED");
+                                Console.WriteLine("    - SUCCEEDED");
                             }
                             else
                             {
-                                
-                                Console.WriteLine("        - FAILED");
-                                Console.WriteLine("        - Reason: Not allowed to use the base namespace Notifications.");
+
+                                Console.WriteLine("    - FAILED");
+                                Console.WriteLine("    - Reason: Not allowed to use the base namespace Notifications.");
                             }
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine("        - FAILED");
-                            Console.WriteLine("        - Reason: Plugin Threw an unhandled exception.");
+                            Console.WriteLine("    - FAILED");
+                            Console.WriteLine("    - Reason: Plugin Threw an unhandled exception.");
                         }
                     }   
                 }
@@ -53,12 +53,12 @@ namespace Notifications.Server.Core.Manager
 
                 
             }
-            Nito.Async.ActionDispatcher.Current.QueueAction(new Action(action));
+            //Nito.Async.ActionDispatcher.Current.QueueAction(new Action(action));
         }
 
         private static void action()
         {
-            Console.WriteLine("Action Done");
+            //Console.WriteLine("Action Done");
         }
     }
 }

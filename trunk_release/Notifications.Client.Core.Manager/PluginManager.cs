@@ -29,7 +29,7 @@ namespace Notifications.Client.Core.Manager
                             {
                                 Console.WriteLine("   - Plugin Namespace: " + instance.GetType().FullName);
                                 instance.setup();
-                                Console.WriteLine("        - SUCCEEDED");
+                                Console.WriteLine("    - SUCCEEDED");
                             }
                             else
                             {

@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5628573F-0733-4DD6-B02B-29D2CFD82CB1}</ProjectGuid>
+    <ProjectGuid>{95C6896D-71F9-4664-81F0-27D5BBC9AAC5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Notifications.Plugins.Administration.Client</RootNamespace>
-    <AssemblyName>Notifications.Plugins.Administration.Client</AssemblyName>
+    <RootNamespace>Notifications.Plugins.Administration.Server</RootNamespace>
+    <AssemblyName>Notifications.Plugins.Administration.Server</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -42,6 +42,32 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\External_Libraries\Nitro\Nito.Async\Nito.Async.csproj">
+      <Project>{708763ED-7801-4F2C-B103-4FEBD771769A}</Project>
+      <Name>Nito.Async</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Global.Core.Utils\Global.Core.Utils.csproj">
+      <Project>{4F796810-F43D-41C3-9D83-AB83D93F1150}</Project>
+      <Name>Global.Core.Utils</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Notifications.Global.Base.Plugin.Server\Global.Base.Plugin.Server.csproj">
+      <Project>{9ACA2A3E-2C76-471C-BDD2-1D48847329DB}</Project>
+      <Name>Global.Base.Plugin.Server</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Notifications.Plugins.Administration.Global\Plugins.Administration.Global.csproj">
+      <Project>{D0ABE4E8-98E7-4A9E-BD00-A32A6E4926DB}</Project>
+      <Name>Plugins.Administration.Global</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Notifications.Server.Interop\Server.Interop.csproj">
+      <Project>{BAF14E0B-6361-4A51-B553-ABBA031E210F}</Project>
+      <Name>Server.Interop</Name>
+      <Private>False</Private>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
