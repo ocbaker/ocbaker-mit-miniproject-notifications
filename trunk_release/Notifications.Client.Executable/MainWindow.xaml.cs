@@ -53,10 +53,10 @@ namespace Notifications.Client.Executable
             Notifications.Client.Core.Manager.PluginManager.start();
             Interop.EventManager.raiseEvents("Client.Window.ChangePage", new Core.Core.UI.Pages.pgeLogin());
             //frame1.Content = new Core.Core.UI.Pages.pgeLogin();
-            foreach (System.Reflection.AssemblyName assem in System.Reflection.Assembly.GetExecutingAssembly().GetReferencedAssemblies())
-            {
-                Console.WriteLine(assem.FullName);
-            }
+            //foreach (System.Reflection.AssemblyName assem in System.Reflection.Assembly.GetExecutingAssembly().GetReferencedAssemblies())
+            //{
+            //    Console.WriteLine(assem.FullName);
+            //}
         }
 
         private void Button2_Click(object sender, RoutedEventArgs e)
@@ -101,7 +101,8 @@ namespace Notifications.Client.Executable
         //[Interop.EventMethod("Client.LoggedIn",glbh_UserLoggedIn)]
         public void glbh_UserLoggedIn()
         {
-            Group1.Header = "Logged In: " + Interop.PropertiesManager.GetProperty("Client.Username");
+            //Console.WriteLine("GetProperty: " + Interop.PropertiesManager.GetProperty(Console.ReadLine()));
+            Group1.Header = "Logged In: " + Interop.PropertiesManager.GetProperty("User.Username");
             Ribbon.IsEnabled = true;
             Ribbon.IsMinimized = false;
             Ribbon.IsHitTestVisible = true;

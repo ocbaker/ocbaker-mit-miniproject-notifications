@@ -13,7 +13,7 @@ namespace Notifications.Client.Interop
         public static object GetProperty(string key)
         {
             key = key.ToLower();
-            if (_properties.ContainsKey(key))
+            if (!_properties.ContainsKey(key))
                 return null;
             else
                 try { return _properties[key]; }

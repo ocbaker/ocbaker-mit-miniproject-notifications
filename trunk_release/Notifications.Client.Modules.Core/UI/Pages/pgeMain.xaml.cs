@@ -20,12 +20,27 @@ namespace Notifications.Client.Core.Core.UI.Pages
     /// </summary>
     public partial class pgeMain : Page
     {
+        public static pgeMain copyOfMe;
         public pgeMain()
         {
+            copyOfMe = this;
             InitializeComponent();
-            
         }
 
 
+
+        [Interop.StaticEventMethod("Client.LoggedIn")]
+        public static void UserLoggedIn()
+        {
+            copyOfMe = new pgeMain();
+            Interop.EventManager.raiseEvents("Client.Window.changePage", (Object)copyOfMe);
+        }
+
+        [Interop.StaticEventMethod("Client.Pages.showMainPage")]
+        public static void ShowMainPage()
+        {
+            copyOfMe = new pgeMain();
+            Interop.EventManager.raiseEvents("Client.Window.changePage", (Object)copyOfMe);
+        }
     }
 }
