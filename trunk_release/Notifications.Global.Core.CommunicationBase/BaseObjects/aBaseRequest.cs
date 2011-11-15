@@ -10,6 +10,7 @@ namespace Notifications.Global.Core.Communication.Base.BaseObjects
     {
 
         private Guid _messageID;
+        public object _userInformation;
 
         public aBaseRequest()
         {

@@ -57,6 +57,7 @@ namespace Notifications.Client.Executable
             //{
             //    Console.WriteLine(assem.FullName);
             //}
+            Interop.EventManager.raiseEvents("Client.Window.Initialized");
         }
 
         private void Button2_Click(object sender, RoutedEventArgs e)
@@ -80,22 +81,36 @@ namespace Notifications.Client.Executable
 
         public void addTab(Object key, Object value)
         {
-
+            throw new NotImplementedException();
         }
 
         public void addPage(Object key, Object value)
         {
-
+            throw new NotImplementedException();
         }
 
         public void glbh_AddTab(Object tab)
         {
-            Ribbon.Items.Add(tab);
+            try
+            {
+                Ribbon.Items.Add(tab);
+            }
+            catch (InvalidOperationException)
+            {
+                Console.WriteLine("Tab is already added");
+            }
         }
 
         public void glbh_RemoveTab(Object tab)
         {
-            Ribbon.Items.Remove(tab);
+            try
+            {
+                Ribbon.Items.Remove(tab);
+            }
+            catch (InvalidOperationException)
+            {
+                Console.WriteLine("Tab does not exist on the Ribbon");
+            }
         }
 
         //[Interop.EventMethod("Client.LoggedIn",glbh_UserLoggedIn)]

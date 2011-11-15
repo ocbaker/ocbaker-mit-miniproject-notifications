@@ -13,9 +13,13 @@ namespace Notifications.Global.Core.Communication.Core.Responses
     /// </summary>
     public class comdata_rtLogin : Base.BaseObjects.aBaseResponse
     {
-        public comdata_rtLogin(Global.Core.Communication.Base.BaseObjects.aBaseRequest request) : base(request) { }
+        public comdata_rtLogin(Global.Core.Communication.Base.BaseObjects.aBaseRequest request, Data.UserInformation userInfo) : base(request)
+        {
+            userInformation = userInfo;
+        }
 
         public bool loginSuccessful;
         public string username;
+        public readonly Data.UserInformation userInformation;
     }
 }

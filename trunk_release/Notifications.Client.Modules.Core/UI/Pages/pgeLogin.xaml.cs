@@ -24,7 +24,7 @@ namespace Notifications.Client.Core.Core.UI.Pages
         public pgeLogin()
         {
             InitializeComponent();
-            Interop.NetworkComms.addDataHandler((new Responses.comdata_rtLogin(new Requests.comdata_rqLogin())), handleResponse);
+            Interop.NetworkComms.addDataHandler((new Responses.comdata_rtLogin(new Requests.comdata_rqLogin(),null)), handleResponse);
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -42,9 +42,9 @@ namespace Notifications.Client.Core.Core.UI.Pages
         private object handleResponse(object response)
         {
             Responses.comdata_rtLogin resp = (Responses.comdata_rtLogin)response;
-            if (resp.loginSuccessful)
+            if (resp.userInformation != null)
             {
-                Interop.PropertiesManager.SetProperty("User.username", resp.username);
+                Interop.PropertiesManager.SetProperty("User.username", resp.userInformation.username);
                 Interop.EventManager.raiseEvents("Client.LoggedIn");
             }
             else

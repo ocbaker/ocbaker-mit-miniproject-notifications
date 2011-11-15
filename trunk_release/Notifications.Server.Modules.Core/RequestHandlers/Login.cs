@@ -18,28 +18,39 @@ namespace Notifications.Server.Core.Core.RequestHandlers
         {
             
             Global.Core.Communication.Core.Requests.comdata_rqLogin reqo = (Global.Core.Communication.Core.Requests.comdata_rqLogin)request;
-            Global.Core.Communication.Core.Responses.comdata_rtLogin respo = new Global.Core.Communication.Core.Responses.comdata_rtLogin(reqo);
-            respo.loginSuccessful = false;
+            string FirstName="";
+            string LastName="";
+            int userLevel=-1;
             string password = "";
             bool canLogin = true;
             switch (reqo.username)
             {
                 case "bake266":
                     password = "lol";
+                    FirstName = "Oliver";
+                    LastName = "Baker";
+                    userLevel = 0;
                     break;
                 case "burf9":
                     password = "lol";
+                    FirstName = "Shane";
+                    LastName = "Burfield-Mills";
+                    userLevel = 1;
                     break;
                 default:
                     canLogin = false;
                     break;
             }
-            respo.username = reqo.username;
             if (canLogin && reqo.password == password)
             {
-                respo.loginSuccessful = true;
+                Global.Core.Communication.Core.Responses.comdata_rtLogin respo = new Global.Core.Communication.Core.Responses.comdata_rtLogin(reqo, new Global.Core.Communication.Core.Data.UserInformation(reqo.username.ToLower(), FirstName, LastName, userLevel));
+                Interop.EventManager.raiseEvents("Server.Network.LoggedIn", reqo.messageID, respo.userInformation);
+                return respo;
             }
-            return respo;
+            else
+            {
+                return new Global.Core.Communication.Core.Responses.comdata_rtLogin(reqo, null);
+            }
         }
     }
 }

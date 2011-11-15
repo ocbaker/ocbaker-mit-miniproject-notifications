@@ -33,8 +33,8 @@ namespace Notifications.Plugins.SMS.Client.UI
 
         private void addGroup(object group)
         {
-            //RibbonGroup rGroup = (RibbonGroup)group;
-            this.Items.Add(group);
+            RibbonGroup rGroup = (RibbonGroup)group;
+            this.Items.Add(rGroup);
         }
         private void LoggedIn()
         {

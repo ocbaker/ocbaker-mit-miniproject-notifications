@@ -9,6 +9,8 @@ namespace Notifications.Client.Interop
     {
 
         private static Dictionary<string, List<Delegate>> EventList = new Dictionary<string, List<Delegate>>();
+        private static Queue<QueuedEvent> ActionsQueuedPrePluginsLoaded = new Queue<QueuedEvent>();
+        private static bool queueEvents = true;
 
         public static void addEvent(string key)
         {
@@ -93,21 +95,83 @@ namespace Notifications.Client.Interop
         public static void removeHandle(string key, Action<object, object, object, object, object, object, object, object, object, object, object, object, object, object, object> value) { removeHandle(key, Delegate.Combine(value.GetInvocationList())); }
         public static void removeHandle(string key, Action<object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object> value) { removeHandle(key, Delegate.Combine(value.GetInvocationList())); }
 
+        private static void raiseEvents(QueuedEvent qEvent)
+        {
+            try
+            {
+                if (EventList[qEvent.key] != null)
+                {
+                    Console.WriteLine("Raised Event: " + qEvent.key);
+                    try
+                    {
+                        foreach (Delegate outDelegate in EventList[qEvent.key])
+                            outDelegate.DynamicInvoke(qEvent.parameters);
+                    }
+                    catch (Exception ex)
+                    {
+                        string a = "lol";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Failed To Raise Event (Event does not have a handler): " + qEvent.key);
+            }
+        }
+        
         public static void raiseEvents(string key, params object[] fields)
         {
-            Console.WriteLine("Raised Event: " + key);
-            key = key.ToLower();
-            if (EventList[key] != null)
+            if (queueEvents && key != "Client.Executable.LoadedPlugins")
             {
+                Console.WriteLine("Queued Event: " + key);
+                ActionsQueuedPrePluginsLoaded.Enqueue(new QueuedEvent(key.ToLower(), fields));
+            }
+            else
+            {
+                
+                key = key.ToLower();
                 try
                 {
-                    foreach (Delegate outDelegate in EventList[key])
-                        outDelegate.DynamicInvoke(fields);
+                    if (EventList[key] != null)
+                    {
+                        Console.WriteLine("Raised Event: " + key);
+                        try
+                        {
+                            foreach (Delegate outDelegate in EventList[key])
+                                outDelegate.DynamicInvoke(fields);
+                        }
+                        catch (Exception ex)
+                        {
+                            string a = "lol";
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
-                    string a = "lol";
+                    Console.WriteLine("Failed To Raise Event (Event does not have a handler): " + key);
                 }
+            }
+        }
+
+        [StaticEventMethod("Client.Executable.LoadedPlugins")]
+        public static void PluginsAreLoaded()
+        {
+            while (ActionsQueuedPrePluginsLoaded.Count > 0)
+            {
+                raiseEvents(ActionsQueuedPrePluginsLoaded.Dequeue());
+            }
+            queueEvents = false;
+        }
+
+        private class QueuedEvent
+        {
+            public readonly string key;
+            public readonly object[] parameters;
+
+            public QueuedEvent(string key, object[] parameters)
+            {
+                this.key = key;
+                this.parameters = parameters;
             }
         }
     }

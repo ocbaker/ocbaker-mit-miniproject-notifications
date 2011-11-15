@@ -10,11 +10,13 @@ namespace Notifications.Global.Core.Communication.Base.BaseObjects
     {
 
         private Guid _messageID;
+        public readonly object _userInformation;
         private Object _exception;
 
         public aBaseResponse(aBaseRequest request)
         {
             _messageID = request.messageID;
+            _userInformation = request._userInformation;
         }
         public aBaseResponse(aBaseRequest request, Object exception)
         {

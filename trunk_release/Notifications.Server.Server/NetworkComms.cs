@@ -15,7 +15,7 @@ using System.Text;
 using Nito.Async.Sockets;
 using Nito.Async;
 using Notifications.Global.Core.Utils;
-
+using Notifications.Global.Core.Communication.Base.BaseObjects;
 
 namespace Notifications.Server.Server
 {
@@ -28,7 +28,9 @@ namespace Notifications.Server.Server
         /// <summary>
         /// A mapping of sockets (with established connections) to their state.
         /// </summary>
-        private static Dictionary<SimpleServerChildTcpSocket, ChildSocketState> ChildSockets = new Dictionary<SimpleServerChildTcpSocket, ChildSocketState>();
+        private static Dictionary<SimpleServerChildTcpSocket, Interop.SocketInformation> ChildSockets = new Dictionary<SimpleServerChildTcpSocket, Interop.SocketInformation>();
+        private static Dictionary<Guid, SimpleServerChildTcpSocket> RecivedMessages = new Dictionary<System.Guid, SimpleServerChildTcpSocket>();
+        //private static Dictionary<SimpleServerChildTcpSocket,
 
         public NetworkComms(){
             SynchronizationManager.letMeHandleIt();
@@ -59,6 +61,7 @@ namespace Notifications.Server.Server
         private void ResetChildSocket(SimpleServerChildTcpSocket childSocket)
         {
             // Close the child socket if possible
+            Console.WriteLine("{" + ChildSockets[childSocket] + "} - Connection Closed");
             if (childSocket != null)
                 childSocket.Close();
 
@@ -86,7 +89,6 @@ namespace Notifications.Server.Server
         }
         private void ListeningSocket_ConnectionArrived(AsyncResultEventArgs<SimpleServerChildTcpSocket> e)
         {
-            Console.WriteLine("Connection Recived");
             // Check for errors
             if (e.Error != null)
             {
@@ -98,12 +100,13 @@ namespace Notifications.Server.Server
             try
             {
                 // Save the new child socket connection
-                ChildSockets.Add(socket, ChildSocketState.Connected);
-
+                Guid cliGuid = Guid.NewGuid();
+                ChildSockets.Add(socket, new Interop.SocketInformation(cliGuid));
+                Console.WriteLine("{" + cliGuid + "} - Connection Recived");
                 socket.PacketArrived += (args) => ChildSocket_PacketArrived(socket, args);
                 socket.WriteCompleted += (args) => ChildSocket_WriteCompleted(socket, args);
                 socket.ShutdownCompleted += (args) => ChildSocket_ShutdownCompleted(socket, args);
-                Console.WriteLine("Client Connected");
+                //Console.WriteLine("Client Connected");
             }
             catch (Exception ex)
             {
@@ -119,6 +122,13 @@ namespace Notifications.Server.Server
                 //nothing to go here
             }
         }
+
+        [Interop.StaticEventMethod("Server.Network.LoggedIn")]
+        public static void UserLoggedIn(Guid messageID, Global.Core.Communication.Core.Data.UserInformation userInformation)
+        {
+            ChildSockets[RecivedMessages[messageID]].information.Add(userInformation);
+        }
+
         private void ChildSocket_PacketArrived(SimpleServerChildTcpSocket socket, AsyncResultEventArgs<byte[]> e)
         {
             try
@@ -139,10 +149,36 @@ namespace Notifications.Server.Server
                 else
                 {
                     // At this point, we know we actually got a message.
-                    Console.WriteLine("Message Recieved");
+                    
                     // Deserialize the message
-                    object message = Util.Deserialize(e.Result);
-                    HandleInboundData(message);
+                    object message = null;
+                    try
+                    {
+                        message = Util.Deserialize(e.Result);
+                        if (message.GetType().BaseType == typeof(aBaseRequest))
+                        {
+                            try
+                            {
+                                ((aBaseRequest)message)._userInformation = ChildSockets[socket].information.OfType<Global.Core.Communication.Core.Data.UserInformation>().First();
+                            }
+                            catch (Exception)
+                            {
+                                ((aBaseRequest)message)._userInformation = null;
+                            }
+                            Console.WriteLine("{" + ChildSockets[socket] + "} {" + ((aBaseRequest)message).messageID + "} - Message Recived");
+                            RecivedMessages.Add(((aBaseRequest)message).messageID,socket);
+                            HandleInboundData(message);
+                        }
+                        else
+                        {
+                            Console.WriteLine("{" + ChildSockets[socket] + "} - Message Recived (BAD_FORMAT)");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                    
                     //Action<object> act = HandleInboundData;
                     //ThreadPool.QueueUserWorkItem
                     //Nito.Async.ActionDispatcher.Current.QueueAction(act(message));
@@ -194,7 +230,7 @@ namespace Notifications.Server.Server
                 // Close the socket and remove it from the list
                 ResetChildSocket(socket);
             }
-            Console.WriteLine("Client Disconnected");
+            Console.WriteLine("{" + ChildSockets[socket] + "} - Client Disconnected");
         }
         private void ChildSocket_WriteCompleted(SimpleServerChildTcpSocket socket, AsyncCompletedEventArgs e)
         {
@@ -220,13 +256,21 @@ namespace Notifications.Server.Server
             //    string description = (string)e.UserState;
             //    textBoxLog.AppendText("Socket write completed to " + socket.RemoteEndPoint.ToString() + " for message " + description + Environment.NewLine);
             //}
-            Console.WriteLine("Message Sent");
+            //Console.WriteLine("Message Sent");
             //RefreshDisplay();
+            if (e.Error != null)
+            {
+                Console.WriteLine("{" + ChildSockets[RecivedMessages[((aBaseResponse)e.UserState).responseID]] + "} {" + ((aBaseResponse)e.UserState).responseID + "} - Message Send FAILED");
+            }
+            else
+            {
+                Console.WriteLine("{" + ChildSockets[RecivedMessages[((aBaseResponse)e.UserState).responseID]] + "} {" + ((aBaseResponse)e.UserState).responseID + "} - Message Sent");
+            }
         }
 
         public static void writeMessage(object msg){
-
-            ChildSockets.First().Key.WriteAsync(Util.Serialize(msg));
+            RecivedMessages[((aBaseResponse)msg).responseID].WriteAsync(Util.Serialize(msg), msg);
+            //ChildSockets.First().Key.WriteAsync(Util.Serialize(msg));
         }
 
         
