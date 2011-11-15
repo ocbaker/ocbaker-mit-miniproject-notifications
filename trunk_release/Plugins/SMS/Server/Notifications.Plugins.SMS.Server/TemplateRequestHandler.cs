@@ -21,6 +21,7 @@ namespace Notifications.Plugins.SMS.Server
 
             if (requ.retrieveSavedTemp == true)
             {
+                try {
                 // Connect to database and GET the template and put into respo.retrieved_data
                 SqlConnection mycon = new SqlConnection("server=(local);" +
                                        "Trusted_Connection=yes;" +
@@ -35,8 +36,8 @@ namespace Notifications.Plugins.SMS.Server
                
 
                 da.Fill(ds);
-                try
-                {
+                
+                
                     respo.retrieved_data = ds.Tables[0].Rows[0]["SMStemplate"].ToString();
                     mycon.Close();
                 }

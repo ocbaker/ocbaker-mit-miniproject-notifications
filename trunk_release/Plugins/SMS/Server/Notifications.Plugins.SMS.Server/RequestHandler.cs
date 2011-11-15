@@ -17,9 +17,7 @@ namespace Notifications.Plugins.SMS.Server
 
         public void setupHandlers()
         {
-            Console.WriteLine("Setting up SMS Server Plugin....");
             Notifications.Server.Interop.NetworkComms.addDataHandler((new Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_sendSMS()), textSent);
-            
         }
 
 
@@ -88,23 +86,27 @@ namespace Notifications.Plugins.SMS.Server
             }
             else
             {
+                try
+                {
+                    SqlConnection mycon = new SqlConnection("server=(local);" +
+                                        "Trusted_Connection=yes;" +
+                                        "database=PatientNotifications; " +
+                                        "connection timeout=30");
 
-                SqlConnection mycon = new SqlConnection("server=(local);" +
-                                    "Trusted_Connection=yes;" +
-                                    "database=PatientNotifications; " +
-                                    "connection timeout=30");
+                    mycon.Open();
 
-                mycon.Open();
+                    DataSet ds = new DataSet();
+                    SqlDataAdapter da = new SqlDataAdapter("SELECT     Username, ID FROM         dbo.Staff WHERE     (Username = 'burf9');", mycon);
 
-                DataSet ds = new DataSet();
-                SqlDataAdapter da = new SqlDataAdapter("SELECT [Key], Value FROM dbo.Settings WHERE ([Key] = 'SMSGlobalusername') OR ([Key] = 'SMSGlobalpassword')", mycon);
+                    da.Fill(ds);
+                    respo.userid = ds.Tables[0].Rows[0]["Value"].ToString();
 
-                da.Fill(ds);
-                //cachedUsername = ds.Tables[0].Rows[0]["Value"].ToString();
-               // cachedPassword = ds.Tables[0].Rows[1]["Value"].ToString();
+                    mycon.Close();
+                }
+                catch (Exception ex)
+                {
 
-                mycon.Close();
-
+                }
             }
             return respo;
         }
