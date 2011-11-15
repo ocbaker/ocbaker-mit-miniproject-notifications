@@ -93,8 +93,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins.Administration.Glob
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins.Administration.Server", "Notifications.Plugins.Administration.Server\Plugins.Administration.Server.csproj", "{95C6896D-71F9-4664-81F0-27D5BBC9AAC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notifications.Global.Core.InteropBase", "Notifications.Global.Core.InteropBase\Notifications.Global.Core.InteropBase.csproj", "{BE779E3F-2EC5-4164-8101-F8ADD2D841FE}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -355,16 +353,6 @@ Global
 		{95C6896D-71F9-4664-81F0-27D5BBC9AAC5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{95C6896D-71F9-4664-81F0-27D5BBC9AAC5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{95C6896D-71F9-4664-81F0-27D5BBC9AAC5}.Release|x86.ActiveCfg = Release|Any CPU
-		{BE779E3F-2EC5-4164-8101-F8ADD2D841FE}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{BE779E3F-2EC5-4164-8101-F8ADD2D841FE}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{BE779E3F-2EC5-4164-8101-F8ADD2D841FE}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{BE779E3F-2EC5-4164-8101-F8ADD2D841FE}.Debug|x86.ActiveCfg = Debug|x86
-		{BE779E3F-2EC5-4164-8101-F8ADD2D841FE}.Debug|x86.Build.0 = Debug|x86
-		{BE779E3F-2EC5-4164-8101-F8ADD2D841FE}.Release|Any CPU.ActiveCfg = Release|x86
-		{BE779E3F-2EC5-4164-8101-F8ADD2D841FE}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{BE779E3F-2EC5-4164-8101-F8ADD2D841FE}.Release|Mixed Platforms.Build.0 = Release|x86
-		{BE779E3F-2EC5-4164-8101-F8ADD2D841FE}.Release|x86.ActiveCfg = Release|x86
-		{BE779E3F-2EC5-4164-8101-F8ADD2D841FE}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -387,7 +375,6 @@ Global
 		{05546654-B256-4B52-A29C-1983DD1D2845} = {4D8E2A78-D2F0-412C-8FAD-AD07135845D3}
 		{4EAE62DE-8210-406A-8AC6-D57F5AB4D46C} = {4D8E2A78-D2F0-412C-8FAD-AD07135845D3}
 		{4F796810-F43D-41C3-9D83-AB83D93F1150} = {4D8E2A78-D2F0-412C-8FAD-AD07135845D3}
-		{BE779E3F-2EC5-4164-8101-F8ADD2D841FE} = {4D8E2A78-D2F0-412C-8FAD-AD07135845D3}
 		{EB1D1A60-B6A8-447B-B36C-7EE7891A9E08} = {4EAE62DE-8210-406A-8AC6-D57F5AB4D46C}
 		{C55B156A-CC8B-4EB9-BE65-BF0D63C1E5E2} = {4EAE62DE-8210-406A-8AC6-D57F5AB4D46C}
 		{05CACEEE-2939-491A-AAFF-7BDF904AA95F} = {E86C21F6-C15B-4295-B522-D039809FA66D}
