@@ -57,10 +57,14 @@ namespace Notifications.Plugins.SMS.Server
                                        "connection timeout=30");
 
                     mycon.Open();
-
-                    SqlCommand com = new SqlCommand("UPDATE dbo.Settings SET Value=N'" + requ.username + "', Value=N'" + requ.password + "' WHERE [Key] = 'SMSGlobalusername', [Key] = 'SMSGlobalpassword';", mycon);
+                    SqlCommand com = new SqlCommand("UPDATE dbo.Settings SET Value='" + requ.username + "' WHERE [Key] = 'SMSGlobalusername';", mycon);
                     com.ExecuteNonQuery();
                     mycon.Close();
+                    mycon.Open();
+                    SqlCommand com2 = new SqlCommand("UPDATE dbo.Settings SET Value='" + requ.password + "' WHERE [Key] = 'SMSGlobalpassword';", mycon);
+                    com2.ExecuteNonQuery();
+                    mycon.Close();
+
 
                     respo.SaveSucessful = true;
                 }
@@ -114,9 +118,12 @@ namespace Notifications.Plugins.SMS.Server
                                        "connection timeout=30");
 
                     mycon.Open();
-
-                    SqlCommand com = new SqlCommand("UPDATE dbo.Settings SET Value='" + requ.username + "', Value='" + requ.password + "' WHERE [Key] = 'Mailusername', [Key] = 'Mailpassword';", mycon);
+                    SqlCommand com = new SqlCommand("UPDATE dbo.Settings SET Value='" + requ.username + "' WHERE [Key] = 'Mailusername';", mycon);
                     com.ExecuteNonQuery();
+                    mycon.Close();
+                    mycon.Open();
+                    SqlCommand com2 = new SqlCommand("UPDATE dbo.Settings SET Value='" + requ.password + "' WHERE [Key] = 'Mailpassword';", mycon);
+                    com2.ExecuteNonQuery();
                     mycon.Close();
 
                     respo.SaveSucessful = true;
@@ -172,11 +179,15 @@ namespace Notifications.Plugins.SMS.Server
                                        "database=PatientNotifications; " +
                                        "connection timeout=30");
 
-                mycon.Open();
+                    mycon.Open();
+                    SqlCommand com = new SqlCommand("UPDATE dbo.Settings SET Value='" + requ.username + "' WHERE [Key] = 'Proxyusername';", mycon);
+                    com.ExecuteNonQuery();
+                    mycon.Close();
+                    mycon.Open();
+                    SqlCommand com2 = new SqlCommand("UPDATE dbo.Settings SET Value='" + requ.password + "' WHERE [Key] = 'Proxypassword';", mycon);
+                    com2.ExecuteNonQuery();
+                    mycon.Close();
 
-                SqlCommand com = new SqlCommand("UPDATE dbo.Settings SET Value=N'" + requ.username + "', Value=N'" + requ.password + "' WHERE [Key] = 'Proxyusername', [Key] = 'Proxypassword';", mycon);
-                com.ExecuteNonQuery();
-                mycon.Close();
                     respo.SaveSucessful = true;
                 }
                 catch (Exception ex)
