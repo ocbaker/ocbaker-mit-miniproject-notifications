@@ -63,6 +63,7 @@
     <ProjectReference Include="..\..\..\..\Notifications.Global.Core.CommunicationBase\Global.Core.Communication.Base.csproj">
       <Project>{C55B156A-CC8B-4EB9-BE65-BF0D63C1E5E2}</Project>
       <Name>Global.Core.Communication.Base</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

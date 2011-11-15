@@ -11,5 +11,6 @@ namespace Notifications.Plugins.SMS.Global.ComObjects.Response
         public comdata_textSent(Notifications.Global.Core.Communication.Base.BaseObjects.aBaseRequest request) : base(request) { }
         public bool successfullText;
         public string messageID;
+        public string userid;
     }
 }

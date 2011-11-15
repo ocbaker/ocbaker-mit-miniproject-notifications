@@ -56,10 +56,11 @@ namespace Notifications.Plugins.SMS.Server
 
                 mycon.Open();
 
-                SqlCommand com = new SqlCommand("UPDATE dbo.Staff SET SMStemplate=N'" + requ.TempContent+ "WHERE Username='" + requ.username + "';", mycon);
+                SqlCommand com = new SqlCommand("UPDATE dbo.Staff SET SMStemplate='" + requ.TempContent+ "' WHERE Username='" + requ.username + "';", mycon);
                 try
                 {
                     com.ExecuteNonQuery();
+                    respo.retrieved_data = requ.TempContent;
                 }
                 catch (Exception e)
                 {

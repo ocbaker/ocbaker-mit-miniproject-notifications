@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\..\..\Notifications.Testing.ServerConsole\bin\Debug\Plugins\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -64,10 +64,12 @@
     <ProjectReference Include="..\..\..\..\Notifications.Global.Core.CommunicationBase\Global.Core.Communication.Base.csproj">
       <Project>{C55B156A-CC8B-4EB9-BE65-BF0D63C1E5E2}</Project>
       <Name>Global.Core.Communication.Base</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\Notifications.Server.Interop\Server.Interop.csproj">
       <Project>{BAF14E0B-6361-4A51-B553-ABBA031E210F}</Project>
       <Name>Server.Interop</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\Global\Notifications.Plugins.SMS.Global.ComObjects\Plugins.SMS.Global.csproj">
       <Project>{96861E9B-D128-438A-85DA-9F51E7220AD8}</Project>

@@ -25,6 +25,7 @@ namespace Notifications.Plugins.SMS.Server
             if (requ.getData == true)
             {
                 // GET the data respo.username = 'Username' | respo.password = 'Password'
+                try {
 
                 SqlConnection mycon = new SqlConnection("server=(local);" +
                                        "Trusted_Connection=yes;" +
@@ -39,8 +40,10 @@ namespace Notifications.Plugins.SMS.Server
                 da.Fill(ds);
                 respo.username = ds.Tables[0].Rows[0]["Value"].ToString();
                 respo.password = ds.Tables[0].Rows[1]["Value"].ToString();
-                
+
                 mycon.Close();
+                } catch (Exception e) {
+                }
                 respo.dataRetrieved = true;
             }
             else

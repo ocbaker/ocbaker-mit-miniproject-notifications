@@ -42,7 +42,11 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
                 Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_emailSent(new Global.ComObjects.Requests.comdata_sendEmail())), email_serverResponse);
 
                 //Take the current loged in user, get their employee ID number, use it as their FROM: In the SMS FROM
-                txtFrom.Text = Convert.ToString("00001234"); //Interop.PropertiesManager.GetProperty("Client.Username");
+                //txtFrom.Text = Convert.ToString("00001234"); //Interop.PropertiesManager.GetProperty("Client.Username");
+
+                Global.ComObjects.Requests.comdata_sendSMS rGetID = new Global.ComObjects.Requests.comdata_sendSMS();
+                rGetID.wantStaffID = true;
+                Notifications.Client.Interop.NetworkComms.sendMessage(rGetID);
 
                 // GET the user logged in. Get their 'ID'
 
@@ -51,18 +55,24 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
             {
                 Global.ComObjects.Response.comdata_textSent r = (Global.ComObjects.Response.comdata_textSent)response;
 
-                switch (r.successfullText)
+                if (r.userid == null)
                 {
-
-                    case true:
-                        lblmsgid.Content = "The text was sent sucessfully!";
-                        break;
-
-                    case false:
-                        lblmsgid.Content = "The text failed to send.";
-                        break;
+                    txtFrom.Text = r.userid.ToString();
                 }
+                else
+                {
+                    switch (r.successfullText)
+                    {
 
+                        case true:
+                            lblmsgid.Content = "The text was sent sucessfully!";
+                            break;
+
+                        case false:
+                            lblmsgid.Content = "The text failed to send.";
+                            break;
+                    }
+                }
                 return false;
             }
 

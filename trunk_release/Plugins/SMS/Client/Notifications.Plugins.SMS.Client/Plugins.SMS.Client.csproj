@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\..\..\Notifications.Client.Executable\bin\Debug\Plugins\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -34,10 +34,13 @@
     <Reference Include="AvalonControlsLibrary, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>UI\Pages\AvalonControlsLibrary.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="RibbonControlsLibrary, Version=4.0.0.11019, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="RibbonControlsLibrary, Version=4.0.0.11019, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -91,14 +94,17 @@
     <ProjectReference Include="..\..\..\..\Notifications.Global.Core.CommunicationBase\Global.Core.Communication.Base.csproj">
       <Project>{C55B156A-CC8B-4EB9-BE65-BF0D63C1E5E2}</Project>
       <Name>Global.Core.Communication.Base</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\Notifications.Global.Core.CommunicationCore\Global.Core.Communication.Core.csproj">
       <Project>{EB1D1A60-B6A8-447B-B36C-7EE7891A9E08}</Project>
       <Name>Global.Core.Communication.Core</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\Global\Notifications.Plugins.SMS.Global.ComObjects\Plugins.SMS.Global.csproj">
       <Project>{96861E9B-D128-438A-85DA-9F51E7220AD8}</Project>
       <Name>Plugins.SMS.Global</Name>
+      <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

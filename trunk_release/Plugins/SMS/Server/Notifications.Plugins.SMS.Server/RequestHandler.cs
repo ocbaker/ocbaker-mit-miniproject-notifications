@@ -29,11 +29,14 @@ namespace Notifications.Plugins.SMS.Server
             Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_sendSMS requ = (Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_sendSMS)request;
             Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_textSent respo = new Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_textSent(requ);
 
-            respo.successfullText = false;
-     
-          //  if (v.LastCheck < DateTime.Now)
-          //  {
-              //  v.LastCheck = DateTime.Now.AddMinutes(10);
+            if (requ.wantStaffID == false)
+            {
+
+                respo.successfullText = false;
+
+                //  if (v.LastCheck < DateTime.Now)
+                //  {
+                //  v.LastCheck = DateTime.Now.AddMinutes(10);
                 // Connect to database and get get username/password, add to CachedUsername, cachedPassword
 
                 SqlConnection mycon = new SqlConnection("server=(local);" +
@@ -53,34 +56,56 @@ namespace Notifications.Plugins.SMS.Server
                 mycon.Close();
 
 
-          //  }
-            v.APIusername = cachedUsername; v.APIpassword = cachedPassword;
+                //  }
+                v.APIusername = cachedUsername;
+                v.APIpassword = cachedPassword;
 
-            serverNotification sn = new serverNotification();
-            try
-            {
-                sn.requestLogin(v);
+                serverNotification sn = new serverNotification();
                 try
                 {
-                    sn.soapSMS(requ);
-                    respo.messageID = requ.response;
-                    respo.successfullText = true;
-                    
+                    sn.requestLogin(v);
+                    try
+                    {
+                        sn.soapSMS(requ);
+                        respo.messageID = requ.response;
+                        respo.successfullText = true;
+
+                    }
+                    catch (Exception ex)
+                    {
+                        sn.HttpSMS(v, requ);
+                        respo.messageID = requ.response;
+                        respo.successfullText = true;
+                    }
                 }
                 catch (Exception ex)
                 {
-                    sn.HttpSMS(v, requ);
-                    respo.messageID = requ.response;
-                    respo.successfullText = true;
+                    respo.successfullText = false;
+                    respo.messageID = "Failed to send";
                 }
-            }           
-            catch (Exception ex) {
-                respo.successfullText = false;
-                respo.messageID = "Failed to send";
+
+                //recordMessage(respo, requ);
             }
+            else
+            {
 
-            //recordMessage(respo, requ);
+                SqlConnection mycon = new SqlConnection("server=(local);" +
+                                    "Trusted_Connection=yes;" +
+                                    "database=PatientNotifications; " +
+                                    "connection timeout=30");
 
+                mycon.Open();
+
+                DataSet ds = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter("SELECT [Key], Value FROM dbo.Settings WHERE ([Key] = 'SMSGlobalusername') OR ([Key] = 'SMSGlobalpassword')", mycon);
+
+                da.Fill(ds);
+                //cachedUsername = ds.Tables[0].Rows[0]["Value"].ToString();
+               // cachedPassword = ds.Tables[0].Rows[1]["Value"].ToString();
+
+                mycon.Close();
+
+            }
             return respo;
         }
         private static void recordMessage(Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_textSent r, Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_sendSMS rq)
