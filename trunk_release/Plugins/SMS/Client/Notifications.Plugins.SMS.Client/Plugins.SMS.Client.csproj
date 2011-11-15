@@ -131,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="UI\Pages\AvalonControlsLibrary.dll" />
+    <Content Include="UI\Pages\Images\blue-sms-button-32.png" />
     <Content Include="UI\Pages\WPFToolkit.Extended.dll" />
   </ItemGroup>
   <ItemGroup>

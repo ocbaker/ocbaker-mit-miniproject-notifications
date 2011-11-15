@@ -12,6 +12,8 @@ using System.Xml.Linq;
 using System.Xml;
 using System.Text.RegularExpressions;
 using System.Web.Mail;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace Notifications.Plugins.SMS.Server
 {
@@ -19,9 +21,10 @@ namespace Notifications.Plugins.SMS.Server
     {
         XNamespace soapenv = "http://schemas.xmlsoap.org/soap/envelope/";
 
-        private NetworkCredential _cred;
+        private NetworkCredential _cred = null;
         private string ticket;
-      //  public apiValidateLogin apiv;
+       private  string username = null;
+       private  string password = null;
         public string mail_response;
 
         /// <summary>
@@ -32,21 +35,16 @@ namespace Notifications.Plugins.SMS.Server
 
         public void requestLogin(apiValidateLogin vlogin)
         {
-           
-            // apiSendSMS apis = _sendSMS;
-
             string loginTicket = null;
+
+            /// Get proxy information if needed.  
+            getProxyInformation();
 
             HttpWebRequest request = WebRequest.Create("http://www.smsglobal.com/mobileworks/soapserver.php") as HttpWebRequest;
 
-
-            ///Get proxy information if needed.             
-
-            //if (!request.Proxy.IsBypassed(request.RequestUri))
             if (isProxyActive(request.RequestUri, request) == true)
             {
-                //a.Show("Proxy Authentication", "The server you are trying to access requires a username and password." + Environment.NewLine);
-                //_cred = new NetworkCredential(a.UserData.Username, a.UserData.Password); //Data gotten from the server - Will have to make a request to the local database.
+                _cred = new NetworkCredential(this.username, this.password); //Data gotten from the server - Will have to make a request to the local database.
                 request.Proxy.Credentials = _cred;
             }
 
@@ -80,7 +78,6 @@ namespace Notifications.Plugins.SMS.Server
                     using (var answerReader =
                                 new StreamReader(rsp.GetResponseStream()))
                     {
-
                         ///Get the ticket which the server sent back using Regex to get the letter/digit mix of 32 characters.
                         var readString = answerReader.ReadToEnd();
                         Regex r = new Regex(@"(.*)ticket&gt;(.*)&lt;/ticket(.*)");
@@ -102,31 +99,22 @@ namespace Notifications.Plugins.SMS.Server
             {
                 p = false;
             }
-
             return p;
         }
         public void soapSMS(Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_sendSMS apis)
-        // Must accept Object from the request handler, (object requestedData), then apiSendSMS data = (apiSendSMS)requestedData
         {
-            //apiSendSMS apis = vSendSms;
-            //string msgid = null;
 
-            WebRequest request = WebRequest.Create("http://www.smsglobal.com/mobileworks/soapserver.php");
+            HttpWebRequest request = WebRequest.Create("http://www.smsglobal.com/mobileworks/soapserver.php") as HttpWebRequest;
 
-            //if (_cred != null ) request.Proxy.Credentials = _cred;
-            /// Needs a rework ^
             request.Method = "POST";
             request.ContentType = "text/xml";
             request.Headers.Add("urn:MobileWorks#apiSendSms");
-
-            //Windows_7_Dialogs.SecurityDialog a = new Windows_7_Dialogs.SecurityDialog();
-
-            // if (_cred == null)
-            //{
-            //    a.Show();
-            //    request.Proxy.Credentials = new NetworkCredential(a.UserData.Username, a.UserData.Password);
-            //}
-
+           
+            if (isProxyActive(request.RequestUri, request) == true)
+            {
+                _cred = new NetworkCredential(this.username, this.password); //Data gotten from the server - Will have to make a request to the local database.
+                request.Proxy.Credentials = _cred;
+            }
             var document = new XDocument(
                                            new XDeclaration("1.0", "utf-8", String.Empty),
                                            new XElement(soapenv + "Envelope", new XAttribute(XNamespace.Xmlns + "SOAP-ENV", soapenv),
@@ -209,15 +197,30 @@ namespace Notifications.Plugins.SMS.Server
         }
         public void sendEmail(Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_sendEmail vEmail)
         {
+
+            getProxyInformation();
+
+            String[] Mailuserinfo = new String[1];
+
+
+            //if (isProxyActive(request.RequestUri, request) == true)
+            //{
+            //    _cred = new NetworkCredential(this.username, this.password); //Data gotten from the server - Will have to make a request to the local database.
+
+            //    request.Proxy.Credentials = _cred;
+            //}
+
             System.Net.Mail.MailMessage m = new System.Net.Mail.MailMessage("noreply-notifications-miniproject@itsasmurflife.com",
-                vEmail.email_to); // Here have the actual email address
+                vEmail.email_to);
+            
             try
             {
                 m.Subject = "Reminder: " + vEmail.msg_content.Substring(0, 15) + "...";
             }
             catch (Exception e)
             {
-                m.Subject = "Reminder: " + vEmail.msg_content;
+                m.Subject = "Reminder: " + Environment.NewLine + "" + vEmail.msg_content + Environment.NewLine + "Automated Email. Please do not reply as this Email account is not monitored." + Environment.NewLine +
+                    "Your friendly neighbourhood Pediatrician";
             }
             m.Body =  vEmail.msg_content;
             m.BodyEncoding = UTF8Encoding.UTF8;
@@ -228,33 +231,43 @@ namespace Notifications.Plugins.SMS.Server
                 s.EnableSsl = true;
                 s.Timeout = 10000;
                 s.UseDefaultCredentials = false;
-                s.Credentials = new NetworkCredential("noreply-notifications-miniproject@itsasmurflife.com", "miniproject"); /// Get the username and password from server.core. / Utils
-                s.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
-
                 try
                 {
-                    s.Send(m);
-                    mail_response = "The email was sent sucessfully";
-                }
+                    s.Credentials = new NetworkCredential(Mailuserinfo[0], Mailuserinfo[1]); /// Get the username and password from server
+                    s.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
+
+                   try
+                  {
+                       s.Send(m);
+                       mail_response = "The email was sent sucessfully";
+                   }
                 catch (Exception e)
                 {
                     mail_response = "The email was sent but failed";
                 }
+
+                }
+                catch (Exception ex)
+                {
+                    mail_response = "Error connecting to the Database.";
+                }
+                                                                                         
+                //s.Credentials = new NetworkCredential("noreply-notifications-miniproject@itsasmurflife.com", "miniproject");
+                
             }
         }
         public void HttpSMS(apiValidateLogin vlogin, Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_sendSMS vSendSms) // apiSendSMS vSendSms, apiValidateLogin vlogin
         {
-            //apiValidateLogin apiv = vlogin;
 
             String encoded = System.Web.HttpUtility.HtmlEncode(vSendSms.msg_content);
             Uri smsUri = new Uri("http://www.smsglobal.com/http-api.php?action=sendsms&user=" + vlogin.APIusername + "&password=" + vlogin.APIpassword + "&from=" + vSendSms.sms_from + "&to=" + vSendSms.sms_to + "&text=" + encoded);
 
-
             /// Need to add proxy support when I have it working.
-
+            getProxyInformation();
             try
             {
                 WebClient wc = new WebClient();
+                wc.Proxy.Credentials = new NetworkCredential(this.username, this.password);
                 using (Stream s = wc.OpenRead(smsUri))
                 {
                     using (StreamReader r = new StreamReader(s))
@@ -267,6 +280,59 @@ namespace Notifications.Plugins.SMS.Server
 
 
         }
+        private void getProxyInformation()
+        {
+            try
+            {
+                SqlConnection mycon = new SqlConnection("server=(local);" +
+                                    "Trusted_Connection=yes;" +
+                                    "database=PatientNotifications; " +
+                                    "connection timeout=30");
+                mycon.Open();
 
+                DataSet ds = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter("SELECT [Key], Value FROM dbo.Settings WHERE ([Key] = 'Proxyusername') OR ([Key] = 'Proxypassword'", mycon);
+
+                da.Fill(ds);
+
+                username = ds.Tables[0].Rows[0]["Value"].ToString();
+                password = ds.Tables[0].Rows[1]["Value"].ToString();
+
+                mycon.Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        private String[] getMailInformation() 
+        {
+            String[] s = new String[1];
+
+            try
+            {
+                SqlConnection mycon = new SqlConnection("server=(local);" +
+                                    "Trusted_Connection=yes;" +
+                                    "database=PatientNotifications; " +
+                                    "connection timeout=30");
+                mycon.Open();
+
+                DataSet ds = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter("SELECT [Key], Value FROM dbo.Settings WHERE ([Key] = 'Mailusername') OR ([Key] = 'Mailpassword'", mycon);
+
+                da.Fill(ds);
+
+                s[0] = ds.Tables[0].Rows[0]["Value"].ToString();
+                s[1] = ds.Tables[0].Rows[1]["Value"].ToString();
+
+                mycon.Close();
+            }
+            catch (Exception ex)
+            {
+                s[0] = "";
+            }
+
+            return s;
+        }
     }
 }

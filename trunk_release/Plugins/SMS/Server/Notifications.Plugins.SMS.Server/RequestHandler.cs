@@ -93,7 +93,7 @@ namespace Notifications.Plugins.SMS.Server
                                            "connection timeout=30");
 
                 mycon.Open();
-
+                //Isn't finished. VALUES () part of the statement is unfinished.
                 SqlCommand com = new SqlCommand("INSERT INTO PatientData (FamilyName,GivenName, Email, Mobile, Phone, ReminderText, ReminderDate) VALUES (" + "''," + rq.email + "," + rq.sms_to + ",''," + rq.msg_content + ",'');", mycon);
                 com.ExecuteNonQuery(); // Force quit when trying to execute this line. SMS sends fine. 
                 mycon.Close();
@@ -114,7 +114,7 @@ namespace Notifications.Plugins.SMS.Server
             }
             catch (Exception e)
             {
-
+                respo.successfullEmail = false;
             }
 
 

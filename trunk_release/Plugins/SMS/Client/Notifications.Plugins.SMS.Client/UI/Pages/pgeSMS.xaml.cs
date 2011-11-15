@@ -72,7 +72,7 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
                         break;
 
                     case false:
-                        lblmsgid.Content += Environment.NewLine + "The Email failed to send.";
+                        lblmsgid.Content += Environment.NewLine + "The email failed to send.";
                         break;
                 }
                 

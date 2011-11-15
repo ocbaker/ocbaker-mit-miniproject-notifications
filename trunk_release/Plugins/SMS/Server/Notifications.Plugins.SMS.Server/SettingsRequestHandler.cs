@@ -115,7 +115,7 @@ namespace Notifications.Plugins.SMS.Server
 
                     mycon.Open();
 
-                    SqlCommand com = new SqlCommand("UPDATE dbo.Settings SET Value=N'" + requ.username + "', Value=N'" + requ.password + "' WHERE [Key] = 'Mailusername', [Key] = 'Mailpassword';", mycon);
+                    SqlCommand com = new SqlCommand("UPDATE dbo.Settings SET Value='" + requ.username + "', Value='" + requ.password + "' WHERE [Key] = 'Mailusername', [Key] = 'Mailpassword';", mycon);
                     com.ExecuteNonQuery();
                     mycon.Close();
 
