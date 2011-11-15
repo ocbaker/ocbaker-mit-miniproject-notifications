@@ -73,7 +73,7 @@ namespace Notifications.Server.Server
         public void startListening()
         {
             // Read the port number
-            int port = 55365;
+            int port = int.Parse(Interop.PropertiesManager.getSetting("Network","Port"));
 
             //try
             //{

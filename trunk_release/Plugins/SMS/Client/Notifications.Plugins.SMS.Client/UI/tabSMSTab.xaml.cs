@@ -22,11 +22,15 @@ namespace Notifications.Plugins.SMS.Client.UI
     /// </summary>
     public partial class tabSMSTab : RibbonTab
     {
+
+
         public tabSMSTab()
         {
             InitializeComponent();
-            Interop.EventManager.handleEvent("Client.Window.Initalized",LoggedIn);
+            Interop.EventManager.raiseEvents("Client.Window.AddTab", (Object)this);
+            //Interop.EventManager.handleEvent("Client.LoggedIn",LoggedIn);
             //Interop.EventManager.handleEvent("Client.LoggedOut", LoggedOut);
+            
         }
 
         private void addGroup(object group)
@@ -34,14 +38,16 @@ namespace Notifications.Plugins.SMS.Client.UI
             RibbonGroup rGroup = (RibbonGroup)group;
             this.Items.Add(rGroup);
         }
+
+        //[Interop.StaticEventMethod("Client.Window.Initalized")]
         private void LoggedIn()
         {
-            Console.WriteLine("SMS LoggedIn Function Running");
-            Interop.EventManager.raiseEvents("Client.Window.AddTab", (Object)this);
+            this.IsEnabled = true;
         }
         private void LoggedOut()
         {
-            Interop.EventManager.raiseEvents("Client.Window.RemoveTab", (Object)this);
+            this.IsEnabled = false;
+            //Interop.EventManager.raiseEvents("Client.Window.RemoveTab", (Object)this);
         }
 
         private void SendSMS_Click(object sender, RoutedEventArgs e)

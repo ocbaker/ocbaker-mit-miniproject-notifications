@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:ribbon="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" Header="Messaging">
+             d:DesignHeight="300" d:DesignWidth="300" Header="Messaging" Tag="10">
     <ribbon:RibbonGroup x:Name="MyMessaging" 
                                     Header="SMS">
         <ribbon:RibbonButton x:Name="SendSMS"

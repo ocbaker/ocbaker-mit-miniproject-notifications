@@ -41,6 +41,7 @@ namespace Notifications.Client.Executable
                 MessageBox.Show("Error Connecting to Server");
             }
             Interop.EventManager.handleEvent("Client.LoggedIn", glbh_UserLoggedIn);
+            Interop.EventManager.handleEvent("Client.LoggedOut", glbh_UserLoggedOut);
             Interop.EventManager.handleEvent("Client.Window.AddTab", glbh_AddTab);
             Interop.EventManager.handleEvent("Client.Window.RemoveTab", glbh_RemoveTab);
             Interop.EventManager.handleEvent("Client.Window.changePage", glbh_changePage);
@@ -122,6 +123,14 @@ namespace Notifications.Client.Executable
             Ribbon.IsMinimized = false;
             Ribbon.IsHitTestVisible = true;
             Ribbon.SelectedIndex = 0;
+        }
+
+        [Interop.StaticEventMethod("Client.LoggedOut")]
+        protected static void glbh_UserLoggedOut()
+        {
+            //Ribbon.IsEnabled = false;
+            //Ribbon.IsMinimized = true;
+            //Ribbon.IsHitTestVisible = false;
         }
     }
 }

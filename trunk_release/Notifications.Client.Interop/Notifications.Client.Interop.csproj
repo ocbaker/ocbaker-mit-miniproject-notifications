@@ -43,6 +43,7 @@
     <Compile Include="ConsoleManager.cs" />
     <Compile Include="EventManager.cs" />
     <Compile Include="EventMethodAttribute.cs" />
+    <Compile Include="INIFile.cs" />
     <Compile Include="PropertiesManager.cs" />
     <Compile Include="UserInterface.cs" />
     <Compile Include="NetworkComms.cs" />

@@ -9,6 +9,7 @@ namespace Notifications.Server.Interop
     {
 
         private static Dictionary<string, object> _properties = new Dictionary<string, object>();
+        private static IniFile settingsFile = new IniFile(System.IO.Path.Combine(Environment.CurrentDirectory, "settings.ini"));
 
         public static object GetProperty(string key)
         {
@@ -33,6 +34,11 @@ namespace Notifications.Server.Interop
         {
             key = key.ToLower();
             return _properties.ContainsKey(key);
+        }
+
+        public static string getSetting(string group, string key)
+        {
+            return settingsFile.IniReadValue(group, key);
         }
     }
 }
