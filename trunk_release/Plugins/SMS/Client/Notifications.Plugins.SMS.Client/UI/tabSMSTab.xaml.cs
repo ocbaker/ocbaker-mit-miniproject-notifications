@@ -53,12 +53,12 @@ namespace Notifications.Plugins.SMS.Client.UI
 
         private void smsHistory_Click(object sender, RoutedEventArgs e)
         {
-
+            Interop.EventManager.raiseEvents("Client.Window.ChangePage", new UI.Pages.pgeSMShistory());
         }
 
         private void smsTemplate_Click(object sender, RoutedEventArgs e)
         {
-
+            Interop.EventManager.raiseEvents("Client.Window.ChangePage", new UI.Pages.pgeSMSTemplate());
         }
 
 

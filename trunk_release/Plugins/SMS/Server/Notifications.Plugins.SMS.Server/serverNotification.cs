@@ -21,7 +21,7 @@ namespace Notifications.Plugins.SMS.Server
 
         private NetworkCredential _cred;
         private string ticket;
-        public apiValidateLogin apiv;
+      //  public apiValidateLogin apiv;
         public string mail_response;
 
         /// <summary>
@@ -61,8 +61,8 @@ namespace Notifications.Plugins.SMS.Server
                            new XElement(soapenv + "Envelope", new XAttribute(XNamespace.Xmlns + "SOAP-ENV", soapenv),
                                new XElement(soapenv + "Body",
                                new XElement("apiValidateLogin",
-                               new XElement("user", apiv.APIusername),
-                               new XElement("password", apiv.APIpassword)
+                               new XElement("user", vlogin.APIusername),
+                               new XElement("password", vlogin.APIpassword)
                                ))));
             document.Declaration.Version = "1.0";
 

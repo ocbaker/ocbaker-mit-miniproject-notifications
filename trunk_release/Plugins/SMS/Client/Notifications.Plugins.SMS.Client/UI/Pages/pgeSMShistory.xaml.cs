@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Interop = Notifications.Client.Interop;
 
 namespace Notifications.Plugins.SMS.Client.UI.Pages
 {
@@ -22,7 +23,7 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
         public pgeSMShistory()
         {
             InitializeComponent();
-            // Interop.PropertiesManager.GetProperty("Client.Username");
+            // Interop.PropertiesManager.GetProperty("User.Username");
             // "SELECT * FROM PATIENTDATA WHERE DR='.THIS' ??
 
             //Request for Client data

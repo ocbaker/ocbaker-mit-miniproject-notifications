@@ -12,7 +12,8 @@ namespace Notifications.Plugins.SMS.Server
     {
         private static string cachedUsername;
         private static string cachedPassword;
-        private static apiValidateLogin v;
+        private static apiValidateLogin v = new apiValidateLogin();
+        
 
         public void setupHandlers()
         {
@@ -24,14 +25,15 @@ namespace Notifications.Plugins.SMS.Server
 
         private static object textSent(object request)
         {
+           // v.LastCheck = DateTime.Now;
             Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_sendSMS requ = (Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_sendSMS)request;
             Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_textSent respo = new Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_textSent(requ);
 
             respo.successfullText = false;
      
-            if (v.LastCheck < DateTime.Now)
-            {
-                v.LastCheck = DateTime.Now.AddMinutes(10);
+          //  if (v.LastCheck < DateTime.Now)
+          //  {
+              //  v.LastCheck = DateTime.Now.AddMinutes(10);
                 // Connect to database and get get username/password, add to CachedUsername, cachedPassword
 
                 SqlConnection mycon = new SqlConnection("server=(local);" +
@@ -51,8 +53,8 @@ namespace Notifications.Plugins.SMS.Server
                 mycon.Close();
 
 
-            }
-            v = new apiValidateLogin(cachedUsername, cachedPassword);
+          //  }
+            v.APIusername = cachedUsername; v.APIpassword = cachedPassword;
 
             serverNotification sn = new serverNotification();
             try
@@ -77,24 +79,30 @@ namespace Notifications.Plugins.SMS.Server
                 respo.messageID = "Failed to send";
             }
 
-            recordMessage(respo, requ);
+            //recordMessage(respo, requ);
 
             return respo;
         }
         private static void recordMessage(Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_textSent r, Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_sendSMS rq)
         {
          //   Save whatver data is needed using respo and resu.
+            try
+            {
+                SqlConnection mycon = new SqlConnection("server=(local);" +
+                                           "Trusted_Connection=yes;" +
+                                           "database=PatientNotifications; " +
+                                           "connection timeout=30");
 
-            SqlConnection mycon = new SqlConnection("server=(local);" +
-                                       "Trusted_Connection=yes;" +
-                                       "database=PatientNotifications; " +
-                                       "connection timeout=30");
+                mycon.Open();
 
-            mycon.Open();
+                SqlCommand com = new SqlCommand("INSERT INTO PatientData (FamilyName,GivenName, Email, Mobile, Phone, ReminderText, ReminderDate) VALUES (" + "''," + rq.email + "," + rq.sms_to + ",''," + rq.msg_content + ",'');", mycon);
+                com.ExecuteNonQuery(); // Force quit when trying to execute this line. SMS sends fine. 
+                mycon.Close();
+            }
+            catch (Exception ex)
+            {
 
-            SqlCommand com = new SqlCommand("INSERT INTO PatientData (FamilyName,GivenName, Email, Mobile, Phone, ReminderText, ReminderDate) VALUES (" + ",," + rq.email + "," + rq.sms_to + ",," + rq.msg_content + ",);", mycon);
-            com.ExecuteNonQuery();
-            mycon.Close();
+            }
         }
     }
 }

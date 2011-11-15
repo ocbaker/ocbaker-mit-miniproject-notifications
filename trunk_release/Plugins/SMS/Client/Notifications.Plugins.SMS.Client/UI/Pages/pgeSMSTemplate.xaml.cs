@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Notifications.Plugins.SMS.Server;
 using Notifications.Global.Core.Utils;
+using Interop = Notifications.Client.Interop;
 
 
 namespace Notifications.Plugins.SMS.Client.UI.Pages
@@ -87,6 +88,8 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
             Global.ComObjects.Requests.comdata_rqTemplate rTemp = new Global.ComObjects.Requests.comdata_rqTemplate();
             rTemp.TempContent = textBox1.Text;
             rTemp.retrieveSavedTemp = false;
+            rTemp.username = Interop.PropertiesManager.GetProperty("User.Username").ToString();
+            
              Notifications.Client.Interop.NetworkComms.sendMessage(rTemp);
             
 

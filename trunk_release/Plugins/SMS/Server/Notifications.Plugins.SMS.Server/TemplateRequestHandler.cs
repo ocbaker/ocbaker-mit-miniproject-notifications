@@ -35,10 +35,15 @@ namespace Notifications.Plugins.SMS.Server
                
 
                 da.Fill(ds);
-                respo.retrieved_data = ds.Tables[0].Rows[0]["SMStemplate"].ToString();
-                mycon.Close();
-                
+                try
+                {
+                    respo.retrieved_data = ds.Tables[0].Rows[0]["SMStemplate"].ToString();
+                    mycon.Close();
+                }
+                catch (Exception ex)
+                {
 
+                }
             }
             else
             { 
@@ -52,7 +57,14 @@ namespace Notifications.Plugins.SMS.Server
                 mycon.Open();
 
                 SqlCommand com = new SqlCommand("UPDATE dbo.Staff SET SMStemplate=N'" + requ.TempContent+ "WHERE Username='" + requ.username + "';", mycon);
-                com.ExecuteNonQuery();
+                try
+                {
+                    com.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+
+                }
                 mycon.Close();
             }
 
