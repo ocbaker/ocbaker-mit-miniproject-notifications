@@ -25,8 +25,8 @@ namespace Notifications.Plugins.SMS.Client.UI
         public tabSMSTab()
         {
             InitializeComponent();
-            Interop.EventManager.handleEvent("Client.LoggedIn",LoggedIn);
-            Interop.EventManager.handleEvent("Client.LoggedOut", LoggedOut);
+            Interop.EventManager.handleEvent("Client.Window.Initalized",LoggedIn);
+            //Interop.EventManager.handleEvent("Client.LoggedOut", LoggedOut);
         }
 
         private void addGroup(object group)
