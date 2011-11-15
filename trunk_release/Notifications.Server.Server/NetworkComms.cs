@@ -234,7 +234,7 @@ namespace Notifications.Server.Server
         public static void addDataHandler(object key, Func<object, object> value)
         {
             Type tKey;
-            if (key.GetType().BaseType == typeof(Type))
+            if (key.GetType().BaseType != typeof(Notifications.Global.Core.Communication.Base.BaseObjects.aBaseRequest))
             {
                 tKey = (Type)key;
             }
