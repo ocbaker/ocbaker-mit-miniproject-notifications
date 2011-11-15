@@ -105,33 +105,59 @@ namespace Notifications.Server.Core.Manager
 
             //Attach ALL EventHandlers
             Console.WriteLine("Attaching Static Events");
-            foreach (Assembly assem in AppDomain.CurrentDomain.GetAssemblies())
+            var assemblies = from assemb in AppDomain.CurrentDomain.GetAssemblies()
+                             where assemb.Location.StartsWith(Environment.CurrentDirectory)
+                             select assemb as Assembly;
+            foreach (Assembly assem in assemblies)
             {
+                
                 //Console.WriteLine("Finding Static Events in:" +);
                 foreach (var t in assem.GetTypes())
                 {
-                    foreach (MethodInfo method in t.GetMethods())
+                    
+                    var SEMs = from mth in t.GetMethods()
+                             where Attribute.IsDefined(mth,typeof(Interop.StaticEventMethod))
+                             select mth;
+                    foreach (MethodInfo method in SEMs)
                     {
-
-                        if (Attribute.IsDefined(method, typeof(Interop.StaticEventMethod)))
-                        {
-                            Console.WriteLine("Adding Static Event: " + method.ReflectedType.FullName + "." + method.Name);
-                            Interop.StaticEventMethod EventMethodAttrib = (Interop.StaticEventMethod)Attribute.GetCustomAttribute(method, typeof(Interop.StaticEventMethod));
-                            List<Type> args = new List<Type>(
-                                method.GetParameters().Select(p => p.ParameterType));
-                            Type delegateType;
-                            //if (method.ReturnType == typeof(void)) //{
-                            delegateType = Expression.GetActionType(args.ToArray());
-                            //} else {
-                            //args.Add(method.ReturnType);
-                            //delegateType = Expression.GetFuncType(args.ToArray());
-                            //}
-                            //Delegate d = ;
-                            Interop.EventManager.handleEvent(EventMethodAttrib.EventName, Delegate.CreateDelegate(delegateType, null, method));
-
-                        }
+                        Console.WriteLine("Adding Static Event: " + method.ReflectedType.FullName + "." + method.Name);
+                        Interop.StaticEventMethod EventMethodAttrib = (Interop.StaticEventMethod)Attribute.GetCustomAttribute(method, typeof(Interop.StaticEventMethod));
+                        List<Type> args = new List<Type>(
+                            method.GetParameters().Select(p => p.ParameterType));
+                        Type delegateType;
+                        //if (method.ReturnType == typeof(void)) //{
+                        delegateType = Expression.GetActionType(args.ToArray());
+                        //} else {
+                        //args.Add(method.ReturnType);
+                        //delegateType = Expression.GetFuncType(args.ToArray());
+                        //}
+                        //Delegate d = ;
+                        Interop.EventManager.handleEvent(EventMethodAttrib.EventName, Delegate.CreateDelegate(delegateType, null, method));
 
                     }
+
+                    var RHMs = from mtha in t.GetMethods()
+                               where Attribute.IsDefined((MethodInfo)mtha, typeof(Interop.RequestHandlerMethod))
+                               select mtha as MethodInfo;
+                    foreach (MethodInfo method in RHMs)
+                    {
+                        Console.WriteLine("Adding Static Object Handler: " + method.ReflectedType.FullName + "." + method.Name);
+                        Interop.RequestHandlerMethod EventMethodAttrib = (Interop.RequestHandlerMethod)Attribute.GetCustomAttribute(method, typeof(Interop.RequestHandlerMethod));
+                        List<Type> args = new List<Type>(
+                            method.GetParameters().Select(p => p.ParameterType));
+                        Type delegateType;
+                        //if (method.ReturnType == typeof(void)) //{
+                        //delegateType = Expression.GetActionType(args.ToArray());
+                        //} else {
+                        args.Add(method.ReturnType);
+                        delegateType = Expression.GetFuncType(args.ToArray());
+                        //}
+                        //Server.Interop.NetworkComms.addDataHandler(EventMethodAttrib.handledRequest, new Func<object, object>( Delegate.CreateDelegate(delegateType, method).DynamicInvoke));
+                        Server.Interop.NetworkComms.addDataHandler(EventMethodAttrib.handledRequest, (Func<object, object>)Delegate.CreateDelegate(typeof(Func<object, object>), method));
+                        //Interop.EventManager.handleEvent(EventMethodAttrib.EventName, Delegate.CreateDelegate(delegateType, null, method));
+                        
+                    }
+
                 }
             }
         }

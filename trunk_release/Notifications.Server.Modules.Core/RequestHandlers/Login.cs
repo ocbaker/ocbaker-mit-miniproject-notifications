@@ -10,10 +10,11 @@ namespace Notifications.Server.Core.Core.RequestHandlers
 
         public void setupHandlers()
         {
-            Server.Interop.NetworkComms.addDataHandler((new Global.Core.Communication.Core.Requests.comdata_rqLogin()), handleLogin);
+            //Server.Interop.NetworkComms.addDataHandler(, handleLogin);
         }
 
-        private static object handleLogin(object request)
+        [Server.Interop.RequestHandlerMethod(typeof(Global.Core.Communication.Core.Requests.comdata_rqLogin))]
+        public static object handleLogin(object request)
         {
             
             Global.Core.Communication.Core.Requests.comdata_rqLogin reqo = (Global.Core.Communication.Core.Requests.comdata_rqLogin)request;

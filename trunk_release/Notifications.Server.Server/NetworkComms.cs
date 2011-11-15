@@ -16,6 +16,7 @@ using Nito.Async.Sockets;
 using Nito.Async;
 using Notifications.Global.Core.Utils;
 
+
 namespace Notifications.Server.Server
 {
     public class NetworkComms
@@ -106,7 +107,11 @@ namespace Notifications.Server.Server
             }
             catch (Exception ex)
             {
+#if DEBUG
+                throw ex;
+#else
                 ResetChildSocket(socket);
+#endif
                 //throw ex;
             }
             finally
@@ -162,7 +167,11 @@ namespace Notifications.Server.Server
             }
             catch (Exception ex)
             {
+#if DEBUG
+                throw ex;
+#else
                 ResetChildSocket(socket);
+#endif
                 //throw ex;
             }
             finally
@@ -224,27 +233,43 @@ namespace Notifications.Server.Server
 
         public static void addDataHandler(object key, Func<object, object> value)
         {
-            
-            
-            if (DataHandlers.ContainsKey(key.GetType()))
+            Type tKey;
+            if (key.GetType().BaseType == typeof(Type))
+            {
+                tKey = (Type)key;
+            }
+            else
+            {
+                tKey = key.GetType();
+            }
+            if (DataHandlers.ContainsKey(tKey))
             {
                 throw new Exception("Duplicate Keys Not Allowed");
             }
             else
             {
-                DataHandlers.Add(key.GetType(), value);
+                DataHandlers.Add(tKey, value);
             }
         }
 
         public static void removeDataHandler(object key)
         {
-            if (DataHandlers.ContainsKey(key.GetType()))
+            Type tKey;
+            if (key.GetType().BaseType == typeof(Type))
+            {
+                tKey = (Type)key;
+            }
+            else
+            {
+                tKey = key.GetType();
+            }
+            if (DataHandlers.ContainsKey(tKey))
             {
                 throw new KeyNotFoundException();
             }
             else
             {
-                DataHandlers.Remove(key.GetType());
+                DataHandlers.Remove(tKey);
             }
         }
 

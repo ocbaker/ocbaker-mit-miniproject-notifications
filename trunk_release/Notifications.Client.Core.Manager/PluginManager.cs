@@ -63,12 +63,19 @@ namespace Notifications.Client.Core.Manager
 
             //Attach ALL EventHandlers
             Console.WriteLine("Attaching Static Events");
-            foreach (Assembly assem in AppDomain.CurrentDomain.GetAssemblies())
+            var assemblies = from assemb in AppDomain.CurrentDomain.GetAssemblies()
+                             where assemb.Location.StartsWith(Environment.CurrentDirectory)
+                             select assemb as Assembly;
+            foreach (Assembly assem in assemblies)
             {
                 //Console.WriteLine("Finding Static Events in:" +);
                 foreach (var t in assem.GetTypes())
                 {
-                    foreach (MethodInfo method in t.GetMethods())
+
+                    var SEMs = from mth in t.GetMethods()
+                               where Attribute.IsDefined(mth, typeof(Interop.StaticEventMethod))
+                               select mth;
+                    foreach (MethodInfo method in SEMs)
                     {
 
                         if (Attribute.IsDefined(method, typeof(Interop.StaticEventMethod)))
@@ -90,6 +97,27 @@ namespace Notifications.Client.Core.Manager
                         }
 
                     }
+                    //var RHMs = from mtha in t.GetMethods()
+                    //           where Attribute.IsDefined((MethodInfo)mtha, typeof(Interop.RequestHandlerMethod))
+                    //           select mtha as MethodInfo;
+                    //foreach (MethodInfo method in RHMs)
+                    //{
+                    //    Console.WriteLine("Adding Static Object Handler: " + method.ReflectedType.FullName + "." + method.Name);
+                    //    Interop.RequestHandlerMethod EventMethodAttrib = (Interop.RequestHandlerMethod)Attribute.GetCustomAttribute(method, typeof(Interop.RequestHandlerMethod));
+                    //    List<Type> args = new List<Type>(
+                    //        method.GetParameters().Select(p => p.ParameterType));
+                    //    Type delegateType;
+                    //    //if (method.ReturnType == typeof(void)) //{
+                    //    //delegateType = Expression.GetActionType(args.ToArray());
+                    //    //} else {
+                    //    args.Add(method.ReturnType);
+                    //    delegateType = Expression.GetFuncType(args.ToArray());
+                    //    //}
+                    //    //Server.Interop.NetworkComms.addDataHandler(EventMethodAttrib.handledRequest, new Func<object, object>( Delegate.CreateDelegate(delegateType, method).DynamicInvoke));
+                    //    Server.Interop.NetworkComms.addDataHandler(EventMethodAttrib.handledRequest, (Func<object, object>)Delegate.CreateDelegate(typeof(Func<object, object>), method));
+                    //    //Interop.EventManager.handleEvent(EventMethodAttrib.EventName, Delegate.CreateDelegate(delegateType, null, method));
+
+                    //}
                 }
             }
             
@@ -98,26 +126,6 @@ namespace Notifications.Client.Core.Manager
         private static Assembly MyResolveEventHandler(object sender, ResolveEventArgs args)
         {
             //This handler is called only when the common language runtime tries to bind to the assembly and fails.
-
-            //Retrieve the list of referenced assemblies in an array of AssemblyName.
-            Assembly MyAssembly, objExecutingAssemblies;
-            //string strTempAssmbPath = "";
-
-            //objExecutingAssemblies = Assembly.GetExecutingAssembly();
-            //AssemblyName[] arrReferencedAssmbNames = objExecutingAssemblies.GetReferencedAssemblies();
-
-            ////Loop through the array of referenced assembly names.
-            //foreach (AssemblyName strAssmbName in arrReferencedAssmbNames)
-            //{
-            //    //Check for the assembly names that have raised the "AssemblyResolve" event.
-            //    if (strAssmbName.FullName.Substring(0, strAssmbName.FullName.IndexOf(",")) == args.Name.Substring(0, args.Name.IndexOf(",")))
-            //    {
-            //        //Build the path of the assembly from where it has to be loaded.				
-            //        strTempAssmbPath = Environment.CurrentDirectory + "\\Plugins\\" + args.Name.Substring(0, args.Name.IndexOf(",")) + ".dll";
-            //        break;
-            //    }
-
-            //}
             //Load the assembly from the specified path. 
             try
             {
@@ -127,9 +135,6 @@ namespace Notifications.Client.Core.Manager
             {
                 return Assembly.LoadFrom("");
             }
-
-            //Return the loaded assembly.
-            
         }
     }
 }
