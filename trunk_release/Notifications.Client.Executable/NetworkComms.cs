@@ -78,10 +78,10 @@ namespace Notifications.Client.Executable
             {
                 // Read the IP address
                 IPAddress serverIPAddress;
-                IPAddress.TryParse(Interop.PropertiesManager.getSetting("Network", "IP"), out serverIPAddress);
+                IPAddress.TryParse(Interop.PropertiesManager.InIFile["network"]["ip"], out serverIPAddress);
 
                 // Read the port number
-                int port = int.Parse(Interop.PropertiesManager.getSetting("Network", "Port"));
+                int port = int.Parse(Interop.PropertiesManager.InIFile["network"]["port"]);
 
                 // Begin connecting to the remote IP
                 ClientSocket = new SimpleClientTcpSocket();

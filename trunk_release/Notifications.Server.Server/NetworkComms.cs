@@ -73,7 +73,9 @@ namespace Notifications.Server.Server
         public void startListening()
         {
             // Read the port number
-            int port = int.Parse(Interop.PropertiesManager.getSetting("Network","Port"));
+            //string value = Interop.PropertiesManager.getSetting("network","port");
+            string value = Interop.PropertiesManager.InIFile["network"]["port"];
+            int port = int.Parse(value);
 
             //try
             //{
