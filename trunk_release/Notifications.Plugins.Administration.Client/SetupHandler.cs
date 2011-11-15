@@ -21,6 +21,7 @@ namespace Notifications.Plugins.Administration.Client
         [Interop.StaticEventMethod("Client.LoggedIn")]
         public static void UserLoggedIn()
         {
+            Console.WriteLine("LOLLERS");
             Global.Class1 c1 = new Global.Class1();
             Interop.EventManager.raiseEvents("Client.Window.AddTab", (Object)AdminTab);
         }
