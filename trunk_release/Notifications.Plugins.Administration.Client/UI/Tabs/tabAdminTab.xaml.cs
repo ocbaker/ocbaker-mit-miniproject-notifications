@@ -21,29 +21,17 @@ namespace Notifications.Plugins.Administration.Client.UI.Tabs
     /// </summary>
     public partial class tabAdminTab : RibbonTab
     {
+        
         public tabAdminTab()
         {
-            Console.WriteLine("lol");
             InitializeComponent();
-            //Interop.EventManager.handleEvent("Client.LoggedIn",LoggedIn);
-            //Interop.EventManager.handleEvent("Client.LoggedOut", LoggedOut);
             Interop.EventManager.handleEvent("Plugin.Administration.Tab.AddGroup", addGroup);
-            Console.WriteLine("Administration Tab Initialized");
         }
 
         private void addGroup(object group)
         {
             //RibbonGroup rGroup = (RibbonGroup)group;
             this.Items.Add(group);
-        }
-        private void LoggedIn()
-        {
-            Console.WriteLine("Administration LoggedIn Function Running");
-            //Interop.EventManager.raiseEvents("Client.Window.AddTab", (Object)this);
-        }
-        private void LoggedOut()
-        {
-            //Interop.EventManager.raiseEvents("Client.Window.RemoveTab", (Object)this);
         }
     }
 }
