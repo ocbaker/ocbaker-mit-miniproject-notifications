@@ -26,6 +26,9 @@ namespace Notifications.Server.Core.Core.RequestHandlers
                 case "bake266":
                     password = "lol";
                     break;
+                case "burf9":
+                    password = "lol";
+                    break;
                 default:
                     canLogin = false;
                     break;
