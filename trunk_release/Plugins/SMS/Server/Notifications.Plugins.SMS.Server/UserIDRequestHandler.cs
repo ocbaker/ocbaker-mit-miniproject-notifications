@@ -40,7 +40,7 @@ namespace Notifications.Plugins.SMS.Server
                 SqlDataAdapter da = new SqlDataAdapter("SELECT Username, ID FROM dbo.Staff WHERE (Username = 'burf9')", mycon);
 
                 da.Fill(ds);
-                respo.userID = ds.Tables[0].Rows[0]["Value"].ToString();
+                respo.userID = ds.Tables[0].Rows[0]["ID"].ToString();
 
                 mycon.Close();
             }

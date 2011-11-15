@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data;
 using Interop = Notifications.Client.Interop;
 
 namespace Notifications.Plugins.SMS.Client.UI.Pages
@@ -23,12 +24,44 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
         public pgeSMShistory()
         {
             InitializeComponent();
-            // Interop.PropertiesManager.GetProperty("User.Username");
-            // "SELECT * FROM PATIENTDATA WHERE DR='.THIS' ??
+            /// http://www.wpftutorial.net/DataGrid.html
+            /// WPF DataGrid c#
+            /// http://www.c-sharpcorner.com/uploadfile/mahesh/datagrid-in-wpf/
+            /// http://www.codeproject.com/KB/WPF/WPFDataGridExamples.aspx
+            /// 
+            Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_rpStaffHistory(new Global.ComObjects.Requests.comdata_rqStaffHistory())), gotHistory);
 
-            //Request for Client data
+            Global.ComObjects.Requests.comdata_rqStaffHistory gH = new Global.ComObjects.Requests.comdata_rqStaffHistory();
+            gH.staffUsername = Interop.PropertiesManager.GetProperty("User.Username").ToString();
+            Notifications.Client.Interop.NetworkComms.sendMessage(gH);
+
         }
 
+        public void loadsourcedata() { }
 
+        private static object gotHistory(Object response) {
+
+            Global.ComObjects.Response.comdata_rpStaffHistory r = (Global.ComObjects.Response.comdata_rpStaffHistory)response;
+            
+            //Data
+
+            //DataGrid d = new DataGrid();
+
+            //foreach (Global.ComObjects.Data.data_PatientInformation dp in r.d)
+            //{
+            //    d.Items.Add(dp.FamilyName);
+            //    d.Items.Add(dp.GivenName);
+            //    d.Items.Add(dp.Email);
+            //    d.Items.Add(dp.Mobile);
+            //    d.Items.Add(dp.Phone);
+            //    d.Items.Add(dp.ReminderText);
+            //    d.Items.Add(dp.ReminderDate);
+            //    d.Items.Add(dp.Doctor);
+            //}
+
+
+
+            return false;  
+        } 
     }
 }

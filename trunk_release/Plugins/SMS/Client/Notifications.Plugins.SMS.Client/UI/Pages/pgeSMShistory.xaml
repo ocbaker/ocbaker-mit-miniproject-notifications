@@ -11,6 +11,15 @@
 
     <Grid Background="White">
         <Label Content="SMS History" Height="61" Name="label1" FontSize="22" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="#3F0097FF" Width="Auto" VerticalAlignment="Top" HorizontalAlignment="Stretch" />
-        <DataGrid AutoGenerateColumns="False" Height="339" HorizontalAlignment="Left" Margin="12,76,0,0" Name="dgvSMSaHistory" VerticalAlignment="Top" Width="298" />
+        <DataGrid AutoGenerateColumns="False" Height="339" HorizontalAlignment="Left" Margin="12,76,0,0"  Name="dgvSMSaHistory" VerticalAlignment="Top" Width="374" ItemsSource="{Binding ElementName=dgvSMSaHistory}">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="FamilyName" Width="80" IsReadOnly="True">
+                    
+                </DataGridTemplateColumn>
+                
+               
+            </DataGrid.Columns>    
+            
+         </DataGrid>
     </Grid>
     </Page>

@@ -211,9 +211,15 @@ namespace Notifications.Plugins.SMS.Server
         {
             System.Net.Mail.MailMessage m = new System.Net.Mail.MailMessage("noreply-notifications-miniproject@itsasmurflife.com",
                 vEmail.email_to); // Here have the actual email address
-
-            m.Subject = "Reminder: " + vEmail.msg_content;
-            m.Body = vEmail.msg_content.Substring(0, 15) + "...";
+            try
+            {
+                m.Subject = "Reminder: " + vEmail.msg_content.Substring(0, 15) + "...";
+            }
+            catch (Exception e)
+            {
+                m.Subject = "Reminder: " + vEmail.msg_content;
+            }
+            m.Body =  vEmail.msg_content;
             m.BodyEncoding = UTF8Encoding.UTF8;
             m.DeliveryNotificationOptions = System.Net.Mail.DeliveryNotificationOptions.OnFailure;
 

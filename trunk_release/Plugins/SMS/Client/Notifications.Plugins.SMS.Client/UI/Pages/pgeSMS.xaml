@@ -105,7 +105,7 @@
                 <CheckBox Content="SMS" Height="22" HorizontalAlignment="Left" Margin="242,62,0,0" Name="cbSMS" VerticalAlignment="Top" Width="58" IsChecked="True" Checked="cbSMS_Checked" Unchecked="cbSMS_Unchecked" />
                 <CheckBox Content="Email" Height="22" HorizontalAlignment="Left" Margin="301,62,0,0" Name="cbEmail" VerticalAlignment="Top" Width="56" Checked="cbEmail_Checked" Unchecked="cbEmail_Unchecked" />
                 <Label Content="Email:" Height="28" HorizontalAlignment="Left" Margin="46,119,0,0" Name="label4" VerticalAlignment="Top" Width="58" />
-                <TextBox Height="23" HorizontalAlignment="Left" IsEnabled="False" Margin="90,121,0,0" Name="txtEmail" VerticalAlignment="Top" Width="120" />
+                <TextBox Height="23" HorizontalAlignment="Left" IsEnabled="False" Margin="90,121,0,0" Name="txtEmail" VerticalAlignment="Top" Width="255" />
             </Grid>
         </GroupBox>
         <Label Background="#3F0097FF" Content="Send a Message" FontSize="22" Height="61" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Name="label5" VerticalAlignment="Top" VerticalContentAlignment="Center" Grid.ColumnSpan="5" />

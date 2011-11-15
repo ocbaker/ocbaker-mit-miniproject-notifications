@@ -48,6 +48,7 @@
     <Compile Include="RequestHandler.cs" />
     <Compile Include="serverNotification.cs" />
     <Compile Include="SettingsRequestHandler.cs" />
+    <Compile Include="StaffHistoryRequestHandler.cs" />
     <Compile Include="TemplateRequestHandler.cs" />
     <Compile Include="UserIDRequestHandler.cs" />
   </ItemGroup>
