@@ -120,7 +120,8 @@ namespace Notifications.Client.Core.Manager
                     //}
                 }
             }
-            
+
+            Interop.EventManager.raiseEvents("Client.Executable.LoadedPlugins");
         }
 
         private static Assembly MyResolveEventHandler(object sender, ResolveEventArgs args)
