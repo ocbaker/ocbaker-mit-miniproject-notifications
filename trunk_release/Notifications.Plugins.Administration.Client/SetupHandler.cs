@@ -21,7 +21,8 @@ namespace Notifications.Plugins.Administration.Client
         [Interop.StaticEventMethod("Client.LoggedIn")]
         public static void UserLoggedIn()
         {
-            Interop.EventManager.raiseEvents("Client.Window.AddTab", (Object)AdminTab);
+            if(((Notifications.Global.Core.Communication.Core.Data.UserInformation)Interop.PropertiesManager.GetProperty("User")).UserLevel == 0)
+                Interop.EventManager.raiseEvents("Client.Window.AddTab", (Object)AdminTab);
         }
         [Interop.StaticEventMethod("Client.LoggedOut")]
         public static void UserLoggedOut()

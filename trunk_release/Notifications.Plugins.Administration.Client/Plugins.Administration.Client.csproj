@@ -50,6 +50,9 @@
   <ItemGroup>
     <Compile Include="SetupHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\Pages\pgeListUsers.xaml.cs">
+      <DependentUpon>pgeListUsers.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Tabs\tabAdminTab.xaml.cs">
       <DependentUpon>tabAdminTab.xaml</DependentUpon>
     </Compile>
@@ -75,6 +78,16 @@
       <Name>Global.Base.Plugin.Client</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\Notifications.Global.Core.CommunicationBase\Global.Core.Communication.Base.csproj">
+      <Project>{C55B156A-CC8B-4EB9-BE65-BF0D63C1E5E2}</Project>
+      <Name>Global.Core.Communication.Base</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Notifications.Global.Core.CommunicationCore\Global.Core.Communication.Core.csproj">
+      <Project>{EB1D1A60-B6A8-447B-B36C-7EE7891A9E08}</Project>
+      <Name>Global.Core.Communication.Core</Name>
+      <Private>False</Private>
+    </ProjectReference>
     <ProjectReference Include="..\Notifications.Plugins.Administration.Global\Plugins.Administration.Global.csproj">
       <Project>{D0ABE4E8-98E7-4A9E-BD00-A32A6E4926DB}</Project>
       <Name>Plugins.Administration.Global</Name>
@@ -82,6 +95,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="UI\Pages\pgeListUsers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Tabs\tabAdminTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -89,7 +106,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UI\Dialogs\" />
-    <Folder Include="UI\Pages\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

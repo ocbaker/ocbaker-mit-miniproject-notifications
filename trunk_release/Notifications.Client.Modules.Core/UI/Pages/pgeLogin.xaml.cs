@@ -44,7 +44,9 @@ namespace Notifications.Client.Core.Core.UI.Pages
             Responses.comdata_rtLogin resp = (Responses.comdata_rtLogin)response;
             if (resp.userInformation != null)
             {
+                
                 Interop.PropertiesManager.SetProperty("User.username", resp.userInformation.username);
+                Interop.PropertiesManager.SetProperty("User", resp.userInformation);
                 Interop.EventManager.raiseEvents("Client.LoggedIn");
             }
             else

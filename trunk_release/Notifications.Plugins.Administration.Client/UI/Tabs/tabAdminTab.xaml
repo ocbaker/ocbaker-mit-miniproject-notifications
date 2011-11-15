@@ -6,7 +6,9 @@
              xmlns:ribbon="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Header="Administration">
-    <Grid>
-            
-    </Grid>
+    <ribbon:RibbonGroup x:Name="rgUserManagement" Header="User Management">
+        <ribbon:RibbonButton x:Name="btnListUsers" Label="List Users" Click="btnListUsers_Click" />
+        
+    </ribbon:RibbonGroup>
+
 </ribbon:RibbonTab>

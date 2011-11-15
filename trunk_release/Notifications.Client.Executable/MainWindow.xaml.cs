@@ -118,7 +118,7 @@ namespace Notifications.Client.Executable
         public void glbh_UserLoggedIn()
         {
             //Console.WriteLine("GetProperty: " + Interop.PropertiesManager.GetProperty(Console.ReadLine()));
-            Group1.Header = "Logged In: " + Interop.PropertiesManager.GetProperty("User.Username");
+            Group1.Header = "Logged In: " + ((Notifications.Global.Core.Communication.Core.Data.UserInformation)Interop.PropertiesManager.GetProperty("User")).username;
             Ribbon.IsEnabled = true;
             Ribbon.IsMinimized = false;
             Ribbon.IsHitTestVisible = true;

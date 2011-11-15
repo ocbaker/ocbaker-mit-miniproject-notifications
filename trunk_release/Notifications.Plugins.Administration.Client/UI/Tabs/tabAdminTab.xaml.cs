@@ -21,17 +21,27 @@ namespace Notifications.Plugins.Administration.Client.UI.Tabs
     /// </summary>
     public partial class tabAdminTab : RibbonTab
     {
-        
+        private static Pages.pgeListUsers ListUsers;
+
         public tabAdminTab()
         {
             InitializeComponent();
             Interop.EventManager.handleEvent("Plugin.Administration.Tab.AddGroup", addGroup);
+            
         }
+
+        
 
         private void addGroup(object group)
         {
             //RibbonGroup rGroup = (RibbonGroup)group;
             this.Items.Add(group);
+        }
+
+        private void btnListUsers_Click(object sender, RoutedEventArgs e)
+        {
+            ListUsers = new Pages.pgeListUsers();
+            Interop.EventManager.raiseEvents("Client.Window.ChangePage", (object)ListUsers);
         }
     }
 }
