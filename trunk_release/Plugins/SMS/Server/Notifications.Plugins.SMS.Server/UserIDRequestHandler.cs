@@ -11,13 +11,7 @@ namespace Notifications.Plugins.SMS.Server
 
          public void setupHandlers()
         {
-            try
-            {
               Notifications.Server.Interop.NetworkComms.addDataHandler((new Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_rqStaff()), Getid);
-            } catch (Exception e) 
-            {
-
-                }
         }
 
         public static object Getid(Object request)

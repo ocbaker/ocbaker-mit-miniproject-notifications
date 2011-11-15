@@ -46,8 +46,10 @@
     <Compile Include="Requests\comdata_Blank.cs" />
     <Compile Include="Requests\comdata_Login.cs" />
     <Compile Include="Requests\comdata_File.cs" />
+    <Compile Include="Requests\comdata_rqsendCsv.cs" />
     <Compile Include="Responses\comdata_Login.cs" />
     <Compile Include="Responses\comdata_File.cs" />
+    <Compile Include="Responses\comdata_rpsendCsv.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Notifications.Global.Core.CommunicationBase\Global.Core.Communication.Base.csproj">

@@ -30,7 +30,7 @@ namespace Notifications.Plugins.SMS.Client
         }
          static void btnAdmMsg_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            RibbonButton srcRButton = e.Source as RibbonButton;
+           // RibbonButton srcRButton = e.Source as RibbonButton;
             Interop.EventManager.raiseEvents("Client.Window.ChangePage", new UI.Pages.admSMS());
         }
 

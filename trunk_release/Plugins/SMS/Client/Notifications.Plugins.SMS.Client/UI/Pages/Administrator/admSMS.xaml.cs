@@ -21,9 +21,7 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
 
     public partial class admSMS : Page
     {
-       // apiValidateLogin Login = pgeSMS.vlogin;
-        
-        
+          
         public admSMS()
         {
             InitializeComponent();

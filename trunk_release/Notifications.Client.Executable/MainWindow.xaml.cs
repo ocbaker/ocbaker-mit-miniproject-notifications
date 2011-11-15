@@ -132,5 +132,10 @@ namespace Notifications.Client.Executable
             //Ribbon.IsMinimized = true;
             //Ribbon.IsHitTestVisible = false;
         }
+
+        private void Button4_Click(object sender, RoutedEventArgs e)
+        {
+            Interop.EventManager.raiseEvents("Client.Window.ChangePage", new Core.Core.UI.Pages.pgePatientList());
+        }
     }
 }

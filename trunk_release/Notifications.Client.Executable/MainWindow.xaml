@@ -37,7 +37,7 @@
                                          Label="Button3" />
                     <ribbon:RibbonButton x:Name="Button4"
                                          SmallImageSource="Images\SmallIcon.png"
-                                         Label="Button4" />
+                                         Label="Update Patient List" Click="Button4_Click" />
                     
                 </ribbon:RibbonGroup>
                 
