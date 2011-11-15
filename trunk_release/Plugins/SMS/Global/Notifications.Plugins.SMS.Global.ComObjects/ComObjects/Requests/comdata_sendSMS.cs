@@ -18,6 +18,5 @@ namespace Notifications.Plugins.SMS.Global.ComObjects.Requests
         public string msg_type;
         public string response;
         public string email;
-        public bool wantStaffID;
     }
 }

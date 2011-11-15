@@ -44,6 +44,7 @@
     <Compile Include="ComObjects\Requests\comdata_rqProxy.cs" />
     <Compile Include="ComObjects\Requests\comdata_rqSMSGlobal.cs" />
     <Compile Include="ComObjects\Requests\comdata_rqTemplate.cs" />
+    <Compile Include="ComObjects\Requests\comdata_rqStaff.cs" />
     <Compile Include="ComObjects\Requests\comdata_sendEmail.cs" />
     <Compile Include="ComObjects\Requests\comdata_sendSMS.cs" />
     <Compile Include="ComObjects\Response\comdata_emailSent.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="ComObjects\Response\comdata_rpProxy.cs" />
     <Compile Include="ComObjects\Response\comdata_rpSMSGlobal.cs" />
     <Compile Include="ComObjects\Response\comdata_rpTemplate.cs" />
+    <Compile Include="ComObjects\Response\comdata_rpUserID.cs" />
     <Compile Include="ComObjects\Response\comdata_textSent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

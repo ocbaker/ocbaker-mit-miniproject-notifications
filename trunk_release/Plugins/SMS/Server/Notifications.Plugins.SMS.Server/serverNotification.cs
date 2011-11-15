@@ -207,13 +207,13 @@ namespace Notifications.Plugins.SMS.Server
             }
             return responce;
         }
-        public void sendEmail(Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_sendSMS vSendSms)
+        public void sendEmail(Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_sendEmail vEmail)
         {
             System.Net.Mail.MailMessage m = new System.Net.Mail.MailMessage("noreply-notifications-miniproject@itsasmurflife.com",
-                vSendSms.email); // Here have the actual email address
-           
-            m.Subject = "Reminder: " + vSendSms.msg_content;
-            m.Body = vSendSms.msg_content.Substring(0, 15) + "...";
+                vEmail.email_to); // Here have the actual email address
+
+            m.Subject = "Reminder: " + vEmail.msg_content;
+            m.Body = vEmail.msg_content.Substring(0, 15) + "...";
             m.BodyEncoding = UTF8Encoding.UTF8;
             m.DeliveryNotificationOptions = System.Net.Mail.DeliveryNotificationOptions.OnFailure;
 

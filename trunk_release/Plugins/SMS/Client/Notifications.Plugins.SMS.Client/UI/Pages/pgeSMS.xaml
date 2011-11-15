@@ -54,8 +54,7 @@
                          Margin="90,64,0,0"
                          HorizontalAlignment="Left"
                          VerticalAlignment="Top"
-                         IsEnabled="False"
-                         LostFocus="txtFrom_LostFocus" />
+                         IsEnabled="False" />
                 <TextBox Name="txtTo"
                          Width="120"
                          Height="23"

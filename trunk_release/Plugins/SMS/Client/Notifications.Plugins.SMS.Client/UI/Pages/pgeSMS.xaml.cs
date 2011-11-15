@@ -13,7 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Notifications.Plugins.SMS.Server;
 using Notifications.Global.Core.Utils;
-
+using Interop = Notifications.Client.Interop;
 
 namespace Notifications.Plugins.SMS.Client.UI.Pages
 {
@@ -40,13 +40,15 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
 
                 Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_textSent(new Global.ComObjects.Requests.comdata_sendSMS())), txt_serverResponse);
                 Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_emailSent(new Global.ComObjects.Requests.comdata_sendEmail())), email_serverResponse);
+                Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_rpUserID(new Global.ComObjects.Requests.comdata_rqStaff())), returned_UserID);
+
 
                 //Take the current loged in user, get their employee ID number, use it as their FROM: In the SMS FROM
-                //txtFrom.Text = Convert.ToString("00001234"); //Interop.PropertiesManager.GetProperty("Client.Username");
+                txtFrom.Text = Convert.ToString("00001234"); //Interop.PropertiesManager.GetProperty("Client.Username");
 
-                Global.ComObjects.Requests.comdata_sendSMS rGetID = new Global.ComObjects.Requests.comdata_sendSMS();
-                rGetID.wantStaffID = true;
-                Notifications.Client.Interop.NetworkComms.sendMessage(rGetID);
+                Global.ComObjects.Requests.comdata_rqStaff rGetID = new Global.ComObjects.Requests.comdata_rqStaff();
+               rGetID.username = Interop.PropertiesManager.GetProperty("User.Username").ToString();
+               Notifications.Client.Interop.NetworkComms.sendMessage(rGetID);
 
                 // GET the user logged in. Get their 'ID'
 
@@ -55,15 +57,8 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
             {
                 Global.ComObjects.Response.comdata_textSent r = (Global.ComObjects.Response.comdata_textSent)response;
 
-                if (r.userid == null)
-                {
-                    txtFrom.Text = r.userid.ToString();
-                }
-                else
-                {
                     switch (r.successfullText)
                     {
-
                         case true:
                             lblmsgid.Content = "The text was sent sucessfully!";
                             break;
@@ -72,7 +67,6 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
                             lblmsgid.Content = "The text failed to send.";
                             break;
                     }
-                }
                 return false;
             }
 
@@ -95,13 +89,12 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
                 
                 return false;
             }
-
-            private void txtFrom_LostFocus(object sender, RoutedEventArgs e)
+            private object returned_UserID(Object response)
             {
-                /// Will hopefully relate to the logged in user. Dr Smurf. EmployeeID = 00001
-                
+                Global.ComObjects.Response.comdata_rpUserID r = (Global.ComObjects.Response.comdata_rpUserID)response;
 
-
+                txtFrom.Text = r.userID;
+                return false;
             }
 
             private void txtTo_LostFocus(object sender, RoutedEventArgs e)
@@ -139,12 +132,10 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
                 lblmsgid.Content = "";
                 try
                 {
-                    if (cbSMS.IsEnabled)
+                    if (cbSMS.IsChecked.Value)
                     {
                         try
                         {
-                            //n.soapSMS(vSendSms); // <-INSTEAD OF Creating a request object, inherits aBaseRequest, using the vSendSMS, then using NetworkComs 'sendMessage' to send to the server.
-                            
                             Global.ComObjects.Requests.comdata_sendSMS rSMS = new Global.ComObjects.Requests.comdata_sendSMS();
                             rSMS.sms_from = vSendSms.sms_from;
                             rSMS.sms_to = vSendSms.sms_to;
@@ -161,11 +152,11 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
                         }
                     }
 
-                    if (cbEmail.IsEnabled)
+                    if (cbEmail.IsChecked.Value)
                     {
                         Global.ComObjects.Requests.comdata_sendEmail rEmail = new Global.ComObjects.Requests.comdata_sendEmail();
-
-                        rEmail.email_to = vSendSms.email;
+                        rEmail.vSendSMS = vSendSms;
+                        rEmail.email_to = txtEmail.Text;
                         rEmail.msg_content = vSendSms.msg_content;
 
                         Notifications.Client.Interop.NetworkComms.sendMessage(rEmail); //Send the email data to the server so that it can send the email                  

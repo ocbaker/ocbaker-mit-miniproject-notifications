@@ -284,8 +284,17 @@ namespace Notifications.Server.Server
             
             if (DataHandlers.ContainsKey(message.GetType()))
             {
-                object result = DataHandlers[message.GetType()](message);
+                object result = null;
+                try
+                {
+                   result = DataHandlers[message.GetType()](message);
 
+
+                }
+                catch (Exception e)
+                {
+
+                }
                 if (result.GetType().BaseType != typeof(Global.Core.Communication.Base.BaseObjects.aBaseResponse))
                 {
                     //We will not be returning data

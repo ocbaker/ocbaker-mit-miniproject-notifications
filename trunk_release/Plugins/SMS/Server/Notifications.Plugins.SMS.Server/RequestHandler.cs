@@ -14,12 +14,11 @@ namespace Notifications.Plugins.SMS.Server
         private static string cachedPassword;
         private static apiValidateLogin v = new apiValidateLogin();
         
-
         public void setupHandlers()
         {
             Notifications.Server.Interop.NetworkComms.addDataHandler((new Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_sendSMS()), textSent);
+            Notifications.Server.Interop.NetworkComms.addDataHandler((new Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_sendEmail()), emailsent);
         }
-
 
         private static object textSent(object request)
         {
@@ -27,9 +26,7 @@ namespace Notifications.Plugins.SMS.Server
             Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_sendSMS requ = (Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_sendSMS)request;
             Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_textSent respo = new Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_textSent(requ);
 
-            if (requ.wantStaffID == false)
-            {
-
+        
                 respo.successfullText = false;
 
                 //  if (v.LastCheck < DateTime.Now)
@@ -52,7 +49,6 @@ namespace Notifications.Plugins.SMS.Server
                 cachedPassword = ds.Tables[0].Rows[1]["Value"].ToString();
 
                 mycon.Close();
-
 
                 //  }
                 v.APIusername = cachedUsername;
@@ -83,31 +79,7 @@ namespace Notifications.Plugins.SMS.Server
                 }
 
                 //recordMessage(respo, requ);
-            }
-            else
-            {
-                try
-                {
-                    SqlConnection mycon = new SqlConnection("server=(local);" +
-                                        "Trusted_Connection=yes;" +
-                                        "database=PatientNotifications; " +
-                                        "connection timeout=30");
 
-                    mycon.Open();
-
-                    DataSet ds = new DataSet();
-                    SqlDataAdapter da = new SqlDataAdapter("SELECT     Username, ID FROM         dbo.Staff WHERE     (Username = 'burf9');", mycon);
-
-                    da.Fill(ds);
-                    respo.userid = ds.Tables[0].Rows[0]["Value"].ToString();
-
-                    mycon.Close();
-                }
-                catch (Exception ex)
-                {
-
-                }
-            }
             return respo;
         }
         private static void recordMessage(Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_textSent r, Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_sendSMS rq)
@@ -131,5 +103,23 @@ namespace Notifications.Plugins.SMS.Server
 
             }
         }
+        private static object emailsent(Object request)
+        {
+            Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_sendEmail requ = (Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_sendEmail)request;
+            Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_emailSent respo = new Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_emailSent(requ);
+            serverNotification sn = new serverNotification();
+            try
+            {
+                sn.sendEmail(requ);
+            }
+            catch (Exception e)
+            {
+
+            }
+
+
+            return respo;
+        }
+
     }
 }

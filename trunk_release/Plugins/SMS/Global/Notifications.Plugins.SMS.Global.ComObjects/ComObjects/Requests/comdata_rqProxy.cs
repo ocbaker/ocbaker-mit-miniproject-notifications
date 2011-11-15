@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Notifications.Plugins.SMS.Global.ComObjects.Requests
 {
-        [Serializable]
+[Serializable]
     public class comdata_rqProxy : Notifications.Global.Core.Communication.Base.BaseObjects.aBaseRequest
     {
             public comdata_rqProxy() { }

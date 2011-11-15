@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Notifications.Plugins.SMS.Global.ComObjects.Response
 {
-        [Serializable]
+[Serializable]
     public class comdata_rpSMSGlobal : Notifications.Global.Core.Communication.Base.BaseObjects.aBaseResponse
     {
 

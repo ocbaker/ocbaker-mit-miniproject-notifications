@@ -49,6 +49,7 @@
     <Compile Include="serverNotification.cs" />
     <Compile Include="SettingsRequestHandler.cs" />
     <Compile Include="TemplateRequestHandler.cs" />
+    <Compile Include="UserIDRequestHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\External_Libraries\Nitro\Nito.Async\Nito.Async.csproj">
