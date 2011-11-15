@@ -8,7 +8,7 @@ namespace Notifications.Client.Interop
 {
     public static class NetworkComms
     {
-        public delegate void del_addDataHandler(object key,Func<object,object> value);
+        public delegate void del_addDataHandler(object key,Func<object,object> value, bool remove = false);
         public static del_addDataHandler addDataHandler;
 
         public delegate void del_sendMessage(object message);

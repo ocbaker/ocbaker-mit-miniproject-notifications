@@ -29,13 +29,17 @@ namespace Notifications.Client.Executable
             Interop.NetworkComms.removeDataHandler = removeDataHandler;
         }
 
-        public static void addDataHandler(object key, Func<object, object> value){
+        public static void addDataHandler(object key, Func<object, object> value, bool replace = false)
+        {
             string typ = key.GetType().FullName;
-            if (DataHandlers.ContainsKey(key.GetType()))
+            if (!DataHandlers.ContainsKey(key.GetType()))
             {
-                throw new Exception("Duplicate Keys Not Allowed");
-            }else{
                 DataHandlers.Add(key.GetType(), value);
+            }else if(replace){
+                removeDataHandler(key);
+                DataHandlers.Add(key.GetType(), value);
+            }else{
+                throw new Exception("Duplicate Keys Not Allowed");
             }
         }
 
