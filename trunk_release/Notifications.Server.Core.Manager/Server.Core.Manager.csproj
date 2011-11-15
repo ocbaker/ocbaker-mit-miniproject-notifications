@@ -61,6 +61,10 @@
       <Project>{05546654-B256-4B52-A29C-1983DD1D2845}</Project>
       <Name>Global.Core.ManagerBase</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Notifications.Server.Interop\Server.Interop.csproj">
+      <Project>{BAF14E0B-6361-4A51-B553-ABBA031E210F}</Project>
+      <Name>Server.Interop</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
