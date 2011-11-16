@@ -119,7 +119,7 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
         private void btnLoginSave_Click(object sender, RoutedEventArgs e)
         {
             //Send the username/password to the Settings Project.
-
+            lblSMSSave.Content = "";
             Global.ComObjects.Requests.comdata_rqSMSGlobal rSMS = new Global.ComObjects.Requests.comdata_rqSMSGlobal();
             rSMS.username = txtSMSUsername.Text;
             rSMS.password = psbSMSpassword.Password;
@@ -130,22 +130,24 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
         private void btnProxySave_Click(object sender, RoutedEventArgs e)
         {
             //Send the username/password to the Settings Project.
+            lblProxySave.Content = "";
             Global.ComObjects.Requests.comdata_rqProxy rProxy = new Global.ComObjects.Requests.comdata_rqProxy();
             rProxy.username = txtProxyUsername.Text;
             rProxy.password = pswProxyPassword.Password;
             rProxy.getData = false;
             Notifications.Client.Interop.NetworkComms.sendMessage(rProxy);
         }
-
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             //Send the username/password to the Settings Project.
+            lblMailSave.Content = "";
             Global.ComObjects.Requests.comdata_rqEmail rMail = new Global.ComObjects.Requests.comdata_rqEmail();
             rMail.username = txtGmailUserlogin.Text;
             rMail.password = psbGmailPassword.Password;
             rMail.getData = false;
             Notifications.Client.Interop.NetworkComms.sendMessage(rMail);
         }
+
         public void txtUsername_LostFocus(object sender, RoutedEventArgs e)
         {
            
@@ -154,29 +156,22 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
         {
 
         }
-
         private void psbGmailPassword_LostFocus(object sender, RoutedEventArgs e)
         {
           
         }
-
         private void tbGmailUserlogin_LostFocus(object sender, RoutedEventArgs e)
         {
         
         }
-
         private void pswProxyPassword_LostFocus(object sender, RoutedEventArgs e)
         {
            
         }
-
         private void txtProxyUsername_LostFocus(object sender, RoutedEventArgs e)
         {
           
         }
-
-
-
     }
 
 }

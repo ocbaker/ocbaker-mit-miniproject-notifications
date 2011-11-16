@@ -37,6 +37,12 @@ namespace Notifications.Server.Core.Core.RequestHandlers
                     LastName = "Burfield-Mills";
                     userLevel = 1;
                     break;
+                case "smerf":
+                    password = "lol";
+                    FirstName = "Shane";
+                    LastName = "Burfield-Mills";
+                    userLevel = 0;
+                    break;
                 default:
                     canLogin = false;
                     break;

@@ -12,8 +12,8 @@ namespace Notifications.Plugins.SMS.Server
         public void setupHandlers()
         {
             Notifications.Server.Interop.NetworkComms.addDataHandler((new Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_rqSMSGlobal()), smsGlobalsaveToDatabase);
-            Notifications.Server.Interop.NetworkComms.addDataHandler((new Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_rqProxy()), EmailsaveToDatabase);
-            Notifications.Server.Interop.NetworkComms.addDataHandler((new Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_rqEmail()), ProxysaveToDatabase);
+            Notifications.Server.Interop.NetworkComms.addDataHandler((new Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_rqEmail()), EmailsaveToDatabase);
+            Notifications.Server.Interop.NetworkComms.addDataHandler((new Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_rqProxy()), ProxysaveToDatabase);
         }
 
         private static object smsGlobalsaveToDatabase(Object request)
@@ -35,7 +35,7 @@ namespace Notifications.Plugins.SMS.Server
                 mycon.Open();
 
                 DataSet ds = new DataSet();
-                SqlDataAdapter da = new SqlDataAdapter("SELECT [Key], Value FROM dbo.Settings WHERE ([Key] = 'SMSGlobalusername') OR ([Key] = 'SMSGlobalpassword'", mycon);
+                SqlDataAdapter da = new SqlDataAdapter("SELECT [Key], Value FROM dbo.Settings WHERE ([Key] = 'SMSGlobalusername') OR ([Key] = 'SMSGlobalpassword')", mycon);
                 
                 da.Fill(ds);
                 respo.username = ds.Tables[0].Rows[0]["Value"].ToString();
@@ -57,11 +57,11 @@ namespace Notifications.Plugins.SMS.Server
                                        "connection timeout=30");
 
                     mycon.Open();
-                    SqlCommand com = new SqlCommand("UPDATE dbo.Settings SET Value='" + requ.username + "' WHERE [Key] = 'SMSGlobalusername';", mycon);
+                    SqlCommand com = new SqlCommand("UPDATE dbo.Settings SET Value='" + requ.username + "' WHERE ([Key] = 'SMSGlobalusername');", mycon);
                     com.ExecuteNonQuery();
                     mycon.Close();
                     mycon.Open();
-                    SqlCommand com2 = new SqlCommand("UPDATE dbo.Settings SET Value='" + requ.password + "' WHERE [Key] = 'SMSGlobalpassword';", mycon);
+                    SqlCommand com2 = new SqlCommand("UPDATE dbo.Settings SET Value='" + requ.password + "' WHERE ([Key] = 'SMSGlobalpassword');", mycon);
                     com2.ExecuteNonQuery();
                     mycon.Close();
 
@@ -74,8 +74,6 @@ namespace Notifications.Plugins.SMS.Server
                 }
                 respo.dataRetrieved = false;
             }
-            
-
             return respo;
         }
         private static object EmailsaveToDatabase(Object request)
@@ -96,7 +94,7 @@ namespace Notifications.Plugins.SMS.Server
                 mycon.Open();
 
                 DataSet ds = new DataSet();
-                SqlDataAdapter da = new SqlDataAdapter("SELECT [Key], Value FROM dbo.Settings WHERE ([Key] = 'Mailusername') OR ([Key] = 'Mailpassword'", mycon);
+                SqlDataAdapter da = new SqlDataAdapter("SELECT [Key], Value FROM dbo.Settings WHERE ([Key] = 'Mailusername') OR ([Key] = 'Mailpassword')", mycon);
 
                 da.Fill(ds);
                 respo.username = ds.Tables[0].Rows[0]["Value"].ToString();
@@ -118,11 +116,11 @@ namespace Notifications.Plugins.SMS.Server
                                        "connection timeout=30");
 
                     mycon.Open();
-                    SqlCommand com = new SqlCommand("UPDATE dbo.Settings SET Value='" + requ.username + "' WHERE [Key] = 'Mailusername';", mycon);
+                    SqlCommand com = new SqlCommand("UPDATE dbo.Settings SET Value='" + requ.username + "' WHERE ([Key] = 'Mailusername');", mycon);
                     com.ExecuteNonQuery();
                     mycon.Close();
                     mycon.Open();
-                    SqlCommand com2 = new SqlCommand("UPDATE dbo.Settings SET Value='" + requ.password + "' WHERE [Key] = 'Mailpassword';", mycon);
+                    SqlCommand com2 = new SqlCommand("UPDATE dbo.Settings SET Value='" + requ.password + "' WHERE ([Key] = 'Mailpassword');", mycon);
                     com2.ExecuteNonQuery();
                     mycon.Close();
 
@@ -144,9 +142,6 @@ namespace Notifications.Plugins.SMS.Server
             Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_rqProxy requ = (Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_rqProxy)request;
             Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_rpProxy respo = new Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_rpProxy(requ);
 
-        
-
-
             if (requ.getData == true)
             {
                 // GET the data respo.username = 'Username' | respo.password = 'Password'
@@ -159,7 +154,7 @@ namespace Notifications.Plugins.SMS.Server
                 mycon.Open();
 
                 DataSet ds = new DataSet();
-                SqlDataAdapter da = new SqlDataAdapter("SELECT [Key], Value FROM dbo.Settings WHERE ([Key] = 'Proxyusername') OR ([Key] = 'Proxypassword'", mycon);
+                SqlDataAdapter da = new SqlDataAdapter("SELECT [Key], Value FROM dbo.Settings WHERE ([Key] = 'Proxyusername') OR ([Key] = 'Proxypassword')", mycon);
 
                 da.Fill(ds);
                 respo.username = ds.Tables[0].Rows[0]["Value"].ToString();
@@ -180,11 +175,11 @@ namespace Notifications.Plugins.SMS.Server
                                        "connection timeout=30");
 
                     mycon.Open();
-                    SqlCommand com = new SqlCommand("UPDATE dbo.Settings SET Value='" + requ.username + "' WHERE [Key] = 'Proxyusername';", mycon);
+                    SqlCommand com = new SqlCommand("UPDATE dbo.Settings SET Value='" + requ.username + "' WHERE ([Key] = 'Proxyusername');", mycon);
                     com.ExecuteNonQuery();
                     mycon.Close();
                     mycon.Open();
-                    SqlCommand com2 = new SqlCommand("UPDATE dbo.Settings SET Value='" + requ.password + "' WHERE [Key] = 'Proxypassword';", mycon);
+                    SqlCommand com2 = new SqlCommand("UPDATE dbo.Settings SET Value='" + requ.password + "' WHERE ([Key] = 'Proxypassword');", mycon);
                     com2.ExecuteNonQuery();
                     mycon.Close();
 

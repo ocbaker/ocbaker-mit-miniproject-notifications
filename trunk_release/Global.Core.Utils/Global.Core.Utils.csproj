@@ -50,6 +50,7 @@
     <Compile Include="DebugLog.cs" />
     <Compile Include="ExtensionServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Hash.cs" />
     <Compile Include="Util.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

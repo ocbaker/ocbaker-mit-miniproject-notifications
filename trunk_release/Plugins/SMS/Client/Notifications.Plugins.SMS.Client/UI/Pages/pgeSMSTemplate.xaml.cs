@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -31,7 +32,6 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
 
             Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_rpTemplate(new Global.ComObjects.Requests.comdata_rqTemplate())), template);
 
-
             getPreviousTemplate();
 
         }
@@ -39,8 +39,27 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
         {
 
             Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_rpTemplate t = (Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_rpTemplate)request;
-            textBox1.Text = t.retrieved_data;
 
+            if (t.POST == true)
+            {
+                if (t.successfulSave == true)
+                {
+                    textBox1.Text = HttpUtility.HtmlDecode(t.retrieved_data);
+                    _count = HttpUtility.HtmlDecode(t.retrieved_data).Length;
+                    lblSMScount.Content = _count + "/160";
+                    lblmsgResponse.Foreground = ExtensionServices.fromRGB(40, 155, 66);
+                    lblmsgResponse.Content = "Template successfully saved!";
+                }
+                else
+                {
+                    lblmsgResponse.Foreground = ExtensionServices.fromRGB(40, 155, 66);
+                    lblmsgResponse.Content = "Template failed to saved!";
+                }
+            } else {
+                textBox1.Text = HttpUtility.HtmlDecode(t.retrieved_data);
+                _count = HttpUtility.HtmlDecode(t.retrieved_data).Length;
+                lblSMScount.Content = _count + "/160";
+            }
             return false;  
         }
         private void getPreviousTemplate()
@@ -79,11 +98,21 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
             {
                 _count += 1;
             }
-            lblSMScount.Content = _count + "/160";
-        }
+            if (_count > 160)
+            {
+                btnTemplateSave.IsEnabled = false;
+            } else {
+                btnTemplateSave.IsEnabled = true;
+            }
 
+            _count = textBox1.Text.Length;
+
+            lblSMScount.Content = _count + "/160";
+            lblmsgResponse.Content = "";
+        }
         private void btnTemplateSave_Click(object sender, RoutedEventArgs e)
         {
+            lblmsgResponse.Content = "";
             //Save to a User profile.
             Global.ComObjects.Requests.comdata_rqTemplate rTemp = new Global.ComObjects.Requests.comdata_rqTemplate();
             rTemp.TempContent = textBox1.Text;

@@ -10,5 +10,7 @@ namespace Notifications.Plugins.SMS.Global.ComObjects.Response
     {
             public comdata_rpTemplate(Notifications.Global.Core.Communication.Base.BaseObjects.aBaseRequest request) : base(request) { }
             public string retrieved_data;
+            public bool successfulSave;
+            public bool POST;
     }
 }

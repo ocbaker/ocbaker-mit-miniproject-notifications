@@ -13,5 +13,6 @@
         <Label Height="28" HorizontalAlignment="Left" Margin="332,239,0,0" Name="lblSMScount" VerticalAlignment="Top" />
         <Button Content="Save Template" Height="23" HorizontalAlignment="Left" Margin="284,281,0,0" Name="btnTemplateSave" VerticalAlignment="Top" Width="91" Click="btnTemplateSave_Click" />
         <Label Background="#3F0097FF" Content="SMS Template" FontSize="22" Height="61" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Name="label1" VerticalAlignment="Top" VerticalContentAlignment="Center" />
+        <Label Height="28" HorizontalAlignment="Left" Margin="54,239,0,0" Name="lblmsgResponse" VerticalAlignment="Top" />
     </Grid>
 </Page>
