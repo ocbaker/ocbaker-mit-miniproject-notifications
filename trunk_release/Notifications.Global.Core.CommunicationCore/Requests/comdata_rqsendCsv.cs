@@ -8,8 +8,6 @@ namespace Notifications.Global.Core.Communication.Core.Requests
     [Serializable]
     public class comdata_rqsendCsv : Global.Core.Communication.Base.BaseObjects.aBaseRequest
     {
-
         public List<String[]> parsedPatients;
-
     }
 }

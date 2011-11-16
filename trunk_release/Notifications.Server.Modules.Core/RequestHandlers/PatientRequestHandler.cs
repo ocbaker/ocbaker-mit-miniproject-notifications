@@ -11,35 +11,46 @@ namespace Notifications.Server.Core.Core.RequestHandlers
     {
         public void setupHandlers()
         {
-            Notifications.Server.Interop.NetworkComms.addDataHandler((new Notifications.Global.Core.Communication.Core.Requests.comdata_rqsendCsv()), Patients);
+            //Notifications.Server.Interop.NetworkComms.addDataHandler((new Notifications.Global.Core.Communication.Core.Requests.comdata_rqsendCsv()), Patients);
         }
 
-        public static object Patients(Object request)
+        [Server.Interop.RequestHandlerMethod(typeof(Notifications.Global.Core.Communication.Core.Requests.comdata_rqsendCsv))]
+        public static object Patients(object request)
         {
             Notifications.Global.Core.Communication.Core.Requests.comdata_rqsendCsv requ = (Notifications.Global.Core.Communication.Core.Requests.comdata_rqsendCsv)request;
             Notifications.Global.Core.Communication.Core.Responses.comdata_rpsendCsv respo = new Notifications.Global.Core.Communication.Core.Responses.comdata_rpsendCsv(requ);
-
-            foreach (string[] a in requ.parsedPatients)
+            
+            SqlConnection mycon;
+            try
             {
-                try
+                mycon = new SqlConnection("server=(local);" +
+                                                   "Trusted_Connection=yes;" +
+                                                   "database=PatientNotifications; " +
+                                                   "connection timeout=30");
+                mycon.Open();
+                foreach (string[] a in requ.parsedPatients)
                 {
-                    SqlConnection mycon = new SqlConnection("server=(local);" +
-                                               "Trusted_Connection=yes;" +
-                                               "database=PatientNotifications; " +
-                                               "connection timeout=30");
+                    try
+                    {
+                        //Isn't finished. VALUES () part of the statement is unfinished.
+                        SqlCommand com = new SqlCommand("INSERT INTO PatientData (FamilyName,GivenName, Email, Mobile, Phone, ReminderText, ReminderDate) VALUES (N\"" + a[0] + "," + a[1] + "," + a[2] + "," + a[3] + "," + a[4] + "," + a[5] + "," + a[6] + ",burf9)", mycon);
+                        com.ExecuteNonQuery(); // Force quit when trying to execute this line. SMS sends fine. 
 
-                    mycon.Open();
-                    //Isn't finished. VALUES () part of the statement is unfinished.
-                    SqlCommand com = new SqlCommand("INSERT INTO PatientData (FamilyName,GivenName, Email, Mobile, Phone, ReminderText, ReminderDate) VALUES (" + a[0] + "," + a[1] + "," + a[2] + "," + a[3] + "," + a[4] + "," + a[5] + "," + a[6] + ")", mycon);
-                    com.ExecuteNonQuery(); // Force quit when trying to execute this line. SMS sends fine. 
-                    mycon.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        respo.sucessfullSend = false;
+                    }
+
                 }
-                catch (Exception ex)
-                {
-                    respo.sucessfullSend = false;
-                }
+                mycon.Close();
+            }
+            catch (Exception ex)
+            {
 
             }
+
+               
             respo.sucessfullSend = true;
             
             return respo;
