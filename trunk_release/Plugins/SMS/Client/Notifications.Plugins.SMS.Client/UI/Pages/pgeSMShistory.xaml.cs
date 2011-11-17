@@ -21,9 +21,11 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
     /// </summary>
     public partial class pgeSMShistory : Page
     {
+        public static System.Data.DataSet DSPatients { get; set; }
+
         public pgeSMShistory()
         {
-            InitializeComponent();
+            
             /// http://www.wpftutorial.net/DataGrid.html
             /// WPF DataGrid c#
             /// http://www.c-sharpcorner.com/uploadfile/mahesh/datagrid-in-wpf/
@@ -35,14 +37,20 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
             gH.staffUsername = Interop.PropertiesManager.GetProperty("User.Username").ToString();
             Notifications.Client.Interop.NetworkComms.sendMessage(gH);
 
+          
+
+            InitializeComponent();
         }
 
         public void loadsourcedata() { }
 
-        private static object gotHistory(Object response) {
+        private static object gotHistory(Object response)
+        {   // Does not get a reply back from the server????
 
             Global.ComObjects.Response.comdata_rpStaffHistory r = (Global.ComObjects.Response.comdata_rpStaffHistory)response;
-            
+
+            DSPatients = r.ds;
+
             //Data
 
             //DataGrid d = new DataGrid();
@@ -65,3 +73,13 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
         } 
     }
 }
+//<DataGrid AutoGenerateColumns="False" Height="339" HorizontalAlignment="Left" Margin="12,76,0,0"  Name="dgvSMSaHistory" VerticalAlignment="Top" Width="374" ItemsSource="{Binding ElementName=dgvSMSaHistory}">
+//            <DataGrid.Columns>
+//                <DataGridTemplateColumn Header="FamilyName" Width="80" IsReadOnly="True">
+                    
+//                </DataGridTemplateColumn>
+                
+               
+//            </DataGrid.Columns>    
+            
+//         </DataGrid>
