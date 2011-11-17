@@ -10,16 +10,15 @@ namespace Notifications.Server.Core.Core.RequestHandlers
     class PatientRequestHandler : Notifications.Global.Base.Plugin.Server.IRequestHandler
     {
         public void setupHandlers()
-        {
-            //Notifications.Server.Interop.NetworkComms.addDataHandler((new Notifications.Global.Core.Communication.Core.Requests.comdata_rqsendCsv()), Patients);
-        }
+        {         }
 
         [Server.Interop.RequestHandlerMethod(typeof(Notifications.Global.Core.Communication.Core.Requests.comdata_rqsendCsv))]
         public static object Patients(object request)
         {
             Notifications.Global.Core.Communication.Core.Requests.comdata_rqsendCsv requ = (Notifications.Global.Core.Communication.Core.Requests.comdata_rqsendCsv)request;
             Notifications.Global.Core.Communication.Core.Responses.comdata_rpsendCsv respo = new Notifications.Global.Core.Communication.Core.Responses.comdata_rpsendCsv(requ);
-            
+            Notifications.Global.Core.Communication.Core.Data.UserInformation uI = (Notifications.Global.Core.Communication.Core.Data.UserInformation)requ._userInformation;
+           
             SqlConnection mycon;
             try
             {
@@ -32,16 +31,20 @@ namespace Notifications.Server.Core.Core.RequestHandlers
                 {
                     try
                     {
-                        //Isn't finished. VALUES () part of the statement is unfinished.
-                        SqlCommand com = new SqlCommand("INSERT INTO PatientData (FamilyName,GivenName, Email, Mobile, Phone, ReminderText, ReminderDate) VALUES (N\"" + a[0] + "," + a[1] + "," + a[2] + "," + a[3] + "," + a[4] + "," + a[5] + "," + a[6] + ",burf9)", mycon);
-                        com.ExecuteNonQuery(); // Force quit when trying to execute this line. SMS sends fine. 
+                        SqlCommand com = new SqlCommand("INSERT INTO PatientData (FamilyName,GivenName,Email,Mobile,Phone,ReminderText,ReminderDate,Doctor) VALUES ('" + a[0] + "','" + a[1] + "','" + a[2] + "','" + a[3] + "','" + a[4] + "','" + a[5] + "'," + "@mydate" + ",'" + uI.username + "')", mycon);
 
+                        SqlParameter sqlpar = new SqlParameter();
+                        sqlpar.ParameterName = "@mydate";
+                        sqlpar.SqlDbType = SqlDbType.DateTime;
+                        sqlpar.Value = a[6];
+                        com.Parameters.Add(sqlpar);
+
+                        com.ExecuteNonQuery();
                     }
                     catch (Exception ex)
                     {
                         respo.sucessfullSend = false;
                     }
-
                 }
                 mycon.Close();
             }

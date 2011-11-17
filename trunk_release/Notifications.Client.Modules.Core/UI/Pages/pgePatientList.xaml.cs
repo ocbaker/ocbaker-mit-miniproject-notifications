@@ -49,7 +49,7 @@ namespace Notifications.Client.Core.Core.UI.Pages
         }
         public pgePatientList()
         {
-
+            InitializeComponent();
             Notifications.Client.Interop.NetworkComms.addDataHandler((new Notifications.Global.Core.Communication.Core.Responses.comdata_rpsendCsv(new Notifications.Global.Core.Communication.Core.Requests.comdata_rqsendCsv())), sentStatus);
 
             Microsoft.Win32.OpenFileDialog of = new Microsoft.Win32.OpenFileDialog();
@@ -74,11 +74,10 @@ namespace Notifications.Client.Core.Core.UI.Pages
         }
 
         public Object sentStatus(Object response) {
+            Notifications.Global.Core.Communication.Core.Responses.comdata_rpsendCsv r = (Notifications.Global.Core.Communication.Core.Responses.comdata_rpsendCsv)response;
 
-            Notifications.Global.Core.Communication.Core.Responses.comdata_rpsendCsv r  = (Notifications.Global.Core.Communication.Core.Responses.comdata_rpsendCsv)response;
-
-            LabelStatus.Content = r.sucessfullSend;
-
+            lblStatus.Content = "Sucessful attatch to database?" + r.sucessfullSend;
+               
             return false;
         }
 
