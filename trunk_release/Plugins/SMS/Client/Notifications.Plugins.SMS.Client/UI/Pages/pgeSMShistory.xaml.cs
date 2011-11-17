@@ -36,8 +36,11 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
             Global.ComObjects.Requests.comdata_rqStaffHistory gH = new Global.ComObjects.Requests.comdata_rqStaffHistory();
             gH.staffUsername = Interop.PropertiesManager.GetProperty("User.Username").ToString();
             Notifications.Client.Interop.NetworkComms.sendMessage(gH);
+            //bind dataset to wpf datagrid
+            //http://stackoverflow.com/questions/1111804/data-binding-a-wpf-datagrid-control-to-a-system-data-datatable-object
+            ///http://stackoverflow.com/questions/2511177/how-to-bind-a-table-in-a-dataset-to-a-wpf-datagrid-in-c-sharp-and-xaml
 
-          
+
 
             InitializeComponent();
         }
