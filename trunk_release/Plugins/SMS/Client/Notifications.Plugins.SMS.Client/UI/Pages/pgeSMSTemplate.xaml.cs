@@ -31,9 +31,25 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
             lblSMScount.Content = _count + "/160";
 
             Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_rpTemplate(new Global.ComObjects.Requests.comdata_rqTemplate())), template);
+            Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_rpDefaultTemplates(new Global.ComObjects.Requests.comdata_rqDefaultTemplates())), defaultsTemplate);
+
 
             getPreviousTemplate();
-
+            getDefaultTemplates();
+        }
+        private object defaultsTemplate(Object request)
+        {
+            Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_rpDefaultTemplates t = (Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_rpDefaultTemplates)request;
+            if (t.dataresponse == true)
+            {
+                this.DataContext = t.retrievedData.Tables[0];
+                InitializeComponent();
+            }
+            else
+            {
+                getDefaultTemplates();
+            }
+            return false;
         }
         private object template(Object request)
         {
@@ -69,6 +85,12 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
             rTemp.retrieveSavedTemp = true;
             Notifications.Client.Interop.NetworkComms.sendMessage(rTemp);
         }
+        private void getDefaultTemplates()
+        {
+            Global.ComObjects.Requests.comdata_rqDefaultTemplates rTemp = new Global.ComObjects.Requests.comdata_rqDefaultTemplates();
+            rTemp.getALL = true;
+            Notifications.Client.Interop.NetworkComms.sendMessage(rTemp);
+        }
 
         private void textBox1_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -101,8 +123,10 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
             if (_count > 160)
             {
                 btnTemplateSave.IsEnabled = false;
+                btnSavedefTemp.IsEnabled = false;
             } else {
                 btnTemplateSave.IsEnabled = true;
+                btnSavedefTemp.IsEnabled = true;
             }
 
             _count = textBox1.Text.Length;
@@ -123,6 +147,55 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
             
 
                         
+        }
+
+        private void dgvTemplates_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                System.Data.DataRowView d = (System.Data.DataRowView)dgvTemplates.SelectedItem;
+                textBox1.Text = d.Row[1].ToString();
+                textBox1.Tag = d.Row[0].ToString();
+            } catch (Exception ex)  {}
+        }
+
+        private void btnSavedefTemp_Click(object sender, RoutedEventArgs e)
+        {
+            Global.ComObjects.Requests.comdata_rqDefaultTemplates rTemp = new Global.ComObjects.Requests.comdata_rqDefaultTemplates();
+            if (textBox1.Tag != null)
+            {
+                rTemp.newTemplate = false;
+                rTemp.templateName = textBox1.Tag.ToString();
+                rTemp.templateText = textBox1.Text;
+            }
+            else
+            {
+                rTemp.newTemplate = true;
+                rTemp.templateName = txtTempName.Text;
+                rTemp.templateText = textBox1.Text;
+            }
+
+            Notifications.Client.Interop.NetworkComms.sendMessage(rTemp);
+        }
+    }
+    public class Templates
+    {
+        private string temp;
+        private string text;
+        public Templates(string n, string t)
+        {
+            temp = n;
+            text = t;
+        }
+        public String TemplateName
+        {
+            get { return temp; }
+            set { temp = value; }
+        }
+        public string TemplateText
+        {
+            get { return text; }
+            set { text = value; }
         }
     }
 }

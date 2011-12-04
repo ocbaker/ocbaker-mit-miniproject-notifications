@@ -25,7 +25,7 @@ namespace Notifications.Plugins.SMS.Server
            // v.LastCheck = DateTime.Now;
             Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_sendSMS requ = (Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_sendSMS)request;
             Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_textSent respo = new Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_textSent(requ);
-
+            Notifications.Global.Core.Communication.Core.Data.UserInformation uI = (Notifications.Global.Core.Communication.Core.Data.UserInformation)requ._userInformation;
         
                 respo.successfullText = false;
 
@@ -63,13 +63,13 @@ namespace Notifications.Plugins.SMS.Server
                         sn.soapSMS(requ);
                         respo.messageID = requ.response;
                         respo.successfullText = true;
-
                     }
                     catch (Exception ex)
                     {
                         sn.HttpSMS(v, requ);
                         respo.messageID = requ.response;
                         respo.successfullText = true;
+                        recordMessage(respo, requ, uI);
                     }
                 }
                 catch (Exception ex)
@@ -77,12 +77,12 @@ namespace Notifications.Plugins.SMS.Server
                     respo.successfullText = false;
                     respo.messageID = "Failed to send";
                 }
-
-                //recordMessage(respo, requ);
+                recordMessage(respo, requ, uI);
+               
 
             return respo;
         }
-        private static void recordMessage(Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_textSent r, Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_sendSMS rq)
+        private static void recordMessage(Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_textSent r, Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_sendSMS rq, Notifications.Global.Core.Communication.Core.Data.UserInformation uI)
         {
          //   Save whatver data is needed using respo and resu.
             try
@@ -93,9 +93,8 @@ namespace Notifications.Plugins.SMS.Server
                                            "connection timeout=30");
 
                 mycon.Open();
-                //Isn't finished. VALUES () part of the statement is unfinished.
-                SqlCommand com = new SqlCommand("INSERT INTO PatientData (FamilyName,GivenName, Email, Mobile, Phone, ReminderText, ReminderDate) VALUES (" + "''," + rq.email + "," + rq.sms_to + ",''," + rq.msg_content + ",'');", mycon);
-                com.ExecuteNonQuery(); // Force quit when trying to execute this line. SMS sends fine. 
+                SqlCommand com = new SqlCommand("INSERT INTO PatientData (FamilyName,GivenName, Email, Mobile, Phone, ReminderText, ReminderDate, Doctor) VALUES ('','','" + rq.email + "','" + rq.sms_to + "','','" + rq.msg_content + "','','"+ uI.username + "'); ", mycon);
+                com.ExecuteNonQuery();  
                 mycon.Close();
             }
             catch (Exception ex)
@@ -116,8 +115,6 @@ namespace Notifications.Plugins.SMS.Server
             {
                 respo.successfullEmail = false;
             }
-
-
             return respo;
         }
 

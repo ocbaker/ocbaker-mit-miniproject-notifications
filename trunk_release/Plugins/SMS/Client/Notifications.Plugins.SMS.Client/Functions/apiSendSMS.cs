@@ -76,11 +76,23 @@ namespace Notifications.Plugins.SMS.Server
             get { return _sms_to; }
             set {
 
-                Regex r = new Regex(@"^[\D]+$"); Regex rplus = new Regex(@"^[\+]");
-                if (rplus.IsMatch(value))
-                {
-                    value = value.Replace("+", String.Empty);
+                Regex r = new Regex(@"^[\D]+$");
+
+                //Regex replaceallnoobphonenumbers = new Regex(
+
+                value = value.Replace("(", String.Empty);
+                value = value.Replace(")", String.Empty);
+                value = value.Replace("-", String.Empty);
+                value = value.Replace(" ", String.Empty);
+                value = value.Replace("+", String.Empty);
+
+                Regex rr = new Regex(@"^(0\d{2})");
+
+                if (rr.IsMatch(value)) {
+                    value = value.Remove(0, 1);
+                    value = "64" + value; // Should be changed to lookup the country .. 
                 }
+
                 if (r.IsMatch(value) || value == "")
                 {
                  

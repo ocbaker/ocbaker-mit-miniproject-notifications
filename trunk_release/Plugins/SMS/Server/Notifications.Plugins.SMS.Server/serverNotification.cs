@@ -199,9 +199,9 @@ namespace Notifications.Plugins.SMS.Server
         {
 
             getProxyInformation();
-
+            
             String[] Mailuserinfo = new String[1];
-
+            Mailuserinfo = getMailInformation();
 
             //if (isProxyActive(request.RequestUri, request) == true)
             //{
@@ -221,7 +221,8 @@ namespace Notifications.Plugins.SMS.Server
             {
                 m.Subject = "Reminder: " + Environment.NewLine + "" + vEmail.msg_content + Environment.NewLine + "Automated Email. Please do not reply as this Email account is not monitored." + Environment.NewLine +
                     "Your friendly neighbourhood Pediatrician";
-            }
+            } 
+            finally {
             m.Body =  vEmail.msg_content;
             m.BodyEncoding = UTF8Encoding.UTF8;
             m.DeliveryNotificationOptions = System.Net.Mail.DeliveryNotificationOptions.OnFailure;
@@ -236,22 +237,22 @@ namespace Notifications.Plugins.SMS.Server
                     s.Credentials = new NetworkCredential(Mailuserinfo[0], Mailuserinfo[1]); /// Get the username and password from server
                     s.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
 
-                   try
-                  {
-                       s.Send(m);
-                       mail_response = "The email was sent sucessfully";
-                   }
-                catch (Exception e)
-                {
-                    mail_response = "The email was sent but failed";
-                }
+                    try
+                    {
+                        s.Send(m);
+                        mail_response = "The email was sent sucessfully";
+                    }
+                    catch (Exception e)
+                    {
+                        mail_response = "The email was sent but failed";
+                    }
 
                 }
                 catch (Exception ex)
                 {
                     mail_response = "Error connecting to the Database.";
                 }
-                                                                                         
+            }                                                                   
                 //s.Credentials = new NetworkCredential("noreply-notifications-miniproject@itsasmurflife.com", "miniproject");
                 
             }
@@ -307,7 +308,7 @@ namespace Notifications.Plugins.SMS.Server
         }
         private String[] getMailInformation() 
         {
-            String[] s = new String[1];
+            String[] s = new String[2];
 
             try
             {
@@ -318,12 +319,12 @@ namespace Notifications.Plugins.SMS.Server
                 mycon.Open();
 
                 DataSet ds = new DataSet();
-                SqlDataAdapter da = new SqlDataAdapter("SELECT [Key], Value FROM dbo.Settings WHERE ([Key] = 'Mailusername') OR ([Key] = 'Mailpassword'", mycon);
+                SqlDataAdapter da = new SqlDataAdapter("SELECT [Key], Value FROM dbo.Settings WHERE ([Key] = 'Mailusername') OR ([Key] = 'Mailpassword')", mycon);
 
                 da.Fill(ds);
-
                 s[0] = ds.Tables[0].Rows[0]["Value"].ToString();
                 s[1] = ds.Tables[0].Rows[1]["Value"].ToString();
+
 
                 mycon.Close();
             }

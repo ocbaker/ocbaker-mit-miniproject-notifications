@@ -24,13 +24,13 @@
         </Grid.ColumnDefinitions>
         <GroupBox Name="groupBox1"
                   Width="434"
-                  Height="418"
+                  Height="479"
                   Margin="12,76,5,0"
                   HorizontalAlignment="Center"
                   VerticalAlignment="Top"
                   Header="Send an SMS" Grid.ColumnSpan="5" Grid.RowSpan="2">
-            <Grid Height="395">
-                <Expander Name="expSchedule" Width="291" Height="77" Margin="58,309,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Header="Schedule">
+            <Grid Height="463">
+                <Expander Name="expSchedule" Width="291" Height="77" Margin="58,360,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Header="Schedule">
                     <Grid Height="73">
                         <local:DateTimePicker Name="dtp" Height="30" Margin="10,11,14,32" />
                     </Grid>
@@ -64,14 +64,14 @@
                          LostFocus="txtTo_LostFocus" TabIndex="0" />
                 <Label Name="label2"
                        Height="28"
-                       Margin="27,192,0,0"
+                       Margin="27,243,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        Content="Message" />
                 <TextBox Name="txtMessage"
                          Width="255"
                          Height="109"
-                         Margin="90,194,0,0"
+                         Margin="90,245,0,0"
                          HorizontalAlignment="Left"
                          VerticalAlignment="Top"
                          LostFocus="txtMessage_LostFocus"
@@ -92,20 +92,14 @@
                        VerticalAlignment="Top"
                        Content="Send a Message"
                        FontSize="22" />
-                <Label Name="lblmsgid"
-                       Width="364"
-                       Height="28"
-                       Margin="27,416,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       IsEnabled="False" Visibility="Collapsed">
-
-                </Label>
-                <Label Height="26" HorizontalAlignment="Left" Name="lblSMScount" VerticalAlignment="Top" Width="54" Margin="291,303,0,0" />
+                <Label Height="26" HorizontalAlignment="Left" Name="lblSMScount" VerticalAlignment="Top" Width="54" Margin="291,354,0,0" />
                 <CheckBox Content="SMS" Height="22" HorizontalAlignment="Left" Margin="242,62,0,0" Name="cbSMS" VerticalAlignment="Top" Width="58" IsChecked="True" Checked="cbSMS_Checked" Unchecked="cbSMS_Unchecked" />
                 <CheckBox Content="Email" Height="22" HorizontalAlignment="Left" Margin="301,62,0,0" Name="cbEmail" VerticalAlignment="Top" Width="56" Checked="cbEmail_Checked" Unchecked="cbEmail_Unchecked" />
                 <Label Content="Email:" Height="28" HorizontalAlignment="Left" Margin="46,119,0,0" Name="label4" VerticalAlignment="Top" Width="58" />
                 <TextBox Height="23" HorizontalAlignment="Left" IsEnabled="False" Margin="90,121,0,0" Name="txtEmail" VerticalAlignment="Top" Width="255" />
+                <Label Name="lblmsgid" Width="255" Height="48" Margin="90,153,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False" Visibility="Collapsed"></Label>
+                <CheckBox Content="Use default template?" Height="16" HorizontalAlignment="Left" Margin="57,215,0,0" Name="cbdefTemplate" VerticalAlignment="Top" Checked="checkBox1_Checked" Unchecked="cbdefTemplate_Unchecked" />
+                <ComboBox Height="23" HorizontalAlignment="Left" Margin="200,212,0,0" Name="comboBox1" VerticalAlignment="Top" Width="182" />
             </Grid>
         </GroupBox>
         <Label Background="#3F0097FF" Content="Send a Message" FontSize="22" Height="61" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Name="label5" VerticalAlignment="Top" VerticalContentAlignment="Center" Grid.ColumnSpan="5" />

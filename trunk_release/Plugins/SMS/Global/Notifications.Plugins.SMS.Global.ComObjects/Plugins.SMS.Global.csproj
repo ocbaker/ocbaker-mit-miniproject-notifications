@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="ComObjects\Data\data_PatientInformation.cs" />
     <Compile Include="ComObjects\Requests\comdata_rqCustomerSearch.cs" />
+    <Compile Include="ComObjects\Requests\comdata_rqDefaultTemplates.cs" />
     <Compile Include="ComObjects\Requests\comdata_rqEmail.cs" />
     <Compile Include="ComObjects\Requests\comdata_rqProxy.cs" />
     <Compile Include="ComObjects\Requests\comdata_rqSMSGlobal.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="ComObjects\Requests\comdata_sendSMS.cs" />
     <Compile Include="ComObjects\Response\comdata_emailSent.cs" />
     <Compile Include="ComObjects\Response\comdata_rpCustomerSearch.cs" />
+    <Compile Include="ComObjects\Response\comdata_rpDefaultTemplates.cs" />
     <Compile Include="ComObjects\Response\comdata_rpEmail.cs" />
     <Compile Include="ComObjects\Response\comdata_rpProxy.cs" />
     <Compile Include="ComObjects\Response\comdata_rpSMSGlobal.cs" />

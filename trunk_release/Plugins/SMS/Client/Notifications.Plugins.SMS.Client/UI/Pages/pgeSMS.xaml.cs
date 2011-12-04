@@ -50,6 +50,7 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
                     switch (r.successfullText)
                     {
                         case true:
+                            lblmsgid.Visibility = System.Windows.Visibility.Visible;
                             lblmsgid.Content = "The text was sent sucessfully!";
                             break;
 
@@ -66,13 +67,12 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
 
                 switch (r.successfullEmail)
                 {
-
                     case true:
                         lblmsgid.Content += Environment.NewLine + "The Email was sent sucessfully!";
                         break;
 
                     case false:
-                        lblmsgid.Content += Environment.NewLine + "The email failed to send.";
+                        lblmsgid.Content += Environment.NewLine + "The Email failed to send.";
                         break;
                 }
                 
@@ -157,8 +157,8 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
                         }
                     }
                 }
-                catch (Exception ex) { }
-
+                catch (Exception ex) { 
+                }
             }
 
             private void txtMessage_TextChanged(object sender, TextChangedEventArgs e)
@@ -230,6 +230,22 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
                 if (cbEmail.IsChecked == false)
                 {
                     txtEmail.IsEnabled = false;
+                }
+            }
+
+            private void checkBox1_Checked(object sender, RoutedEventArgs e)
+            {
+                if (cbdefTemplate.IsChecked == true)
+                {
+                    
+                }
+            }
+
+            private void cbdefTemplate_Unchecked(object sender, RoutedEventArgs e)
+            {
+                if (cbdefTemplate.IsChecked == false)
+                {
+
                 }
             }
         }
