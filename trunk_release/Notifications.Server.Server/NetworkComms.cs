@@ -156,7 +156,7 @@ namespace Notifications.Server.Server
                     object message = null;
                     try
                     {
-                        message = Util.Deserialize(e.Result);
+                        message = Util.Deserialize(EncryptionService.DecryptToBytes(e.Result));
                         if (message.GetType().BaseType == typeof(aBaseRequest))
                         {
                             try
@@ -269,9 +269,10 @@ namespace Notifications.Server.Server
                 Console.WriteLine("{" + ChildSockets[RecivedMessages[((aBaseResponse)e.UserState).responseID]] + "} {" + ((aBaseResponse)e.UserState).responseID + "} - Message Sent");
             }
         }
-
+        private static Global.Core.Utils.RijndaelEnhanced EncryptionService = new RijndaelEnhanced("Manukau Institute Of Technology", "@1B2c3D4e5F6g7H8");
         public static void writeMessage(object msg){
-            RecivedMessages[((aBaseResponse)msg).responseID].WriteAsync(Util.Serialize(msg), msg);
+
+            RecivedMessages[((aBaseResponse)msg).responseID].WriteAsync(EncryptionService.EncryptToBytes(Util.Serialize(msg)), msg);
             //ChildSockets.First().Key.WriteAsync(Util.Serialize(msg));
         }
 

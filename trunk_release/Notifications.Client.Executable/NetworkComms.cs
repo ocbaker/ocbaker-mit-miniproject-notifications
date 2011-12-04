@@ -105,7 +105,7 @@ namespace Notifications.Client.Executable
         public static void writeMessage(object msg)
         {
 
-            ClientSocket.WriteAsync(Util.Serialize(msg));
+            ClientSocket.WriteAsync(EncryptionService.EncryptToBytes(Util.Serialize(msg)));
         }
 
         /// <summary>
@@ -218,7 +218,7 @@ namespace Notifications.Client.Executable
             }
 
         }
-        
+        private static Global.Core.Utils.RijndaelEnhanced EncryptionService = new RijndaelEnhanced("Manukau Institute Of Technology", "@1B2c3D4e5F6g7H8");
         private void ClientSocket_PacketArrived(AsyncResultEventArgs<byte[]> e)
         {
             //try
@@ -237,7 +237,8 @@ namespace Notifications.Client.Executable
                 else
                 {
                     // At this point, we know we actually got a message.
-                    HandleInboundData(Util.Deserialize(e.Result));
+                    HandleInboundData(Util.Deserialize(EncryptionService.DecryptToBytes(e.Result)));
+                    //HandleInboundData(Util.Deserialize(e.Result));
                     //Sync.SynchronizeAction(() => HandleInboundData(Util.Deserialize(e.Result)));
                 }
             //}
