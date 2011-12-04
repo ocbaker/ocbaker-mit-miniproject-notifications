@@ -44,7 +44,7 @@ namespace Notifications.Client.Executable
         }
 
         public static void removeDataHandler(object key){
-            if (DataHandlers.ContainsKey(key.GetType()))
+            if (!DataHandlers.ContainsKey(key.GetType()))
             {
                 throw new KeyNotFoundException();
             }

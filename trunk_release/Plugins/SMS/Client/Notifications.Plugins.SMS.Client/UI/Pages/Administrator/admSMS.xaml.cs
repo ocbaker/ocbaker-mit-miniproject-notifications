@@ -26,9 +26,9 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
         {
             InitializeComponent();
 
-            Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_rpProxy(new Global.ComObjects.Requests.comdata_rqProxy())), Proxy);
-            Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_rpEmail(new Global.ComObjects.Requests.comdata_rqEmail())), yougotMail);
-            Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_rpSMSGlobal(new Global.ComObjects.Requests.comdata_rqSMSGlobal())), SMS);
+            Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_rpProxy(new Global.ComObjects.Requests.comdata_rqProxy())), Proxy, true);
+            Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_rpEmail(new Global.ComObjects.Requests.comdata_rqEmail())), yougotMail, true);
+            Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_rpSMSGlobal(new Global.ComObjects.Requests.comdata_rqSMSGlobal())), SMS, true);
 
             loadPreviousData();
         }

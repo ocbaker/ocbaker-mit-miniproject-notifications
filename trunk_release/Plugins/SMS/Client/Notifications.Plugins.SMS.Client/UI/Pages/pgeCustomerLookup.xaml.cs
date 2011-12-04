@@ -23,7 +23,7 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
         {
             InitializeComponent();
 
-            Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_rpCustomerSearch(new Global.ComObjects.Requests.comdata_rqCustomerSearch())), search);
+            Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_rpCustomerSearch(new Global.ComObjects.Requests.comdata_rqCustomerSearch())), search, true);
 
             Global.ComObjects.Requests.comdata_rqCustomerSearch rTemp = new Global.ComObjects.Requests.comdata_rqCustomerSearch();
             rTemp.LookupData = "smurf";

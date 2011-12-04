@@ -31,8 +31,8 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
             InitializeComponent();
             lblSMScount.Content = _count + "/160";
 
-            Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_rpTemplate(new Global.ComObjects.Requests.comdata_rqTemplate())), template);
-            Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_rpDefaultTemplates(new Global.ComObjects.Requests.comdata_rqDefaultTemplates())), defaultsTemplate);
+            Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_rpTemplate(new Global.ComObjects.Requests.comdata_rqTemplate())), template, true);
+            Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_rpDefaultTemplates(new Global.ComObjects.Requests.comdata_rqDefaultTemplates())), defaultsTemplate, true);
 
 
             getPreviousTemplate();
