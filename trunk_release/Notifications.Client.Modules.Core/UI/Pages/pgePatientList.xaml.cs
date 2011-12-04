@@ -74,7 +74,7 @@ namespace Notifications.Client.Core.Core.UI.Pages
         public Object sentStatus(Object response) {
             Notifications.Global.Core.Communication.Core.Responses.comdata_rpsendCsv r = (Notifications.Global.Core.Communication.Core.Responses.comdata_rpsendCsv)response;
 
-            lblStatus.Content = "Successful attatch to database?    " + r.sucessfullSend;
+            lblStatus.Content = "Successful send to the database?    " + r.sucessfullSend;
 
             if (r.sucessfullSend == true)
             {                
