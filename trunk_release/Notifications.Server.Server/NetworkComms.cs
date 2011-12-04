@@ -339,7 +339,7 @@ namespace Notifications.Server.Server
                 }
                 catch (Exception e)
                 {
-
+                    Console.WriteLine("Plugin Thrown Exception! Client ID: {" + ((Global.Core.Communication.Base.BaseObjects.aBaseRequest)message).messageID + "}");
                 }
                 if (result.GetType().BaseType != typeof(Global.Core.Communication.Base.BaseObjects.aBaseResponse))
                 {
