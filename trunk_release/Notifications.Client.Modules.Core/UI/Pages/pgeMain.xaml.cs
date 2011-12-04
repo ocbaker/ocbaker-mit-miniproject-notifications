@@ -19,12 +19,15 @@ namespace Notifications.Client.Core.Core.UI.Pages
     /// Interaction logic for pgeMain.xaml
     /// </summary>
     public partial class pgeMain : Page
-    {
+    { 
+Notifications.Global.Core.Communication.Core.Data.UserInformation uI;
         public static pgeMain copyOfMe;
         public pgeMain()
         {
             copyOfMe = this;
             InitializeComponent();
+            txtblockMessage.Text = "Welcome! You have logged in under the username: " + Interop.PropertiesManager.GetProperty("User.Username").ToString();
+
         }
 
 

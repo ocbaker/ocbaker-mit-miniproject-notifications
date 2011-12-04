@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using Notifications.Plugins.SMS.Server;
 using Notifications.Global.Core.Utils;
 using Interop = Notifications.Client.Interop;
+using System.Web;
 
 
 namespace Notifications.Plugins.SMS.Client.UI.Pages
@@ -139,14 +140,11 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
             lblmsgResponse.Content = "";
             //Save to a User profile.
             Global.ComObjects.Requests.comdata_rqTemplate rTemp = new Global.ComObjects.Requests.comdata_rqTemplate();
-            rTemp.TempContent = textBox1.Text;
+            rTemp.TempContent = HttpUtility.HtmlEncode(textBox1.Text);
             rTemp.retrieveSavedTemp = false;
             rTemp.username = Interop.PropertiesManager.GetProperty("User.Username").ToString();
             
-             Notifications.Client.Interop.NetworkComms.sendMessage(rTemp);
-            
-
-                        
+             Notifications.Client.Interop.NetworkComms.sendMessage(rTemp);        
         }
 
         private void dgvTemplates_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -154,8 +152,8 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
             try
             {
                 System.Data.DataRowView d = (System.Data.DataRowView)dgvTemplates.SelectedItem;
-                textBox1.Text = d.Row[1].ToString();
-                textBox1.Tag = d.Row[0].ToString();
+                textBox1.Text = HttpUtility.HtmlDecode(d.Row[1].ToString());
+                textBox1.Tag = HttpUtility.HtmlDecode(d.Row[0].ToString());
             } catch (Exception ex)  {}
         }
 
@@ -166,16 +164,21 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
             {
                 rTemp.newTemplate = false;
                 rTemp.templateName = textBox1.Tag.ToString();
-                rTemp.templateText = textBox1.Text;
+                rTemp.templateText = HttpUtility.HtmlEncode(textBox1.Text);
             }
             else
             {
                 rTemp.newTemplate = true;
                 rTemp.templateName = txtTempName.Text;
-                rTemp.templateText = textBox1.Text;
+                rTemp.templateText = HttpUtility.HtmlEncode(textBox1.Text);
             }
 
             Notifications.Client.Interop.NetworkComms.sendMessage(rTemp);
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
     public class Templates

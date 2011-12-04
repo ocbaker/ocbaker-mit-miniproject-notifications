@@ -4,23 +4,24 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignHeight="468" d:DesignWidth="427"
+      d:DesignHeight="523" d:DesignWidth="427"
 	Title="pgeSMStemplate">
 
-    <Grid>
-        <TextBox Height="132" HorizontalAlignment="Left" Margin="54,209,0,0" Name="textBox1" VerticalAlignment="Top" Width="313" TextWrapping="Wrap" TextChanged="textBox1_TextChanged" />
+    <Grid Height="525">
+        <TextBox Height="132" HorizontalAlignment="Left" Margin="54,276,0,0" Name="textBox1" VerticalAlignment="Top" Width="313" TextWrapping="Wrap" TextChanged="textBox1_TextChanged" />
         <Label Content="Default template for text messages. Change if needed:" Height="28" HorizontalAlignment="Left" Margin="65,67,0,0" Name="label2" VerticalAlignment="Top" />
-        <Label Height="28" HorizontalAlignment="Left" Margin="332,347,0,0" Name="lblSMScount" VerticalAlignment="Top" />
-        <Button Content="Save Personal Template" SnapsToDevicePixels="True" Height="27" HorizontalAlignment="Left" Margin="234,413,0,0" Name="btnTemplateSave" VerticalAlignment="Top" Width="133" Click="btnTemplateSave_Click" />
+        <Label Height="28" HorizontalAlignment="Left" Margin="341,414,0,0" Name="lblSMScount" VerticalAlignment="Top" />
+        <Button Content="Save Personal Template" SnapsToDevicePixels="True" Height="27" HorizontalAlignment="Left" Margin="243,480,0,0" Name="btnTemplateSave" VerticalAlignment="Top" Width="133" Click="btnTemplateSave_Click" />
         <Label Background="#3F0097FF" Content="SMS Template" FontSize="22" Height="61" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Name="label1" VerticalAlignment="Top" VerticalContentAlignment="Center" />
-        <Label Height="28" HorizontalAlignment="Left" Margin="54,347,0,0" Name="lblmsgResponse" VerticalAlignment="Top" />
-        <DataGrid Height="92" Margin="54,101,60,0" Name="dgvTemplates" VerticalAlignment="Top" ItemsSource="{Binding}"  AutoGenerateColumns="False" MouseDoubleClick="dgvTemplates_MouseDoubleClick" SelectionMode="Extended">
+        <Label Height="28" HorizontalAlignment="Left" Margin="63,414,0,0" Name="lblmsgResponse" VerticalAlignment="Top" />
+        <DataGrid Height="169" Margin="54,101,60,0" Name="dgvTemplates" VerticalAlignment="Top" ItemsSource="{Binding}"  AutoGenerateColumns="False" MouseDoubleClick="dgvTemplates_MouseDoubleClick" SelectionMode="Extended">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Key" Width="SizeToCells" IsReadOnly="True" Binding="{Binding TemplateName}"  />
                 <DataGridTextColumn Header="Description" Width="SizeToCells" IsReadOnly="True" Binding="{Binding TemplateText}" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Save as Default Template" SnapsToDevicePixels="True" Height="27" HorizontalAlignment="Left" Margin="45,413,0,0" Name="btnSavedefTemp" VerticalAlignment="Top" Width="148"  Click="btnSavedefTemp_Click"/>
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="45,384,0,0" Name="txtTempName" VerticalAlignment="Top" Width="120" />
+        <Button Content="Save as Default Template" SnapsToDevicePixels="True" Height="27" HorizontalAlignment="Left" Margin="54,480,0,0" Name="btnSavedefTemp" VerticalAlignment="Top" Width="148"  Click="btnSavedefTemp_Click"/>
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="54,451,0,0" Name="txtTempName" VerticalAlignment="Top" Width="120" />
+        <Button Content="Delete" Height="23" HorizontalAlignment="Left" Margin="296,451,0,0" Name="Delete" VerticalAlignment="Top" Width="75" Click="Delete_Click" />
     </Grid>
 </Page>

@@ -14,6 +14,9 @@ using System.Windows.Shapes;
 using Notifications.Plugins.SMS.Server;
 using Notifications.Global.Core.Utils;
 using Interop = Notifications.Client.Interop;
+using System.Text.RegularExpressions;
+using System.Data;
+using System.Web;
 
 namespace Notifications.Plugins.SMS.Client.UI.Pages
 {
@@ -36,12 +39,51 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
                 Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_textSent(new Global.ComObjects.Requests.comdata_sendSMS())), txt_serverResponse);
                 Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_emailSent(new Global.ComObjects.Requests.comdata_sendEmail())), email_serverResponse);
                 Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_rpUserID(new Global.ComObjects.Requests.comdata_rqStaff())), returned_UserID);
+                Notifications.Client.Interop.NetworkComms.addDataHandler((new Global.ComObjects.Response.comdata_rpTemplates(new Global.ComObjects.Requests.comdata_rqTemplates())), getMyTemplate);
 
                 /// Take the current loged in user, get their employee ID number, use it as their FROM: In the SMS FROM
                Global.ComObjects.Requests.comdata_rqStaff rGetID = new Global.ComObjects.Requests.comdata_rqStaff();
                rGetID.username = Interop.PropertiesManager.GetProperty("User.Username").ToString();
                Notifications.Client.Interop.NetworkComms.sendMessage(rGetID);
 
+               Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_rqTemplates dT = new Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_rqTemplates();
+               dT.getALL = true;
+               Notifications.Client.Interop.NetworkComms.sendMessage(dT);
+
+            }
+
+            private object getMyTemplate(object response)
+            {
+                Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_rpTemplates t = (Notifications.Plugins.SMS.Global.ComObjects.Response.comdata_rpTemplates)response;
+                try
+                {
+                    if (t.dataresponse == true)
+                    {
+                        try
+                        {
+                            foreach (DataRow r in t.retrievedData.Tables[0].Rows)
+                            {
+                                comboBox1.Items.Add(r["TemplateName"]);
+                            }
+                            comboBox1.SelectedIndex = 0;
+                        }
+                        catch (Exception ex)
+                        {
+                            comboBox1.Items.Add("Items failed to load");
+                        }
+                    }
+                    else
+                    {
+                        lblmsgid.Visibility = System.Windows.Visibility.Visible;
+                        txtBlockmessage.Text = HttpUtility.HtmlDecode(t.retrievedData.Tables[0].Rows[0]["TemplateText"].ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+                return false;
             }
             private object txt_serverResponse(Object response)
             {
@@ -51,11 +93,11 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
                     {
                         case true:
                             lblmsgid.Visibility = System.Windows.Visibility.Visible;
-                            lblmsgid.Content = "The text was sent sucessfully!";
+                            txtBlockmessage.Text = "The text was sent sucessfully!";
                             break;
 
                         case false:
-                            lblmsgid.Content = "The text failed to send.";
+                            txtBlockmessage.Text = "The text failed to send.";
                             break;
                     }
                 return false;
@@ -68,11 +110,11 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
                 switch (r.successfullEmail)
                 {
                     case true:
-                        lblmsgid.Content += Environment.NewLine + "The Email was sent sucessfully!";
+                        txtBlockmessage.Text += Environment.NewLine + "The Email was sent sucessfully!";
                         break;
 
                     case false:
-                        lblmsgid.Content += Environment.NewLine + "The Email failed to send.";
+                        txtBlockmessage.Text += Environment.NewLine + "The Email failed to send.";
                         break;
                 }
                 
@@ -127,8 +169,8 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
                         {
                             Global.ComObjects.Requests.comdata_sendSMS rSMS = new Global.ComObjects.Requests.comdata_sendSMS();
                             rSMS.sms_from = vSendSms.sms_from;
-                            rSMS.sms_to = vSendSms.sms_to;
                             rSMS.msg_content = vSendSms.msg_content;
+                            rSMS.sms_to = vSendSms.sms_to;
                             rSMS.msg_type = vSendSms.msg_type;
                             rSMS.schedule = vSendSms.schedule;
                             rSMS.unicode = vSendSms.unicode;
@@ -144,7 +186,6 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
                     if (cbEmail.IsChecked.Value)
                     {
                         Global.ComObjects.Requests.comdata_sendEmail rEmail = new Global.ComObjects.Requests.comdata_sendEmail();
-                        //rEmail.vSendSMS = vSendSms;
                         rEmail.email_to = txtEmail.Text;
                         rEmail.msg_content = vSendSms.msg_content;
                         try
@@ -237,7 +278,13 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
             {
                 if (cbdefTemplate.IsChecked == true)
                 {
-                    
+                    txtMessage.Visibility = System.Windows.Visibility.Hidden;
+                    lblReason.Visibility = System.Windows.Visibility.Visible;
+                    lblName.Visibility = System.Windows.Visibility.Visible;
+                    lblDate.Visibility = System.Windows.Visibility.Visible;
+                    txtReason.Visibility = System.Windows.Visibility.Visible;
+                    txtName.Visibility = System.Windows.Visibility.Visible;
+                    txtDate.Visibility = System.Windows.Visibility.Visible;
                 }
             }
 
@@ -245,8 +292,120 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
             {
                 if (cbdefTemplate.IsChecked == false)
                 {
-
+                    txtMessage.Visibility = System.Windows.Visibility.Visible;
+                    txtReason.Visibility = System.Windows.Visibility.Hidden;
+                    txtName.Visibility = System.Windows.Visibility.Hidden;
+                    txtDate.Visibility = System.Windows.Visibility.Hidden;
+                    lblReason.Visibility = System.Windows.Visibility.Hidden;
+                    lblName.Visibility = System.Windows.Visibility.Hidden;
+                    lblDate.Visibility = System.Windows.Visibility.Hidden;
                 }
             }
+
+            private void comboBox1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+            {
+                Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_rqTemplates dT = new Notifications.Plugins.SMS.Global.ComObjects.Requests.comdata_rqTemplates();
+                dT.getALL = false;
+                dT.templateName = comboBox1.SelectedItem.ToString();
+                Notifications.Client.Interop.NetworkComms.sendMessage(dT);
+            }
+            private string ReplaceWords(string oldtext)
+            {
+
+                if (oldtext.Contains("~reason~") && txtReason.Text != "") oldtext = oldtext.Replace("~reason~", txtReason.Text);
+                if (oldtext.Contains("~date~") && txtDate.Text != "") oldtext = oldtext.Replace("~date~", txtDate.Text);
+                if (oldtext.Contains("~name~") && txtName.Text != "") oldtext = oldtext.Replace("~name~", txtName.Text);
+
+                return oldtext;
+            }
+
+            private void txtName_LostFocus(object sender, RoutedEventArgs e)
+            {
+                txtBlockmessage.Text = ReplaceWords(txtBlockmessage.Text.ToString());
+                _count = txtBlockmessage.Text.Length;
+                byte red = (byte)_count;
+                byte green = 150, blue = 150;
+
+                if (_count + 150 > 255)
+                {
+                    red = 255;
+                    blue = 0;
+                    green = 0;
+                }
+                else
+                {
+                    red = (byte)((int)150 + (int)_count);
+
+                    blue = (byte)((int)150 - (int)_count);
+                    green = blue;
+                }
+                lblSMScount.Content = _count + "/160";
+                lblSMScount.Foreground = ExtensionServices.fromRGB(red, green, blue);
+                try { vSendSms.msg_content = txtBlockmessage.Text; btnSend.IsEnabled = true; }
+                catch (Exception ex)
+                {
+                    btnSend.IsEnabled = false;
+                }
+            }
+
+            private void txtReason_LostFocus(object sender, RoutedEventArgs e)
+            {
+                txtBlockmessage.Text = ReplaceWords(txtBlockmessage.Text.ToString());
+                _count = txtBlockmessage.Text.Length;
+                byte red = (byte)_count;
+                byte green = 150, blue = 150;
+
+                if (_count + 150 > 255)
+                {
+                    red = 255;
+                    blue = 0;
+                    green = 0;
+                }
+                else
+                {
+                    red = (byte)((int)150 + (int)_count);
+
+                    blue = (byte)((int)150 - (int)_count);
+                    green = blue;
+                }
+                lblSMScount.Content = _count + "/160";
+                lblSMScount.Foreground = ExtensionServices.fromRGB(red, green, blue);
+                try { vSendSms.msg_content = txtBlockmessage.Text; btnSend.IsEnabled = true; }
+                catch (Exception ex)
+                {
+                    btnSend.IsEnabled = false;
+                }
+            }
+
+            private void txtDate_LostFocus(object sender, RoutedEventArgs e)
+            {
+                txtBlockmessage.Text = ReplaceWords(txtBlockmessage.Text.ToString());
+                _count = txtBlockmessage.Text.Length;
+                byte red = (byte)_count;
+                byte green = 150, blue = 150;
+
+                if (_count + 150 > 255)
+                {
+                    red = 255;
+                    blue = 0;
+                    green = 0;
+                }
+                else
+                {
+                    red = (byte)((int)150 + (int)_count);
+
+                    blue = (byte)((int)150 - (int)_count);
+                    green = blue;
+                }
+                lblSMScount.Content = _count + "/160";
+                lblSMScount.Foreground = ExtensionServices.fromRGB(red, green, blue);
+                try { vSendSms.msg_content = txtBlockmessage.Text; btnSend.IsEnabled = true; }
+                catch (Exception ex)
+                {
+                    btnSend.IsEnabled = false;
+                }
+            }
+
+
         }
 }

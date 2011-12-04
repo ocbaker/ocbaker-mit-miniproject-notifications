@@ -26,15 +26,7 @@
                                     Header="Group1">
                     <ribbon:RibbonButton x:Name="Button1"
                                          LargeImageSource="Images\LargeIcon.png"
-                                         Label="Button1" Click="Button2_Click" />
-
-                    <ribbon:RibbonButton x:Name="ButtonTest"
-                                         SmallImageSource="Images\SmallIcon.png"
-                                         Label="Button2"
-                                         Click="ButtonTest_Click"/>
-                    <ribbon:RibbonButton x:Name="Button3"
-                                         SmallImageSource="Images\SmallIcon.png"
-                                         Label="Button3" />
+                                         Label="Log out" Click="Button2_Click" />
                     <ribbon:RibbonButton x:Name="Button4"
                                          SmallImageSource="Images\SmallIcon.png"
                                          Label="Update Patient List" Click="Button4_Click" />

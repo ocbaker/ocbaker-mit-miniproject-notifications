@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComObjects\Data\data_PatientInformation.cs" />
+    <Compile Include="ComObjects\Requests\comdata_rqTemplates.cs" />
     <Compile Include="ComObjects\Requests\comdata_rqCustomerSearch.cs" />
     <Compile Include="ComObjects\Requests\comdata_rqDefaultTemplates.cs" />
     <Compile Include="ComObjects\Requests\comdata_rqEmail.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="ComObjects\Response\comdata_rpSMSGlobal.cs" />
     <Compile Include="ComObjects\Response\comdata_rpStaffHistory.cs" />
     <Compile Include="ComObjects\Response\comdata_rpTemplate.cs" />
+    <Compile Include="ComObjects\Response\comdata_rpTemplates.cs" />
     <Compile Include="ComObjects\Response\comdata_rpUserID.cs" />
     <Compile Include="ComObjects\Response\comdata_textSent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

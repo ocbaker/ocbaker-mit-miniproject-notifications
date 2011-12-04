@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="RibbonControlsLibrary, Version=4.0.0.11019, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -89,6 +90,10 @@
     <ProjectReference Include="..\Notifications.Global.Core.CommunicationCore\Global.Core.Communication.Core.csproj">
       <Project>{EB1D1A60-B6A8-447B-B36C-7EE7891A9E08}</Project>
       <Name>Global.Core.Communication.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Notifications.Plugins.Administration.Client\Plugins.Administration.Client.csproj">
+      <Project>{5628573F-0733-4DD6-B02B-29D2CFD82CB1}</Project>
+      <Name>Plugins.Administration.Client</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
