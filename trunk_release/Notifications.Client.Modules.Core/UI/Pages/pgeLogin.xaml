@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <Grid Height="127" HorizontalAlignment="Center" Margin="0" Name="grid1" VerticalAlignment="Center" Width="206">
+        <Grid Height="127" HorizontalAlignment="Center" Margin="44,127,50,45" Name="grid1" VerticalAlignment="Center" Width="206">
             <Button Content="Login" Height="23" HorizontalAlignment="Left" Margin="119,67,0,0" Name="btnLogin" VerticalAlignment="Top" Width="75" Click="btnLogin_Click" IsDefault="True" />
             <Button Content="Quit" Height="23" HorizontalAlignment="Left" Margin="38,67,0,0" Name="btnExit" VerticalAlignment="Top" Width="75" Click="btnExit_Click" IsCancel="True" />
             <TextBox Height="23" HorizontalAlignment="Left" Margin="74,6,0,0" Name="txtUsername" VerticalAlignment="Top" Width="120" />
@@ -16,5 +16,6 @@
             <Label Content="Password Incorrect" Height="28" HorizontalAlignment="Left" Margin="85,96,0,0" Name="lblError" VerticalAlignment="Top" Visibility="Hidden" Foreground="#FFF81313" />
         </Grid>
         <Rectangle Height="69" HorizontalAlignment="Stretch" Name="rectangle1" Stroke="Black" VerticalAlignment="Top" Width="Auto" Fill="#85569AFF" />
+        <TextBlock Height="34" HorizontalAlignment="Stretch" Margin="90,88,88,0" Name="textBlock1" Text="User Login" VerticalAlignment="Top" Width="122" FontSize="20" />
     </Grid>
 </Page>
