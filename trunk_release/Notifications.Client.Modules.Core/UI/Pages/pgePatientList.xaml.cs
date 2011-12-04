@@ -50,13 +50,12 @@ namespace Notifications.Client.Core.Core.UI.Pages
         public pgePatientList()
         {
             InitializeComponent();
-            Notifications.Client.Interop.NetworkComms.addDataHandler((new Notifications.Global.Core.Communication.Core.Responses.comdata_rpsendCsv(new Notifications.Global.Core.Communication.Core.Requests.comdata_rqsendCsv())), sentStatus);
+            Notifications.Client.Interop.NetworkComms.addDataHandler((new Notifications.Global.Core.Communication.Core.Responses.comdata_rpsendCsv(new Notifications.Global.Core.Communication.Core.Requests.comdata_rqsendCsv())), sentStatus, true);
 
             Microsoft.Win32.OpenFileDialog of = new Microsoft.Win32.OpenFileDialog();
 
             of.FileName = "";
             of.DefaultExt = ".csv";
-           
 
             Nullable<bool> result = of.ShowDialog();
 
@@ -70,14 +69,19 @@ namespace Notifications.Client.Core.Core.UI.Pages
             Notifications.Global.Core.Communication.Core.Requests.comdata_rqsendCsv rsendCSV = new Notifications.Global.Core.Communication.Core.Requests.comdata_rqsendCsv();
             rsendCSV.parsedPatients = parsed;
             Notifications.Client.Interop.NetworkComms.sendMessage(rsendCSV);
-          
         }
 
         public Object sentStatus(Object response) {
             Notifications.Global.Core.Communication.Core.Responses.comdata_rpsendCsv r = (Notifications.Global.Core.Communication.Core.Responses.comdata_rpsendCsv)response;
 
-            lblStatus.Content = "Sucessful attatch to database?" + r.sucessfullSend;
-               
+            lblStatus.Content = "Successful attatch to database?    " + r.sucessfullSend;
+
+            if (r.sucessfullSend == true)
+            {                
+                this.DataContext = r.returnedPatients.Tables[0];
+                InitializeComponent();
+            }
+
             return false;
         }
 

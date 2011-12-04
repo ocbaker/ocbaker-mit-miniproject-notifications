@@ -4,10 +4,11 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignHeight="468" d:DesignWidth="427"
+      d:DesignHeight="434" d:DesignWidth="720"
 	Title="pgePatientList">
 
     <Grid>
-        <Label Content="Getting Data.." Height="408" HorizontalAlignment="Left" Margin="12,33,0,0" Name="lblStatus" VerticalAlignment="Top" Width="403" FontSize="56" />
+        <Label Content="Getting Data.." Height="43" HorizontalAlignment="Left" Margin="12,33,0,0" Name="lblStatus" VerticalAlignment="Top" Width="403" FontSize="15" />
+        <DataGrid AutoGenerateColumns="True" Height="372" HorizontalAlignment="Left" Margin="20,69,0,0" Name="dataGrid1" VerticalAlignment="Top" Width="678" ItemsSource="{Binding}"/>
     </Grid>
 </Page>

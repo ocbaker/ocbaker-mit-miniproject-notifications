@@ -4,16 +4,17 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignHeight="427" d:DesignWidth="398" 
+      d:DesignHeight="476" d:DesignWidth="754" 
       Width="auto" Height="auto"
 
 	Title="SMShistory">
 
-    <Grid Background="White">
-        <Label Content="SMS History" Height="61" Name="label1" FontSize="22" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="#3F0097FF" Width="Auto" VerticalAlignment="Top" HorizontalAlignment="Stretch" />
-        <DataGrid ItemsSource="{Binding Path=DSPatients}" >
-            
-        </DataGrid>
-        
+    <Grid Background="White" Width="754" Height="455">
+        <Label Content="SMS History" Height="61" Name="label1" FontSize="22" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="#3F0097FF" Width="Auto" VerticalAlignment="Top" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" />
+        <DataGrid AutoGenerateColumns="True" Height="317" HorizontalAlignment="Left" Margin="20,124,0,0" Name="dataGrid1" VerticalAlignment="Top" Width="714" ItemsSource="{Binding}" IsReadOnly="True" />
+        <ComboBox Height="23" HorizontalAlignment="Left" Margin="20,86,0,0" Name="cbColumnList" VerticalAlignment="Top" Width="240" ItemsSource="{Binding Path=Columns/Header}" SelectionChanged="cbColumnList_SelectionChanged" />
+        <Button Content="Search" Height="23" HorizontalAlignment="Left" Margin="557,86,0,0" Name="btnSearch" VerticalAlignment="Top" Width="75" Click="btnSearch_Click" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="266,86,0,0" Name="txtPara1" VerticalAlignment="Top" Width="120" />
+        <TextBox Height="23" HorizontalAlignment="Right" Margin="0,87,233,0" Name="txtPara2" VerticalAlignment="Top" Width="120" />
     </Grid>
     </Page>

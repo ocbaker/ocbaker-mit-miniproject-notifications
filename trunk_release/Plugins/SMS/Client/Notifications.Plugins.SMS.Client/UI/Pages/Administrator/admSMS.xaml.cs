@@ -52,7 +52,6 @@ namespace Notifications.Plugins.SMS.Client.UI.Pages
 
             if (t.dataRetrieved == true)
             {
-               
                 txtProxyUsername.Text = t.username;
                 pswProxyPassword.Password = t.password;
             }

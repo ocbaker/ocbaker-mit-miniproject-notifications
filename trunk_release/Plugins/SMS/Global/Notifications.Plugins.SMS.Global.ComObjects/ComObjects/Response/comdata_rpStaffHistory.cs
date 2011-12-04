@@ -9,8 +9,8 @@ namespace Notifications.Plugins.SMS.Global.ComObjects.Response
     public class comdata_rpStaffHistory : Notifications.Global.Core.Communication.Base.BaseObjects.aBaseResponse
     {
         public comdata_rpStaffHistory(Notifications.Global.Core.Communication.Base.BaseObjects.aBaseRequest request) : base(request) { }
-        public new List<Data.data_PatientInformation> d;
-        public new DataSet ds;
+        public List<Data.data_PatientInformation> d;
+        public DataSet ds;
 
     }
 }

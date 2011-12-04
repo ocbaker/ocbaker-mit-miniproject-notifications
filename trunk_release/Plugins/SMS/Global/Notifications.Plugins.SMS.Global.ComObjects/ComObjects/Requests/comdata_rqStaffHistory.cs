@@ -10,7 +10,8 @@ namespace Notifications.Plugins.SMS.Global.ComObjects.Requests
     {
         public comdata_rqStaffHistory() { }
 
-        public string staffUsername;
+        public string LookupData;
+        public string LookupElement;
 
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 
 namespace Notifications.Global.Core.Communication.Core.Responses
 {
@@ -12,7 +13,7 @@ namespace Notifications.Global.Core.Communication.Core.Responses
         public comdata_rpsendCsv(Global.Core.Communication.Base.BaseObjects.aBaseRequest request) : base(request) { }
 
         public bool sucessfullSend;
-
+        public DataSet returnedPatients;
 
     }
 }

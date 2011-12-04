@@ -65,6 +65,11 @@ namespace Notifications.Plugins.SMS.Client.UI
             Interop.EventManager.raiseEvents("Client.Window.ChangePage", new UI.Pages.pgeSMSTemplate());
         }
 
+        private void smsCust_Click(object sender, RoutedEventArgs e)
+        {
+            Interop.EventManager.raiseEvents("Client.Window.ChangePage", new UI.Pages.pgeCustomerLookup());
+        }
+
 
     }
     

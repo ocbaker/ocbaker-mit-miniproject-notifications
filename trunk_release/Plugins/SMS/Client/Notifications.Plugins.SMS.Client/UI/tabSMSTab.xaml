@@ -16,5 +16,8 @@
         <ribbon:RibbonButton x:Name="smsTemplate"
                                          Label="SMS Template" Click="smsTemplate_Click">
         </ribbon:RibbonButton>
+        <ribbon:RibbonButton x:Name="smsCust"
+                                         Label="Customer Search" Click="smsCust_Click">
+        </ribbon:RibbonButton>
     </ribbon:RibbonGroup>
 </ribbon:RibbonTab>
